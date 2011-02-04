@@ -45,9 +45,10 @@ public:
 	void UpdateScene();
 	qreal GetProgress();
 
-	int progress;					// test progress in %
 	FileRWResults results_write;	// results of write test
 	FileRWResults results_read;		// results of read test
+	FileRWResults reference_write;	// reference results for write test
+	FileRWResults reference_read;	// reference results for read test
 
 	QDomElement WriteResults(QDomDocument &doc);	// writes results of test to XML
 	void RestoreResults(QDomElement &root, bool reference = false);			// reads results from XML document
@@ -58,6 +59,8 @@ private:
 
 	LineGraph *__read_graph;
 	LineGraph *__write_graph;
+	LineGraph *__read_reference_graph;
+	LineGraph *__write_reference_graph;
 
 	Line *__avg_line;
 	Line *__max_line;
