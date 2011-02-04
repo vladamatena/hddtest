@@ -31,8 +31,8 @@ void Device::Open(QString path, bool close, bool rw)
 		// check for access rights
 		QString user = QString::fromAscii(getenv("USER"));
 		QMessageBox box;
-		box.setText("You are running HddTest as user:" + user + " most probably you do not have rights to read block device. This will cause HddTest to show incorrect results.");
-		box.setInformativeText("Continue at own risk.");
+		box.setText("You are running HDDTest as user: " + user + " most probably you do not have rights to read: " + path + " This will cause HddTest to show incorrect results.");
+		box.setInformativeText("Continue at your own risk.");
 		box.exec();
 	}
 
