@@ -51,9 +51,10 @@ public:
 	qreal GetProgress();
 
 	SmallFilesResults results;
+	SmallFilesResults reference;
 
-	QDomElement WriteResults(QDomDocument &doc);	// writes results of test to XML
-	void RestoreResults(QDomElement &root, bool reference = false);			// reads results from XML document
+	QDomElement WriteResults(QDomDocument &doc);					// writes results of test to XML
+	void RestoreResults(QDomElement &root, bool reference = false);	// reads results from XML document
 
 private:
 	Bar *build_dir_bar;
@@ -61,7 +62,11 @@ private:
 	Bar *read_files_bar;
 	Bar *destroy_bar;
 
-	int progress;
+	Bar *build_dir_reference_bar;
+	Bar *build_files_reference_bar;
+	Bar *read_files_reference_bar;
+	Bar *destroy_reference_bar;
+
 };
 
 #endif // SMALLFILES_H

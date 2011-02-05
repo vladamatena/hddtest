@@ -11,10 +11,15 @@
 SmallFiles::SmallFiles(QWidget *parent):
 	TestWidget(parent)
 {
-	build_dir_bar = this->addBar("s", "Directory structure", QColor(255, 0 , 0), 0.1, 0.1);
-	build_files_bar = this->addBar("s", "Files 1-10K", QColor(0, 0, 255), 0.3, 0.1);
-	read_files_bar = this->addBar("s", "Read files", QColor(255, 0 , 255), 0.5, 0.1);
-	destroy_bar = this->addBar("s", "Structure destroy", QColor(0, 255 , 0), 0.7, 0.1);
+	build_dir_bar = this->addBar(	"s", "Directory structure",	QColor(255,	0,		0),		0.03, 0.1);
+	build_files_bar = this->addBar(	"s", "Files 1-10K",			QColor(255,	64,		0),	0.27, 0.1);
+	read_files_bar = this->addBar(	"s", "Read files",			QColor(255,	128,	0),	0.51, 0.1);
+	destroy_bar = this->addBar(		"s", "Structure destroy",	QColor(255,	192,	0),	0.75, 0.1);
+
+	build_dir_reference_bar = this->addBar(		"s", "Directory structure",	QColor(0,	0,		255),	0.14, 0.1);
+	build_files_reference_bar = this->addBar(	"s", "Files 1-10K",			QColor(0,	64,		255),	0.38, 0.1);
+	read_files_reference_bar = this->addBar(	"s", "Read files",			QColor(0,	128,	255),	0.62, 0.1);
+	destroy_reference_bar = this->addBar(		"s", "Structure destroy",	QColor(0,	192,	255),	0.86, 0.1);
 }
 
 void SmallFiles::InitScene()
@@ -105,11 +110,11 @@ void SmallFiles::TestLoop()
 
 void SmallFiles::UpdateScene()
 {
-	// update progress
-//	SetProgress(100 * (results.dirs_build + results.files_build + results.files_read + results.destroyed) / (5 * SMALLFILES_SIZE));
-
 	// rescale
-	Rescale((qreal)results.max / Device::s, true);
+	if(results.max > reference.max)
+		Rescale((qreal)results.max / Device::s, true);
+	else
+		Rescale((qreal)reference.max / Device::s, true);
 
 	// update bars
 	this->build_dir_bar->Set(
@@ -124,11 +129,25 @@ void SmallFiles::UpdateScene()
 	this->destroy_bar->Set(
 			100 * results.destroyed / (SMALLFILES_SIZE * 2),
 			(qreal)results.destroy_time / Device::s);
+
+	// update reference bars
+	this->build_dir_reference_bar->Set(
+			100 * reference.dirs_build / SMALLFILES_SIZE,
+			(qreal)reference.dir_build_time / Device::s);
+	this->build_files_reference_bar->Set(
+			100 * reference.files_build / SMALLFILES_SIZE,
+			(qreal)reference.file_build_time / Device::s);
+	this->read_files_reference_bar->Set(
+			100 * reference.files_read / SMALLFILES_SIZE,
+			(qreal)reference.file_read_time / Device::s);
+	this->destroy_reference_bar->Set(
+			100 * reference.destroyed / (SMALLFILES_SIZE * 2),
+			(qreal)reference.destroy_time / Device::s);
 }
 
 qreal SmallFiles::GetProgress()
 {
-	return progress;
+	return (float)(results.dirs_build + results.files_build + results.files_read + results.destroyed) / (5 * SMALLFILES_SIZE);
 }
 
 SmallFilesResults::SmallFilesResults()
@@ -189,49 +208,51 @@ QDomElement SmallFiles::WriteResults(QDomDocument &doc)
 
 void SmallFiles::RestoreResults(QDomElement &results, bool reference)
 {
+	SmallFilesResults &res = reference?this->reference:this->results;
+
 	// Locate main seek element
 	QDomElement main = results.firstChildElement("Small_Files");
 	if(!main.attribute("valid", "no").compare("no"))
 		return;
 
 	// init scene and remove results
-	InitScene();
+	res.erase();
 
 	//// get dirs build
 	QDomElement dir_build = main.firstChildElement("Build_dirs");
 	if(dir_build.isNull())
 		return;
-	this->results.dir_build_time = dir_build.attribute("time", "0").toDouble();
+	res.dir_build_time = dir_build.attribute("time", "0").toDouble();
 
 	//// get file build
 	QDomElement files_build = main.firstChildElement("Build_files");
 	if(files_build.isNull())
 		return;
-	this->results.file_build_time = files_build.attribute("time", "0").toDouble();
+	res.file_build_time = files_build.attribute("time", "0").toDouble();
 
 	//// get read files
 	QDomElement files_read = main.firstChildElement("Read_files");
 	if(files_read.isNull())
 		return;
-	this->results.file_read_time = files_read.attribute("time", "0").toDouble();
+	res.file_read_time = files_read.attribute("time", "0").toDouble();
 
 	//// get destroy
 	QDomElement destroy = main.firstChildElement("Destroy");
 	if(destroy.isNull())
 		return;
-	this->results.destroy_time = destroy.attribute("time", "0").toDouble();
+	res.destroy_time = destroy.attribute("time", "0").toDouble();
 
 	// check max
-	this->results.CheckMax(this->results.dir_build_time);
-	this->results.CheckMax(this->results.file_build_time);
-	this->results.CheckMax(this->results.file_read_time);
-	this->results.CheckMax(this->results.destroy_time);
+	res.CheckMax(res.dir_build_time);
+	res.CheckMax(res.file_build_time);
+	res.CheckMax(res.file_read_time);
+	res.CheckMax(res.destroy_time);
 
 	// set progress and update scene
-	this->results.dirs_build = SMALLFILES_SIZE;
-	this->results.files_build = SMALLFILES_SIZE;
-	this->results.files_read = SMALLFILES_SIZE;
-	this->results.destroyed = 2 * SMALLFILES_SIZE;
+	res.dirs_build = SMALLFILES_SIZE;
+	res.files_build = SMALLFILES_SIZE;
+	res.files_read = SMALLFILES_SIZE;
+	res.destroyed = 2 * SMALLFILES_SIZE;
 
 	UpdateScene();
 }
