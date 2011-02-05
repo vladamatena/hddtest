@@ -35,6 +35,8 @@ public:
 	hddtime build;
 	hddtime destroy;
 	hddtime max;
+
+	int progress;
 };
 
 class FileStructure : public TestWidget
@@ -48,15 +50,16 @@ public:
 	qreal GetProgress();
 
 	FileStructureResults results;
+	FileStructureResults reference;
 
-	QDomElement WriteResults(QDomDocument &doc);	// writes results of test to XML
-	void RestoreResults(QDomElement &root, bool reference = false);			// reads results from XML document
-
-	int progress;
+	QDomElement WriteResults(QDomDocument &doc);					// writes results of test to XML
+	void RestoreResults(QDomElement &root, bool reference = false);	// reads results from XML document
 
 private:
 	Bar *build_bar;
 	Bar *destroy_bar;
+	Bar *build_reference_bar;
+	Bar *destroy_reference_bar;
 };
 
 #endif // FILESTRUCTURE_H

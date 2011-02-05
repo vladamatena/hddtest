@@ -291,13 +291,13 @@ void TestWidget::Bar::Set(qreal progress, qreal value)
 		name_text->setDefaultTextColor(color);
 	}
 
-	// outer rect - bar frame
+	// outer rect (bar frame)
 	if(rect == NULL)
 		rect = test->scene->addRect(0, 0, 0, 0, QPen(color));
 
-	// inner rect - progress
+	// inner rect (progress)
 	if(inner_rect == NULL)
-		inner_rect = test->scene->addRect(0, 0, 0, 0, QPen(Qt::NoPen), QBrush(color.darker(55)));
+		inner_rect = test->scene->addRect(0, 0, 0, 0, QPen(Qt::NoPen), QBrush(color.darker(70)));
 
 
 	// set items data

@@ -11,8 +11,10 @@
 FileStructure::FileStructure(QWidget *parent):
 	TestWidget(parent)
 {
-	build_bar = this->addBar("s", "Structure build", QColor(0, 255, 0), 0.2, 0.2);
-	destroy_bar = this->addBar("s", "Structure destroy", QColor(255, 0, 0), 0.7, 0.2);
+	build_bar = this->addBar("s", "Structure build", QColor(255, 128, 128), 0.1, 0.16);
+	build_reference_bar = this->addBar("s", "Structure build", QColor(128, 128, 255), 0.31, 0.16);
+	destroy_bar = this->addBar("s", "Structure destroy", QColor(255, 0, 0), 0.53, 0.16);
+	destroy_reference_bar = this->addBar("s", "Structure destroy", QColor(0, 0, 255), 0.74, 0.16);
 }
 
 void FileStructure::TestLoop()
@@ -24,7 +26,7 @@ void FileStructure::TestLoop()
 	QList<QString> files;
 	QList<QString> nodes;
 	nodes.push_back(device->GetSafeTemp());	//	add initial node
-	progress = 0;
+	results.progress = 0;
 
 	// create structure
 	while(
@@ -56,34 +58,34 @@ void FileStructure::TestLoop()
 			++results.build_files;
 		}
 
-		progress = 100 * (results.build_files + results.build_dirs + results.destroyed) / (4 * FILESTRUCTURE_SIZE);
+		results.progress = 100 * (results.build_files + results.build_dirs + results.destroyed) / (4 * FILESTRUCTURE_SIZE);
 
 		if(go == false)
 			return;
 	}
 
-	// sleep 1 sec
+	// small delay for system to return normal
 	sleep(1);
 
-	// del files
+	// delete files
 	for(int i = 0; i < files.size(); ++i)
 	{
 		results.AddDestroy(device->DelFile(files[i]));
 		++results.destroyed;
 
-		progress = 100 * (results.build_files + results.build_dirs + results.destroyed) / (4 * FILESTRUCTURE_SIZE);
+		results.progress = 100 * (results.build_files + results.build_dirs + results.destroyed) / (4 * FILESTRUCTURE_SIZE);
 
 		if(go == false)
 			return;
 	}
 
-	// del dirs
+	// delete dirs
 	for(int i = nodes.size() - 1; i > 0 ; --i)
 	{
 		results.AddDestroy(device->DelDir(nodes[i]));
 		++results.destroyed;
 
-		progress = 100 * (results.build_files + results.build_dirs + results.destroyed) / (4 * FILESTRUCTURE_SIZE);
+		results.progress = 100 * (results.build_files + results.build_dirs + results.destroyed) / (4 * FILESTRUCTURE_SIZE);
 
 		if(go == false)
 			return;
@@ -98,13 +100,13 @@ void FileStructure::InitScene()
 
 void FileStructure::UpdateScene()
 {
-	// update progress
-//	SetProgress(progress);
-
 	// rescale
-	Rescale((qreal)results.max / 1000000, true);
+	if(results.max > reference.max)
+		Rescale((qreal)results.max / 1000000, true);
+	else
+		Rescale((qreal)reference.max / 1000000, true);
 
-	// update bars
+	// update result bars
 	build_bar->Set(
 			(100 * (results.build_dirs + results.build_files)) / (2 * FILESTRUCTURE_SIZE),
 			(qreal)results.build / 1000000);
@@ -112,18 +114,20 @@ void FileStructure::UpdateScene()
 	destroy_bar->Set(
 			100 * results.destroyed / (2 * FILESTRUCTURE_SIZE),
 			(qreal)results.destroy / 1000000) ;
-	/*
-	build_bar->SetProgress((100 * (results.build_dirs + results.build_files)) / (2 * FILESTRUCTURE_SIZE));
-	destroy_bar->SetProgress(100 * results.destroyed / (2 * FILESTRUCTURE_SIZE));
 
-	build_bar->SetValue((qreal)results.build / 1000000);
-	destroy_bar->SetValue((qreal)results.destroy / 1000000);
-	*/
+	// update reference bars
+	build_reference_bar->Set(
+			(100 * (reference.build_dirs + reference.build_files)) / (2 * FILESTRUCTURE_SIZE),
+			(qreal)reference.build / 1000000);
+
+	destroy_reference_bar->Set(
+			100 * reference.destroyed / (2 * FILESTRUCTURE_SIZE),
+			(qreal)reference.destroy / 1000000) ;
 }
 
 qreal FileStructure::GetProgress()
 {
-	return progress;
+	return (qreal)(results.build_files + results.build_dirs + results.destroyed) / (qreal)(4 * FILESTRUCTURE_SIZE);;
 }
 
 FileStructureResults::FileStructureResults()
@@ -137,9 +141,9 @@ void FileStructureResults::erase()
 	build_dirs = 0;
 	destroyed = 0;
 
-	destroy = 0.0;
-	build = 0.0;
-	max = 0.0;
+	destroy = 0.0f;
+	build = 0.0f;
+	max = 0.0f;
 }
 
 void FileStructureResults::AddBuild(hddtime time)
@@ -158,7 +162,7 @@ QDomElement FileStructure::WriteResults(QDomDocument &doc)
 {
 	// create main seek element
 	QDomElement master = doc.createElement("File_Structure");
-	master.setAttribute("valid", (100 == progress)?"yes":"no");
+	master.setAttribute("valid", (100 == results.progress)?"yes":"no");
 	doc.appendChild(master);
 
 	// add build element
@@ -176,31 +180,33 @@ QDomElement FileStructure::WriteResults(QDomDocument &doc)
 
 void FileStructure::RestoreResults(QDomElement &results, bool reference)
 {
+	FileStructureResults *res = reference?&this->reference:&this->results;
+
 	// Locate main seek element
 	QDomElement main = results.firstChildElement("File_Structure");
 	if(!main.attribute("valid", "no").compare("no"))
 		return;
 
 	// init scene and remove results
-	InitScene();
+	res->erase();
 
 	//// get Build
 	QDomElement build = main.firstChildElement("Build");
 	if(build.isNull())
 		return;
-	this->results.AddBuild(build.attribute("time", "0").toDouble());
+	res->AddBuild(build.attribute("time", "0").toDouble());
 
 	//// get Destroy
 	QDomElement destroy = main.firstChildElement("Destroy");
 	if(destroy.isNull())
 		return;
-	this->results.AddDestroy(destroy.attribute("time", "0").toDouble());
+	res->AddDestroy(destroy.attribute("time", "0").toDouble());
 
 	// set progress and update scene
-	progress = 100;
-	this->results.build_dirs = FILESTRUCTURE_SIZE;
-	this->results.build_files = FILESTRUCTURE_SIZE;
-	this->results.destroyed = FILESTRUCTURE_SIZE * 2;
+	res->progress = 100;
+	res->build_dirs = FILESTRUCTURE_SIZE;
+	res->build_files = FILESTRUCTURE_SIZE;
+	res->destroyed = FILESTRUCTURE_SIZE * 2;
 
 	UpdateScene();
 }
