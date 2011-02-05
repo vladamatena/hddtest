@@ -127,7 +127,7 @@ void FileStructure::UpdateScene()
 
 qreal FileStructure::GetProgress()
 {
-	return (qreal)(results.build_files + results.build_dirs + results.destroyed) / (qreal)(4 * FILESTRUCTURE_SIZE);;
+	return (qreal)(results.build_files + results.build_dirs + results.destroyed) / (qreal)(4 * FILESTRUCTURE_SIZE);
 }
 
 FileStructureResults::FileStructureResults()
