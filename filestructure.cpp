@@ -11,10 +11,10 @@
 FileStructure::FileStructure(QWidget *parent):
 	TestWidget(parent)
 {
-	build_bar = this->addBar("s", "Structure build", QColor(255, 128, 128), 0.1, 0.16);
-	build_reference_bar = this->addBar("s", "Structure build", QColor(128, 128, 255), 0.31, 0.16);
-	destroy_bar = this->addBar("s", "Structure destroy", QColor(255, 0, 0), 0.53, 0.16);
-	destroy_reference_bar = this->addBar("s", "Structure destroy", QColor(0, 0, 255), 0.74, 0.16);
+	build_bar = this->addBar(				"s", "Structure build",		QColor(255,	0,	0),		0.1, 0.16);
+	build_reference_bar = this->addBar(		"s", "Structure build",		QColor(0,	0,	255),	0.31, 0.16);
+	destroy_bar = this->addBar(				"s", "Structure destroy",	QColor(255,	64,	0),		0.53, 0.16);
+	destroy_reference_bar = this->addBar(	"s", "Structure destroy",	QColor(0,	64,	255),	0.74, 0.16);
 }
 
 void FileStructure::TestLoop()
