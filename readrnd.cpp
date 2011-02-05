@@ -34,7 +34,7 @@ ReadRnd::ReadRnd(QWidget *parent):
 		Bar *bar = this->addBar(
 				"MB/s",
 				Device::Format(results[i].__block_size),
-				QColor(0xff * (i+1) / results.size(), 0, 0xff - 0xff * (i+1) / results.size()),
+				QColor(0xff, 0xa0 * (i+1) / results.size(), 0),
 				i * 1.0f / results.size(),
 				1.0f / (results.size() + 1));
 
