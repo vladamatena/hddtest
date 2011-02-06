@@ -13,20 +13,12 @@ ReadBlock::ReadBlock(QWidget *parent):
 {
 	// add subtests to subtest list
 	int base = 1048576;
-	results.push_back(ReadBlockResult(base));
-	results.push_back(ReadBlockResult(base /= 2));
-	results.push_back(ReadBlockResult(base /= 2));
-	results.push_back(ReadBlockResult(base /= 2));
-	results.push_back(ReadBlockResult(base /= 2));
-	results.push_back(ReadBlockResult(base /= 2));
-	results.push_back(ReadBlockResult(base /= 2));
-	results.push_back(ReadBlockResult(base /= 2));
-	results.push_back(ReadBlockResult(base /= 2));
-	results.push_back(ReadBlockResult(base /= 2));
-	results.push_back(ReadBlockResult(base /= 2));
-	results.push_back(ReadBlockResult(base /= 2));
-
-	progress = 0;
+	for(int i = 0; i < 12; ++i)
+	{
+		results.push_back(ReadBlockResult(base));
+		reference.push_back(ReadBlockResult(base));
+		base /= 2;
+	}
 
 	// add bars to scene
 	for(int i = 0; i < results.size(); ++i)
@@ -35,10 +27,21 @@ ReadBlock::ReadBlock(QWidget *parent):
 				"MB/s",
 				Device::Format(results[i].__block_size),
 				QColor(0xff, 0xa0 * (i+1) / results.size(), 0),
-				i * 1.0f / results.size(),
-				1.0f / (results.size() + 1));
+				2*i * 1.0f / (results.size() + reference.size()),
+				1.0f / (results.size() + reference.size() + 1));
+		bars.push_back(bar);
+	}
 
-		this->bars.push_back(bar);
+	// add reference bars to scene
+	for(int i = 0; i < reference.size(); ++i)
+	{
+		Bar *bar = this->addBar(
+				"MB/s",
+				Device::Format(reference[i].__block_size),
+				QColor(0, 0xc0 * (i+1) / reference.size(), 0xff),
+				(2*i + 1) * 1.0f / (reference.size() + reference.size()),
+				1.0f / (reference.size() + reference.size() + 1));
+		reference_bars.push_back(bar);
 	}
 }
 
@@ -67,9 +70,6 @@ void ReadBlock::TestLoop()
 				return;
 		}
 
-		// update progress
-		progress = ((i + 1) * 100) / results.size();
-
 		if(go == false)
 			return;
 	}
@@ -83,39 +83,45 @@ void ReadBlock::InitScene()
 
 void ReadBlock::UpdateScene()
 {
-	// update progress
-//	SetProgress(progress);
-
 	// update subtest results
 	for(int i = 0; i < results.size(); ++i)
 	{
 		//// update subresult
 		const ReadBlockResult &result = results.at(i);
-
-		// calculate MB/s
-		qreal MBps = (qreal)result.__bytes_read / (qreal)result.__time_elapsed;
+		const ReadBlockResult &refer = reference.at(i);
 
 		// get global max
 		qreal max = 0;
 		for(int j = 0; j < results.size(); ++j)
 		{
-			qreal speed = (qreal)results[j].__bytes_read / results[j].__time_elapsed;
+			qreal speed = 0.0f;
+			speed = (qreal)results[j].__bytes_read / results[j].__time_elapsed;
+			if(max < speed)
+				max = speed;
+			speed = (qreal)reference[j].__bytes_read / reference[j].__time_elapsed;
 			if(max < speed)
 				max = speed;
 		}
 
-		// update scene
+		// rescale and update grephics
 		Rescale(max, true);
 		bars[i]->Set(
 				(qreal)(100 * result.__bytes_read) / READ_BLOCK_SIZE,
-				MBps);
+				(qreal)result.__bytes_read / (qreal)result.__time_elapsed);
+		reference_bars[i]->Set(
+				(qreal)(100 * refer.__bytes_read) / READ_BLOCK_SIZE,
+				(qreal)refer.__bytes_read / (qreal)refer.__time_elapsed);
 	}
 }
 
 
 qreal ReadBlock::GetProgress()
 {
-	return progress;
+	qreal progress = 0.0f;
+
+	for(unsigned int i = 0; i < results.size(); ++i)
+		progress += (float)results[i].__bytes_read / READ_BLOCK_SIZE;
+	return progress / results.size();
 }
 
 void ReadBlockResult::erase()
@@ -129,7 +135,7 @@ QDomElement ReadBlock::WriteResults(QDomDocument &doc)
 {
 	// create main seek element
 	QDomElement master = doc.createElement("Read_Block");
-	master.setAttribute("valid", (progress == 100)?"yes":"no");
+	master.setAttribute("valid", (GetProgress() == 100)?"yes":"no");
 	doc.appendChild(master);
 
 	// write subresults
@@ -147,13 +153,12 @@ QDomElement ReadBlock::WriteResults(QDomDocument &doc)
 
 void ReadBlock::RestoreResults(QDomElement &results, bool reference)
 {
+	QList<ReadBlockResult> *res = reference?&this->reference:&this->results;
+
 	// Locate main readblock element
 	QDomElement seek = results.firstChildElement("Read_Block");
 	if(!seek.attribute("valid", "no").compare("no"))
 		return;
-
-	// init scene and remove results
-	InitScene();
 
 	// get list of readblock subresults
 	QDomNodeList xmlresults = seek.elementsByTagName("Result");
@@ -161,13 +166,10 @@ void ReadBlock::RestoreResults(QDomElement &results, bool reference)
 	// read subresults
 	for(int i = 0; i < this->results.size(); ++i)
 	{
-		this->results[i].__block_size = xmlresults.at(i).toElement().attribute("size").toLongLong();
-		this->results[i].__time_elapsed = xmlresults.at(i).toElement().attribute("time").toLongLong();
-		this->results[i].__bytes_read = READ_BLOCK_SIZE;
+		(*res)[i].__block_size = xmlresults.at(i).toElement().attribute("size").toLongLong();
+		(*res)[i].__time_elapsed = xmlresults.at(i).toElement().attribute("time").toLongLong();
+		(*res)[i].__bytes_read = READ_BLOCK_SIZE;
 	}
-
-	// set progress
-	progress = 100;
 
 	// refresh view
 	UpdateScene();

@@ -52,15 +52,15 @@ public:
 
 	// list of subtest results
 	QList<ReadBlockResult> results;
+	QList<ReadBlockResult> reference;
 
-	// test progress
-	int progress;
 
 	QDomElement WriteResults(QDomDocument &doc);	// writes results of test to XML
 	void RestoreResults(QDomElement &root, bool reference = false);			// reads results from XML document
 
 private:
 	QList<Bar*> bars;
+	QList<Bar*> reference_bars;
 };
 
 #endif // READBLOCK_H
