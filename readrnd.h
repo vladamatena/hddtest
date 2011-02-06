@@ -51,9 +51,9 @@ public:
 
 	// list of subtest results
 	QList<ReadRndResult> results;
+	QList<ReadRndResult> reference;
 
 	// test progress
-	int progress;
 	qreal GetProgress();
 
 	QDomElement WriteResults(QDomDocument &doc);	// writes results of test to XML
@@ -61,6 +61,7 @@ public:
 
 private:
 	QList<Bar*> bars;
+	QList<Bar*> reference_bars;
 };
 
 #endif // READRND_H
