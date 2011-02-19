@@ -115,8 +115,8 @@ public:
 
 	void Rescale(qreal max, bool force = false);
 
-	Device *device;
-	QGraphicsScene *scene;
+	Device *device;				// pointer to device selecte dfor testing in GUI
+	QGraphicsScene *scene;		// pointer to current grephics scene
 
 	qreal Yscale;
 
@@ -140,7 +140,7 @@ private:
 
 	QTimer refresh_timer;
 	TestThread *test_thread;
-	QList<Marker*> markers;
+	QList<Marker*> markers;		// List of markers used in scene
 
 private slots:
 	void refresh_timer_timeout();
