@@ -101,10 +101,7 @@ void FileStructure::InitScene()
 void FileStructure::UpdateScene()
 {
 	// rescale
-	if(results.max > reference.max)
-		Rescale((qreal)results.max / 1000000, true);
-	else
-		Rescale((qreal)reference.max / 1000000, true);
+	Rescale();
 
 	// update result bars
 	build_bar->Set(

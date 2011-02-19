@@ -92,33 +92,27 @@ void TestWidget::on_startstop_clicked()
 		StopTest();
 }
 
-void TestWidget::Rescale(qreal max, bool force)
+void TestWidget::Rescale(bool force)
 {
+	qreal max = 0;
+	qreal min = 0;
+
+	for(int i = 0; i < markers.size(); ++i)
+	{
+		if(markers[i]->max > max)
+			max = markers[i]->max;
+		if(markers[i]->min < min)
+			min = markers[i]->min;
+	}
+
 	// calculate Y axis scale
 	if((max * Yscale > scene->height()) || (Yscale == 0) || force)
 	{
-		qreal oldscale = Yscale;	// backup old multipiler
+		qreal oldscale = Yscale;	// store old multipiler
 
 		Yscale = scene->height() / (max * 1.5);	// calc new multipiler
 
 		resizeEvent(NULL);
-
-		// rescale graphics
-		QList<QGraphicsItem*> items = scene->items();
-		for(int j = 0; j < items.size(); ++j)
-		{
-			if(items[j]->type() == QGraphicsRectItem::Type)
-			{
-				QGraphicsRectItem* point = static_cast<QGraphicsRectItem*>(items[j]);
-				QRectF rect = point->rect();
-				point->setRect(
-						rect.x(),
-						scene->height() - ((scene->height() - rect.y()) / oldscale) * Yscale,
-						rect.width(),
-						rect.height()
-						);
-			}
-		}
 	}
 }
 
@@ -132,12 +126,18 @@ void TestWidget::resizeEvent(QResizeEvent *event)
 				rect.width() * 1.05,
 				rect.height() * 1.05,
 				Qt::KeepAspectRatio);
+
+	for(int i = 0; i < markers.size(); ++i)
+		markers[i]->Reposition();
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////
 /////// Marker add functions //////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
+
+TestWidget::Marker::Marker():
+	max(0.0f), min(0.0f) {}
 
 TestWidget::Line* TestWidget::addLine(QString unit, QString name, QColor color)
 {

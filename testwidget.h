@@ -30,6 +30,8 @@ public:
 	class Marker
 	{
 	public:
+		Marker();
+
 		TestWidget *test;
 		qreal max;						// maximal value used by this marker
 		qreal min;						// minimal value used by this marker
@@ -122,7 +124,7 @@ public:
 	Bar* addBar(QString unit, QString name, QColor color, qreal position, qreal width);
 	LineGraph* addLineGraph(QString unit, bool net, QColor color);
 
-	void Rescale(qreal max, bool force = false);
+	void Rescale(bool force = false);
 
 	Device *device;				// pointer to device selecte dfor testing in GUI
 	QGraphicsScene *scene;		// pointer to current grephics scene

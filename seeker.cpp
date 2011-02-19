@@ -79,8 +79,7 @@ void Seeker::InitScene()
 void Seeker::UpdateScene()
 {
 	// rescale view
-	Rescale(result.max());
-	Rescale(reference.max());
+	Rescale();
 
 	// draw new seeks
 	for(int i = 0; i < result.newseeks.count(); ++i)

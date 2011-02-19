@@ -104,7 +104,7 @@ void ReadBlock::UpdateScene()
 		}
 
 		// rescale and update grephics
-		Rescale(max, true);
+		Rescale();
 		bars[i]->Set(
 				(qreal)(100 * result.__bytes_read) / READ_BLOCK_SIZE,
 				(qreal)result.__bytes_read / (qreal)result.__time_elapsed);

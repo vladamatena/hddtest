@@ -82,10 +82,7 @@ void FileRW::UpdateScene()
 		Rescale(results_read.max);
 	else
 		Rescale(results_write.max);*/
-	Rescale(results_read.max);
-	Rescale(results_write.max);
-	Rescale(reference_read.max);
-	Rescale(reference_write.max);
+	Rescale();
 
 	// set graph size
 	__write_graph->SetSize(results_write.blocks);

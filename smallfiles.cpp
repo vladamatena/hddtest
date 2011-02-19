@@ -111,10 +111,7 @@ void SmallFiles::TestLoop()
 void SmallFiles::UpdateScene()
 {
 	// rescale
-	if(results.max > reference.max)
-		Rescale((qreal)results.max / Device::s, true);
-	else
-		Rescale((qreal)reference.max / Device::s, true);
+	Rescale();
 
 	// update bars
 	this->build_dir_bar->Set(

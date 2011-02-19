@@ -64,8 +64,7 @@ void ReadCont::InitScene()
 void ReadCont::UpdateScene()
 {
 	// rescale scene to reflect possible new max
-	Rescale(results.max);
-	Rescale(reference.max);
+	Rescale();
 
 	// set line graph line count
 	graph->SetSize(results.blocks);
