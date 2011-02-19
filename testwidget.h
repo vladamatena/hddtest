@@ -123,9 +123,6 @@ public:
 	bool running;
 	bool go;
 
-	// TODO: remove this
-	//int progress;
-
 protected:
 	 void resizeEvent(QResizeEvent *event);
 
