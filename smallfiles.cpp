@@ -110,9 +110,6 @@ void SmallFiles::TestLoop()
 
 void SmallFiles::UpdateScene()
 {
-	// rescale
-	Rescale();
-
 	// update bars
 	this->build_dir_bar->Set(
 			100 * results.dirs_build / SMALLFILES_SIZE,
@@ -140,6 +137,9 @@ void SmallFiles::UpdateScene()
 	this->destroy_reference_bar->Set(
 			100 * reference.destroyed / (SMALLFILES_SIZE * 2),
 			(qreal)reference.destroy_time / Device::s);
+
+	// rescale
+	Rescale();
 }
 
 qreal SmallFiles::GetProgress()

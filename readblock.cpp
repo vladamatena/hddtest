@@ -103,14 +103,14 @@ void ReadBlock::UpdateScene()
 				max = speed;
 		}
 
-		// rescale and update grephics
-		Rescale();
+		// rescale and update graphics
 		bars[i]->Set(
 				(qreal)(100 * result.__bytes_read) / READ_BLOCK_SIZE,
 				(qreal)result.__bytes_read / (qreal)result.__time_elapsed);
 		reference_bars[i]->Set(
 				(qreal)(100 * refer.__bytes_read) / READ_BLOCK_SIZE,
 				(qreal)refer.__bytes_read / (qreal)refer.__time_elapsed);
+		Rescale();
 	}
 }
 

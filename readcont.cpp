@@ -63,9 +63,6 @@ void ReadCont::InitScene()
 
 void ReadCont::UpdateScene()
 {
-	// rescale scene to reflect possible new max
-	Rescale();
-
 	// set line graph line count
 	graph->SetSize(results.blocks);
 	refGraph->SetSize(reference.blocks);
@@ -90,6 +87,9 @@ void ReadCont::UpdateScene()
 	// update horizontal lines
 	averageLine->SetValue(results.avg);
 	refAverageLine->SetValue(reference.avg);
+
+	// rescale scene to reflect possible new max
+	Rescale();
 }
 
 qreal ReadCont::GetProgress()

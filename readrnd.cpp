@@ -110,13 +110,13 @@ void ReadRnd::UpdateScene()
 		}
 
 		// rescale and update grephics
-		Rescale();
 		bars[i]->Set(
 				(qreal)(100 * result.__bytes_read) / READ_RND_SIZE,
 				(qreal)result.__bytes_read / (qreal)result.__time_elapsed);
 		reference_bars[i]->Set(
 				(qreal)(100 * refer.__bytes_read) / READ_RND_SIZE,
 				(qreal)refer.__bytes_read / (qreal)refer.__time_elapsed);
+		Rescale();
 	}
 }
 

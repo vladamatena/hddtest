@@ -108,10 +108,7 @@ void TestWidget::Rescale(bool force)
 	// calculate Y axis scale
 	if((max * Yscale > scene->height()) || (max * Yscale < scene->height() / 2) || (Yscale == 0) || force)
 	{
-		qreal oldscale = Yscale;	// store old multipiler
-
 		Yscale = scene->height() / (max * 1.5);	// calc new multipiler
-
 		resizeEvent(NULL);
 	}
 }
@@ -128,7 +125,7 @@ void TestWidget::resizeEvent(QResizeEvent *event)
 				Qt::KeepAspectRatio);
 
 	for(int i = 0; i < markers.size(); ++i)
-		markers[i]->Reposition();
+	markers[i]->Reposition();
 }
 
 

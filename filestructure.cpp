@@ -100,9 +100,6 @@ void FileStructure::InitScene()
 
 void FileStructure::UpdateScene()
 {
-	// rescale
-	Rescale();
-
 	// update result bars
 	build_bar->Set(
 			(100 * (results.build_dirs + results.build_files)) / (2 * FILESTRUCTURE_SIZE),
@@ -120,6 +117,9 @@ void FileStructure::UpdateScene()
 	destroy_reference_bar->Set(
 			100 * reference.destroyed / (2 * FILESTRUCTURE_SIZE),
 			(qreal)reference.destroy / 1000000) ;
+
+	// rescale
+	Rescale();
 }
 
 qreal FileStructure::GetProgress()

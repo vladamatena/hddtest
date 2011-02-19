@@ -78,9 +78,6 @@ void Seeker::InitScene()
 
 void Seeker::UpdateScene()
 {
-	// rescale view
-	Rescale();
-
 	// draw new seeks
 	for(int i = 0; i < result.newseeks.count(); ++i)
 	{
@@ -98,6 +95,9 @@ void Seeker::UpdateScene()
 	// update lines
 	dataAvgLine->SetValue(result.avg());
 	referenceAvgLine->SetValue(reference.avg());
+
+	// rescale view
+	Rescale();
 }
 
 qreal Seeker::GetProgress()

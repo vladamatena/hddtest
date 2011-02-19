@@ -77,13 +77,6 @@ void FileRW::InitScene()
 
 void FileRW::UpdateScene()
 {
-	// rescale graph
-/*	if(results_read.max > results_write.max)
-		Rescale(results_read.max);
-	else
-		Rescale(results_write.max);*/
-	Rescale();
-
 	// set graph size
 	__write_graph->SetSize(results_write.blocks);
 	__read_graph->SetSize(results_read.blocks);
@@ -131,6 +124,9 @@ void FileRW::UpdateScene()
 	else
 		max_line->SetValue(results_write.max);
 		*/
+
+	// rescale graph
+	Rescale();
 }
 
 qreal FileRW::GetProgress()
