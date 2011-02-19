@@ -268,7 +268,7 @@ void HDDTest::OpenResultFile(QString filename, bool reference)
 	QDomElement root = doc.documentElement();
 	QDomElement results = root.firstChildElement("Results");
 
-	// restore devide info and store index
+	// restore device info and store index
 	reference?refDevice->ReadInfo(root):device->ReadInfo(root);
 	int index = ui->Tabs->currentIndex();
 
