@@ -179,10 +179,18 @@ TestWidget::LineGraph* TestWidget::addLineGraph(QString unit, bool net, QColor c
 /////// Marker management functions ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
+TestWidget::Line::Line(TestWidget *test, QString unit, QString name, QColor color):
+		unit(unit), name(name), color(color), line(NULL), text(NULL)
+{
+	this->test = test;
+}
+
 void TestWidget::Line::SetValue(qreal value)
 {
 	// update min and max for Line
 	max = min = value;
+
+	this->value = value;
 
 	// add line
 	if(line == NULL)
@@ -220,10 +228,9 @@ void TestWidget::Line::SetValue(qreal value)
 		text->setPlainText(QString::number(value, 'f', 2) + " " + unit);
 }
 
-TestWidget::Line::Line(TestWidget *test, QString unit, QString name, QColor color):
-		unit(unit), name(name), color(color), line(NULL), text(NULL)
+void TestWidget::Line::Reposition()
 {
-	this->test = test;
+	SetValue(value);
 }
 
 TestWidget::Ticks::Ticks(TestWidget *test, QColor color):
@@ -266,6 +273,17 @@ void TestWidget::Ticks::AddTick(qreal value, qreal position)
 			QPen(color));
 
 	ticks.push_back(tick);
+	positions.push_back(QPointF(position, value));
+}
+
+void TestWidget::Ticks::Reposition()
+{
+	for(int i = 0; i < ticks.size(); ++i)
+		ticks[i]->setRect(
+					positions[i].rx() *  test->scene->width() * LINEGRAPH_WIDTH,
+					test->scene->height() - positions[i].ry() * test->Yscale,
+					1,
+					1);
 }
 
 void TestWidget::Ticks::erase()
@@ -274,6 +292,7 @@ void TestWidget::Ticks::erase()
 	for(int i = 0; i < ticks.size(); ++i)
 		test->scene->removeItem(ticks[i]);
 	ticks.clear();
+	positions.clear();
 
 	// reset min and max
 	min = max = 0.0f;
@@ -288,6 +307,9 @@ TestWidget::Bar::Bar(TestWidget *test, QString unit, QString name, QColor color,
 
 void TestWidget::Bar::Set(qreal progress, qreal value)
 {
+	this->value = value;
+	this->progress = progress;
+
 	// update min and max for bars
 	if(value > max)
 		max = value;
@@ -337,6 +359,11 @@ void TestWidget::Bar::Set(qreal progress, qreal value)
 	name_text->setPos(
 			X + W / 2 - name_text->boundingRect().width() / 2,
 			test->scene->height() - name_text->boundingRect().height());
+}
+
+void TestWidget::Bar::Reposition()
+{
+	Set(progress, value);
 }
 
 TestWidget::LineGraph::LineGraph(TestWidget *test, QString unit, bool shownet, QColor color) :
@@ -491,7 +518,7 @@ void TestWidget::LineGraph::Reposition()
 					net_markups[i / 10]->setPlainText(QString::number(i) + " " + unit);
 					net_markups[i / 10]->setPos(
 							test->scene->width() * LINEGRAPH_NET_WIDTH,
-							test->scene->height() - (i * test->Yscale * dist) - net_markups[i / 10]->boundingRect().height() / 2);
+							test->scene->height() - (i*test->Yscale * dist) - net_markups[i/10]->boundingRect().height() / 2);
 				}
 			}
 		}

@@ -31,8 +31,9 @@ public:
 	{
 	public:
 		TestWidget *test;
-		qreal max;			// maximal value used by this marker
-		qreal min;			// minimal value used by this marker
+		qreal max;						// maximal value used by this marker
+		qreal min;						// minimal value used by this marker
+		virtual void Reposition() = 0;	// reposition marker on view change
 	};
 	class Ticks : public Marker
 	{
@@ -40,10 +41,12 @@ public:
 		Ticks(TestWidget *test, QColor color);
 		void AddTick(qreal value, qreal position);
 		void erase();
+		void Reposition();
 
 	private:
 		QColor color;
 		QList<QGraphicsRectItem*> ticks;
+		QList<QPointF> positions;
 		QGraphicsRectItem *rect;
 	};
 	class Line : public Marker
@@ -51,24 +54,28 @@ public:
 	public:
 		Line(TestWidget *test, QString unit, QString name, QColor color);
 		void SetValue(qreal value);
+		void Reposition();
 
 	private:
 		QString unit, name;
 		QColor color;
 		QGraphicsLineItem *line;
 		QGraphicsTextItem *text;
+		qreal value;
 	};
-	class Bar : public Marker	{
+	class Bar : public Marker
+	{
 	public:
 		Bar(TestWidget *test, QString unit, QString name, QColor color, qreal position, qreal width);
 		void Set(qreal progress, qreal value);
+		void Reposition();
 
 	private:
 		QString unit, name;
 		QColor color;
 		QGraphicsRectItem *rect, *inner_rect;
 		QGraphicsTextItem *value_text, *name_text;
-		qreal position, width, value;
+		qreal position, width, value, progress;
 	};
 	class LineGraph : public Marker
 	{
@@ -76,7 +83,7 @@ public:
 		LineGraph(TestWidget *test, QString unit, bool net, QColor color);
 		void SetSize(int count);	// set graph final value count
 		void AddValue(qreal value);	// add new value to graph
-		void Reposition();			// repositions lines in screen acordin to new scale and count
+		void Reposition();			// repositions lines in screen acording to new scale and count
 		void erase();				// erase all data in graph
 
 	private:
