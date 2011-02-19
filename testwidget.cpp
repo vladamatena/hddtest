@@ -181,6 +181,9 @@ TestWidget::LineGraph* TestWidget::addLineGraph(QString unit, bool net, QColor c
 
 void TestWidget::Line::SetValue(qreal value)
 {
+	// update min and max for Line
+	max = min = value;
+
 	// add line
 	if(line == NULL)
 	{
@@ -231,6 +234,12 @@ TestWidget::Ticks::Ticks(TestWidget *test, QColor color):
 
 void TestWidget::Ticks::AddTick(qreal value, qreal position)
 {
+	// update max and min for ticks
+	if(value > max)
+		max = value;
+	if(value < min)
+		min = value;
+
 	// add graph bounding rect
 	if(rect)
 		rect->setRect(
@@ -265,6 +274,9 @@ void TestWidget::Ticks::erase()
 	for(int i = 0; i < ticks.size(); ++i)
 		test->scene->removeItem(ticks[i]);
 	ticks.clear();
+
+	// reset min and max
+	min = max = 0.0f;
 }
 
 TestWidget::Bar::Bar(TestWidget *test, QString unit, QString name, QColor color, qreal position, qreal width) :
@@ -276,6 +288,11 @@ TestWidget::Bar::Bar(TestWidget *test, QString unit, QString name, QColor color,
 
 void TestWidget::Bar::Set(qreal progress, qreal value)
 {
+	// update min and max for bars
+	if(value > max)
+		max = value;
+	min = 0;
+
 	//// Create bar items
 	// bar value
 	if(value_text == NULL)
@@ -339,6 +356,12 @@ void TestWidget::LineGraph::SetSize(int count)
 
 void TestWidget::LineGraph::AddValue(qreal value)
 {
+	// update max and min for linegraph
+	if(value > max)
+		max = value;
+	if(value < min)
+		min = value;
+
 	// add new line
 	values.push_back(value);
 
@@ -364,6 +387,9 @@ void TestWidget::LineGraph::erase()
 	size = 10;
 	Yscale_cached = 0;
 	rect = NULL;
+
+	// reset min and max
+	min = max = 0.0f;
 }
 
 void TestWidget::LineGraph::Reposition()

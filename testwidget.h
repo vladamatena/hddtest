@@ -31,6 +31,8 @@ public:
 	{
 	public:
 		TestWidget *test;
+		qreal max;			// maximal value used by this marker
+		qreal min;			// minimal value used by this marker
 	};
 	class Ticks : public Marker
 	{
