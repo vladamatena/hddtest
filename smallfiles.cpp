@@ -46,7 +46,7 @@ void SmallFiles::TestLoop()
 
 		// create node
 		hddtime time = device->MkDir(file);
-		results.CheckMax(results.dir_build_time += time);
+		results.dir_build_time += time;
 
 		++results.dirs_build;
 
@@ -63,7 +63,7 @@ void SmallFiles::TestLoop()
 
 		// create file
 		hddtime time = device->MkFile(file, Device::K + random.Get64() % (9 * Device::K));
-		results.CheckMax(results.file_build_time += time);
+		results.file_build_time += time;
 
 		++results.files_build;
 
@@ -79,7 +79,7 @@ void SmallFiles::TestLoop()
 		int index = random.Get64() % files_to_read.size();
 		hddtime time = device->ReadFile(files_to_read[index]);
 		files_to_read.removeAt(index);
-		results.CheckMax(results.file_read_time += time);
+		results.file_read_time += time;
 
 		++results.files_read;
 
@@ -90,7 +90,7 @@ void SmallFiles::TestLoop()
 	// del files
 	for(int i = 0; i < files.size(); ++i)
 	{
-		results.CheckMax(results.destroy_time += device->DelFile(files[i]));
+		results.destroy_time += device->DelFile(files[i]);
 		++results.destroyed;
 
 		if(go == false)
@@ -100,7 +100,7 @@ void SmallFiles::TestLoop()
 	// del dirs
 	for(int i = nodes.size() - 1; i > 0 ; --i)
 	{
-		results.CheckMax(results.destroy_time += device->DelDir(nodes[i]));
+		results.destroy_time += device->DelDir(nodes[i]);
 		++results.destroyed;
 
 		if(go == false)
@@ -159,17 +159,10 @@ void SmallFilesResults::erase()
 	file_read_time = 0;
 	destroy_time = 0;
 
-	max = 0;
-
 	dirs_build = 0;
 	files_build = 0;
 	files_read = 0;
 	destroyed = 0;
-}
-
-void SmallFilesResults::CheckMax(hddtime time)
-{
-	max = std::max(max, time);
 }
 
 QDomElement SmallFiles::WriteResults(QDomDocument &doc)
@@ -238,12 +231,6 @@ void SmallFiles::RestoreResults(QDomElement &results, bool reference)
 	if(destroy.isNull())
 		return;
 	res.destroy_time = destroy.attribute("time", "0").toDouble();
-
-	// check max
-	res.CheckMax(res.dir_build_time);
-	res.CheckMax(res.file_build_time);
-	res.CheckMax(res.file_read_time);
-	res.CheckMax(res.destroy_time);
 
 	// set progress and update scene
 	res.dirs_build = SMALLFILES_SIZE;

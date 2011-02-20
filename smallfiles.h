@@ -29,14 +29,11 @@ public:
 	hddtime file_read_time;
 	hddtime destroy_time;
 
-	hddtime max;
-
 	int dirs_build;
 	int files_build;
 	int files_read;
 	int destroyed;
 
-	void CheckMax(hddtime time);
 	void erase();
 };
 
