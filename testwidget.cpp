@@ -94,8 +94,8 @@ void TestWidget::on_startstop_clicked()
 
 void TestWidget::Rescale(bool force)
 {
-	qreal max = 0;
-	qreal min = 0;
+	qreal max = 0.0f;
+	qreal min = 0.0f;
 
 	for(int i = 0; i < markers.size(); ++i)
 	{
@@ -108,7 +108,7 @@ void TestWidget::Rescale(bool force)
 	// calculate Y axis scale
 	if((max * Yscale > scene->height()) || (max * Yscale < scene->height() / 2) || (Yscale == 0) || force)
 	{
-		Yscale = scene->height() / (max * 1.5);	// calc new multipiler
+		Yscale = (qreal)scene->height() / (max * 1.5);	// calc new multipiler
 		resizeEvent(NULL);
 	}
 }
@@ -308,8 +308,7 @@ void TestWidget::Bar::Set(qreal progress, qreal value)
 	this->progress = progress;
 
 	// update min and max for bars
-	if(value > max)
-		max = value;
+	max = value;
 	min = 0;
 
 	//// Create bar items

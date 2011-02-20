@@ -129,7 +129,7 @@ public:
 	Device *device;				// pointer to device selecte dfor testing in GUI
 	QGraphicsScene *scene;		// pointer to current grephics scene
 
-	qreal Yscale;
+	qreal Yscale;				// Y axis multipiler
 
 	bool running;
 	bool go;
