@@ -198,13 +198,16 @@ void HDDTest::ReloadTests(bool loaded)
 
 	// disable test start in loaded mode | enable otherwise
 	bool start_enabled = !loaded;
-	ui->filerwwidget->SetStartEnabled(start_enabled);
-	ui->filestructurewidget->SetStartEnabled(start_enabled);
 	ui->readblockwidget->SetStartEnabled(start_enabled);
 	ui->readcontwidget->SetStartEnabled(start_enabled);
 	ui->readrndwidget->SetStartEnabled(start_enabled);
 	ui->seekwidget->SetStartEnabled(start_enabled);
+
+	// disable fs tests on nonmounted filesystems
+	start_enabled = (!loaded && fs);
 	ui->smallfileswidget->SetStartEnabled(start_enabled);
+	ui->filerwwidget->SetStartEnabled(start_enabled);
+	ui->filestructurewidget->SetStartEnabled(start_enabled);
 }
 
 void HDDTest::on_save_clicked()

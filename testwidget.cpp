@@ -125,7 +125,7 @@ void TestWidget::resizeEvent(QResizeEvent *event)
 				Qt::KeepAspectRatio);
 
 	for(int i = 0; i < markers.size(); ++i)
-	markers[i]->Reposition();
+		markers[i]->Reposition();
 }
 
 
@@ -342,7 +342,7 @@ void TestWidget::Bar::Set(qreal progress, qreal value)
 	// set items positions
 	int W = test->scene->width() * width;
 	int H = value * test->Yscale;
-	int X = test->scene->width() * position ;
+	int X = test->scene->width() * position;
 	int Y = test->scene->height() - H - name_text->boundingRect().height();
 
 	//// set positions
