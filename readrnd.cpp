@@ -175,7 +175,7 @@ qreal ReadRnd::GetProgress()
 {
 	qreal progress = 0.0f;
 
-	for(unsigned int i = 0; i < results.size(); ++i)
+	for(int i = 0; i < results.size(); ++i)
 		progress += (float)results[i].__bytes_read / READ_RND_SIZE;
 	return progress / results.size();
 }

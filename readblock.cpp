@@ -118,7 +118,7 @@ qreal ReadBlock::GetProgress()
 {
 	qreal progress = 0.0f;
 
-	for(unsigned int i = 0; i < results.size(); ++i)
+	for(int i = 0; i < results.size(); ++i)
 		progress += (float)results[i].__bytes_read / READ_BLOCK_SIZE;
 	return progress / results.size();
 }

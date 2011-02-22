@@ -113,7 +113,7 @@ void TestWidget::Rescale(bool force)
 	}
 }
 
-void TestWidget::resizeEvent(QResizeEvent *event)
+void TestWidget::resizeEvent(QResizeEvent*)
 {
 	QRect rect = ui->graph->rect();
 	scene->setSceneRect(rect);

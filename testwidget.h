@@ -135,7 +135,7 @@ public:
 	bool go;
 
 protected:
-	 void resizeEvent(QResizeEvent *event);
+	 void resizeEvent(QResizeEvent*);
 
 private:
 	class TestThread : public QThread
