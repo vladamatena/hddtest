@@ -94,7 +94,6 @@ public:
 		QColor color;
 		QList<QGraphicsLineItem*> lines;
 		QList<qreal> values;
-		QGraphicsRectItem *rect;
 	};
 	class Net : public Marker
 	{

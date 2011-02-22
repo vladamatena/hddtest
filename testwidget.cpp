@@ -384,7 +384,6 @@ TestWidget::LineGraph::LineGraph(TestWidget *test, QString unit, QColor color) :
 {
 	this->test = test;
 	size = 10;
-	rect = NULL;
 }
 
 void TestWidget::LineGraph::SetSize(int count)
@@ -424,7 +423,6 @@ void TestWidget::LineGraph::erase()
 	values.erase(values.begin(), values.end());
 
 	size = 10;
-	rect = NULL;
 
 	// reset min and max
 	min = max = 0.0f;
@@ -432,23 +430,6 @@ void TestWidget::LineGraph::erase()
 
 void TestWidget::LineGraph::Reposition()
 {
-	// add graph bounding rect
-	if(rect)
-	{
-		rect->setRect(0,
-					  0,
-					  test->scene->width() * LINEGRAPH_WIDTH,
-					  test->scene->height());
-	}
-	else
-	{
-		rect = test->scene->addRect(0,
-								   0,
-								   test->scene->width() * LINEGRAPH_WIDTH,
-								   test->scene->height(),
-								   QPen(QColor(0,0,0)));
-	}
-
 	// reposition lines
 	for(int i = 0; i < lines.size(); ++i)
 	{
