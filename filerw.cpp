@@ -12,12 +12,12 @@ FileRW::FileRW(QWidget *parent) :
 	TestWidget(parent)
 {
 	// Add two line graph components (reading + writting)
-	__read_graph = addLineGraph("MB/s", false, QColor(255, 192, 192));
-	__write_graph = addLineGraph("MB/s", false, QColor(255, 0, 0));
+	__read_graph = addLineGraph("MB/s", QColor(255, 192, 192));
+	__write_graph = addLineGraph("MB/s", QColor(255, 0, 0));
 
 	// Add two line graph components (reference reading + reference writting)
-	__read_reference_graph = addLineGraph("MB/s", false, QColor(192, 192, 255));
-	__write_reference_graph = addLineGraph("MB/s", false, QColor(0, 0, 255));
+	__read_reference_graph = addLineGraph("MB/s", QColor(192, 192, 255));
+	__write_reference_graph = addLineGraph("MB/s", QColor(0, 0, 255));
 
 	// Add background net
 	__net = addNet("MB/s");

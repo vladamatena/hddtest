@@ -82,7 +82,7 @@ public:
 	class LineGraph : public Marker
 	{
 	public:
-		LineGraph(TestWidget *test, QString unit, bool net, QColor color);
+		LineGraph(TestWidget *test, QString unit, QColor color);
 		void SetSize(int count);	// set graph final value count
 		void AddValue(qreal value);	// add new value to graph
 		void Reposition();			// repositions lines in screen acording to new scale and count
@@ -90,14 +90,10 @@ public:
 
 	private:
 		int size;
-		bool shownet;
 		QString unit;
-		qreal Yscale_cached;
 		QColor color;
 		QList<QGraphicsLineItem*> lines;
 		QList<qreal> values;
-		QList<QGraphicsLineItem*> net;
-		QList<QGraphicsTextItem*> net_markups;
 		QGraphicsRectItem *rect;
 	};
 	class Net : public Marker
@@ -133,7 +129,7 @@ public:
 	Line* addLine(QString unit, QString name, QColor color);
 	Ticks* addTicks(QColor color);
 	Bar* addBar(QString unit, QString name, QColor color, qreal position, qreal width);
-	LineGraph* addLineGraph(QString unit, bool net, QColor color);
+	LineGraph* addLineGraph(QString unit, QColor color);
 	Net* addNet(QString unit);
 
 	void Rescale(bool force = false);
