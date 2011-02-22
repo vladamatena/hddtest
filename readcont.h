@@ -58,8 +58,8 @@ public:
 	ReadContResults results;
 	ReadContResults reference;
 
-	QDomElement WriteResults(QDomDocument &doc);	// writes results of test to XML
-	void RestoreResults(QDomElement &root, bool reference = false);			// reads results from XML document
+	QDomElement WriteResults(QDomDocument &doc);						// writes results of test to XML
+	void RestoreResults(QDomElement &root, bool reference = false);		// reads results from XML document
 
 private:
 //	bool first;
@@ -67,6 +67,8 @@ private:
 
 	LineGraph *graph;
 	LineGraph *refGraph;
+
+	Net *net;
 
 	Line *averageLine;
 	Line *refAverageLine;

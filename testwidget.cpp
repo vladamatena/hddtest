@@ -168,6 +168,14 @@ TestWidget::LineGraph* TestWidget::addLineGraph(QString unit, bool net, QColor c
 	return linegraph;
 }
 
+TestWidget::Net* TestWidget::addNet(QString unit)
+{
+	Net *net = new Net(this, unit);
+	markers.push_back(net);	// TODO delete merkers on exit
+
+	return net;
+}
+
 
 
 
@@ -529,6 +537,10 @@ TestWidget::Net::Net(TestWidget *test, QString unit)
 
 void TestWidget::Net::Reposition()
 {
+	// If Yscale is not set do not do anything
+	if(test->Yscale == 0)
+		return;
+
 	// get distances
 	qreal dist = 1;		//TODO: handle distances in better way
 

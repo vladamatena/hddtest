@@ -16,8 +16,11 @@ ReadCont::ReadCont(QWidget *parent):
 	refAverageLine = new Line(this, "MB/s", "", QColor(0, 0, 255));
 
 	// add line graph component to graph
-	graph = addLineGraph("MB/s", true, QColor(255, 128, 128));
-	refGraph = addLineGraph("MB/s", true, QColor(128, 128, 255));
+	graph = addLineGraph("MB/s", false, QColor(255, 128, 128));
+	refGraph = addLineGraph("MB/s", false, QColor(128, 128, 255));
+
+	// add background net
+	net = addNet("MB/s");
 }
 
 ReadCont::~ReadCont()

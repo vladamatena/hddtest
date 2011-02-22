@@ -62,6 +62,8 @@ private:
 	LineGraph *__read_reference_graph;
 	LineGraph *__write_reference_graph;
 
+	Net *__net;
+
 	Line *__avg_line;
 	Line *__max_line;
 };
