@@ -104,6 +104,7 @@ public:
 		QString unit;
 		QList<QGraphicsLineItem*> net;
 		QList<QGraphicsTextItem*> net_markups;
+		QGraphicsLineItem* left_line;
 	};
 
 	explicit TestWidget(QWidget *parent = 0);

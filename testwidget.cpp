@@ -422,6 +422,8 @@ TestWidget::Net::Net(TestWidget *test, QString unit)
 {
 	this->test = test;
 	this->unit = unit;
+
+	left_line = test->scene->addLine(0, 0, 0, test->scene->height(),QPen(QColor(200,200,200)));
 }
 
 void TestWidget::Net::Reposition()
@@ -429,6 +431,9 @@ void TestWidget::Net::Reposition()
 	// If Yscale is not set do not do anything
 	if(test->Yscale == 0)
 		return;
+
+	// reposition left line
+	left_line->setLine(0, 0, 0, test->scene->height());
 
 	// get distances
 	qreal dist = 1;		//TODO: handle distances in better way
