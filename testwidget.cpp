@@ -283,12 +283,21 @@ void TestWidget::Ticks::AddTick(qreal value, qreal position)
 
 void TestWidget::Ticks::Reposition()
 {
+	// reposition ticks
 	for(int i = 0; i < ticks.size(); ++i)
 		ticks[i]->setRect(
 					positions[i].rx() *  test->scene->width() * LINEGRAPH_WIDTH,
 					test->scene->height() - positions[i].ry() * test->Yscale,
 					1,
 					1);
+
+	// reposition bounding rect
+	if(rect)
+		rect->setRect(
+				0,
+				0,
+				test->scene->width() * LINEGRAPH_WIDTH,
+				test->scene->height());
 }
 
 void TestWidget::Ticks::erase()
