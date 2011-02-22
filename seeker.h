@@ -79,6 +79,8 @@ private:
 
 	Ticks *dataTicks;
 	Ticks *referenceTicks;
+
+	Net* net;
 };
 
 #endif // SEEKER_H

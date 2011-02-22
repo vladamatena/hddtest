@@ -16,6 +16,8 @@ Seeker::Seeker(QWidget *parent) :
 
 	dataTicks = addTicks(QColor(255, 0, 0));
 	referenceTicks = addTicks(QColor(0, 0, 255));
+
+	net = addNet("ms");
 }
 
 Seeker::~Seeker()
