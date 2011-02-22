@@ -186,16 +186,6 @@ void HDDTest::ReloadTests(bool loaded)
 
 	UpdateInfo(false);
 
-/****** not used since tab locking not fit secondary results loading
-	// enable if device is valid or data are loaded
-	for(int i = 0; i <= 4; ++i)
-		this->ui->Tabs->setTabEnabled(i, valid || loaded);
-
-	// enable fs tests if device is mounted or results are loaded
-	for(int i = 5; i <= 7; ++i)
-		this->ui->Tabs->setTabEnabled(i, (valid && fs) || loaded);
-*/
-
 	// disable test start in loaded mode | enable otherwise
 	bool start_enabled = !loaded;
 	ui->readblockwidget->SetStartEnabled(start_enabled);

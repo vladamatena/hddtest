@@ -114,7 +114,6 @@ void ReadBlock::UpdateScene()
 	}
 }
 
-
 qreal ReadBlock::GetProgress()
 {
 	qreal progress = 0.0f;
