@@ -436,7 +436,7 @@ void TestWidget::Net::Reposition()
 	left_line->setLine(0, 0, 0, test->scene->height());
 
 	// get distances
-	qreal dist = 1;		//TODO: handle distances in better way
+	int dist = 1;		//TODO: handle distances in better way
 
 	// get count
 	int count = test->scene->height() / (test->Yscale * dist);
@@ -475,7 +475,7 @@ void TestWidget::Net::Reposition()
 	// position lines and makups
 	for(int i = 0; i < net.size(); ++i)
 	{
-		if(i % 10)	// default line
+		if((dist * i) % 10)	// default line
 		{
 			net[i]->setLine(
 					0,
@@ -497,10 +497,10 @@ void TestWidget::Net::Reposition()
 			// position and set text
 			if(i / 10 < net_markups.size())
 			{
-				net_markups[i / 10]->setPlainText(QString::number(i) + " " + unit);
+				net_markups[i / 10]->setPlainText(QString::number(i * dist) + " " + unit);
 				net_markups[i / 10]->setPos(
 						test->scene->width() * LINEGRAPH_NET_WIDTH,
-						test->scene->height() - (i*test->Yscale * dist) - net_markups[i/10]->boundingRect().height() / 2);
+						test->scene->height() - (i * test->Yscale * dist) - net_markups[i / 10]->boundingRect().height() / 2);
 			}
 		}
 	}
