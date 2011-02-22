@@ -520,3 +520,82 @@ void TestWidget::LineGraph::Reposition()
 		}
 	}
 }
+
+TestWidget::Net::Net(TestWidget *test, QString unit)
+{
+	this->test = test;
+	this->unit = unit;
+}
+
+void TestWidget::Net::Reposition()
+{
+	// get distances
+	qreal dist = 1;		//TODO: handle distances in better way
+
+	// get count
+	int count = test->scene->height() / (test->Yscale * dist);
+
+	// construct lines
+	while(net.size() != count)
+	{
+		if(net.size() > count) // lines are too many - remove one
+		{
+			test->scene->removeItem(net.back());
+			net.pop_back();
+		}
+		else	// missing some lines - add one
+		{
+			net.push_back(test->scene->addLine(0,0,0,0,QPen(QColor(200,200,200))));
+			net.back()->setZValue(-100);
+		}
+	}
+
+	// construct makups
+	while(net_markups.size() != (count / 10) + 1)
+	{
+		if(net_markups.size() > (count / 10) + 1) // markups are too many - remove one
+		{
+			test->scene->removeItem(net_markups.back());
+			net_markups.pop_back();
+		}
+		else	// missing some markups - add one
+		{
+			net_markups.push_back(test->scene->addText(""));
+			net_markups.back()->setZValue(-100);
+			net_markups.back()->setDefaultTextColor(QColor(230,230,230));
+		}
+	}
+
+	// position lines and makups
+	for(int i = 0; i < net.size(); ++i)
+	{
+		if(i % 10)	// default line
+		{
+			net[i]->setLine(
+					0,
+					test->scene->height() - test->Yscale * dist * i,
+					test->scene->width() * LINEGRAPH_WIDTH,
+					test->scene->height() - test->Yscale * dist * i);
+			net[i]->setPen(QPen(QColor(230,230,230)));
+		}
+		else		// extra line with value
+		{
+			// position line
+			net[i]->setLine(
+					0,
+					test->scene->height() - test->Yscale * dist * i,
+					test->scene->width() * LINEGRAPH_NET_WIDTH,
+					test->scene->height() - test->Yscale * dist * i);
+			net[i]->setPen(QPen(QColor(200,200,200)));
+
+			// position and set text
+			if(i / 10 < net_markups.size())
+			{
+				net_markups[i / 10]->setPlainText(QString::number(i) + " " + unit);
+				net_markups[i / 10]->setPos(
+						test->scene->width() * LINEGRAPH_NET_WIDTH,
+						test->scene->height() - (i*test->Yscale * dist) - net_markups[i/10]->boundingRect().height() / 2);
+			}
+		}
+	}
+}

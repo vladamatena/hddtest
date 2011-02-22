@@ -100,6 +100,17 @@ public:
 		QList<QGraphicsTextItem*> net_markups;
 		QGraphicsRectItem *rect;
 	};
+	class Net : public Marker
+	{
+	public:
+		Net(TestWidget *test, QString unit);
+		void Reposition();
+
+	private:
+		QString unit;
+		QList<QGraphicsLineItem*> net;
+		QList<QGraphicsTextItem*> net_markups;
+	};
 
 	explicit TestWidget(QWidget *parent = 0);
 	~TestWidget();
@@ -123,6 +134,7 @@ public:
 	Ticks* addTicks(QColor color);
 	Bar* addBar(QString unit, QString name, QColor color, qreal position, qreal width);
 	LineGraph* addLineGraph(QString unit, bool net, QColor color);
+	Net* addNet(QString unit);
 
 	void Rescale(bool force = false);
 
