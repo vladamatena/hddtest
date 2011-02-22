@@ -239,7 +239,7 @@ void TestWidget::Line::Reposition()
 }
 
 TestWidget::Ticks::Ticks(TestWidget *test, QColor color):
-	color(color), rect(NULL)
+	color(color)
 {
 	this->test = test;
 }
@@ -251,21 +251,6 @@ void TestWidget::Ticks::AddTick(qreal value, qreal position)
 		max = value;
 	if(value < min)
 		min = value;
-
-	// add graph bounding rect
-	if(rect)
-		rect->setRect(
-				0,
-				0,
-				test->scene->width() * LINEGRAPH_WIDTH,
-				test->scene->height());
-	else
-		rect = test->scene->addRect(
-				0,
-				0,
-				test->scene->width() * LINEGRAPH_WIDTH,
-				test->scene->height(),
-				QPen(QColor(0,0,0)));
 
 	// add tick
 	QGraphicsRectItem *tick;
@@ -290,14 +275,6 @@ void TestWidget::Ticks::Reposition()
 					test->scene->height() - positions[i].ry() * test->Yscale,
 					1,
 					1);
-
-	// reposition bounding rect
-	if(rect)
-		rect->setRect(
-				0,
-				0,
-				test->scene->width() * LINEGRAPH_WIDTH,
-				test->scene->height());
 }
 
 void TestWidget::Ticks::erase()

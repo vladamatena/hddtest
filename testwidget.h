@@ -49,8 +49,7 @@ public:
 		QColor color;
 		QList<QGraphicsRectItem*> ticks;
 		QList<QPointF> positions;
-		QGraphicsRectItem *rect;
-	};
+		};
 	class Line : public Marker
 	{
 	public:
