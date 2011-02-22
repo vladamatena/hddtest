@@ -456,7 +456,7 @@ void TestWidget::Net::Reposition()
 		}
 	}
 
-	// construct makups
+	// construct markups
 	while(net_markups.size() != (count / 10) + 1)
 	{
 		if(net_markups.size() > (count / 10) + 1) // markups are too many - remove one
@@ -472,7 +472,7 @@ void TestWidget::Net::Reposition()
 		}
 	}
 
-	// position lines and makups
+	// position lines and markups
 	for(int i = 0; i < net.size(); ++i)
 	{
 		if((dist * i) % 10)	// default line
