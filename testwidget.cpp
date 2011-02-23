@@ -311,6 +311,7 @@ void TestWidget::Bar::Set(qreal progress, qreal value)
 	{
 		value_text = test->scene->addText("NO DATA");
 		value_text->setDefaultTextColor(color);
+		value_text->setZValue(100);
 	}
 
 	// bar name
