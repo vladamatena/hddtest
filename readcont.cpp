@@ -12,8 +12,8 @@ ReadCont::ReadCont(QWidget *parent):
 	TestWidget(parent)
 {
 	// add line components to graph
-	averageLine = new Line(this, "MB/s", "", QColor(255, 0, 0));
-	refAverageLine = new Line(this, "MB/s", "", QColor(0, 0, 255));
+	averageLine = addLine("MB/s", "", QColor(255, 0, 0));
+	refAverageLine = addLine("MB/s", "", QColor(0, 0, 255));
 
 	// add line graph component to graph
 	graph = addLineGraph("MB/s", QColor(255, 128, 128));
@@ -25,11 +25,7 @@ ReadCont::ReadCont(QWidget *parent):
 
 ReadCont::~ReadCont()
 {
-	// TODO: is this nessesary?
-	delete averageLine;
-	delete refAverageLine;
 }
-
 
 void ReadCont::TestLoop()
 {
