@@ -22,20 +22,18 @@ void Device::Open(QString path, bool close, bool rw)
 	if(close)
 		Close();
 
+	// skip opening device pointing to result file
+	if(path.length() == 0)
+		return;
+
 	// open device file
 	if(!rw)
 		__fd = open(path.toUtf8(), O_RDONLY | O_LARGEFILE);
 	else
 		__fd = open(path.toUtf8(), O_CREAT | O_RDWR | O_SYNC | O_LARGEFILE, S_IRWXU);
+
 	if(__fd < 0)
-	{
-		// check for access rights
-		QString user = QString::fromAscii(getenv("USER"));
-		QMessageBox box;
-		box.setText("You are running HDDTest as user: " + user + " most probably you do not have rights to read: " + path + " This will cause HDDTest to show incorrect results.");
-		box.setInformativeText("Continue at your own risk.");
-		box.exec();
-	}
+		ReportProblem();
 
 	DisableCaches();
 

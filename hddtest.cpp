@@ -103,9 +103,9 @@ void HDDTest::on_drive_currentIndexChanged(QString)
 		case DeviceItemData::HDD_ITEM_SAVED:
 		{
 			if(!device)
-				device = new Device(data.value<DeviceItemData>().path, false);
+				device = new Device("", false);
 			else
-				device->Open(data.value<DeviceItemData>().path, true);
+				device->Open("", true);
 			OpenResultFile(data.value<DeviceItemData>().path);
 			ReloadTests(true);
 		}
@@ -138,9 +138,10 @@ void HDDTest::on_reference_currentIndexChanged(QString )
 		case DeviceItemData::HDD_ITEM_SAVED:
 		{
 			if(!refDevice)
-				refDevice = new Device(data.value<DeviceItemData>().path, false);
+				refDevice = new Device("", false);
 			else
-				refDevice->Open(data.value<DeviceItemData>().path, true);
+				refDevice->Open("", true);
+
 			OpenResultFile(data.value<DeviceItemData>().path, true);
 			UpdateInfo(true);
 		}
