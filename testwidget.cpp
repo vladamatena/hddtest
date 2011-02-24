@@ -439,7 +439,7 @@ TestWidget::Net::Net(TestWidget *test, QString unit)
 void TestWidget::Net::Reposition()
 {
 	// If Yscale is not set do not do anything
-	if(test->Yscale == 0)
+	if((test->Yscale == 0) || (test->Yscale == INFINITY))
 		return;
 
 	// reposition left line
@@ -449,10 +449,17 @@ void TestWidget::Net::Reposition()
 				test->graph.left(),
 				test->graph.top() + test->graph.height());
 
-	// get distances
-	int dist = 1;		//TODO: handle distances in better way
+	// get font height
+	qreal fontHeight = 8;	//TODO: get real font height
 
-	// get count
+	// get distance
+	qreal dist = 1;
+	while(10 * dist * test->Yscale > fontHeight)
+		dist /= 10;
+	while(10 * dist * test->Yscale < 2 * fontHeight)
+		dist *= 10;
+
+	// get line count
 	int count = test->graph.height() / (test->Yscale * dist);
 
 	// construct lines
@@ -489,7 +496,7 @@ void TestWidget::Net::Reposition()
 	// position lines and markups
 	for(int i = 0; i < net.size(); ++i)
 	{
-		if((dist * i) % 10)	// default line
+		if(i % 10)	// default line
 		{
 			net[i]->setLine(
 					test->graph.left(),
