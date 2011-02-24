@@ -159,6 +159,7 @@ private:
 	QTimer refresh_timer;
 	TestThread *test_thread;
 	QList<Marker*> markers;		// List of markers used in scene
+	QRect graph;
 
 private slots:
 	void refresh_timer_timeout();

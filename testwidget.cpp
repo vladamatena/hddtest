@@ -15,13 +15,13 @@ TestWidget::TestWidget(QWidget *parent) :
 
 	Yscale = 0;
 
-	// set graph scene
-	QRect content = ui->graph->rect();
-	scene = new QGraphicsScene(0, 0, content.width(), content.height());
-
-	ui->graph->setScene(scene);
-	ui->graph->fitInView(0, 0, content.width(), content.height(), Qt::KeepAspectRatio);
 	ui->graph->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+	ui->graph->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	ui->graph->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+	// set graph scene
+	scene = new QGraphicsScene(ui->graph->rect(), ui->graph);
+	ui->graph->setScene(scene);
 }
 
 TestWidget::~TestWidget()
@@ -123,14 +123,12 @@ void TestWidget::resizeEvent(QResizeEvent*)
 	QRect rect = ui->graph->rect();
 	scene->setSceneRect(rect);
 
-	// fit scene to window
-	QRect view = ui->graph->viewport()->rect();
-	ui->graph->fitInView(
-				view.width() * 0.05,
-				view.height() * 0.05,
-				view.width() * 1.05,
-				view.height() * 1.05,
-				Qt::KeepAspectRatio);
+	// set graph rect according to new window size
+	graph = QRect(
+				rect.width() * 0.05f,
+				rect.height() * 0.05f,
+				rect.width() * 0.9f,
+				rect.height() * 0.9f);
 
 	// reposition scene items according to new window dimensions
 	Rescale(true);
@@ -192,7 +190,7 @@ TestWidget::Net* TestWidget::addNet(QString unit)
 ///////////////////////////////////////////////////////////////////////////////
 
 TestWidget::Line::Line(TestWidget *test, QString unit, QString name, QColor color):
-		unit(unit), name(name), color(color), line(NULL), text(NULL)
+		unit(unit), name(name), color(color), line(NULL), text(NULL), value(0)
 {
 	this->test = test;
 }
