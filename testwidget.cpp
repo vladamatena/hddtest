@@ -457,7 +457,7 @@ void TestWidget::Net::Reposition()
 	qreal dist = 1;
 	while(10 * dist * test->Yscale > fontHeight)
 		dist /= 10;
-	while(10 * dist * test->Yscale < 2 * fontHeight)
+	while(10 * dist * test->Yscale < 3 * fontHeight)
 		dist *= 10;
 
 	// get line count
