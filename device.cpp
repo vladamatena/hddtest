@@ -17,6 +17,7 @@ void Device::Open(QString path, bool close, bool rw)
 {
 	this->path = path;
 	temp_created = false;
+	problemReported = false;
 
 	if(close)
 		Close();
@@ -36,35 +37,7 @@ void Device::Open(QString path, bool close, bool rw)
 		box.exec();
 	}
 
-	// give advice to disable caching
-	int ret = posix_fadvise(__fd, 0, 0, POSIX_FADV_DONTNEED);
-	if(ret)
-	{
-		// check for access rights
-		QString user = QString::fromAscii(getenv("USER"));
-		QMessageBox box;
-		box.setText("You are running HDDTest as user: " + user + " most probably you do not have rights to make your system not to cache hdd operations. This will cause HddTest to show incorrect results.");
-		box.setInformativeText("Continue at your own risk.");
-		box.exec();
-	}
-
-	// empty caches
-	QFile caches("/proc/sys/vm/drop_caches");
-	caches.open(QIODevice::WriteOnly);
-	if(caches.isOpen())
-	{
-		caches.putChar('3');
-		caches.close();
-	}
-	else
-	{
-		// check for access rights
-		QString user = QString::fromAscii(getenv("USER"));
-		QMessageBox box;
-		box.setText("You are running HDDTest as user: " + user + " most probably you do not have rights to drop caches. This will cause HDDTest to show incorrect results.");
-		box.setInformativeText("Continue at your own risk.");
-		box.exec();
-	}
+	DisableCaches();
 
 	// get drive size
 	__device_size = lseek64(__fd, 0, SEEK_END);
@@ -84,6 +57,45 @@ void Device::Close()
 {
 	// close device file
 	close(__fd);
+}
+
+void Device::DisableCaches()
+{
+		// give advice to disable caching
+		int ret = posix_fadvise(__fd, 0, 0, POSIX_FADV_DONTNEED);
+		if(ret)
+		ReportProblem();
+
+		// empty caches
+		QFile caches("/proc/sys/vm/drop_caches");
+		caches.open(QIODevice::WriteOnly);
+		if(caches.isOpen())
+		{
+			caches.putChar('3');
+			caches.close();
+		}
+		else
+			ReportProblem();
+}
+
+void Device::ReportProblem()
+{
+	if(problemReported)
+		return;
+
+	problemReported = true;
+	QString user = QString::fromAscii(getenv("USER"));
+	QMessageBox box;
+	box.setText("You are running HDDTest as user: " + user +
+				" most probably you do not have rights for HDDTest to operate properly." +
+				" You you should have right to do following with device you want to be tested:" +
+				"\n\tRead block device." +
+				"\n\tRead and write device`s filesystem." +
+				"\n\tAdvice device not to be cached." +
+				"\n\tDrop system caches." +
+				"\nFailing to do so will cause HDDTest to show incorrect results.");
+	box.setInformativeText("Continue at your own risk.");
+	box.exec();
 }
 
 void Device::SetPos(hddpos pos)

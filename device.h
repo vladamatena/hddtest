@@ -43,8 +43,11 @@ public:
 	Device(QString path, bool rw = false);		/// Device constructor - opens device specified by path
 	~Device();									/// Device destructor - close device file descriptor
 
+	// device access operations
 	void Open(QString path, bool close, bool rw = false);	/// Opens device specified by path
 	void Close();								/// Close device file descriptor
+	void ReportProblem();						/// Reports a problem with accessing device
+	void DisableCaches();						/// Disables some caches for device
 	void DriveInfo();							/// Read driveinfo from device
 	static QString Format(hddsize size);		/// Size to human readable format convertor
 
@@ -102,6 +105,7 @@ public:
 private:
 	int __fd;				// device's file destriptor
 	hddsize __device_size;	// device's size
+	bool problemReported;	// whenever device acces problem was reported
 };
 
 
