@@ -23,6 +23,9 @@ HDDTest::HDDTest(QWidget *parent) :
 {
     ui->setupUi(this);
 
+	connect(&device, SIGNAL(accessWarning()), this, SLOT(device_accessWarning()));
+	connect(&refDevice, SIGNAL(accessWarning()), this, SLOT(refDevice_accessWarning()));
+
 	// drive selection fill-in
 	QDir block = QDir("/dev/disk/by-path");
 	QFileInfoList devList = block.entryInfoList();
@@ -140,7 +143,7 @@ void HDDTest::on_reference_currentIndexChanged(QString )
 	}
 }
 
-void HDDTest::on_device_accessWarning()
+void HDDTest::device_accessWarning()
 {
 	QString user = QString::fromAscii(getenv("USER"));
 	QMessageBox box;
@@ -156,7 +159,7 @@ void HDDTest::on_device_accessWarning()
 	box.exec();
 }
 
-void HDDTest::on_refDevice_accessWarning() {}
+void HDDTest::refDevice_accessWarning() {}
 
 void HDDTest::UpdateInfo(bool reference)
 {

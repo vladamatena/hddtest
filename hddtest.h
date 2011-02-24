@@ -72,8 +72,8 @@ private slots:
 	void on_save_clicked();
 	void on_drive_currentIndexChanged(QString);
 	void on_reference_currentIndexChanged(QString);
-	void on_device_accessWarning();
-	void on_refDevice_accessWarning();
+	void device_accessWarning();
+	void refDevice_accessWarning();
 };
 
 Q_DECLARE_METATYPE(HDDTest::DeviceItemData)
