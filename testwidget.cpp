@@ -222,15 +222,15 @@ void TestWidget::Line::SetValue(qreal value)
 
 	// set new line position
 	line->setLine(
-			0,
-			test->scene->height() - value * test->Yscale,
-			test->scene->width() - text->boundingRect().width(),
-			test->scene->height() - value * test->Yscale);
+			test->graph.left(),
+			test->graph.top() + test->graph.height() - value * test->Yscale,
+			test->graph.left() + test->graph.width() - text->boundingRect().width(),
+			test->graph.top() + test->graph.height() - value * test->Yscale);
 
 	// set new text position and content
 	text->setPos(
-			test->scene->width() - text->boundingRect().width(),
-			test->scene->height() - value * test->Yscale - text->boundingRect().height() / 2);
+			test->graph.left() + test->graph.width() - text->boundingRect().width(),
+			test->graph.top() + test->graph.height() - value * test->Yscale - text->boundingRect().height() / 2);
 
 	if(name.length() > 0)
 		text->setPlainText(name + ": " + QString::number(value, 'f', 2) + " " + unit);
@@ -261,8 +261,8 @@ void TestWidget::Ticks::AddTick(qreal value, qreal position)
 	QGraphicsRectItem *tick;
 
 	tick = test->scene->addRect(
-			position *  test->scene->width() * LINEGRAPH_WIDTH,
-			test->scene->height() - value * test->Yscale,
+			test->graph.left() + position *  test->graph.width() * LINEGRAPH_WIDTH,
+			test->graph.top() + test->graph.height() - value * test->Yscale,
 			1,
 			1,
 			QPen(color));
@@ -276,8 +276,8 @@ void TestWidget::Ticks::Reposition()
 	// reposition ticks
 	for(int i = 0; i < ticks.size(); ++i)
 		ticks[i]->setRect(
-					positions[i].rx() *  test->scene->width() * LINEGRAPH_WIDTH,
-					test->scene->height() - positions[i].ry() * test->Yscale,
+					test->graph.left() + positions[i].rx() *  test->graph.width() * LINEGRAPH_WIDTH,
+					test->graph.top() + test->graph.height() - positions[i].ry() * test->Yscale,
 					1,
 					1);
 }
@@ -339,10 +339,10 @@ void TestWidget::Bar::Set(qreal progress, qreal value)
 	value_text->setPlainText(QString::number(value, 'f', 2) + " " + unit);
 
 	// set items positions
-	int W = test->scene->width() * width;
+	int W = test->graph.width() * width;
 	int H = value * test->Yscale;
-	int X = test->scene->width() * position;
-	int Y = test->scene->height() - H - name_text->boundingRect().height();
+	int X = test->graph.left() + test->graph.width() * position;
+	int Y = test->graph.top() + test->graph.height() - H - name_text->boundingRect().height();
 
 	//// set positions
 	rect->setRect(X, Y, W, H);
@@ -354,7 +354,7 @@ void TestWidget::Bar::Set(qreal progress, qreal value)
 
 	name_text->setPos(
 			X + W / 2 - name_text->boundingRect().width() / 2,
-			test->scene->height() - name_text->boundingRect().height());
+			test->graph.top() + test->graph.height() - name_text->boundingRect().height());
 }
 
 void TestWidget::Bar::Reposition()
@@ -417,10 +417,10 @@ void TestWidget::LineGraph::Reposition()
 	for(int i = 0; i < lines.size(); ++i)
 	{
 		lines[i]->setLine(
-				(qreal)i  / (size - 1) * test->scene->width() * LINEGRAPH_WIDTH,
-				test->scene->height() - values[i] * test->Yscale,
-				(qreal)(i + 1)  / (size - 1) * test->scene->width() * LINEGRAPH_WIDTH,
-				test->scene->height() - values[i + 1] * test->Yscale);
+				test->graph.left() + (qreal)i  / (size - 1) * test->graph.width() * LINEGRAPH_WIDTH,
+				test->graph.top() + test->graph.height() - values[i] * test->Yscale,
+				test->graph.left() + (qreal)(i + 1)  / (size - 1) * test->graph.width() * LINEGRAPH_WIDTH,
+				test->graph.top() + test->graph.height() - values[i + 1] * test->Yscale);
 	}	
 }
 
@@ -429,7 +429,12 @@ TestWidget::Net::Net(TestWidget *test, QString unit)
 	this->test = test;
 	this->unit = unit;
 
-	left_line = test->scene->addLine(0, 0, 0, test->scene->height(),QPen(QColor(200,200,200)));
+	left_line = test->scene->addLine(
+				test->graph.left(),
+				test->graph.top(),
+				test->graph.left(),
+				test->graph.top() + test->graph.height(),
+				QPen(QColor(200,200,200)));
 }
 
 void TestWidget::Net::Reposition()
@@ -439,13 +444,17 @@ void TestWidget::Net::Reposition()
 		return;
 
 	// reposition left line
-	left_line->setLine(0, 0, 0, test->scene->height());
+	left_line->setLine(
+				test->graph.left(),
+				test->graph.top(),
+				test->graph.left(),
+				test->graph.top() + test->graph.height());
 
 	// get distances
 	int dist = 1;		//TODO: handle distances in better way
 
 	// get count
-	int count = test->scene->height() / (test->Yscale * dist);
+	int count = test->graph.height() / (test->Yscale * dist);
 
 	// construct lines
 	while(net.size() != count)
@@ -484,20 +493,20 @@ void TestWidget::Net::Reposition()
 		if((dist * i) % 10)	// default line
 		{
 			net[i]->setLine(
-					0,
-					test->scene->height() - test->Yscale * dist * i,
-					test->scene->width() * LINEGRAPH_WIDTH,
-					test->scene->height() - test->Yscale * dist * i);
+					test->graph.left(),
+					test->graph.top() + test->graph.height() - test->Yscale * dist * i,
+					test->graph.left() + test->graph.width() * LINEGRAPH_WIDTH,
+					test->graph.top() + test->graph.height() - test->Yscale * dist * i);
 			net[i]->setPen(QPen(QColor(230,230,230)));
 		}
 		else		// extra line with value
 		{
 			// position line
 			net[i]->setLine(
-					0,
-					test->scene->height() - test->Yscale * dist * i,
-					test->scene->width() * LINEGRAPH_NET_WIDTH,
-					test->scene->height() - test->Yscale * dist * i);
+					test->graph.left(),
+					test->graph.top() + test->graph.height() - test->Yscale * dist * i,
+					test->graph.left() + test->graph.width() * LINEGRAPH_NET_WIDTH,
+					test->graph.top() + test->graph.height() - test->Yscale * dist * i);
 			net[i]->setPen(QPen(QColor(200,200,200)));
 
 			// position and set text
@@ -505,8 +514,8 @@ void TestWidget::Net::Reposition()
 			{
 				net_markups[i / 10]->setPlainText(QString::number(i * dist) + " " + unit);
 				net_markups[i / 10]->setPos(
-						test->scene->width() * LINEGRAPH_NET_WIDTH,
-						test->scene->height() - (i * test->Yscale * dist) - net_markups[i / 10]->boundingRect().height() / 2);
+						test->graph.left() + test->graph.width() * LINEGRAPH_NET_WIDTH,
+						test->graph.top() + test->graph.height() - (i * test->Yscale * dist) - net_markups[i / 10]->boundingRect().height() / 2);
 			}
 		}
 	}
