@@ -316,7 +316,7 @@ void TestWidget::Bar::Set(qreal progress, qreal value)
 	{
 		value_text = test->scene->addText("NO DATA");
 		value_text->setDefaultTextColor(color);
-		value_text->setZValue(100);
+		value_text->setZValue(100);		
 	}
 
 	// bar name
@@ -334,15 +334,14 @@ void TestWidget::Bar::Set(qreal progress, qreal value)
 	if(inner_rect == NULL)
 		inner_rect = test->scene->addRect(0, 0, 0, 0, QPen(Qt::NoPen), QBrush(color.darker(70)));
 
-
-	// set items data
-	value_text->setPlainText(QString::number(value, 'f', 2) + " " + unit);
-
 	// set items positions
 	int W = test->graph.width() * width;
 	int H = value * test->Yscale;
 	int X = test->graph.left() + test->graph.width() * position;
 	int Y = test->graph.top() + test->graph.height() - H - name_text->boundingRect().height();
+
+	// set items data
+	value_text->setPlainText(QString::number(value, 'f', 2) + " " + unit);
 
 	//// set positions
 	rect->setRect(X, Y, W, H);
