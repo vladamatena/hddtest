@@ -87,16 +87,16 @@ void TestWidget::SetStartEnabled(bool enabled)
 void TestWidget::on_startstop_clicked()
 {
 	if(running == false)
-		StartTest(); // TODO add device here instead of NULL
+		StartTest();
 	else
 		StopTest();
 }
 
 void TestWidget::Rescale(bool force)
 {
+	// get absolute min and max
 	qreal max = 0.0f;
 	qreal min = 0.0f;
-
 	for(int i = 0; i < markers.size(); ++i)
 	{
 		if(markers[i]->max > max)
@@ -108,26 +108,33 @@ void TestWidget::Rescale(bool force)
 	// calculate Y axis scale
 	if((max * Yscale > scene->height()) || (max * Yscale < scene->height() / 2) || (Yscale == 0) || force)
 	{
-		Yscale = (qreal)scene->height() / (max * 1.5);	// calc new multipiler
-		resizeEvent(NULL);
+		// calculate new Yscale to fit data in view
+		Yscale = (qreal)scene->height() / (max * 1.5);
+
+		// reposition markers according new Yscale
+		for(int i = 0; i < markers.size(); ++i)
+			markers[i]->Reposition();
 	}
 }
 
 void TestWidget::resizeEvent(QResizeEvent*)
 {
+	// resize scene to new window dimensions
 	QRect rect = ui->graph->rect();
 	scene->setSceneRect(rect);
+
+	// fit scene to window
+	QRect view = ui->graph->viewport()->rect();
 	ui->graph->fitInView(
-				rect.width() * 0.05,
-				rect.height() * 0.05,
-				rect.width() * 1.05,
-				rect.height() * 1.05,
+				view.width() * 0.05,
+				view.height() * 0.05,
+				view.width() * 1.05,
+				view.height() * 1.05,
 				Qt::KeepAspectRatio);
 
-	for(int i = 0; i < markers.size(); ++i)
-		markers[i]->Reposition();
+	// reposition scene items according to new window dimensions
+	Rescale(true);
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////
 /////// Marker add functions //////////////////////////////////////////////////

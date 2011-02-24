@@ -261,38 +261,14 @@ void HDDTest::OpenResultFile(QString filename, bool reference)
 	QDomElement root = doc.documentElement();
 	QDomElement results = root.firstChildElement("Results");
 
-	// restore device info and store index
+	// restore device info
 	reference?refDevice->ReadInfo(root):device->ReadInfo(root);
-	int index = ui->Tabs->currentIndex();
-
-	// restore seek results
-	ui->Tabs->setCurrentIndex(4);
+	// restore tests result
 	ui->seekwidget->RestoreResults(root, reference);
-
-	// restore File RW results
-	ui->Tabs->setCurrentIndex(5);
 	ui->filerwwidget->RestoreResults(root, reference);
-
-	// restore File Structure
-	ui->Tabs->setCurrentIndex(6);
 	ui->filestructurewidget->RestoreResults(root, reference);
-
-	// restore small files
-	ui->Tabs->setCurrentIndex(7);
 	ui->smallfileswidget->RestoreResults(root, reference);
-
-	// restore read block
-	ui->Tabs->setCurrentIndex(3);
 	ui->readblockwidget->RestoreResults(root, reference);
-
-	// restore read random
-	ui->Tabs->setCurrentIndex(1);
 	ui->readrndwidget->RestoreResults(root, reference);
-
-	// restore read cont
-	ui->Tabs->setCurrentIndex(2);
 	ui->readcontwidget->RestoreResults(root, reference);
-
-	// restore tabs to saved index
-	ui->Tabs->setCurrentIndex(index);
 }
