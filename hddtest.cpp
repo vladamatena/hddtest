@@ -19,8 +19,7 @@
 
 HDDTest::HDDTest(QWidget *parent) :
     QDialog(parent),
-	ui(new Ui::HDDTest),
-	device(NULL), refDevice(NULL)
+	ui(new Ui::HDDTest)
 {
     ui->setupUi(this);
 
@@ -55,18 +54,17 @@ HDDTest::HDDTest(QWidget *parent) :
 	ui->reference->addItem("--- Launch file open dialog ---", QVariant::fromValue(DeviceItemData(DeviceItemData::HDD_ITEM_OPEN, "")));
 
 	// initialize tests
-	ui->filerwwidget->SetDevice(device);
-	ui->filestructurewidget->SetDevice(device);
-	ui->readblockwidget->SetDevice(device);
-	ui->readcontwidget->SetDevice(device);
-	ui->readrndwidget->SetDevice(device);
-	ui->seekwidget->SetDevice(device);
-	ui->smallfileswidget->SetDevice(device);
+	ui->filerwwidget->SetDevice(&device);
+	ui->filestructurewidget->SetDevice(&device);
+	ui->readblockwidget->SetDevice(&device);
+	ui->readcontwidget->SetDevice(&device);
+	ui->readrndwidget->SetDevice(&device);
+	ui->seekwidget->SetDevice(&device);
+	ui->smallfileswidget->SetDevice(&device);
 }
 
 HDDTest::~HDDTest()
 {
-	delete device;
     delete ui;
 }
 
@@ -92,20 +90,14 @@ void HDDTest::on_drive_currentIndexChanged(QString)
 		break;
 		case DeviceItemData::HDD_ITEM_DEVICE:
 		{
-			if(!device)
-				device = new Device(data.value<DeviceItemData>().path, false);
-			else
-				device->Open(data.value<DeviceItemData>().path, true);
+			device.Open(data.value<DeviceItemData>().path, true);
 			ReloadTests(false);
 		}
 		break;
 		// TODO: handle dynamic added devices without DeviceItemData
 		case DeviceItemData::HDD_ITEM_SAVED:
 		{
-			if(!device)
-				device = new Device("", false);
-			else
-				device->Open("", true);
+			device.Open("", true);
 			OpenResultFile(data.value<DeviceItemData>().path);
 			ReloadTests(true);
 		}
@@ -137,10 +129,7 @@ void HDDTest::on_reference_currentIndexChanged(QString )
 		break;
 		case DeviceItemData::HDD_ITEM_SAVED:
 		{
-			if(!refDevice)
-				refDevice = new Device("", false);
-			else
-				refDevice->Open("", true);
+			refDevice.Open("", true);
 
 			OpenResultFile(data.value<DeviceItemData>().path, true);
 			UpdateInfo(true);
@@ -151,39 +140,57 @@ void HDDTest::on_reference_currentIndexChanged(QString )
 	}
 }
 
+void HDDTest::on_device_accessWarning()
+{
+	QString user = QString::fromAscii(getenv("USER"));
+	QMessageBox box;
+	box.setText("You are running HDDTest as user: " + user +
+				" most probably you do not have rights for HDDTest to operate properly." +
+				" You you should have right to do following with device you want to be tested:" +
+				"\n\tRead block device." +
+				"\n\tRead and write device`s filesystem." +
+				"\n\tAdvice device not to be cached." +
+				"\n\tDrop system caches." +
+				"\nFailing to do so will cause HDDTest to show incorrect results.");
+	box.setInformativeText("Continue at your own risk.");
+	box.exec();
+}
+
+void HDDTest::on_refDevice_accessWarning() {}
+
 void HDDTest::UpdateInfo(bool reference)
 {
 	if(!reference)
 	{
 		// update info tab - tested device
-		this->ui->model->setText(device->model);
-		this->ui->serial->setText(device->serial);
-		this->ui->firmware->setText(device->firmware);
-		this->ui->size->setText(Device::Format(device->size));
-		this->ui->mountpoint->setText(device->mountpoint);
-		this->ui->fstype->setText(device->fstype);
-		this->ui->fsoptions->setText(device->fsoptions);
-		this->ui->kernel->setText(device->kernel);
+		this->ui->model->setText(device.model);
+		this->ui->serial->setText(device.serial);
+		this->ui->firmware->setText(device.firmware);
+		this->ui->size->setText(Device::Format(device.size));
+		this->ui->mountpoint->setText(device.mountpoint);
+		this->ui->fstype->setText(device.fstype);
+		this->ui->fsoptions->setText(device.fsoptions);
+		this->ui->kernel->setText(device.kernel);
 	}
 	else
 	{
 		// update info tab - reference devices
-		this->ui->reference_model->setText(refDevice->model);
-		this->ui->reference_serial->setText(refDevice->serial);
-		this->ui->reference_firmware->setText(refDevice->firmware);
-		this->ui->reference_size->setText(Device::Format(refDevice->size));
-		this->ui->reference_mountpoint->setText(refDevice->mountpoint);
-		this->ui->reference_fstype->setText(refDevice->fstype);
-		this->ui->reference_fsoptions->setText(refDevice->fsoptions);
-		this->ui->reference_kernel->setText(refDevice->kernel);
+		this->ui->reference_model->setText(refDevice.model);
+		this->ui->reference_serial->setText(refDevice.serial);
+		this->ui->reference_firmware->setText(refDevice.firmware);
+		this->ui->reference_size->setText(Device::Format(refDevice.size));
+		this->ui->reference_mountpoint->setText(refDevice.mountpoint);
+		this->ui->reference_fstype->setText(refDevice.fstype);
+		this->ui->reference_fsoptions->setText(refDevice.fsoptions);
+		this->ui->reference_kernel->setText(refDevice.kernel);
 	}
 }
 
 void HDDTest::ReloadTests(bool loaded)
 {
 	// check test modes - FS, Valid
-	bool fs = (device)?device->fs:false;
-	bool valid = (device)?(device->size > 0):false;
+	bool fs = device.fs;
+	bool valid = device.size > 0;
 
 	UpdateInfo(false);
 
@@ -208,7 +215,7 @@ void HDDTest::on_save_clicked()
 	doc.appendChild(results);
 
 	// save drive info
-	results.appendChild(device->WriteInfo(doc));
+	results.appendChild(device.WriteInfo(doc));
 
 	// save tests results
 	results.appendChild(filerw.WriteResults(doc));
@@ -263,7 +270,7 @@ void HDDTest::OpenResultFile(QString filename, bool reference)
 	QDomElement results = root.firstChildElement("Results");
 
 	// restore device info
-	reference?refDevice->ReadInfo(root):device->ReadInfo(root);
+	reference?refDevice.ReadInfo(root):device.ReadInfo(root);
 	// restore tests result
 	ui->seekwidget->RestoreResults(root, reference);
 	ui->filerwwidget->RestoreResults(root, reference);

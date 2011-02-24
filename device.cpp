@@ -8,9 +8,14 @@
 
 #include "device.h"
 
-Device::Device(QString path, bool rw)
+Device::Device()
 {
-	Open(path, false, rw);
+	path = "";
+	temp_created = false;
+	problemReported = false;
+	size = -1;
+	fs = false;
+	DriveInfo();
 }
 
 void Device::Open(QString path, bool close, bool rw)
@@ -82,18 +87,7 @@ void Device::ReportProblem()
 		return;
 
 	problemReported = true;
-	QString user = QString::fromAscii(getenv("USER"));
-	QMessageBox box;
-	box.setText("You are running HDDTest as user: " + user +
-				" most probably you do not have rights for HDDTest to operate properly." +
-				" You you should have right to do following with device you want to be tested:" +
-				"\n\tRead block device." +
-				"\n\tRead and write device`s filesystem." +
-				"\n\tAdvice device not to be cached." +
-				"\n\tDrop system caches." +
-				"\nFailing to do so will cause HDDTest to show incorrect results.");
-	box.setInformativeText("Continue at your own risk.");
-	box.exec();
+	accessWarning();
 }
 
 void Device::SetPos(hddpos pos)

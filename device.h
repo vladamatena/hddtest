@@ -36,11 +36,12 @@ typedef qint64 hddpos;	/// position on drive in bytes
 typedef qint64 hddsize; /// size on drive in bytes
 
 
-// Class for device manipulation via device file
-class Device
+/// Class for device manipulation via device file
+class Device: public QObject
 {
+	Q_OBJECT
 public:
-	Device(QString path, bool rw = false);		/// Device constructor - opens device specified by path
+	Device();									/// Device constructor
 	~Device();									/// Device destructor - close device file descriptor
 
 	// device access operations
@@ -106,6 +107,9 @@ private:
 	int __fd;				// device's file destriptor
 	hddsize __device_size;	// device's size
 	bool problemReported;	// whenever device acces problem was reported
+
+signals:
+	void accessWarning();
 };
 
 

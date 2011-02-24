@@ -35,7 +35,8 @@ void FileRW::TestLoop()
 
 	// prepare test file
 	QString temp = device->GetSafeTemp();
-	Device file_write(temp + "/file.1G", true);
+	Device file_write;
+	file_write.Open(temp + "/file.1G", false, true);
 
 	// get block count	
 	results_write.blocks = FILERW_SIZE / FILERW_BLOCK;
@@ -53,7 +54,8 @@ void FileRW::TestLoop()
 			break;
 	}
 
-	Device file_read(temp + "/file.1G");
+	Device file_read;
+	file_read.Open(temp + "/file.1G", false);
 
 	// read block until enough data is read
 	file_read.SetPos(0);

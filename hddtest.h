@@ -59,8 +59,8 @@ public:
 private:
     Ui::HDDTest *ui;
 
-	Device *device;
-	Device *refDevice;
+	Device device;
+	Device refDevice;
 
 	ReadCont readcont;
 	ReadBlock readblock;
@@ -71,7 +71,9 @@ private:
 private slots:
 	void on_save_clicked();
 	void on_drive_currentIndexChanged(QString);
-	void on_reference_currentIndexChanged(QString );
+	void on_reference_currentIndexChanged(QString);
+	void on_device_accessWarning();
+	void on_refDevice_accessWarning();
 };
 
 Q_DECLARE_METATYPE(HDDTest::DeviceItemData)
