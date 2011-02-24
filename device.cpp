@@ -31,21 +31,40 @@ void Device::Open(QString path, bool close, bool rw)
 		// check for access rights
 		QString user = QString::fromAscii(getenv("USER"));
 		QMessageBox box;
-		box.setText("You are running HDDTest as user: " + user + " most probably you do not have rights to read: " + path + " This will cause HddTest to show incorrect results.");
+		box.setText("You are running HDDTest as user: " + user + " most probably you do not have rights to read: " + path + " This will cause HDDTest to show incorrect results.");
 		box.setInformativeText("Continue at your own risk.");
 		box.exec();
 	}
 
 	// give advice to disable caching
-	posix_fadvise(__fd, 0, 0, POSIX_FADV_DONTNEED);
-	// TODO: check result and report to user if failed
+	int ret = posix_fadvise(__fd, 0, 0, POSIX_FADV_DONTNEED);
+	if(ret)
+	{
+		// check for access rights
+		QString user = QString::fromAscii(getenv("USER"));
+		QMessageBox box;
+		box.setText("You are running HDDTest as user: " + user + " most probably you do not have rights to make your system not to cache hdd operations. This will cause HddTest to show incorrect results.");
+		box.setInformativeText("Continue at your own risk.");
+		box.exec();
+	}
 
 	// empty caches
 	QFile caches("/proc/sys/vm/drop_caches");
 	caches.open(QIODevice::WriteOnly);
-	caches.putChar('3');
-	caches.close();
-	// TODO: check reult and report if failed
+	if(caches.isOpen())
+	{
+		caches.putChar('3');
+		caches.close();
+	}
+	else
+	{
+		// check for access rights
+		QString user = QString::fromAscii(getenv("USER"));
+		QMessageBox box;
+		box.setText("You are running HDDTest as user: " + user + " most probably you do not have rights to drop caches. This will cause HDDTest to show incorrect results.");
+		box.setInformativeText("Continue at your own risk.");
+		box.exec();
+	}
 
 	// get drive size
 	__device_size = lseek64(__fd, 0, SEEK_END);
