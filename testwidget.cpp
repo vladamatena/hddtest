@@ -298,7 +298,7 @@ void TestWidget::Ticks::erase()
 
 TestWidget::Bar::Bar(TestWidget *test, QString unit, QString name, QColor color, qreal position, qreal width) :
 		unit(unit), name(name), color(color), rect(NULL), inner_rect(NULL),
-		value_text(NULL), name_text(NULL), position(position), width(width)
+		value_text(NULL), name_text(NULL), position(position), width(width), value(0), progress(0)
 {
 	this->test = test;
 }
