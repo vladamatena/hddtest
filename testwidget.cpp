@@ -65,6 +65,7 @@ void TestWidget::StartTest()
 {
 	if(!device)
 		return;
+	device->DisableCaches();
 	ui->startstop->setText("Stop");
 	InitScene();
 	test_thread->start();
