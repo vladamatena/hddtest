@@ -15,6 +15,9 @@ FileStructure::FileStructure(QWidget *parent):
 	build_reference_bar = this->addBar(		"s", "Structure build",		QColor(0,	0,	255),	0.31, 0.16);
 	destroy_bar = this->addBar(				"s", "Structure destroy",	QColor(255,	64,	0),		0.53, 0.16);
 	destroy_reference_bar = this->addBar(	"s", "Structure destroy",	QColor(0,	64,	255),	0.74, 0.16);
+
+	testName = "File structure";
+	testDescription = "File structure test creates random directory structure containing " + QString::number(FILESTRUCTURE_SIZE) + " files and " + QString::number(FILESTRUCTURE_SIZE) + " directories. Then this structure si deleted. Construct and delete oprations times are shown in bar graph. This test can only be performed on mounted filesystem.";
 }
 
 void FileStructure::TestLoop()
