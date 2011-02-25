@@ -116,10 +116,10 @@ void TestWidget::Rescale(bool force)
 	}
 
 	// calculate Y axis scale
-	if((max * Yscale > scene->height()) || (max * Yscale < scene->height() / 2) || (Yscale == 0) || force)
+	if((max * Yscale > graph.height() * 0.9) || (max * Yscale < graph.height() / 2) || (Yscale == 0) || force)
 	{
 		// calculate new Yscale to fit data in view
-		Yscale = (qreal)scene->height() / (max * 1.5);
+		Yscale = (qreal)graph.height() / (max * 1.5);
 
 		// reposition markers according new Yscale
 		for(int i = 0; i < markers.size(); ++i)
