@@ -23,7 +23,11 @@ FileRW::FileRW(QWidget *parent) :
 	__net = addNet("MB/s", "File position", "Speed");
 
 	testName = "File write and read";
-	testDescription = "R/W File test writes " + Device::Format(FILERW_SIZE) + " to file on mounted device. Then whole file is read again. Process is shown in graph where darker color shows write speed and lighter read speed depending on file position. This test is not aviable(grayed start button) when device is not mounted.";
+	testDescription = "R/W File test writes " + Device::Format(FILERW_SIZE) +
+			" to file on mounted device. Then whole file is read again." +
+			" Process is shown in graph where darker color shows write speed" +
+			"and lighter read speed depending on file position." +
+			" This test is not aviable(grayed start button) when device is not mounted.";
 }
 
 FileRW::~FileRW()
@@ -123,16 +127,6 @@ void FileRW::UpdateScene()
 		__read_reference_graph->AddValue(data);
 	}
 
-/*	// set average line position
-	avg_line->SetValue(results_read.avg + results_write.avg / 2);
-
-	// set max line position
-	if(results_read.max > results_write.max)
-		max_line->SetValue(results_read.max);
-	else
-		max_line->SetValue(results_write.max);
-		*/
-
 	// rescale graph
 	Rescale();
 }
@@ -141,7 +135,9 @@ qreal FileRW::GetProgress()
 {
 	if((results_read.blocks_done == 0) && (results_write.blocks_done == 0))
 		return 0.0f;
-	return (float)(results_read.blocks_done + results_write.blocks_done) / (float)(results_write.blocks + results_read.blocks);
+	qreal done = results_read.blocks_done + results_write.blocks_done;
+	qreal blocks = results_write.blocks + results_read.blocks;
+	return done / blocks;
 }
 
 FileRWResults::FileRWResults()
