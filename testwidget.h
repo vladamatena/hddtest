@@ -1,6 +1,7 @@
 #ifndef TESTWIDGET_H
 #define TESTWIDGET_H
 
+#include <math.h>
 #include <QWidget>
 #include <QThread>
 #include <QGraphicsScene>

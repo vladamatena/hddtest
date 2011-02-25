@@ -471,11 +471,8 @@ void TestWidget::Net::Reposition()
 	qreal fontHeight = xAxisText->boundingRect().height();
 
 	// get distance
-	qreal dist = 1;
-	while(10 * dist * test->Yscale > fontHeight)
-		dist /= 10;
-	while(10 * dist * test->Yscale < 3 * fontHeight)
-		dist *= 10;
+	qreal dist = fontHeight / (10 * test->Yscale);
+	dist = pow(10, trunc(log10(dist)));
 
 	// get line count
 	int count = test->graph.height() / (test->Yscale * dist);
