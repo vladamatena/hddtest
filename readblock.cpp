@@ -20,6 +20,16 @@ ReadBlock::ReadBlock(QWidget *parent):
 		base /= 2;
 	}
 
+	// test name and description
+	testName = "Read block";
+	testDescription = "Read Block test reads " + Device::Format(READ_BLOCK_SIZE) + " with different block sizes. Blocks of specified size are place next to each other. No seekeing is required to access next block. Block sizes are: ";
+	for(int i = 0; i < results.size(); ++i)
+	{
+		if(i > 0)
+			testDescription += ", ";
+		testDescription += Device::Format(results[i].__block_size);
+	}
+
 	// add bars to scene
 	for(int i = 0; i < results.size(); ++i)
 	{

@@ -20,6 +20,12 @@ SmallFiles::SmallFiles(QWidget *parent):
 	build_files_reference_bar = this->addBar(	"s", "Files 1-10K",			QColor(0,	64,		255),	0.38, 0.1);
 	read_files_reference_bar = this->addBar(	"s", "Read files",			QColor(0,	128,	255),	0.62, 0.1);
 	destroy_reference_bar = this->addBar(		"s", "Structure destroy",	QColor(0,	192,	255),	0.86, 0.1);
+
+	testName = "Small files";
+	testDescription = "This test creates random directory struture containing " + QString::number(SMALLFILES_SIZE) +
+			" then " + QString::number(SMALLFILES_SIZE) + " files in size 1K to 10K are randomly distributed across this strucure." +
+			" after this files are read again in random order. Finally whole structure is deleted including files." +
+			" Every operation has it`s own bar that shows operation time. This test is only aviable for devices containing mounted filesystem.";
 }
 
 void SmallFiles::InitScene()

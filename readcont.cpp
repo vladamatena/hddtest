@@ -21,7 +21,12 @@ ReadCont::ReadCont(QWidget *parent):
 
 	// add background net
 	net = addNet("MB/s", "Device position", "Read speed");
-}
+
+	testName = "Read Continuous";
+	testDescription = "Read Continuous test reads " + Device::Format(READ_CONT_SIZE) + " from device." +
+			" Read operation is divided into block of " + Device::Format(READ_CONT_BLOCK) + " in order to draw graph." +
+			" Horizontal axis is device position and vertical is read speed.";
+ }
 
 ReadCont::~ReadCont()
 {
