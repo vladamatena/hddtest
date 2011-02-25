@@ -18,6 +18,9 @@ Seeker::Seeker(QWidget *parent) :
 	referenceTicks = addTicks(QColor(0, 0, 255));
 
 	net = addNet("ms", "Seek length", "Seek time");
+
+	testName = "Seek";
+	testDescription = "Seek test performs " + QString::number(SEEKCOUNT) + " seeks to random positions on device. Seek lenght is marked on horizontal axis and seek duration is on vertical axis.";
 }
 
 Seeker::~Seeker()

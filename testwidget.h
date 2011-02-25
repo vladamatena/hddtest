@@ -139,7 +139,10 @@ public:
 	QGraphicsScene *scene;		// pointer to current grephics scene
 
 	qreal Yscale;				// Y axis multipiler
-	QRect graph;
+	QRect graph;				// rect in graphics scene occupied by graph
+
+	QString testName;			// test name
+	QString testDescription;	// test description - used by info box
 
 	bool running;
 	bool go;
@@ -166,6 +169,7 @@ private:
 private slots:
 	void refresh_timer_timeout();
 	void on_startstop_clicked();
+	void on_info_clicked();
 };
 
 #endif // TESTWIDGET_H

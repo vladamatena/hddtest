@@ -93,6 +93,15 @@ void TestWidget::on_startstop_clicked()
 		StopTest();
 }
 
+
+void TestWidget::on_info_clicked()
+{
+	QMessageBox box;
+	box.setText(testName);
+	box.setInformativeText(testDescription);
+	box.exec();
+}
+
 void TestWidget::Rescale(bool force)
 {
 	// get absolute min and max
