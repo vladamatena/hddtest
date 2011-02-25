@@ -20,7 +20,7 @@ ReadCont::ReadCont(QWidget *parent):
 	refGraph = addLineGraph("MB/s", QColor(128, 128, 255));
 
 	// add background net
-	net = addNet("MB/s");
+	net = addNet("MB/s", "Device position", "Read speed");
 }
 
 ReadCont::~ReadCont()

@@ -175,9 +175,9 @@ TestWidget::LineGraph* TestWidget::addLineGraph(QString unit, QColor color)
 	return linegraph;
 }
 
-TestWidget::Net* TestWidget::addNet(QString unit)
+TestWidget::Net* TestWidget::addNet(QString unit, QString xAxis, QString yAxis)
 {
-	Net *net = new Net(this, unit);
+	Net *net = new Net(this, unit, xAxis, yAxis);
 	markers.push_back(net);	// TODO delete merkers on exit
 
 	return net;
@@ -426,17 +426,23 @@ void TestWidget::LineGraph::Reposition()
 	}	
 }
 
-TestWidget::Net::Net(TestWidget *test, QString unit)
+TestWidget::Net::Net(TestWidget *test, QString unit, QString xAxis, QString yAxis):
+	unit(unit), xAxis(xAxis), yAxis(yAxis)
 {
 	this->test = test;
-	this->unit = unit;
 
+	// left vertical line of net
 	left_line = test->scene->addLine(
 				test->graph.left(),
 				test->graph.top(),
 				test->graph.left(),
 				test->graph.top() + test->graph.height(),
 				QPen(QColor(200,200,200)));
+
+	// axis descriptions
+	xAxisText = test->scene->addText(xAxis);
+	yAxisText = test->scene->addText(yAxis);
+	yAxisText->rotate(-90);
 }
 
 void TestWidget::Net::Reposition()
@@ -452,8 +458,17 @@ void TestWidget::Net::Reposition()
 				test->graph.left(),
 				test->graph.top() + test->graph.height());
 
+	// reposition axis descriptions
+	xAxisText->setPos(
+				test->graph.left(),
+				test->graph.bottom());
+	yAxisText->setPos(
+				test->graph.left() - yAxisText->boundingRect().height(),
+				test->graph.bottom());
+
+
 	// get font height
-	qreal fontHeight = 8;	//TODO: get real font height
+	qreal fontHeight = xAxisText->boundingRect().height();
 
 	// get distance
 	qreal dist = 1;

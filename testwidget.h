@@ -97,14 +97,15 @@ public:
 	class Net : public Marker
 	{
 	public:
-		Net(TestWidget *test, QString unit);
+		Net(TestWidget *test, QString unit, QString xAxis, QString yAxis);
 		void Reposition();
 
 	private:
-		QString unit;
+		QString unit, xAxis, yAxis;
 		QList<QGraphicsLineItem*> net;
 		QList<QGraphicsTextItem*> net_markups;
-		QGraphicsLineItem* left_line;
+		QGraphicsLineItem *left_line;
+		QGraphicsTextItem *xAxisText, *yAxisText;
 	};
 
 	explicit TestWidget(QWidget *parent = 0);
@@ -129,7 +130,7 @@ public:
 	Ticks* addTicks(QColor color);
 	Bar* addBar(QString unit, QString name, QColor color, qreal position, qreal width);
 	LineGraph* addLineGraph(QString unit, QColor color);
-	Net* addNet(QString unit);
+	Net* addNet(QString unit, QString xAxis, QString yAxis);
 
 	void Rescale(bool force = false);
 

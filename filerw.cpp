@@ -20,7 +20,7 @@ FileRW::FileRW(QWidget *parent) :
 	__write_reference_graph = addLineGraph("MB/s", QColor(0, 0, 255));
 
 	// Add background net
-	__net = addNet("MB/s");
+	__net = addNet("MB/s", "File position", "Speed");
 }
 
 FileRW::~FileRW()
