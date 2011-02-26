@@ -135,6 +135,12 @@ qreal ReadBlock::GetProgress()
 	return progress / results.size();
 }
 
+ReadBlockResult::ReadBlockResult(qint32 block_size):
+	__bytes_read(0), __time_elapsed(0), __block_size(block_size), max(0)
+{
+	erase();
+}
+
 void ReadBlockResult::erase()
 {
 	// reset bytes read and time elapsed

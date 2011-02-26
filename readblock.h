@@ -23,11 +23,7 @@
 class ReadBlockResult
 {
 public:
-	ReadBlockResult(qint32 block_size):
-			__bytes_read(0), __time_elapsed(0), __block_size(block_size)
-	{
-		max = 0;
-	}
+	ReadBlockResult(qint32 block_size);
 
 	qint64 __bytes_read;
 	qint64 __time_elapsed;
