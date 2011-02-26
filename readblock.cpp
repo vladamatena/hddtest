@@ -169,6 +169,9 @@ void ReadBlock::RestoreResults(QDomElement &results, bool reference)
 	if(!seek.attribute("valid", "no").compare("no"))
 		return;
 
+	// remove old results
+	results.erase(results.begin(), results.end());
+
 	// get list of readblock subresults
 	QDomNodeList xmlresults = seek.elementsByTagName("Result");
 
