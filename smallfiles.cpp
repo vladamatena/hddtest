@@ -244,7 +244,7 @@ void SmallFiles::RestoreResults(QDomElement &results, bool reference)
 	res.files_read = SMALLFILES_SIZE;
 	res.destroyed = 2 * SMALLFILES_SIZE;
 
-	UpdateScene();	
+	UpdateScene();
 }
 
 void SmallFiles::EraseResults()
