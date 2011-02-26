@@ -116,7 +116,7 @@ void TestWidget::Rescale(bool force)
 	}
 
 	// calculate Y axis scale
-	if((max * Yscale > graph.height() * 0.9) || (max * Yscale < graph.height() / 2) || (Yscale == 0) || force)
+	if((max * Yscale > graph.height() * 0.9) || (max * Yscale < graph.height() / 2) || force)
 	{
 		// calculate new Yscale to fit data in view
 		if(max != min)
