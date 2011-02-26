@@ -585,9 +585,9 @@ void TestWidget::Legend::Reposition()
 		items[i].text->setPos(pos -= items[i].text->boundingRect().width(), 0);
 		items[i].rect->setRect(
 					pos -= width,
-					0,
-					width,
-					width);
+					width * 0.1f,
+					width * 0.8f,
+					width * 0.8f);
 		pos -= width;
 	}
 }
