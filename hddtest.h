@@ -53,6 +53,7 @@ public:
     ~HDDTest();
 
 	void ReloadTests(bool loaded);
+	void EraseResults();
 	void UpdateInfo(bool reference);
 	void OpenResultFile(QString filename, bool reference = false);
 

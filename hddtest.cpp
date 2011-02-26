@@ -93,6 +93,7 @@ void HDDTest::on_drive_currentIndexChanged(QString)
 		break;
 		case DeviceItemData::HDD_ITEM_DEVICE:
 		{
+			EraseResults();
 			device.Open(data.value<DeviceItemData>().path, true);
 			ReloadTests(false);
 		}
@@ -207,6 +208,17 @@ void HDDTest::ReloadTests(bool loaded)
 	ui->smallfileswidget->SetStartEnabled(!loaded && fs);
 	ui->filerwwidget->SetStartEnabled(!loaded && fs);
 	ui->filestructurewidget->SetStartEnabled(!loaded && fs);
+}
+
+void HDDTest::EraseResults()
+{
+	ui->readblockwidget->EraseResults();
+	ui->readcontwidget->EraseResults();
+	ui->readrndwidget->EraseResults();
+	ui->seekwidget->EraseResults();
+	ui->smallfileswidget->EraseResults();
+	ui->filerwwidget->EraseResults();
+	ui->filestructurewidget->EraseResults();
 }
 
 void HDDTest::on_save_clicked()

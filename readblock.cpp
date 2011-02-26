@@ -170,7 +170,8 @@ void ReadBlock::RestoreResults(QDomElement &results, bool reference)
 		return;
 
 	// remove old results
-	results.erase(results.begin(), results.end());
+	for(int i = 0; i < res->size(); ++i)
+		(*res)[i].erase();
 
 	// get list of readblock subresults
 	QDomNodeList xmlresults = seek.elementsByTagName("Result");
@@ -189,5 +190,6 @@ void ReadBlock::RestoreResults(QDomElement &results, bool reference)
 
 void ReadBlock::EraseResults()
 {
-	results.erase(results.begin(), results.end());
+	for(int i = 0; i < results.size(); ++i)
+		results[i].erase();
 }

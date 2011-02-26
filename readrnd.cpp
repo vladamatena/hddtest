@@ -169,7 +169,8 @@ void ReadRnd::RestoreResults(QDomElement &results, bool reference)
 		return;
 
 	// remove old results
-	res.erase(results.begin(), results.end());
+	for(int i = 0; i < res->size(); ++i)
+		(*res)[i].erase();
 
 	// get list of reads
 	QDomNodeList xmlresults = seek.elementsByTagName("Result");
@@ -197,6 +198,7 @@ qreal ReadRnd::GetProgress()
 
 void ReadRnd::EraseResults()
 {
-	results.erase(results.begin(), results.end());
+	for(int i = 0; i < results.size(); ++i)
+		results[i].erase();
 }
 
