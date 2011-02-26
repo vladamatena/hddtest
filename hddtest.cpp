@@ -33,7 +33,10 @@ HDDTest::HDDTest(QWidget *parent) :
 		if(devList.at(i).baseName().length() > 0)
 			ui->drive->addItem(
 						QFile::symLinkTarget(devList.at(i).absoluteFilePath()),
-						QVariant::fromValue(DeviceItemData(DeviceItemData::HDD_ITEM_DEVICE, QFile::symLinkTarget(devList.at(i).absoluteFilePath()))));
+						QVariant::fromValue(
+							DeviceItemData(
+								DeviceItemData::HDD_ITEM_DEVICE,
+								QFile::symLinkTarget(devList.at(i).absoluteFilePath()))));
 	ui->drive->insertSeparator(ui->drive->count());
 	ui->reference->addItem("Nothing", QVariant(DeviceItemData::HDD_ITEM_NONE));
 	// saved results
@@ -46,15 +49,23 @@ HDDTest::HDDTest(QWidget *parent) :
 		{
 			ui->drive->addItem(
 						"Saved: " + savedList.at(i).fileName(),
-						QVariant::fromValue(DeviceItemData(DeviceItemData::HDD_ITEM_SAVED, savedList.at(i).absoluteFilePath())));
+						QVariant::fromValue(
+							DeviceItemData(
+								DeviceItemData::HDD_ITEM_SAVED,
+								savedList.at(i).absoluteFilePath())));
 			ui->reference->addItem(
 						"Saved: " + savedList.at(i).fileName(),
-						QVariant::fromValue(DeviceItemData(DeviceItemData::HDD_ITEM_SAVED, savedList.at(i).absoluteFilePath())));
+						QVariant::fromValue(
+							DeviceItemData(
+								DeviceItemData::HDD_ITEM_SAVED,
+								savedList.at(i).absoluteFilePath())));
 		}
 	ui->drive->insertSeparator(ui->drive->count());
 	ui->reference->insertSeparator(ui->reference->count());
-	ui->drive->addItem("--- Launch file open dialog ---", QVariant::fromValue(DeviceItemData(DeviceItemData::HDD_ITEM_OPEN, "")));
-	ui->reference->addItem("--- Launch file open dialog ---", QVariant::fromValue(DeviceItemData(DeviceItemData::HDD_ITEM_OPEN, "")));
+	ui->drive->addItem("--- Launch file open dialog ---", QVariant::fromValue(
+						   DeviceItemData(DeviceItemData::HDD_ITEM_OPEN, "")));
+	ui->reference->addItem("--- Launch file open dialog ---", QVariant::fromValue(
+							   DeviceItemData(DeviceItemData::HDD_ITEM_OPEN, "")));
 
 	// initialize tests
 	ui->filerwwidget->SetDevice(&device);
@@ -276,7 +287,6 @@ void HDDTest::OpenResultFile(QString filename, bool reference)
 	int row,col;
 	if(!doc.setContent(&file, &err, &row, &col))
 	{
-		std::cerr << "Can't' set document content:" << err.toAscii().constData() << " at row: " << row << " col:" << col << std::endl;
 		file.close();
 		return;
 	}

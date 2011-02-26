@@ -23,9 +23,11 @@ SmallFiles::SmallFiles(QWidget *parent):
 
 	testName = "Small files";
 	testDescription = "This test creates random directory struture containing " + QString::number(SMALLFILES_SIZE) +
-			" then " + QString::number(SMALLFILES_SIZE) + " files in size 1K to 10K are randomly distributed across this strucure." +
+			" then " + QString::number(SMALLFILES_SIZE) +
+			" files in size 1K to 10K are randomly distributed across this strucure." +
 			" after this files are read again in random order. Finally whole structure is deleted including files." +
-			" Every operation has it`s own bar that shows operation time. This test is only aviable for devices containing mounted filesystem.";
+			" Every operation has it`s own bar that shows operation time." +
+			" This test is only aviable for devices containing mounted filesystem.";
 }
 
 void SmallFiles::InitScene()
@@ -175,7 +177,7 @@ QDomElement SmallFiles::WriteResults(QDomDocument &doc)
 {
 	// create main seek element
 	QDomElement master = doc.createElement("Small_Files");
-	master.setAttribute("valid", (1 ==((results.dirs_build + results.files_build + results.files_read + results.destroyed) / (5 * SMALLFILES_SIZE)))?"yes":"no");
+	master.setAttribute("valid", (GetProgress() == 1)?"yes":"no");
 	doc.appendChild(master);
 
 
