@@ -183,5 +183,12 @@ void ReadCont::RestoreResults(QDomElement &root, bool reference)
 
 void ReadCont::EraseResults()
 {
+	// erase results
 	results.erase();
+
+	// erase graph
+	graph->erase();
+
+	// refresh view
+	UpdateScene();
 }
