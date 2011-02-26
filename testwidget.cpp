@@ -220,7 +220,6 @@ void TestWidget::Line::SetValue(qreal value)
 {
 	// update min and max for Line
 	max = min = value;
-
 	this->value = value;
 
 	// add line
@@ -240,6 +239,10 @@ void TestWidget::Line::SetValue(qreal value)
 		font.setBold(true);
 		text->setFont(font);
 	}
+
+	// shide line if value is zero
+	text->setVisible(value != 0);
+	line->setVisible(value != 0);
 
 	// set new line position
 	line->setLine(
