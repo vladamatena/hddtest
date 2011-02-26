@@ -168,6 +168,9 @@ void ReadRnd::RestoreResults(QDomElement &results, bool reference)
 	if(!seek.attribute("valid", "no").compare("no"))
 		return;
 
+	// remove old results
+	res.erase(results.begin(), results.end());
+
 	// get list of reads
 	QDomNodeList xmlresults = seek.elementsByTagName("Result");
 
