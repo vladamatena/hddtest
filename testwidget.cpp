@@ -477,11 +477,11 @@ void TestWidget::Net::Reposition()
 
 	// reposition axis descriptions
 	xAxisText->setPos(
-				test->graph.left(),
+				test->graph.left() + xAxisText->boundingRect().height(),
 				test->graph.bottom());
 	yAxisText->setPos(
 				test->graph.left() - yAxisText->boundingRect().height(),
-				test->graph.bottom());
+				test->graph.bottom() - yAxisText->boundingRect().height());
 
 
 	// get font height
