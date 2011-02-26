@@ -119,7 +119,8 @@ void TestWidget::Rescale(bool force)
 	if((max * Yscale > graph.height() * 0.9) || (max * Yscale < graph.height() / 2) || (Yscale == 0) || force)
 	{
 		// calculate new Yscale to fit data in view
-		Yscale = (qreal)graph.height() / (max * 1.5);
+		if(max != min)
+			Yscale = (qreal)graph.height() / (max * 1.5);
 
 		// reposition markers according new Yscale
 		for(int i = 0; i < markers.size(); ++i)

@@ -253,4 +253,6 @@ void Seeker::RestoreResults(QDomElement &results, bool reference)
 void Seeker::EraseResults()
 {
 	result.erase();
+	dataTicks->erase();
+	UpdateScene();
 }
