@@ -268,6 +268,14 @@ void FileRW::RestoreResults(QDomElement &results, bool reference)
 
 void FileRW::EraseResults()
 {
+	// erase test results
 	results_read.erase();
 	results_write.erase();
+
+	// erase line graphs
+	__write_graph->erase();
+	__read_graph->erase();
+
+	// resfresh view
+	UpdateScene();
 }
