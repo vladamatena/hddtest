@@ -545,7 +545,8 @@ void TestWidget::Net::Reposition()
 				net_markups[i / 10]->setPlainText(QString::number(i * dist) + " " + unit);
 				net_markups[i / 10]->setPos(
 						test->graph.left() + test->graph.width() * LINEGRAPH_NET_WIDTH,
-						test->graph.top() + test->graph.height() - (i * test->Yscale * dist) - net_markups[i / 10]->boundingRect().height() / 2);
+						test->graph.top() + test->graph.height() - (i * test->Yscale * dist)
+							- net_markups[i / 10]->boundingRect().height() / 2);
 			}
 		}
 	}
