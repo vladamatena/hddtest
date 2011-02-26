@@ -25,8 +25,8 @@ FileRW::FileRW(QWidget *parent) :
 	// Add legend
 	__legend = addLegend();
 	__legend->AddItem("Read", QColor(255, 192, 192));
-	__legend->AddItem("Read", QColor(192, 192, 255));
 	__legend->AddItem("Write", QColor(255, 0, 0));
+	__legend->AddItem("Read", QColor(192, 192, 255));
 	__legend->AddItem("Write", QColor(0, 0, 255));
 
 	testName = "File write and read";
