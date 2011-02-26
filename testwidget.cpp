@@ -550,3 +550,35 @@ void TestWidget::Net::Reposition()
 		}
 	}
 }
+
+TestWidget::Legend::Legend(TestWidget *test)
+{
+	this->test = test;
+}
+
+void TestWidget::Legend::AddItem(QString name, QColor color)
+{
+	Item item;
+	item.rect = test->scene->addRect(0, 0, 0, 0, color);
+	item.text = test->scene->addText(name);
+	items.push_back(item);
+}
+
+void TestWidget::Legend::Reposition()
+{
+	// first free position
+	int pos = test->graph.right();
+
+	// position items
+	for(int i = 0; i < items.size(); ++i)
+	{
+		int width = items[i].text->boundingRect().height();
+		items[i].text->setPos(pos -= items[i].text->boundingRect().width(), 0);
+		items[i].rect->setRect(
+					pos -= width,
+					0,
+					width,
+					width);
+		pos -= width;
+	}
+}

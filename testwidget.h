@@ -108,6 +108,22 @@ public:
 		QGraphicsLineItem *left_line;
 		QGraphicsTextItem *xAxisText, *yAxisText;
 	};
+	class Legend : public Marker
+	{
+	public:
+		Legend(TestWidget *test);
+		void AddItem(QString name, QColor color);
+		void Reposition();
+	private:
+		struct Item
+		{
+		public:
+			QGraphicsTextItem *text;
+			QGraphicsRectItem *rect;
+		};
+
+		QList<Item> items;
+	};
 
 	explicit TestWidget(QWidget *parent = 0);
 	~TestWidget();
@@ -132,6 +148,7 @@ public:
 	Bar* addBar(QString unit, QString name, QColor color, qreal position, qreal width);
 	LineGraph* addLineGraph(QString unit, QColor color);
 	Net* addNet(QString unit, QString xAxis, QString yAxis);
+	Legend* addLegend();
 
 	void Rescale(bool force = false);
 
