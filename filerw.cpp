@@ -22,6 +22,13 @@ FileRW::FileRW(QWidget *parent) :
 	// Add background net
 	__net = addNet("MB/s", "File position", "Speed");
 
+	// Add legend
+	__legend = addLegend();
+	__legend->AddItem("Read", QColor(255, 192, 192));
+	__legend->AddItem("Read", QColor(192, 192, 255));
+	__legend->AddItem("Write", QColor(255, 0, 0));
+	__legend->AddItem("Write", QColor(0, 0, 255));
+
 	testName = "File write and read";
 	testDescription = "R/W File test writes " + Device::Format(FILERW_SIZE) +
 			" to file on mounted device. Then whole file is read again." +

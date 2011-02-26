@@ -66,6 +66,8 @@ private:
 
 	Line *__avg_line;
 	Line *__max_line;
+
+	Legend *__legend;
 };
 
 #endif // FILERW_H

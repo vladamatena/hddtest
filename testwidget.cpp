@@ -192,6 +192,14 @@ TestWidget::Net* TestWidget::addNet(QString unit, QString xAxis, QString yAxis)
 	return net;
 }
 
+TestWidget::Legend* TestWidget::addLegend()
+{
+	Legend *legend = new Legend(this);
+	markers.push_back(legend);	// TODO delete merkers on exit
+
+	return legend;
+}
+
 
 
 
