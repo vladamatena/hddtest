@@ -568,7 +568,7 @@ TestWidget::Legend::Legend(TestWidget *test)
 void TestWidget::Legend::AddItem(QString name, QColor color)
 {
 	Item item;
-	item.rect = test->scene->addRect(0, 0, 0, 0, color);
+	item.rect = test->scene->addRect(0, 0, 0, 0, color, color);
 	item.text = test->scene->addText(name);
 	items.push_back(item);
 }
