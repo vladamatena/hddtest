@@ -192,6 +192,10 @@ void ReadBlock::RestoreResults(QDomElement &results, bool reference)
 
 void ReadBlock::EraseResults()
 {
+	// erase result data
 	for(int i = 0; i < results.size(); ++i)
 		results[i].erase();
+
+	// refresh view
+	UpdateScene();
 }

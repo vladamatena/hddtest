@@ -198,7 +198,11 @@ qreal ReadRnd::GetProgress()
 
 void ReadRnd::EraseResults()
 {
+	// erase results
 	for(int i = 0; i < results.size(); ++i)
 		results[i].erase();
+
+	// refresh view
+	UpdateScene();
 }
 
