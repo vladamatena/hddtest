@@ -211,3 +211,7 @@ void FileStructure::RestoreResults(QDomElement &results, bool reference)
 	UpdateScene();
 }
 
+void FileStructure::EraseResults()
+{
+	results.erase();
+}

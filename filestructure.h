@@ -54,6 +54,7 @@ public:
 
 	QDomElement WriteResults(QDomDocument &doc);					// writes results of test to XML
 	void RestoreResults(QDomElement &root, bool reference = false);	// reads results from XML document
+	void EraseResults();
 
 private:
 	Bar *build_bar;

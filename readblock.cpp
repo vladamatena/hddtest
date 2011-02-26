@@ -183,3 +183,8 @@ void ReadBlock::RestoreResults(QDomElement &results, bool reference)
 	// refresh view
 	UpdateScene();
 }
+
+void ReadBlock::EraseResults()
+{
+	results.erase(results.begin(), results.end());
+}

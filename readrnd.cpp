@@ -192,3 +192,8 @@ qreal ReadRnd::GetProgress()
 	return progress / results.size();
 }
 
+void ReadRnd::EraseResults()
+{
+	results.erase(results.begin(), results.end());
+}
+

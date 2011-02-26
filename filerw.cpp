@@ -265,3 +265,9 @@ void FileRW::RestoreResults(QDomElement &results, bool reference)
 	res_read->blocks_done = res_read->blocks;
 	UpdateScene();
 }
+
+void FileRW::EraseResults()
+{
+	results_read.erase();
+	results_write.erase();
+}

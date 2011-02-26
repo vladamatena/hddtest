@@ -180,3 +180,8 @@ void ReadCont::RestoreResults(QDomElement &root, bool reference)
 	// refresh view
 	UpdateScene();
 }
+
+void ReadCont::EraseResults()
+{
+	results.erase();
+}

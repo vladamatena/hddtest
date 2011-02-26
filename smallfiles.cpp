@@ -246,3 +246,8 @@ void SmallFiles::RestoreResults(QDomElement &results, bool reference)
 
 	UpdateScene();	
 }
+
+void SmallFiles::EraseResults()
+{
+	results.erase();
+}

@@ -247,3 +247,8 @@ void Seeker::RestoreResults(QDomElement &results, bool reference)
 	// refresh view
 	UpdateScene();
 }
+
+void Seeker::EraseResults()
+{
+	result.erase();
+}

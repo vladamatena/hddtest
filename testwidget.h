@@ -139,6 +139,7 @@ public:
 	virtual void InitScene() = 0;
 	virtual void UpdateScene() = 0;
 	virtual qreal GetProgress() = 0;
+	virtual void EraseResults() = 0;
 	virtual QDomElement WriteResults(QDomDocument &doc) = 0;
 	virtual void RestoreResults(QDomElement &root, bool reference = false) = 0;
 
