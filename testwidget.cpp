@@ -149,8 +149,11 @@ void TestWidget::resizeEvent(QResizeEvent*)
 /////// Marker add functions //////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-TestWidget::Marker::Marker():
-	max(0.0f), min(0.0f) {}
+TestWidget::Marker::Marker(TestWidget *test):
+	max(0.0f), min(0.0f)
+{
+	this->test = test;
+}
 
 TestWidget::Line* TestWidget::addLine(QString unit, QString name, QColor color)
 {
@@ -210,10 +213,7 @@ TestWidget::Legend* TestWidget::addLegend()
 ///////////////////////////////////////////////////////////////////////////////
 
 TestWidget::Line::Line(TestWidget *test, QString unit, QString name, QColor color):
-		unit(unit), name(name), color(color), line(NULL), text(NULL), value(0)
-{
-	this->test = test;
-}
+	Marker(test), unit(unit), name(name), color(color), line(NULL), text(NULL), value(0) {}
 
 void TestWidget::Line::SetValue(qreal value)
 {
@@ -264,10 +264,7 @@ void TestWidget::Line::Reposition()
 }
 
 TestWidget::Ticks::Ticks(TestWidget *test, QColor color):
-	color(color)
-{
-	this->test = test;
-}
+	 Marker(test), color(color) {}
 
 void TestWidget::Ticks::AddTick(qreal value, qreal position)
 {
@@ -315,11 +312,8 @@ void TestWidget::Ticks::erase()
 }
 
 TestWidget::Bar::Bar(TestWidget *test, QString unit, QString name, QColor color, qreal position, qreal width) :
-		unit(unit), name(name), color(color), rect(NULL), inner_rect(NULL),
-		value_text(NULL), name_text(NULL), position(position), width(width), value(0), progress(0)
-{
-	this->test = test;
-}
+		Marker(test), unit(unit), name(name), color(color), rect(NULL), inner_rect(NULL),
+		value_text(NULL), name_text(NULL), position(position), width(width), value(0), progress(0) {}
 
 void TestWidget::Bar::Set(qreal progress, qreal value)
 {
@@ -381,10 +375,9 @@ void TestWidget::Bar::Reposition()
 	Set(progress, value);
 }
 
-TestWidget::LineGraph::LineGraph(TestWidget *test, QString unit, QColor color) :
-		 unit(unit), color(color)
+TestWidget::LineGraph::LineGraph(TestWidget *test, QString unit, QColor color):
+	 Marker(test), unit(unit), color(color)
 {
-	this->test = test;
 	size = 10;
 }
 
@@ -444,10 +437,8 @@ void TestWidget::LineGraph::Reposition()
 }
 
 TestWidget::Net::Net(TestWidget *test, QString unit, QString xAxis, QString yAxis):
-	unit(unit), xAxis(xAxis), yAxis(yAxis)
+	Marker(test), unit(unit), xAxis(xAxis), yAxis(yAxis)
 {
-	this->test = test;
-
 	// left vertical line of net
 	left_line = test->scene->addLine(
 				test->graph.left(),
@@ -560,10 +551,8 @@ void TestWidget::Net::Reposition()
 	}
 }
 
-TestWidget::Legend::Legend(TestWidget *test)
-{
-	this->test = test;
-}
+TestWidget::Legend::Legend(TestWidget *test):
+	Marker(test) {}
 
 void TestWidget::Legend::AddItem(QString name, QColor color)
 {

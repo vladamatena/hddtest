@@ -31,7 +31,7 @@ public:
 	class Marker
 	{
 	public:
-		Marker();
+		Marker(TestWidget *test);
 
 		TestWidget *test;
 		qreal max;						// maximal value used by this marker
