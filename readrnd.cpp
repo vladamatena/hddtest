@@ -167,7 +167,7 @@ QDomElement ReadRnd::WriteResults(QDomDocument &doc)
 
 void ReadRnd::RestoreResults(QDomElement &results, bool reference)
 {
-	QList<ReadRndResult> *res = reference?&this->reference:&this->results;
+	QList<ReadRndResult> &res = reference?this->reference:this->results;
 
 	// Locate main readrnd element
 	QDomElement seek = results.firstChildElement("Read_Random");
@@ -175,18 +175,18 @@ void ReadRnd::RestoreResults(QDomElement &results, bool reference)
 		return;
 
 	// remove old results
-	for(int i = 0; i < res->size(); ++i)
-		(*res)[i].erase();
+	for(int i = 0; i < res.size(); ++i)
+		res[i].erase();
 
 	// get list of reads
 	QDomNodeList xmlresults = seek.elementsByTagName("Result");
 
 	// read subresults
-	for(int i = 0; i < res->size(); ++i)
+	for(int i = 0; i < res.size(); ++i)
 	{
-		(*res)[i].__block_size = xmlresults.at(i).toElement().attribute("size").toLongLong();
-		(*res)[i].__time_elapsed = xmlresults.at(i).toElement().attribute("time").toLongLong();
-		(*res)[i].__bytes_read = READ_RND_SIZE;
+		res[i].__block_size = xmlresults.at(i).toElement().attribute("size").toLongLong();
+		res[i].__time_elapsed = xmlresults.at(i).toElement().attribute("time").toLongLong();
+		res[i].__bytes_read = READ_RND_SIZE;
 	}
 
 	// refresh view
