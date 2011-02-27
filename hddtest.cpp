@@ -113,6 +113,7 @@ void HDDTest::on_drive_currentIndexChanged(QString)
 		case DeviceItemData::HDD_ITEM_SAVED:
 		{
 			device.Open("", true);
+			EraseResults(TestWidget::RESULTS);
 			OpenResultFile(data.value<DeviceItemData>().path, TestWidget::RESULTS);
 			ReloadTests(true);
 		}
@@ -146,6 +147,7 @@ void HDDTest::on_reference_currentIndexChanged(QString )
 		{
 			refDevice.Open("", true);
 
+			EraseResults(TestWidget::REFERENCE);
 			OpenResultFile(data.value<DeviceItemData>().path, TestWidget::REFERENCE);
 			UpdateInfo(true);
 		}
