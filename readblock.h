@@ -44,12 +44,13 @@ public:
 	void TestLoop();
 	void InitScene();
 	void UpdateScene();
-	qreal GetProgress();
 
 	// list of subtest results
 	QList<ReadBlockResult> results;
 	QList<ReadBlockResult> reference;
 
+	// test progress
+	qreal GetProgress();
 
 	QDomElement WriteResults(QDomDocument &doc);	// writes results of test to XML
 	void RestoreResults(QDomElement &root, bool reference = false);			// reads results from XML document

@@ -244,13 +244,13 @@ void HDDTest::on_save_clicked()
 	results.appendChild(device.WriteInfo(doc));
 
 	// save tests results
-	results.appendChild(filerw.WriteResults(doc));
-	results.appendChild(filestruct.WriteResults(doc));
-	results.appendChild(readblock.WriteResults(doc));
-	results.appendChild(readcont.WriteResults(doc));
+	results.appendChild(ui->filerwwidget->WriteResults(doc));
+	results.appendChild(ui->filestructurewidget->WriteResults(doc));
+	results.appendChild(ui->readblockwidget->WriteResults(doc));
+	results.appendChild(ui->readcontwidget->WriteResults(doc));
 	results.appendChild(ui->readrndwidget->WriteResults(doc));
 	results.appendChild(ui->seekwidget->WriteResults(doc));
-	results.appendChild(smallfiles.WriteResults(doc));
+	results.appendChild(ui->smallfileswidget->WriteResults(doc));
 
 	// write document to file
 	QString filename = QFileDialog::getSaveFileName(this, tr("Save results"), "", tr("Results (*.xml)"));

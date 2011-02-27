@@ -63,7 +63,7 @@ void TestWidget::refresh_timer_timeout()
 
 void TestWidget::StartTest()
 {
-	if(!device)
+	if(!device)	// TODO: is needed?
 		return;
 	device->DisableCaches();
 	ui->startstop->setText("Stop");

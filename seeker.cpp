@@ -205,7 +205,7 @@ QDomElement Seeker::WriteResults(QDomDocument &doc)
 {
 	// create main seek element
 	QDomElement master = doc.createElement("Seek");
-	master.setAttribute("valid", (result.progress==100)?"yes":"no");
+	master.setAttribute("valid", (GetProgress() == 1)?"yes":"no");
 	doc.appendChild(master);
 
 	// add values to main element

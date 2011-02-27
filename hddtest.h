@@ -63,12 +63,6 @@ private:
 	Device device;
 	Device refDevice;
 
-	ReadCont readcont;
-	ReadBlock readblock;
-	FileRW filerw;
-	FileStructure filestruct;
-	SmallFiles smallfiles;
-
 private slots:
 	void on_save_clicked();
 	void on_drive_currentIndexChanged(QString);

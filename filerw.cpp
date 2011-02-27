@@ -192,7 +192,7 @@ QDomElement FileRW::WriteResults(QDomDocument &doc)
 {
 	// create main seek element
 	QDomElement master = doc.createElement("File_Read_Write");
-	master.setAttribute("valid", (GetProgress()==100)?"yes":"no");
+	master.setAttribute("valid", (GetProgress() == 1)?"yes":"no");
 	doc.appendChild(master);
 
 	//// add write element
@@ -200,7 +200,7 @@ QDomElement FileRW::WriteResults(QDomDocument &doc)
 	master.appendChild(write);
 
 	// add values to write element
-	if(GetProgress() == 100) for(int i = 0; i < results_write.results.size(); ++i)
+	if(GetProgress() == 1) for(int i = 0; i < results_write.results.size(); ++i)
 	{
 		QDomElement value = doc.createElement("Write");
 		value.setAttribute("speed", results_write.results[i]);
@@ -212,7 +212,7 @@ QDomElement FileRW::WriteResults(QDomDocument &doc)
 	master.appendChild(read);
 
 	// add values to read element
-	if(GetProgress() == 100) for(int i = 0; i < results_read.results.size(); ++i)
+	if(GetProgress() == 1) for(int i = 0; i < results_read.results.size(); ++i)
 	{
 		QDomElement value = doc.createElement("Read");
 		value.setAttribute("speed", results_read.results[i]);

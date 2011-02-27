@@ -149,7 +149,7 @@ QDomElement ReadRnd::WriteResults(QDomDocument &doc)
 {
 	// create main seek element
 	QDomElement master = doc.createElement("Read_Random");
-	master.setAttribute("valid", (GetProgress() == 100)?"yes":"no");
+	master.setAttribute("valid", (GetProgress() == 1)?"yes":"no");
 	doc.appendChild(master);
 
 	// write subresults

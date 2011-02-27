@@ -177,7 +177,7 @@ QDomElement SmallFiles::WriteResults(QDomDocument &doc)
 {
 	// create main seek element
 	QDomElement master = doc.createElement("Small_Files");
-	master.setAttribute("valid", (GetProgress() == 1)?"yes":"no");
+	master.setAttribute("valid", (this->GetProgress() == 1)?"yes":"no");
 	doc.appendChild(master);
 
 

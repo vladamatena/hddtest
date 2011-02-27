@@ -166,7 +166,7 @@ QDomElement FileStructure::WriteResults(QDomDocument &doc)
 {
 	// create main seek element
 	QDomElement master = doc.createElement("File_Structure");
-	master.setAttribute("valid", (100 == results.progress)?"yes":"no");
+	master.setAttribute("valid", (GetProgress() == 1)?"yes":"no");
 	doc.appendChild(master);
 
 	// add build element
