@@ -138,13 +138,14 @@ void FileRW::UpdateScene()
 	Rescale();
 }
 
-qreal FileRW::GetProgress()
+int FileRW::GetProgress()
 {
-	if((results_read.blocks_done == 0) && (results_write.blocks_done == 0))
-		return 0.0f;
-	qreal done = results_read.blocks_done + results_write.blocks_done;
-	qreal blocks = results_write.blocks + results_read.blocks;
-	return done / blocks;
+	int done = results_read.blocks_done + results_write.blocks_done;
+	int blocks = results_write.blocks + results_read.blocks;
+	if(blocks)
+		return (100 * done) / blocks;
+	else
+		return 0;
 }
 
 FileRWResults::FileRWResults()
@@ -192,7 +193,7 @@ QDomElement FileRW::WriteResults(QDomDocument &doc)
 {
 	// create main seek element
 	QDomElement master = doc.createElement("File_Read_Write");
-	master.setAttribute("valid", (GetProgress() == 1)?"yes":"no");
+	master.setAttribute("valid", (GetProgress() == 100)?"yes":"no");
 	doc.appendChild(master);
 
 	//// add write element
@@ -200,7 +201,7 @@ QDomElement FileRW::WriteResults(QDomDocument &doc)
 	master.appendChild(write);
 
 	// add values to write element
-	if(GetProgress() == 1) for(int i = 0; i < results_write.results.size(); ++i)
+	if(GetProgress() == 100) for(int i = results_write.results.size() - 1; i >= 0; --i)
 	{
 		QDomElement value = doc.createElement("Write");
 		value.setAttribute("speed", results_write.results[i]);
@@ -212,7 +213,7 @@ QDomElement FileRW::WriteResults(QDomDocument &doc)
 	master.appendChild(read);
 
 	// add values to read element
-	if(GetProgress() == 1) for(int i = 0; i < results_read.results.size(); ++i)
+	if(GetProgress() == 100) for(int i = results_read.results.size() - 1; i >= 0; --i)
 	{
 		QDomElement value = doc.createElement("Read");
 		value.setAttribute("speed", results_read.results[i]);

@@ -96,9 +96,9 @@ void ReadCont::UpdateScene()
 	Rescale();
 }
 
-qreal ReadCont::GetProgress()
+int ReadCont::GetProgress()
 {
-	return results.progress / 100.0f;
+	return results.progress;
 }
 
 ReadContResults::ReadContResults()
@@ -138,7 +138,7 @@ QDomElement ReadCont::WriteResults(QDomDocument &doc)
 {
 	// create main seek element
 	QDomElement master = doc.createElement("Read_Continuous");
-	master.setAttribute("valid", (GetProgress() == 1)?"yes":"no");
+	master.setAttribute("valid", (GetProgress() == 100)?"yes":"no");
 	doc.appendChild(master);
 
 	// write subresults

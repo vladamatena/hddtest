@@ -150,9 +150,9 @@ void SmallFiles::UpdateScene()
 	Rescale();
 }
 
-qreal SmallFiles::GetProgress()
+int SmallFiles::GetProgress()
 {
-	return (float)(results.dirs_build + results.files_build + results.files_read + results.destroyed) / (5 * SMALLFILES_SIZE);
+	return (100 * (results.dirs_build + results.files_build + results.files_read + results.destroyed)) / (5 * SMALLFILES_SIZE);
 }
 
 SmallFilesResults::SmallFilesResults()
@@ -177,7 +177,7 @@ QDomElement SmallFiles::WriteResults(QDomDocument &doc)
 {
 	// create main seek element
 	QDomElement master = doc.createElement("Small_Files");
-	master.setAttribute("valid", (this->GetProgress() == 1)?"yes":"no");
+	master.setAttribute("valid", (this->GetProgress() == 100)?"yes":"no");
 	doc.appendChild(master);
 
 

@@ -45,7 +45,7 @@ public:
 	void InitScene();
 	void TestLoop();
 	void UpdateScene();
-	qreal GetProgress();
+	int GetProgress();
 
 	SmallFilesResults results;
 	SmallFilesResults reference;

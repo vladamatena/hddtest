@@ -53,7 +53,7 @@ public:
 	void TestLoop();
 	void InitScene();
 	void UpdateScene();
-	qreal GetProgress();
+	int GetProgress();
 
 	ReadContResults results;
 	ReadContResults reference;

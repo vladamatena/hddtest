@@ -68,7 +68,7 @@ public:
 	void InitScene();
 	void UpdateScene();
 
-	qreal GetProgress();
+	int GetProgress();
 
 	QDomElement WriteResults(QDomDocument &doc);	// writes results of test to XML
 	void RestoreResults(QDomElement &root, bool reference = false);			// reads results from XML document

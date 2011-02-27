@@ -149,7 +149,7 @@ QDomElement ReadRnd::WriteResults(QDomDocument &doc)
 {
 	// create main seek element
 	QDomElement master = doc.createElement("Read_Random");
-	master.setAttribute("valid", (GetProgress() == 1)?"yes":"no");
+	master.setAttribute("valid", (GetProgress() == 100)?"yes":"no");
 	doc.appendChild(master);
 
 	// write subresults
@@ -193,13 +193,13 @@ void ReadRnd::RestoreResults(QDomElement &results, bool reference)
 	UpdateScene();
 }
 
-qreal ReadRnd::GetProgress()
+int ReadRnd::GetProgress()
 {
-	qreal progress = 0.0f;
+	hddsize progress = 0;
 
 	for(int i = 0; i < results.size(); ++i)
-		progress += (float)results[i].__bytes_read / READ_RND_SIZE;
-	return progress / results.size();
+		progress += results[i].__bytes_read;
+	return (100 * progress) / (results.size() * READ_RND_SIZE);
 }
 
 void ReadRnd::EraseResults()

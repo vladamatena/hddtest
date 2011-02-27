@@ -47,7 +47,7 @@ public:
 	void InitScene();
 	void TestLoop();
 	void UpdateScene();
-	qreal GetProgress();
+	int GetProgress();
 
 	FileStructureResults results;
 	FileStructureResults reference;

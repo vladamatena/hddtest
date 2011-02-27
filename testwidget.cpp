@@ -50,9 +50,9 @@ void TestWidget::TestThread::run()
 
 void TestWidget::refresh_timer_timeout()
 {
-	qreal progress = GetProgress();
-	ui->progress->setValue(progress * 100);
-	if(progress == 1)
+	int progress = GetProgress();
+	ui->progress->setValue(progress);
+	if(progress == 100)
 	{
 		refresh_timer.stop();
 		ui->startstop->setText("Start");

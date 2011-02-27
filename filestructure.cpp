@@ -129,9 +129,9 @@ void FileStructure::UpdateScene()
 	Rescale();
 }
 
-qreal FileStructure::GetProgress()
+int FileStructure::GetProgress()
 {
-	return (qreal)(results.build_files + results.build_dirs + results.destroyed) / (qreal)(4 * FILESTRUCTURE_SIZE);
+	return (100 * (results.build_files + results.build_dirs + results.destroyed)) / (4 * FILESTRUCTURE_SIZE);
 }
 
 FileStructureResults::FileStructureResults()
@@ -166,7 +166,7 @@ QDomElement FileStructure::WriteResults(QDomDocument &doc)
 {
 	// create main seek element
 	QDomElement master = doc.createElement("File_Structure");
-	master.setAttribute("valid", (GetProgress() == 1)?"yes":"no");
+	master.setAttribute("valid", (GetProgress() == 100)?"yes":"no");
 	doc.appendChild(master);
 
 	// add build element

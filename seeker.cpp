@@ -107,9 +107,9 @@ void Seeker::UpdateScene()
 	Rescale();
 }
 
-qreal Seeker::GetProgress()
+int Seeker::GetProgress()
 {
-	return result.progress / 100.0f;
+	return result.progress;
 }
 
 void Seeker::SeekResult::AddSeek(QPointF seek)
@@ -205,11 +205,11 @@ QDomElement Seeker::WriteResults(QDomDocument &doc)
 {
 	// create main seek element
 	QDomElement master = doc.createElement("Seek");
-	master.setAttribute("valid", (GetProgress() == 1)?"yes":"no");
+	master.setAttribute("valid", (GetProgress() == 100)?"yes":"no");
 	doc.appendChild(master);
 
 	// add values to main element
-	if(result.progress == 100) for(int i = 0; i < result.seeks.size(); ++i)
+	if(GetProgress() == 100) for(int i = 0; i < result.seeks.size(); ++i)
 	{
 		QDomElement value = doc.createElement("Seek");
 		value.setAttribute("length", result.seeks[i].x());

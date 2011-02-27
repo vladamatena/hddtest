@@ -126,13 +126,13 @@ void ReadBlock::UpdateScene()
 	}
 }
 
-qreal ReadBlock::GetProgress()
+int ReadBlock::GetProgress()
 {
-	qreal progress = 0.0f;
+	hddsize read = 0;
 
 	for(int i = 0; i < results.size(); ++i)
-		progress += (float)results[i].__bytes_read / READ_BLOCK_SIZE;
-	return progress / results.size();
+		read += results[i].__bytes_read;
+	return (100 * read) / (results.size() * READ_BLOCK_SIZE);
 }
 
 ReadBlockResult::ReadBlockResult(qint32 block_size):
@@ -152,7 +152,7 @@ QDomElement ReadBlock::WriteResults(QDomDocument &doc)
 {
 	// create main seek element
 	QDomElement master = doc.createElement("Read_Block");
-	master.setAttribute("valid", (GetProgress() == 1)?"yes":"no");
+	master.setAttribute("valid", (GetProgress() == 100)?"yes":"no");
 	doc.appendChild(master);
 
 	// write subresults

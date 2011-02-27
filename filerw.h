@@ -43,7 +43,7 @@ public:
 	void TestLoop();
 	void InitScene();
 	void UpdateScene();
-	qreal GetProgress();
+	int GetProgress();
 
 	FileRWResults results_write;	// results of write test
 	FileRWResults results_read;		// results of read test
