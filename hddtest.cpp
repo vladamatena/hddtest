@@ -38,7 +38,9 @@ HDDTest::HDDTest(QWidget *parent) :
 								DeviceItemData::HDD_ITEM_DEVICE,
 								QFile::symLinkTarget(devList.at(i).absoluteFilePath()))));
 	ui->drive->insertSeparator(ui->drive->count());
-	ui->reference->addItem("Nothing", QVariant(DeviceItemData::HDD_ITEM_NONE));
+	ui->reference->addItem(
+				"Nothing",
+				QVariant::fromValue(DeviceItemData(DeviceItemData::HDD_ITEM_NONE, "")));
 	// saved results
 	QDir saved = QDir();
 	saved.setFilter(QDir::Files);
@@ -151,6 +153,10 @@ void HDDTest::on_reference_currentIndexChanged(QString )
 			OpenResultFile(data.value<DeviceItemData>().path, TestWidget::REFERENCE);
 			UpdateInfo(true);
 		}
+		break;
+		case DeviceItemData::HDD_ITEM_NONE:
+			refDevice.Open("", false);
+			EraseResults(TestWidget::REFERENCE);
 		break;
 		default:
 			;// TODO: handle error

@@ -48,7 +48,7 @@ void Device::Open(QString path, bool close, bool rw)
 	// set pos to begin of device
 	SetPos(0);
 
-	this->DriveInfo();
+	DriveInfo();
 }
 
 Device::~Device()

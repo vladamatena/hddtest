@@ -283,8 +283,8 @@ void FileRW::EraseResults(DataSet dataset)
 		reference_read.erase();
 		reference_write.erase();
 
-		__write_graph->erase();
-		__read_graph->erase();
+		__write_reference_graph->erase();
+		__read_reference_graph->erase();
 	}
 
 	// resfresh view

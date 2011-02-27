@@ -192,7 +192,7 @@ void ReadCont::EraseResults(DataSet dataset)
 	else
 	{
 		reference.erase();
-		graph->erase();
+		refGraph->erase();
 	}
 
 	// refresh view
