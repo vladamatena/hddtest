@@ -13,7 +13,7 @@ TestWidget::TestWidget(QWidget *parent) :
 	go = false;
 	connect(&refresh_timer, SIGNAL(timeout()), this, SLOT(refresh_timer_timeout()));
 
-	Yscale = 0;
+	Yscale = 1;
 
 	ui->graph->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 	ui->graph->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
