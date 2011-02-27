@@ -170,7 +170,7 @@ QDomElement ReadBlock::WriteResults(QDomDocument &doc)
 
 void ReadBlock::RestoreResults(QDomElement &results, bool reference)
 {
-	QList<ReadBlockResult> *res = reference?&this->reference:&this->results;
+	QList<ReadBlockResult> &res = reference?this->reference:this->results;
 
 	// Locate main readblock element
 	QDomElement seek = results.firstChildElement("Read_Block");
@@ -178,8 +178,8 @@ void ReadBlock::RestoreResults(QDomElement &results, bool reference)
 		return;
 
 	// remove old results
-	for(int i = 0; i < res->size(); ++i)
-		(*res)[i].erase();
+	for(int i = 0; i < res.size(); ++i)
+		res[i].erase();
 
 	// get list of readblock subresults
 	QDomNodeList xmlresults = seek.elementsByTagName("Result");
@@ -187,9 +187,9 @@ void ReadBlock::RestoreResults(QDomElement &results, bool reference)
 	// read subresults
 	for(int i = 0; i < this->results.size(); ++i)
 	{
-		(*res)[i].__block_size = xmlresults.at(i).toElement().attribute("size").toLongLong();
-		(*res)[i].__time_elapsed = xmlresults.at(i).toElement().attribute("time").toLongLong();
-		(*res)[i].__bytes_read = READ_BLOCK_SIZE;
+		res[i].__block_size = xmlresults.at(i).toElement().attribute("size").toLongLong();
+		res[i].__time_elapsed = xmlresults.at(i).toElement().attribute("time").toLongLong();
+		res[i].__bytes_read = READ_BLOCK_SIZE;
 	}
 
 	// refresh view
