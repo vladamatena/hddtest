@@ -168,9 +168,9 @@ QDomElement ReadBlock::WriteResults(QDomDocument &doc)
 	return master;
 }
 
-void ReadBlock::RestoreResults(QDomElement &results, bool reference)
+void ReadBlock::RestoreResults(QDomElement &results, DataSet dataset)
 {
-	QList<ReadBlockResult> &res = reference?this->reference:this->results;
+	QList<ReadBlockResult> &res = (dataset == REFERENCE)?this->reference:this->results;
 
 	// Locate main readblock element
 	QDomElement seek = results.firstChildElement("Read_Block");

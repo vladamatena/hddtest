@@ -204,9 +204,9 @@ QDomElement SmallFiles::WriteResults(QDomDocument &doc)
 	return master;
 }
 
-void SmallFiles::RestoreResults(QDomElement &results, bool reference)
+void SmallFiles::RestoreResults(QDomElement &results, DataSet dataset)
 {
-	SmallFilesResults &res = reference?this->reference:this->results;
+	SmallFilesResults &res = (dataset == REFERENCE)?this->reference:this->results;
 
 	// Locate main seek element
 	QDomElement main = results.firstChildElement("Small_Files");

@@ -153,9 +153,9 @@ QDomElement ReadCont::WriteResults(QDomDocument &doc)
 	return master;
 }
 
-void ReadCont::RestoreResults(QDomElement &root, bool reference)
+void ReadCont::RestoreResults(QDomElement &root, DataSet dataset)
 {
-	ReadContResults &results = reference?this->reference:this->results;
+	ReadContResults &results = (dataset == REFERENCE)?this->reference:this->results;
 
 	// Locate main readcont element
 	QDomElement main = root.firstChildElement("Read_Continuous");
@@ -163,7 +163,7 @@ void ReadCont::RestoreResults(QDomElement &root, bool reference)
 		return;
 
 	// init scene and remove results
-	reference?refGraph->erase():graph->erase();
+	(dataset == REFERENCE)?refGraph->erase():graph->erase();
 	results.erase();
 
 	// get list of read continuous values

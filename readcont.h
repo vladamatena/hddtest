@@ -59,7 +59,7 @@ public:
 	ReadContResults reference;
 
 	QDomElement WriteResults(QDomDocument &doc);						// writes results of test to XML
-	void RestoreResults(QDomElement &root, bool reference = false);		// reads results from XML document
+	void RestoreResults(QDomElement &root, DataSet = RESULTS);		// reads results from XML document
 	void EraseResults();
 
 private:

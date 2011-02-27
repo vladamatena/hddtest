@@ -165,9 +165,9 @@ QDomElement ReadRnd::WriteResults(QDomDocument &doc)
 	return master;
 }
 
-void ReadRnd::RestoreResults(QDomElement &results, bool reference)
+void ReadRnd::RestoreResults(QDomElement &results, DataSet dataset)
 {
-	QList<ReadRndResult> &res = reference?this->reference:this->results;
+	QList<ReadRndResult> &res = (dataset == REFERENCE)?this->reference:this->results;
 
 	// Locate main readrnd element
 	QDomElement seek = results.firstChildElement("Read_Random");

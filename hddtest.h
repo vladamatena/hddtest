@@ -55,7 +55,7 @@ public:
 	void ReloadTests(bool loaded);
 	void EraseResults();
 	void UpdateInfo(bool reference);
-	void OpenResultFile(QString filename, bool reference = false);
+	void OpenResultFile(QString filename, TestWidget::DataSet = TestWidget::RESULTS);
 
 private:
     Ui::HDDTest *ui;

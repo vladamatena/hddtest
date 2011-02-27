@@ -28,6 +28,8 @@ class TestWidget : public QWidget
     Q_OBJECT
 
 public:
+	enum DataSet { RESULTS, REFERENCE };
+
 	class Marker
 	{
 	public:
@@ -38,6 +40,7 @@ public:
 		qreal min;						// minimal value used by this marker
 		virtual void Reposition() = 0;	// reposition marker on view change
 	};
+
 	class Ticks : public Marker
 	{
 	public:
@@ -50,7 +53,8 @@ public:
 		QColor color;
 		QList<QGraphicsRectItem*> ticks;
 		QList<QPointF> positions;
-		};
+	};
+
 	class Line : public Marker
 	{
 	public:
@@ -65,6 +69,7 @@ public:
 		QGraphicsTextItem *text;
 		qreal value;
 	};
+
 	class Bar : public Marker
 	{
 	public:
@@ -79,6 +84,7 @@ public:
 		QGraphicsTextItem *value_text, *name_text;
 		qreal position, width, value, progress;
 	};
+
 	class LineGraph : public Marker
 	{
 	public:
@@ -95,6 +101,7 @@ public:
 		QList<QGraphicsLineItem*> lines;
 		QList<qreal> values;
 	};
+
 	class Net : public Marker
 	{
 	public:
@@ -108,6 +115,7 @@ public:
 		QGraphicsLineItem *left_line;
 		QGraphicsTextItem *xAxisText, *yAxisText;
 	};
+
 	class Legend : public Marker
 	{
 	public:
@@ -141,7 +149,7 @@ public:
 	virtual int GetProgress() = 0;	///	Report test progress in range from 0 to 100.
 	virtual void EraseResults() = 0;
 	virtual QDomElement WriteResults(QDomDocument &doc) = 0;
-	virtual void RestoreResults(QDomElement &root, bool reference = false) = 0;
+	virtual void RestoreResults(QDomElement &root, DataSet = RESULTS) = 0;
 
 	// Graph creation functions
 	Line* addLine(QString unit, QString name, QColor color);

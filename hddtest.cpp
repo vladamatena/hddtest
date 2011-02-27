@@ -113,7 +113,7 @@ void HDDTest::on_drive_currentIndexChanged(QString)
 		case DeviceItemData::HDD_ITEM_SAVED:
 		{
 			device.Open("", true);
-			OpenResultFile(data.value<DeviceItemData>().path);
+			OpenResultFile(data.value<DeviceItemData>().path, TestWidget::RESULTS);
 			ReloadTests(true);
 		}
 		break;
@@ -146,7 +146,7 @@ void HDDTest::on_reference_currentIndexChanged(QString )
 		{
 			refDevice.Open("", true);
 
-			OpenResultFile(data.value<DeviceItemData>().path, true);
+			OpenResultFile(data.value<DeviceItemData>().path, TestWidget::REFERENCE);
 			UpdateInfo(true);
 		}
 		break;
@@ -267,7 +267,7 @@ void HDDTest::on_save_clicked()
 	file.close();
 }
 
-void HDDTest::OpenResultFile(QString filename, bool reference)
+void HDDTest::OpenResultFile(QString filename, TestWidget::DataSet dataset)
 {
 	if(filename.length() == 0)
 		return;
@@ -295,13 +295,13 @@ void HDDTest::OpenResultFile(QString filename, bool reference)
 	QDomElement results = root.firstChildElement("Results");
 
 	// restore device info
-	reference?refDevice.ReadInfo(root):device.ReadInfo(root);
+	(dataset == TestWidget::REFERENCE)?refDevice.ReadInfo(root):device.ReadInfo(root);
 	// restore tests result
-	ui->seekwidget->RestoreResults(root, reference);
-	ui->filerwwidget->RestoreResults(root, reference);
-	ui->filestructurewidget->RestoreResults(root, reference);
-	ui->smallfileswidget->RestoreResults(root, reference);
-	ui->readblockwidget->RestoreResults(root, reference);
-	ui->readrndwidget->RestoreResults(root, reference);
-	ui->readcontwidget->RestoreResults(root, reference);
+	ui->seekwidget->RestoreResults(root, dataset);
+	ui->filerwwidget->RestoreResults(root, dataset);
+	ui->filestructurewidget->RestoreResults(root, dataset);
+	ui->smallfileswidget->RestoreResults(root, dataset);
+	ui->readblockwidget->RestoreResults(root, dataset);
+	ui->readrndwidget->RestoreResults(root, dataset);
+	ui->readcontwidget->RestoreResults(root, dataset);
 }

@@ -223,10 +223,10 @@ QDomElement FileRW::WriteResults(QDomDocument &doc)
 	return master;
 }
 
-void FileRW::RestoreResults(QDomElement &results, bool reference)
+void FileRW::RestoreResults(QDomElement &results, DataSet dataset)
 {
-	FileRWResults *res_write = reference?&reference_write:&results_write;
-	FileRWResults *res_read = reference?&reference_read:&results_read;
+	FileRWResults *res_write = (dataset == REFERENCE)?&reference_write:&results_write;
+	FileRWResults *res_read = (dataset == REFERENCE)?&reference_read:&results_read;
 
 	// Locate main fileRW element
 	QDomElement main = results.firstChildElement("File_Read_Write");
@@ -236,8 +236,8 @@ void FileRW::RestoreResults(QDomElement &results, bool reference)
 	// erase old results
 	res_write->erase();
 	res_read->erase();
-	reference?__write_reference_graph->erase():__write_graph->erase();
-	reference?__read_reference_graph->erase():__read_graph->erase();
+	(dataset == REFERENCE)?__write_reference_graph->erase():__write_graph->erase();
+	(dataset == REFERENCE)?__read_reference_graph->erase():__read_graph->erase();
 
 	//// get Write
 	QDomElement write = main.firstChildElement("Write_data");

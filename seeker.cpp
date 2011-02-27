@@ -220,9 +220,9 @@ QDomElement Seeker::WriteResults(QDomDocument &doc)
 	return master;
 }
 
-void Seeker::RestoreResults(QDomElement &results, bool reference)
+void Seeker::RestoreResults(QDomElement &results, DataSet dataset)
 {
-	SeekResult &result = reference?this->reference:this->result;
+	SeekResult &result = (dataset == REFERENCE)?this->reference:this->result;
 
 	// Locate main seek element
 	QDomElement seek = results.firstChildElement("Seek");
@@ -231,7 +231,7 @@ void Seeker::RestoreResults(QDomElement &results, bool reference)
 
 	// clear results and initialize scene
 	result.erase();
-	reference?referenceTicks->erase():dataTicks->erase();
+	(dataset == REFERENCE)?referenceTicks->erase():dataTicks->erase();
 
 	// get list of seeks
 	QDomNodeList seeks = seek.elementsByTagName("Seek");

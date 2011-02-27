@@ -182,9 +182,9 @@ QDomElement FileStructure::WriteResults(QDomDocument &doc)
 	return master;
 }
 
-void FileStructure::RestoreResults(QDomElement &results, bool reference)
+void FileStructure::RestoreResults(QDomElement &results, DataSet dataset)
 {
-	FileStructureResults *res = reference?&this->reference:&this->results;
+	FileStructureResults *res = (dataset == REFERENCE)?&this->reference:&this->results;
 
 	// Locate main seek element
 	QDomElement main = results.firstChildElement("File_Structure");
