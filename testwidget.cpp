@@ -360,6 +360,7 @@ void TestWidget::Bar::Set(qreal progress, qreal value)
 
 	// set items data
 	value_text->setPlainText(QString::number(value, 'f', 2) + " " + unit);
+	value_text->setVisible(progress > 0);
 
 	//// set positions
 	rect->setRect(X, Y, W, H);
