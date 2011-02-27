@@ -124,10 +124,10 @@ void ReadRnd::UpdateScene()
 		// rescale and update graphics
 		bars[i]->Set(
 				(qreal)(100 * result.__bytes_read) / READ_RND_SIZE,
-				(qreal)result.__bytes_read / (qreal)result.__time_elapsed);
+				(result.__time_elapsed > 0)?(qreal)result.__bytes_read / (qreal)result.__time_elapsed:0);
 		reference_bars[i]->Set(
 				(qreal)(100 * refer.__bytes_read) / READ_RND_SIZE,
-				(qreal)refer.__bytes_read / (qreal)refer.__time_elapsed);
+				(refer.__time_elapsed > 0)?(qreal)refer.__bytes_read / (qreal)refer.__time_elapsed:0);
 		Rescale();
 	}
 }
