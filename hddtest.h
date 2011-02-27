@@ -54,7 +54,7 @@ public:
 
 	void ReloadTests(bool loaded);
 	void EraseResults(TestWidget::DataSet dataset);
-	void UpdateInfo(bool reference);
+	void UpdateInfo(TestWidget::DataSet dataset);
 	void OpenResultFile(QString filename, TestWidget::DataSet = TestWidget::RESULTS);
 
 private:

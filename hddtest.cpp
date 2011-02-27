@@ -148,15 +148,14 @@ void HDDTest::on_reference_currentIndexChanged(QString )
 		case DeviceItemData::HDD_ITEM_SAVED:
 		{
 			refDevice.Open("", true);
-
 			EraseResults(TestWidget::REFERENCE);
 			OpenResultFile(data.value<DeviceItemData>().path, TestWidget::REFERENCE);
-			UpdateInfo(true);
+			UpdateInfo(TestWidget::REFERENCE);
 		}
 		break;
 		case DeviceItemData::HDD_ITEM_NONE:
-			refDevice.Open("", false);
 			EraseResults(TestWidget::REFERENCE);
+			UpdateInfo(TestWidget::REFERENCE);
 		break;
 		default:
 			;// TODO: handle error
@@ -181,9 +180,9 @@ void HDDTest::device_accessWarning()
 
 void HDDTest::refDevice_accessWarning() {}
 
-void HDDTest::UpdateInfo(bool reference)
+void HDDTest::UpdateInfo(TestWidget::DataSet dataset)
 {
-	if(!reference)
+	if(dataset == TestWidget::RESULTS)
 	{
 		// update info tab - tested device
 		this->ui->model->setText(device.model);
@@ -215,7 +214,7 @@ void HDDTest::ReloadTests(bool loaded)
 	bool fs = device.fs;
 	bool valid = device.size > 0;
 
-	UpdateInfo(false);
+	UpdateInfo(TestWidget::RESULTS);
 
 	// Raw device test
 	ui->readblockwidget->SetStartEnabled(!loaded && valid);
@@ -231,6 +230,11 @@ void HDDTest::ReloadTests(bool loaded)
 
 void HDDTest::EraseResults(TestWidget::DataSet dataset)
 {
+	if(dataset == TestWidget::RESULTS)
+		device.EraseDriveInfo();
+	else
+		refDevice.EraseDriveInfo();
+
 	ui->readblockwidget->EraseResults(dataset);
 	ui->readcontwidget->EraseResults(dataset);
 	ui->readrndwidget->EraseResults(dataset);
