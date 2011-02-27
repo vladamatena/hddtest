@@ -189,8 +189,26 @@ QString Device::Format(hddsize size)
 	return QString::number(size) + " B";
 }
 
+void Device::EraseDriveInfo()
+{
+	size = -1;
+
+	model = "UNKNOWN";
+	serial = "UNKNOWN";
+	firmware = "UNKNOWN";
+
+	mountpoint = "NOT MOUNTED";
+	fstype = "NOT MOUNTED";
+	fsoptions = "NOT MOUNTED";
+	fs = false;
+
+	// kernel is left unchanged
+}
+
 void Device::DriveInfo()
 {
+	EraseDriveInfo();
+
 	hd_driveid id;
 
 	// use device size
@@ -203,18 +221,6 @@ void Device::DriveInfo()
 		serial = QString::fromAscii((char*)id.serial_no, 20).trimmed();
 		firmware = QString::fromAscii((char*)id.fw_rev, 8).trimmed();
 	}
-	else
-	{
-		model = "UNKNOWN";
-		serial = "UNKNOWN";
-		firmware = "UNKNOWN";
-	}
-
-	// get info from mounts
-	mountpoint = "NOT MOUNTED";
-	fstype = "NOT MOUNTED";
-	fsoptions = "NOT MOUNTED";
-	fs = false;
 
 	QFile mounts("/proc/mounts");
 	mounts.open(QFile::ReadOnly);
