@@ -59,8 +59,8 @@ public:
 	ReadContResults reference;
 
 	QDomElement WriteResults(QDomDocument &doc);						// writes results of test to XML
-	void RestoreResults(QDomElement &root, DataSet = RESULTS);		// reads results from XML document
-	void EraseResults();
+	void RestoreResults(QDomElement &root, DataSet dataset);		// reads results from XML document
+	void EraseResults(DataSet dataset);
 
 private:
 //	bool first;

@@ -196,11 +196,15 @@ void ReadBlock::RestoreResults(QDomElement &results, DataSet dataset)
 	UpdateScene();
 }
 
-void ReadBlock::EraseResults()
+void ReadBlock::EraseResults(DataSet dataset)
 {
-	// erase result data
-	for(int i = 0; i < results.size(); ++i)
-		results[i].erase();
+	// erase data
+	if(dataset == RESULTS)
+		for(int i = 0; i < results.size(); ++i)
+			results[i].erase();
+	else
+		for(int i = 0; i < reference.size(); ++i)
+			reference[i].erase();
 
 	// refresh view
 	UpdateScene();

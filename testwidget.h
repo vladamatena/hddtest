@@ -147,9 +147,9 @@ public:
 	virtual void InitScene() = 0;
 	virtual void UpdateScene() = 0;
 	virtual int GetProgress() = 0;	///	Report test progress in range from 0 to 100.
-	virtual void EraseResults() = 0;
+	virtual void EraseResults(DataSet dataset) = 0;
 	virtual QDomElement WriteResults(QDomDocument &doc) = 0;
-	virtual void RestoreResults(QDomElement &root, DataSet = RESULTS) = 0;
+	virtual void RestoreResults(QDomElement &root, DataSet dataset) = 0;
 
 	// Graph creation functions
 	Line* addLine(QString unit, QString name, QColor color);

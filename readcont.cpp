@@ -181,13 +181,19 @@ void ReadCont::RestoreResults(QDomElement &root, DataSet dataset)
 	UpdateScene();
 }
 
-void ReadCont::EraseResults()
+void ReadCont::EraseResults(DataSet dataset)
 {
-	// erase results
-	results.erase();
-
-	// erase graph
-	graph->erase();
+	// erase data
+	if(dataset == RESULTS)
+	{
+		results.erase();
+		graph->erase();
+	}
+	else
+	{
+		reference.erase();
+		graph->erase();
+	}
 
 	// refresh view
 	UpdateScene();

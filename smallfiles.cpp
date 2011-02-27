@@ -249,8 +249,12 @@ void SmallFiles::RestoreResults(QDomElement &results, DataSet dataset)
 	UpdateScene();
 }
 
-void SmallFiles::EraseResults()
+void SmallFiles::EraseResults(DataSet dataset)
 {
-	results.erase();
+	if(dataset == RESULTS)
+		results.erase();
+	else
+		reference.erase();
+
 	UpdateScene();
 }

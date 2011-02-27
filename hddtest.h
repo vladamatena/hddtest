@@ -53,7 +53,7 @@ public:
     ~HDDTest();
 
 	void ReloadTests(bool loaded);
-	void EraseResults();
+	void EraseResults(TestWidget::DataSet dataset);
 	void UpdateInfo(bool reference);
 	void OpenResultFile(QString filename, TestWidget::DataSet = TestWidget::RESULTS);
 

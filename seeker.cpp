@@ -250,9 +250,17 @@ void Seeker::RestoreResults(QDomElement &results, DataSet dataset)
 	UpdateScene();
 }
 
-void Seeker::EraseResults()
+void Seeker::EraseResults(DataSet dataset)
 {
-	result.erase();
-	dataTicks->erase();
+	if(dataset == RESULTS)
+	{
+		result.erase();
+		dataTicks->erase();
+	}
+	else
+	{
+		reference.erase();
+		referenceTicks->erase();
+	}
 	UpdateScene();
 }

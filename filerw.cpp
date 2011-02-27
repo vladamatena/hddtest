@@ -267,15 +267,25 @@ void FileRW::RestoreResults(QDomElement &results, DataSet dataset)
 	UpdateScene();
 }
 
-void FileRW::EraseResults()
+void FileRW::EraseResults(DataSet dataset)
 {
-	// erase test results
-	results_read.erase();
-	results_write.erase();
+	// erase data
+	if(dataset == RESULTS)
+	{
+		results_read.erase();
+		results_write.erase();
 
-	// erase line graphs
-	__write_graph->erase();
-	__read_graph->erase();
+		__write_graph->erase();
+		__read_graph->erase();
+	}
+	else
+	{
+		reference_read.erase();
+		reference_write.erase();
+
+		__write_graph->erase();
+		__read_graph->erase();
+	}
 
 	// resfresh view
 	UpdateScene();

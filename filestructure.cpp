@@ -215,8 +215,12 @@ void FileStructure::RestoreResults(QDomElement &results, DataSet dataset)
 	UpdateScene();
 }
 
-void FileStructure::EraseResults()
+void FileStructure::EraseResults(DataSet dataset)
 {
-	results.erase();
+	if(dataset == RESULTS)
+		results.erase();
+	else
+		reference.erase();
+
 	UpdateScene();
 }

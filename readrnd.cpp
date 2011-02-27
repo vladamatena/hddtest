@@ -202,11 +202,15 @@ int ReadRnd::GetProgress()
 	return (100 * progress) / (results.size() * READ_RND_SIZE);
 }
 
-void ReadRnd::EraseResults()
+void ReadRnd::EraseResults(DataSet dataset)
 {
-	// erase results
-	for(int i = 0; i < results.size(); ++i)
-		results[i].erase();
+	// erase data
+	if(dataset == RESULTS)
+		for(int i = 0; i < results.size(); ++i)
+			results[i].erase();
+	else
+		for(int i = 0; i < reference.size(); ++i)
+			reference[i].erase();
 
 	// refresh view
 	UpdateScene();
