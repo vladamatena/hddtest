@@ -37,12 +37,12 @@ namespace Ui {
 class HDDTest : public QDialog {
 	Q_OBJECT
 public:
-	struct DeviceItemData
+	struct DeviceItem
 	{
 		enum Type	{ HDD_ITEM_DEVICE, HDD_ITEM_OPEN, HDD_ITEM_SAVED, HDD_ITEM_NONE };
 
-		DeviceItemData() {}
-		DeviceItemData(Type type, QString path):
+		DeviceItem() {}
+		DeviceItem(Type type, QString path):
 			type(type), path(path) {}
 
 		Type type;
@@ -71,6 +71,6 @@ private slots:
 	void refDevice_accessWarning();
 };
 
-Q_DECLARE_METATYPE(HDDTest::DeviceItemData)
+Q_DECLARE_METATYPE(HDDTest::DeviceItem)
 
 #endif // HDDTEST_H
