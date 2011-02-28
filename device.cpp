@@ -102,14 +102,14 @@ hddtime Device::SeekTo(hddpos pos)
 	timeval __end;
 	char c;
 
-	// get seek start timeout
+	// get seek start timestamp
 	gettimeofday(&__start, 0);
 
 	// seek to new position
 	SetPos(pos);
 	read(__fd, &c, sizeof(char));
 
-	// get seek end timeout
+	// get seek end timestamp
 	gettimeofday(&__end, 0);
 
 	// count seek duration
@@ -130,7 +130,7 @@ hddtime Device::ReadAt(hddsize size, hddpos pos)
 	timeval __end;
 	char *buffer = new char[size];
 
-	// get seek start timeout
+	// get seek start timestamp
 	gettimeofday(&__start, 0);
 
 	// seek to new position
@@ -139,7 +139,7 @@ hddtime Device::ReadAt(hddsize size, hddpos pos)
 	if(ret <= 0)
 		std::cerr << "Read failed" << std::endl;
 
-	// get seek end timeout
+	// get seek end timestamp
 	gettimeofday(&__end, 0);
 
 	// count seek duration
@@ -156,7 +156,7 @@ hddtime Device::Read(hddsize size)
 	timeval __end;
 	char *buffer = new char[size];
 
-	// get seek start timeout
+	// get seek start timestamp
 	gettimeofday(&__start, 0);
 
 	// read data
@@ -164,7 +164,7 @@ hddtime Device::Read(hddsize size)
 	if(ret <= 0)
 		std::cerr << "Read failed" << std::endl;
 
-	// get seek end timeout
+	// get seek end timestamp
 	gettimeofday(&__end, 0);
 
 	// count seek duration
