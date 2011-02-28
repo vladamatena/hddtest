@@ -41,7 +41,8 @@ public:
 	{
 		enum Type	{ HDD_ITEM_DEVICE, HDD_ITEM_OPEN, HDD_ITEM_SAVED, HDD_ITEM_NONE };
 
-		DeviceItem() {}
+		DeviceItem():
+			type(HDD_ITEM_NONE), path("") {}
 		DeviceItem(Type type, QString path):
 			type(type), path(path) {}
 

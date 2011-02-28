@@ -111,8 +111,11 @@ void HDDTest::on_drive_currentIndexChanged(QString)
 			ReloadTests(true);
 		}
 		break;
-		default:
-			;// TODO: handle error
+		case DeviceItem::HDD_ITEM_NONE:
+			EraseResults(TestWidget::RESULTS);
+			device.Open(data.value<DeviceItem>().path, true);
+			ReloadTests(false);
+		break;
 	}
 }
 
@@ -148,8 +151,10 @@ void HDDTest::on_reference_currentIndexChanged(QString )
 			EraseResults(TestWidget::REFERENCE);
 			UpdateInfo(TestWidget::REFERENCE);
 		break;
-		default:
-			;// TODO: handle error
+		case  DeviceItem::HDD_ITEM_DEVICE:
+			// silently ignore
+			// this should not happend
+		break;
 	}
 }
 
