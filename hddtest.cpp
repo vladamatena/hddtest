@@ -47,6 +47,7 @@ HDDTest::HDDTest(QWidget *parent) :
 	saved.setNameFilters(QStringList("*.xml"));
 	QFileInfoList savedList = saved.entryInfoList();
 	for(int i = 0; i < savedList.size(); ++i)
+	{
 		if(savedList.at(i).baseName().length() > 0)
 		{
 			ui->drive->addItem(
@@ -62,6 +63,7 @@ HDDTest::HDDTest(QWidget *parent) :
 								DeviceItemData::HDD_ITEM_SAVED,
 								savedList.at(i).absoluteFilePath())));
 		}
+	}
 	ui->drive->insertSeparator(ui->drive->count());
 	ui->reference->insertSeparator(ui->reference->count());
 	ui->drive->addItem("--- Launch file open dialog ---", QVariant::fromValue(
