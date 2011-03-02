@@ -58,14 +58,11 @@ public:
 	ReadContResults results;
 	ReadContResults reference;
 
-	QDomElement WriteResults(QDomDocument &doc);						// writes results of test to XML
+	QDomElement WriteResults(QDomDocument &doc);					// writes results of test to XML
 	void RestoreResults(QDomElement &root, DataSet dataset);		// reads results from XML document
 	void EraseResults(DataSet dataset);
 
 private:
-//	bool first;
-//	qreal last;
-
 	LineGraph *graph;
 	LineGraph *refGraph;
 
@@ -73,8 +70,6 @@ private:
 
 	Line *averageLine;
 	Line *refAverageLine;
-	//Line *min_line;
-	//Line *max_line;
 };
 
 
