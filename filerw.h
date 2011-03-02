@@ -14,9 +14,6 @@
 
 #include "testwidget.h"
 
-#define FILERW_SIZE 1073741824
-#define FILERW_BLOCK 10485760
-
 class FileRWResults
 {
 public:
@@ -38,6 +35,9 @@ class FileRW : public TestWidget
 public:
 	FileRW(QWidget *parent = 0);
 	~FileRW();
+
+	static const hddsize FILERW_SIZE = 1024 * Device::M;
+	static const hddsize FILERW_BLOCK = 10 * Device::M;
 
 	// members from Test
 	void TestLoop();

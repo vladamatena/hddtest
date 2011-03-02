@@ -20,7 +20,7 @@ Seeker::Seeker(QWidget *parent) :
 	net = addNet("ms", "Seek length", "Seek time");
 
 	testName = "Seek";
-	testDescription = "Seek test performs " + QString::number(SEEKCOUNT) +
+	testDescription = "Seek test performs " + QString::number(SEEKER_SEEKCOUNT) +
 			" seeks to random positions on device." +
 			" Seek lenght is marked on horizontal axis and seek duration is on vertical axis.";
 }
@@ -46,8 +46,8 @@ void Seeker::TestLoop()
 	hddpos last = device->GetSize();
 	device->SeekTo(last);
 
-	// test SEEKCOUNT seeks
-	for(int i = 0; i < SEEKCOUNT; ++i)
+	// test SEEKER_SEEKCOUNT seeks
+	for(int i = 0; i < SEEKER_SEEKCOUNT; ++i)
 	{
 		hddpos next = gen.Get64() % device->GetSize();	// get next position
 
@@ -70,7 +70,7 @@ void Seeker::TestLoop()
 		result.AddSeek(QPointF(pos, time));	// add seek to results
 
 		// count test progress
-		result.progress = i * 100 / (SEEKCOUNT - 1);
+		result.progress = i * 100 / (SEEKER_SEEKCOUNT - 1);
 
 		if(go == false)
 			return;
@@ -118,7 +118,7 @@ void Seeker::SeekResult::AddSeek(QPointF seek)
 	newseeks.push_back(seek);	// add sekk to stack used for drawing new results
 
 	// if seek lasted long add it to maxims
-	if(maxims.count() < SEEK_MAX_AVG)	// not enough maxims - add any seek
+	if(maxims.count() < SEEKER_MAX_AVG)	// not enough maxims - add any seek
 	{
 		maxims.push_front(seek.y());
 		qSort(maxims);
@@ -133,16 +133,16 @@ void Seeker::SeekResult::AddSeek(QPointF seek)
 	}
 
 	// is seek was extraordinary fast - add to mins
-	if(mins.count() < SEEK_MIN_AVG)	// too few minims - add any seek
+	if(mins.count() < SEEKER_MIN_AVG)	// too few minims - add any seek
 	{
 		mins.push_front(seek.y());
 		qSort(mins);
 	}
 	else	// min pool is full add only fastest seeks
 	{
-		if(seek.y() < mins[SEEK_MIN_AVG - 1])
+		if(seek.y() < mins[SEEKER_MIN_AVG - 1])
 		{
-			mins[SEEK_MIN_AVG - 1] = seek.y();
+			mins[SEEKER_MIN_AVG - 1] = seek.y();
 			qSort(mins);
 		}
 	}

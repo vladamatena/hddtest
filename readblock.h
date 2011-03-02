@@ -17,8 +17,6 @@
 #include "randomgenerator.h"
 #include "device.h"
 
-#define READ_BLOCK_SIZE 104857600
-
 // Class for keepeg subtest results and progress
 class ReadBlockResult
 {
@@ -40,6 +38,8 @@ class ReadBlock : public TestWidget
 public:
 	// ReadRnd class constructor
 	ReadBlock(QWidget *parent = 0);
+
+	static const hddsize READ_BLOCK_SIZE = 100 * Device::M;
 
 	void TestLoop();
 	void InitScene();

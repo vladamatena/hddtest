@@ -17,8 +17,6 @@
 #include "randomgenerator.h"
 #include "device.h"
 
-#define READ_RND_SIZE 104857600
-
 // Class for keepeg subtest results and progress
 class ReadRndResult
 {
@@ -40,6 +38,8 @@ class ReadRnd : public TestWidget
 public:
 	// ReadRnd class constructor
 	ReadRnd(QWidget *parent = 0);
+
+	static const hddsize READ_RND_SIZE = 100 * Device::M;
 
 	void TestLoop();
 	void InitScene();

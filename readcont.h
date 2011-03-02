@@ -23,9 +23,6 @@
 #include "device.h"
 #include "testwidget.h"
 
-#define READ_CONT_SIZE 4294967296
-#define READ_CONT_BLOCK 52428800
-
 class ReadContResults
 {
 public:
@@ -49,6 +46,9 @@ class ReadCont : public TestWidget
 public:
 	ReadCont(QWidget *parent = 0);
 	~ReadCont();
+
+	static const hddsize READ_CONT_SIZE = 4096 * Device::M;
+	static const hddsize READ_CONT_BLOCK = 50 * Device::M;
 
 	void TestLoop();
 	void InitScene();

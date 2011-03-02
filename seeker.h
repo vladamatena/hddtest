@@ -14,9 +14,6 @@
 #ifndef SEEKER_H
 #define SEEKER_H
 
-#define BLOCKSIZE 512
-#define SEEKCOUNT 1000
-
 #include <QThread>
 #include <QFile>
 #include <QPointF>
@@ -29,9 +26,6 @@
 #include "testwidget.h"
 #include "device.h"
 #include "randomgenerator.h"
-
-#define SEEK_MAX_AVG 15	// how many max values are used to calculate final max
-#define SEEK_MIN_AVG 10	// how many min values are used to calculate final min
 
 /// Seeker
 /// class implemeting function for running seek test
@@ -60,6 +54,11 @@ private:
 public:
 	explicit Seeker(QWidget *parent = 0);
 	~Seeker();
+
+	static const hddsize SEEKER_BLOCKSIZE = 512 * Device::B;	/// seek read size
+	static const hddsize SEEKER_SEEKCOUNT = 1000;
+	static const int SEEKER_MAX_AVG = 15;	/// how many max values are used to calculate final max
+	static const int SEEKER_MIN_AVG = 10;	/// how many min values are used to calculate final min
 
 	SeekResult result;		// seek results
 	SeekResult reference;	// seek reference results

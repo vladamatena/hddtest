@@ -17,8 +17,6 @@
 #include "testwidget.h"
 #include "randomgenerator.h"
 
-#define FILESTRUCTURE_SIZE 1000
-
 class FileStructureResults
 {
 public:
@@ -43,6 +41,8 @@ class FileStructure : public TestWidget
 {
 public:
 	FileStructure(QWidget *parent = 0);
+
+	static const hddsize FILESTRUCTURE_SIZE = 1000;
 
 	void InitScene();
 	void TestLoop();

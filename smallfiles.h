@@ -17,8 +17,6 @@
 #include "testwidget.h"
 #include "randomgenerator.h"
 
-#define SMALLFILES_SIZE 1000
-
 class SmallFilesResults
 {
 public:
@@ -41,6 +39,8 @@ class SmallFiles : public TestWidget
 {
 public:
 	SmallFiles(QWidget *parent = 0);
+
+	static const int SMALLFILES_SIZE = 1000;
 
 	void InitScene();
 	void TestLoop();
