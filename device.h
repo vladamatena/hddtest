@@ -50,6 +50,7 @@ public:
 	void ReportProblem();						/// Reports a problem with accessing device
 	void DropCaches();							/// Disables some caches for device
 	hddtime Sync();								/// Sync filesystem
+	void Warmup();								/// Make device redy for operation
 	void DriveInfo();							/// Read driveinfo from device
 	void EraseDriveInfo();						/// Erase drive info to default values
 	static QString Format(hddsize size);		/// Size to human readable format convertor

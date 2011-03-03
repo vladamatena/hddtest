@@ -65,10 +65,17 @@ void TestWidget::StartTest()
 {
 	if(!device)
 		return;
+
+	// prepare device for test
+	device->Warmup();
 	device->DropCaches();
 	device->Sync();
+
+	// prepare ui for test
 	ui->startstop->setText("Stop");
 	InitScene();
+
+	// start ui refresh
 	test_thread->start();
 	refresh_timer.start(100);
 }

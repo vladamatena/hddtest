@@ -101,6 +101,11 @@ hddtime Device::Sync()
 	return timediff;
 }
 
+void Device::Warmup()
+{
+	ReadAt(M, M);
+}
+
 void Device::ReportProblem()
 {
 	if(problemReported)
