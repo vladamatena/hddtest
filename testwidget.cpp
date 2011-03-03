@@ -65,7 +65,7 @@ void TestWidget::StartTest()
 {
 	if(!device)	// TODO: is needed?
 		return;
-	device->DisableCaches();
+	device->DropCaches();
 	ui->startstop->setText("Stop");
 	InitScene();
 	test_thread->start();

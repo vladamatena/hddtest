@@ -48,7 +48,8 @@ public:
 	void Open(QString path, bool close, bool rw = false);	/// Opens device specified by path
 	void Close();								/// Close device file descriptor
 	void ReportProblem();						/// Reports a problem with accessing device
-	void DisableCaches();						/// Disables some caches for device
+	void DropCaches();							/// Disables some caches for device
+	hddtime Sync();								/// Sync filesystem
 	void DriveInfo();							/// Read driveinfo from device
 	void EraseDriveInfo();						/// Erase drive info to default values
 	static QString Format(hddsize size);		/// Size to human readable format convertor

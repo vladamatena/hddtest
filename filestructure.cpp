@@ -36,6 +36,7 @@ void FileStructure::TestLoop()
 	results.progress = 0;
 
 	// create structure
+	device->DropCaches();
 	while(
 			(results.build_files < FILESTRUCTURE_SIZE) ||
 			(results.build_dirs < FILESTRUCTURE_SIZE))
@@ -71,8 +72,9 @@ void FileStructure::TestLoop()
 			return;
 	}
 
-	// small delay for system to return normal
-	sleep(1);
+
+	// make sure structure is not cached
+	device->DropCaches();
 
 	// delete files
 	for(int i = 0; i < files.size(); ++i)

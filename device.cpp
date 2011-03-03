@@ -40,7 +40,7 @@ void Device::Open(QString path, bool close, bool rw)
 	if(__fd < 0)
 		ReportProblem();
 
-	DisableCaches();
+	DropCaches();
 
 	// get drive size
 	__device_size = lseek64(__fd, 0, SEEK_END);
@@ -62,7 +62,7 @@ void Device::Close()
 	close(__fd);
 }
 
-void Device::DisableCaches()
+void Device::DropCaches()
 {
 		// give advice to disable caching
 		int ret = posix_fadvise(__fd, 0, 0, POSIX_FADV_DONTNEED);
@@ -79,6 +79,26 @@ void Device::DisableCaches()
 		}
 		else
 			ReportProblem();
+}
+
+hddtime Device::Sync()
+{
+	timeval __start;
+	timeval __end;
+
+	// get sync start timestamp
+	gettimeofday(&__start, 0);
+
+	// sync
+	sync();
+
+	// get sync end timestamp
+	gettimeofday(&__end, 0);
+
+	// count sync time
+	hddtime timediff = (__end.tv_sec * 1000 * 1000 + __end.tv_usec) - (__start.tv_sec * 1000 * 1000 + __start.tv_usec);
+
+	return timediff;
 }
 
 void Device::ReportProblem()

@@ -46,6 +46,8 @@ void SmallFiles::TestLoop()
 	nodes.push_back(device->GetSafeTemp());	//	add initial node
 
 	// build dirs
+	device->DropCaches();
+	device->Sync();
 	for(int i = 0; i < SMALLFILES_SIZE; ++i)
 	{
 		// construct new node name and path
@@ -61,8 +63,10 @@ void SmallFiles::TestLoop()
 		if(go == false)
 			return;
 	}
+	results.dir_build_time += device->Sync();
 
 	// build files
+	device->DropCaches();
 	for(int i = 0; i < SMALLFILES_SIZE; ++i)
 	{
 		// construct new node name and path
@@ -78,8 +82,10 @@ void SmallFiles::TestLoop()
 		if(go == false)
 			return;
 	}
+	results.file_build_time += device->Sync();
 
 	// read files in random order
+	device->DropCaches();
 	QList<QString> files_to_read(files);
 	while(!files_to_read.empty())
 	{
@@ -94,6 +100,10 @@ void SmallFiles::TestLoop()
 		if(go == false)
 			return;
 	}
+	results.file_read_time += device->Sync();
+
+	// make sure caches are empty
+	device->DropCaches();
 
 	// del files
 	for(int i = 0; i < files.size(); ++i)
@@ -104,6 +114,7 @@ void SmallFiles::TestLoop()
 		if(go == false)
 			return;
 	}
+	results.destroy_time += device->Sync();
 
 	// del dirs
 	for(int i = nodes.size() - 1; i > 0 ; --i)
@@ -114,6 +125,7 @@ void SmallFiles::TestLoop()
 		if(go == false)
 			return;
 	}
+	results.destroy_time += device->Sync();
 }
 
 void SmallFiles::UpdateScene()
