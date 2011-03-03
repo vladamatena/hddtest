@@ -23,9 +23,6 @@ public:
 	FileStructureResults();
 	void erase();
 
-	void AddBuild(hddtime time);
-	void AddDestroy(hddtime time);
-
 	int build_files;
 	int build_dirs;
 	int destroyed;

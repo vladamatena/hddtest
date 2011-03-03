@@ -49,7 +49,7 @@ void FileStructure::TestLoop()
 			nodes.push_back(path + "/" + name);
 
 			// create node
-			results.AddBuild(device->MkDir(path + "/" + name));
+			results.build += device->MkDir(path + "/" + name);
 
 			++results.build_dirs;
 		}
@@ -61,7 +61,7 @@ void FileStructure::TestLoop()
 			files.push_back(path + "/" + name);
 
 			// create file
-			results.AddBuild(device->MkFile(path + "/" + name, 0));
+			results.build += device->MkFile(path + "/" + name, 0);
 
 			++results.build_files;
 		}
@@ -79,7 +79,7 @@ void FileStructure::TestLoop()
 	// delete files
 	for(int i = 0; i < files.size(); ++i)
 	{
-		results.AddDestroy(device->DelFile(files[i]));
+		results.destroy += device->DelFile(files[i]);
 		++results.destroyed;
 
 		results.progress = 100 * (results.build_files + results.build_dirs + results.destroyed) / (4 * FILESTRUCTURE_SIZE);
@@ -91,7 +91,7 @@ void FileStructure::TestLoop()
 	// delete dirs
 	for(int i = nodes.size() - 1; i > 0 ; --i)
 	{
-		results.AddDestroy(device->DelDir(nodes[i]));
+		results.destroy += device->DelDir(nodes[i]);
 		++results.destroyed;
 
 		results.progress = 100 * (results.build_files + results.build_dirs + results.destroyed) / (4 * FILESTRUCTURE_SIZE);
@@ -151,16 +151,6 @@ void FileStructureResults::erase()
 	build = 0.0f;
 }
 
-void FileStructureResults::AddBuild(hddtime time)
-{
-	build += time;
-}
-
-void FileStructureResults::AddDestroy(hddtime time)
-{
-	destroy += time;
-}
-
 QDomElement FileStructure::WriteResults(QDomDocument &doc)
 {
 	// create main seek element
@@ -197,13 +187,13 @@ void FileStructure::RestoreResults(QDomElement &results, DataSet dataset)
 	QDomElement build = main.firstChildElement("Build");
 	if(build.isNull())
 		return;
-	res->AddBuild(build.attribute("time", "0").toDouble());
+	res->build = build.attribute("time", "0").toDouble();
 
 	//// get Destroy
 	QDomElement destroy = main.firstChildElement("Destroy");
 	if(destroy.isNull())
 		return;
-	res->AddDestroy(destroy.attribute("time", "0").toDouble());
+	res->destroy = destroy.attribute("time", "0").toDouble();
 
 	// set progress and update scene
 	res->progress = 100;
