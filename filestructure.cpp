@@ -33,13 +33,10 @@ void FileStructure::TestLoop()
 	QList<QString> files;
 	QList<QString> nodes;
 	nodes.push_back(device->GetSafeTemp());	//	add initial node
-	results.progress = 0;
 
 	// create structure
 	device->DropCaches();
-	while(
-			(results.build_files < FILESTRUCTURE_SIZE) ||
-			(results.build_dirs < FILESTRUCTURE_SIZE))
+	while((results.build_files < FILESTRUCTURE_SIZE) || (results.build_dirs < FILESTRUCTURE_SIZE))
 	{
 		if((!(results.build_files < FILESTRUCTURE_SIZE)) || (random.Get32() % 2 == 0))
 		{
@@ -66,11 +63,10 @@ void FileStructure::TestLoop()
 			++results.build_files;
 		}
 
-		results.progress = 100 * (results.build_files + results.build_dirs + results.destroyed) / (4 * FILESTRUCTURE_SIZE);
-
-		if(go == false)
+		if(!go)
 			return;
 	}
+	results.build += device->Sync();
 
 
 	// make sure structure is not cached
@@ -82,11 +78,10 @@ void FileStructure::TestLoop()
 		results.destroy += device->DelFile(files[i]);
 		++results.destroyed;
 
-		results.progress = 100 * (results.build_files + results.build_dirs + results.destroyed) / (4 * FILESTRUCTURE_SIZE);
-
-		if(go == false)
+		if(!go)
 			return;
 	}
+	results.destroy += device->Sync();
 
 	// delete dirs
 	for(int i = nodes.size() - 1; i > 0 ; --i)
@@ -94,11 +89,10 @@ void FileStructure::TestLoop()
 		results.destroy += device->DelDir(nodes[i]);
 		++results.destroyed;
 
-		results.progress = 100 * (results.build_files + results.build_dirs + results.destroyed) / (4 * FILESTRUCTURE_SIZE);
-
-		if(go == false)
+		if(!go)
 			return;
 	}
+	results.destroy += device->Sync();
 }
 
 void FileStructure::InitScene()
@@ -196,7 +190,6 @@ void FileStructure::RestoreResults(QDomElement &results, DataSet dataset)
 	res->destroy = destroy.attribute("time", "0").toDouble();
 
 	// set progress and update scene
-	res->progress = 100;
 	res->build_dirs = FILESTRUCTURE_SIZE;
 	res->build_files = FILESTRUCTURE_SIZE;
 	res->destroyed = FILESTRUCTURE_SIZE * 2;

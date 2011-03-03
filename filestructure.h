@@ -29,8 +29,6 @@ public:
 
 	hddtime build;
 	hddtime destroy;
-
-	int progress;
 };
 
 class FileStructure : public TestWidget
