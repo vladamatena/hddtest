@@ -106,8 +106,8 @@ void FileRW::UpdateScene()
 	int nrws = results_write.new_results.size();
 	for(int i = 0; i < nrws; ++i)
 	{
-		qreal data = results_write.new_results.back();
-		results_write.new_results.pop_back();
+		qreal data = results_write.new_results.front();
+		results_write.new_results.pop_front();
 		__write_graph->AddValue(data);
 	}
 
@@ -115,8 +115,8 @@ void FileRW::UpdateScene()
 	int nrrs = results_read.new_results.size();
 	for(int i = 0; i < nrrs; ++i)
 	{
-		qreal data = results_read.new_results.back();
-		results_read.new_results.pop_back();
+		qreal data = results_read.new_results.front();
+		results_read.new_results.pop_front();
 		__read_graph->AddValue(data);
 	}
 
@@ -124,8 +124,8 @@ void FileRW::UpdateScene()
 	int nrwsr = reference_write.new_results.size();
 	for(int i = 0; i < nrwsr; ++i)
 	{
-		qreal data = reference_write.new_results.back();
-		reference_write.new_results.pop_back();
+		qreal data = reference_write.new_results.front();
+		reference_write.new_results.pop_front();
 		__write_reference_graph->AddValue(data);
 	}
 
@@ -133,8 +133,8 @@ void FileRW::UpdateScene()
 	int nrrsr = reference_read.new_results.size();
 	for(int i = 0; i < nrrsr; ++i)
 	{
-		qreal data = reference_read.new_results.back();
-		reference_read.new_results.pop_back();
+		qreal data = reference_read.new_results.front();
+		reference_read.new_results.pop_front();
 		__read_reference_graph->AddValue(data);
 	}
 
