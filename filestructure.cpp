@@ -93,6 +93,9 @@ void FileStructure::TestLoop()
 			return;
 	}
 	results.destroy += device->Sync();
+
+	// mark test as finished
+	results.done = true;
 }
 
 void FileStructure::InitScene()
@@ -127,7 +130,10 @@ void FileStructure::UpdateScene()
 
 int FileStructure::GetProgress()
 {
-	return (100 * (results.build_files + results.build_dirs + results.destroyed)) / (4 * FILESTRUCTURE_SIZE);
+	// "+ done" and "+ 1" stops at 99% until final sync is finished
+	int state = results.build_files + results.build_dirs + results.destroyed + results.done;
+	int target = 4 * FILESTRUCTURE_SIZE + 1;
+	return (100 * state) / target;
 }
 
 FileStructureResults::FileStructureResults()
@@ -143,6 +149,8 @@ void FileStructureResults::erase()
 
 	destroy = 0.0f;
 	build = 0.0f;
+
+	done = false;
 }
 
 QDomElement FileStructure::WriteResults(QDomDocument &doc)
@@ -193,6 +201,7 @@ void FileStructure::RestoreResults(QDomElement &results, DataSet dataset)
 	res->build_dirs = FILESTRUCTURE_SIZE;
 	res->build_files = FILESTRUCTURE_SIZE;
 	res->destroyed = FILESTRUCTURE_SIZE * 2;
+	res->done = true;
 
 	UpdateScene();
 }

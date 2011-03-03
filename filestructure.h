@@ -26,6 +26,7 @@ public:
 	int build_files;
 	int build_dirs;
 	int destroyed;
+	bool done;
 
 	hddtime build;
 	hddtime destroy;
