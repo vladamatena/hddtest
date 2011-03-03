@@ -204,7 +204,7 @@ void Seeker::SeekResult::erase()
 QDomElement Seeker::WriteResults(QDomDocument &doc)
 {
 	// create main seek element
-	QDomElement master = doc.createElement("Seek");
+	QDomElement master = doc.createElement("Seeker");
 	master.setAttribute("valid", (GetProgress() == 100)?"yes":"no");
 	doc.appendChild(master);
 
@@ -225,7 +225,7 @@ void Seeker::RestoreResults(QDomElement &results, DataSet dataset)
 	SeekResult &result = (dataset == REFERENCE)?this->reference:this->result;
 
 	// Locate main seek element
-	QDomElement seek = results.firstChildElement("Seek");
+	QDomElement seek = results.firstChildElement("Seeker");
 	if(!seek.attribute("valid", "no").compare("no"))
 		return;
 
