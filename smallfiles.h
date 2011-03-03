@@ -31,6 +31,7 @@ public:
 	int files_build;
 	int files_read;
 	int destroyed;
+	bool done;
 
 	void erase();
 };

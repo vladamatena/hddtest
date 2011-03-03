@@ -126,6 +126,8 @@ void SmallFiles::TestLoop()
 			return;
 	}
 	results.destroy_time += device->Sync();
+
+	results.done = true;
 }
 
 void SmallFiles::UpdateScene()
@@ -164,7 +166,10 @@ void SmallFiles::UpdateScene()
 
 int SmallFiles::GetProgress()
 {
-	return (100 * (results.dirs_build + results.files_build + results.files_read + results.destroyed)) / (5 * SMALLFILES_SIZE);
+	// "+ results.done" and  "+ 1" forces 99% until filan sync is done
+	int state = results.dirs_build + results.files_build + results.files_read + results.destroyed + results.done;
+	int target = 5 * SMALLFILES_SIZE + 1;
+	return (100 * state) / target;
 }
 
 SmallFilesResults::SmallFilesResults()
@@ -183,6 +188,8 @@ void SmallFilesResults::erase()
 	files_build = 0;
 	files_read = 0;
 	destroyed = 0;
+
+	done = false;
 }
 
 QDomElement SmallFiles::WriteResults(QDomDocument &doc)

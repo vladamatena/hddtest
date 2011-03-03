@@ -63,9 +63,10 @@ void TestWidget::refresh_timer_timeout()
 
 void TestWidget::StartTest()
 {
-	if(!device)	// TODO: is needed?
+	if(!device)
 		return;
 	device->DropCaches();
+	device->Sync();
 	ui->startstop->setText("Stop");
 	InitScene();
 	test_thread->start();
