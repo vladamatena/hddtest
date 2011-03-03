@@ -98,19 +98,6 @@ void ReadBlock::UpdateScene()
 		const ReadBlockResult &result = results.at(i);
 		const ReadBlockResult &refer = reference.at(i);
 
-		// get global max
-		qreal max = 0;
-		for(int j = 0; j < results.size(); ++j)
-		{
-			qreal speed = 0.0f;
-			speed = (qreal)results[j].__bytes_read / results[j].__time_elapsed;
-			if(max < speed)
-				max = speed;
-			speed = (qreal)reference[j].__bytes_read / reference[j].__time_elapsed;
-			if(max < speed)
-				max = speed;
-		}
-
 		// rescale and update graphics
 		bars[i]->Set(
 				(qreal)(100 * result.__bytes_read) / READ_BLOCK_SIZE,
@@ -131,7 +118,7 @@ int ReadBlock::GetProgress()
 	return (100 * read) / (results.size() * READ_BLOCK_SIZE);
 }
 
-ReadBlockResult::ReadBlockResult(qint32 block_size):
+ReadBlockResult::ReadBlockResult(hddsize block_size):
 	__bytes_read(0), __time_elapsed(0), __block_size(block_size)
 {
 	erase();

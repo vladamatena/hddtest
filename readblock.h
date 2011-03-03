@@ -21,7 +21,7 @@
 class ReadBlockResult
 {
 public:
-	ReadBlockResult(qint32 block_size);
+	ReadBlockResult(hddsize block_size);
 
 	hddsize __bytes_read;
 	hddtime __time_elapsed;
