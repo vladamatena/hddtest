@@ -21,13 +21,12 @@
 class ReadRndResult
 {
 public:
-	ReadRndResult(qint32 block_size);
+	ReadRndResult(hddsize block_size);
 
-	qint64 __bytes_read;
-	qint64 __time_elapsed;
-	qint32 __block_size;
-
-	qreal max;
+	hddsize __bytes_read;
+	hddtime __time_elapsed;
+	hddsize __block_size;
+	hddsize __blocks_done;
 
 	void erase();
 };
@@ -39,7 +38,7 @@ public:
 	// ReadRnd class constructor
 	ReadRnd(QWidget *parent = 0);
 
-	static const hddsize READ_RND_SIZE = 100 * Device::M;
+	static const hddsize READ_RND_SIZE = 100;
 
 	void TestLoop();
 	void InitScene();

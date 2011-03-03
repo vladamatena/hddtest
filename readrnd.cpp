@@ -22,8 +22,8 @@ ReadRnd::ReadRnd(QWidget *parent):
 
 	// test name and description
 	testName = "Read random";
-	testDescription = "Read random test reads " + Device::Format(READ_RND_SIZE) + " with different block sizes." +
-			" Blocks of specified size are distributed randomly across the device." +
+	testDescription = "Read random test reads " + QString::number(READ_RND_SIZE) +
+			" blocks for each block size. Blocks are distributed randomly across the device." +
 			" Therefore seeking is required to access next block. Block sizes are: ";
 	for(int i = 0; i < results.size(); ++i)
 	{
@@ -69,26 +69,23 @@ void ReadRnd::TestLoop()
 	// run subtests
 	for(int i = 0; i < results.size(); ++i)
 	{
-		ReadRndResult *result = &results[i];
+		ReadRndResult &result = results[i];
 
 		// run subtest
-		while(result->__bytes_read < READ_RND_SIZE)
+		while(result.__blocks_done < READ_RND_SIZE)
 		{
 			// get new position
-			hddpos newpos = gen.Get64() % (device->GetSize() - result->__block_size);
+			hddpos newpos = gen.Get64() % (device->GetSize() - result.__block_size);
 
-			result->__time_elapsed += device->ReadAt(result->__block_size, newpos);
-			result->__bytes_read += result->__block_size;
+			result.__time_elapsed += device->ReadAt(result.__block_size, newpos);
+			result.__bytes_read += result.__block_size;
+			result.__blocks_done++;
 
-			qreal speed = (qreal)result->__bytes_read / result->__time_elapsed;
-			if(result->max < speed)
-				result->max = speed;
-
-			if(go == false)
+			if(!go)
 				return;
 		}
 
-		if(go == false)
+		if(!go)
 			return;
 	}
 }
@@ -123,17 +120,17 @@ void ReadRnd::UpdateScene()
 
 		// rescale and update graphics
 		bars[i]->Set(
-				(qreal)(100 * result.__bytes_read) / READ_RND_SIZE,
+				(qreal)(100 * result.__blocks_done) / READ_RND_SIZE,
 				(result.__time_elapsed > 0)?(qreal)result.__bytes_read / (qreal)result.__time_elapsed:0);
 		reference_bars[i]->Set(
-				(qreal)(100 * refer.__bytes_read) / READ_RND_SIZE,
+				(qreal)(100 * refer.__blocks_done) / READ_RND_SIZE,
 				(refer.__time_elapsed > 0)?(qreal)refer.__bytes_read / (qreal)refer.__time_elapsed:0);
 		Rescale();
 	}
 }
 
-ReadRndResult::ReadRndResult(qint32 block_size):
-	__bytes_read(0), __time_elapsed(0), __block_size(block_size), max(0)
+ReadRndResult::ReadRndResult(hddsize block_size):
+	__bytes_read(0), __time_elapsed(0), __block_size(block_size)
 {
 	erase();
 }
@@ -141,8 +138,9 @@ ReadRndResult::ReadRndResult(qint32 block_size):
 void ReadRndResult::erase()
 {
 	// reset bytes read and time elapsed
-	this->__bytes_read = 0;
-	this->__time_elapsed = 0;
+	__bytes_read = 0;
+	__time_elapsed = 0;
+	__blocks_done = 0;
 }
 
 QDomElement ReadRnd::WriteResults(QDomDocument &doc)
@@ -159,6 +157,7 @@ QDomElement ReadRnd::WriteResults(QDomDocument &doc)
 		QDomElement build = doc.createElement("Result");
 		build.setAttribute("size", results[i].__block_size);
 		build.setAttribute("time", results[i].__time_elapsed);
+		build.setAttribute("read", results[i].__bytes_read);
 		master.appendChild(build);
 	}
 
@@ -186,7 +185,8 @@ void ReadRnd::RestoreResults(QDomElement &results, DataSet dataset)
 	{
 		res[i].__block_size = xmlresults.at(i).toElement().attribute("size").toLongLong();
 		res[i].__time_elapsed = xmlresults.at(i).toElement().attribute("time").toLongLong();
-		res[i].__bytes_read = READ_RND_SIZE;
+		res[i].__bytes_read = xmlresults.at(i).toElement().attribute("read").toLongLong();
+		res[i].__blocks_done = READ_RND_SIZE;
 	}
 
 	// refresh view
@@ -198,7 +198,7 @@ int ReadRnd::GetProgress()
 	hddsize progress = 0;
 
 	for(int i = 0; i < results.size(); ++i)
-		progress += results[i].__bytes_read;
+		progress += results[i].__blocks_done;
 	return (100 * progress) / (results.size() * READ_RND_SIZE);
 }
 
