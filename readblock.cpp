@@ -74,15 +74,11 @@ void ReadBlock::TestLoop()
 			result->__time_elapsed += device->Read(result->__block_size);
 			result->__bytes_read += result->__block_size;
 
-			qreal speed = (qreal)result->__bytes_read / result->__time_elapsed;
-			if(result->max < speed)
-				result->max = speed;
-
-			if(go == false)
+			if(!go)
 				return;
 		}
 
-		if(go == false)
+		if(!go)
 			return;
 	}
 }
@@ -136,7 +132,7 @@ int ReadBlock::GetProgress()
 }
 
 ReadBlockResult::ReadBlockResult(qint32 block_size):
-	__bytes_read(0), __time_elapsed(0), __block_size(block_size), max(0)
+	__bytes_read(0), __time_elapsed(0), __block_size(block_size)
 {
 	erase();
 }

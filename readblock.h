@@ -23,11 +23,9 @@ class ReadBlockResult
 public:
 	ReadBlockResult(qint32 block_size);
 
-	qint64 __bytes_read;
-	qint64 __time_elapsed;
-	qint32 __block_size;
-
-	qreal max;
+	hddsize __bytes_read;
+	hddtime __time_elapsed;
+	hddsize __block_size;
 
 	void erase();
 };
