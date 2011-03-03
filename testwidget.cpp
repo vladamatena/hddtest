@@ -384,6 +384,7 @@ void TestWidget::Bar::Reposition()
 TestWidget::LineGraph::LineGraph(TestWidget *test, QString unit, QColor color):
 	 Marker(test), unit(unit), color(color)
 {
+	// set to something else than 0 should be changed by test before first use
 	size = 10;
 }
 
