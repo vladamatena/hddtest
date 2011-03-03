@@ -149,19 +149,16 @@ void FileStructureResults::erase()
 
 	destroy = 0.0f;
 	build = 0.0f;
-	max = 0.0f;
 }
 
 void FileStructureResults::AddBuild(hddtime time)
 {
 	build += time;
-	max = std::max(build, destroy);
 }
 
 void FileStructureResults::AddDestroy(hddtime time)
 {
 	destroy += time;
-	max = std::max(build, destroy);
 }
 
 QDomElement FileStructure::WriteResults(QDomDocument &doc)

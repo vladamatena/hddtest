@@ -32,7 +32,6 @@ public:
 
 	hddtime build;
 	hddtime destroy;
-	hddtime max;
 
 	int progress;
 };
