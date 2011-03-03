@@ -106,7 +106,8 @@ void FileRW::UpdateScene()
 	int nrws = results_write.new_results.size();
 	for(int i = 0; i < nrws; ++i)
 	{
-		qreal data = results_write.new_results.pop();
+		qreal data = results_write.new_results.back();
+		results_write.new_results.pop_back();
 		__write_graph->AddValue(data);
 	}
 
@@ -114,7 +115,8 @@ void FileRW::UpdateScene()
 	int nrrs = results_read.new_results.size();
 	for(int i = 0; i < nrrs; ++i)
 	{
-		qreal data = results_read.new_results.pop();
+		qreal data = results_read.new_results.back();
+		results_read.new_results.pop_back();
 		__read_graph->AddValue(data);
 	}
 
@@ -122,7 +124,8 @@ void FileRW::UpdateScene()
 	int nrwsr = reference_write.new_results.size();
 	for(int i = 0; i < nrwsr; ++i)
 	{
-		qreal data = reference_write.new_results.pop();
+		qreal data = reference_write.new_results.back();
+		reference_write.new_results.pop_back();
 		__write_reference_graph->AddValue(data);
 	}
 
@@ -130,7 +133,8 @@ void FileRW::UpdateScene()
 	int nrrsr = reference_read.new_results.size();
 	for(int i = 0; i < nrrsr; ++i)
 	{
-		qreal data = reference_read.new_results.pop();
+		qreal data = reference_read.new_results.back();
+		reference_read.new_results.pop_back();
 		__read_reference_graph->AddValue(data);
 	}
 
@@ -201,7 +205,7 @@ QDomElement FileRW::WriteResults(QDomDocument &doc)
 	master.appendChild(write);
 
 	// add values to write element
-	if(GetProgress() == 100) for(int i = results_write.results.size() - 1; i >= 0; --i)
+	if(GetProgress() == 100) for(int i = 0; i < results_write.results.size(); ++i)
 	{
 		QDomElement value = doc.createElement("Write");
 		value.setAttribute("speed", results_write.results[i]);
@@ -213,7 +217,7 @@ QDomElement FileRW::WriteResults(QDomDocument &doc)
 	master.appendChild(read);
 
 	// add values to read element
-	if(GetProgress() == 100) for(int i = results_read.results.size() - 1; i >= 0; --i)
+	if(GetProgress() == 100) for(int i = 0; i < results_read.results.size(); ++i)
 	{
 		QDomElement value = doc.createElement("Read");
 		value.setAttribute("speed", results_read.results[i]);
@@ -247,7 +251,7 @@ void FileRW::RestoreResults(QDomElement &results, DataSet dataset)
 	QDomNodeList writes = write.elementsByTagName("Write");
 	res_write->blocks = writes.size();
 	// read write result data
-	for(int i = writes.size() - 1; i >= 0; --i)
+	for(int i = 0; i < writes.size(); ++i)
 		res_write->AddResult(writes.at(i).toElement().attribute("speed", "0").toDouble());
 
 	// get Read
@@ -258,8 +262,8 @@ void FileRW::RestoreResults(QDomElement &results, DataSet dataset)
 	QDomNodeList reads = read.elementsByTagName("Read");
 	res_read->blocks = reads.size();
 	// read result data
-	for(int i = reads.size() - 1; i >= 0; --i)
-		res_read->AddResult(reads.at(i).toElement().attribute("speed", "0").toDouble());
+	for(int i = 0; i < reads.size(); ++i)
+		res_read->AddResult(reads.item(i).toElement().attribute("speed", "0").toDouble());
 
 	// set progress and update scene
 	res_write->blocks_done = res_write->blocks;

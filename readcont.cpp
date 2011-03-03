@@ -75,7 +75,8 @@ void ReadCont::UpdateScene()
 	int resSize = results.new_results.size();
 	for(int i = 0; i < resSize; ++i)
 	{
-		qreal data = results.new_results.pop();
+		qreal data = results.new_results.back();
+		results.new_results.pop_back();
 		graph->AddValue(data);
 	}
 
@@ -83,7 +84,8 @@ void ReadCont::UpdateScene()
 	int refSize = reference.new_results.size();
 	for(int i = 0; i < refSize; ++i)
 	{
-		qreal data = reference.new_results.pop();
+		qreal data = reference.new_results.back();
+		reference.new_results.pop_back();
 		refGraph->AddValue(data);
 	}
 
