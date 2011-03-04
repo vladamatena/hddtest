@@ -32,7 +32,6 @@
 #include <QtXml>
 
 typedef qint64 hddtime; /// time interval in microseconds
-typedef qint64 hddpos;	/// position on drive in bytes
 typedef qint64 hddsize; /// size on drive in bytes
 
 
@@ -56,11 +55,11 @@ public:
 	static QString Format(hddsize size);		/// Size to human readable format convertor
 
 	// raw disk operations
-	void SetPos(hddpos pos);					/// Set actual position
-	hddtime SeekTo(hddpos pos);					/// Seek to position returns operation time
+	void SetPos(hddsize pos);					/// Set actual position
+	hddtime SeekTo(hddsize pos);				/// Seek to position returns operation time
 	hddtime Read(hddsize size);					/// Read data at current position and return operation time
 	hddtime Write(hddsize size);				/// Write data at current position and return operation time
-	hddtime ReadAt(hddsize size, hddpos pos);	/// Read data at position return operation time
+	hddtime ReadAt(hddsize size, hddsize pos);	/// Read data at position return operation time
 	hddsize GetSize();							/// Get size of drive
 
 	// fs operations

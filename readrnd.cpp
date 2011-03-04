@@ -75,7 +75,7 @@ void ReadRnd::TestLoop()
 		while(result.__blocks_done < READ_RND_SIZE)
 		{
 			// get new position
-			hddpos newpos = gen.Get64() % (device->GetSize() - result.__block_size);
+			hddsize newpos = gen.Get64() % (device->GetSize() - result.__block_size);
 
 			result.__time_elapsed += device->ReadAt(result.__block_size, newpos);
 			result.__bytes_read += result.__block_size;

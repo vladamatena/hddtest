@@ -43,13 +43,13 @@ void Seeker::TestLoop()
 	RandomGenerator gen;
 
 	// seek to drive end
-	hddpos last = device->GetSize();
+	hddsize last = device->GetSize();
 	device->SeekTo(last);
 
 	// test SEEKER_SEEKCOUNT seeks
 	for(int i = 0; i < SEEKER_SEEKCOUNT; ++i)
 	{
-		hddpos next = gen.Get64() % device->GetSize();	// get next position
+		hddsize next = gen.Get64() % device->GetSize();	// get next position
 
 		// make timed seek
 		hddtime timediff = device->SeekTo(next);

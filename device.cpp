@@ -115,13 +115,13 @@ void Device::ReportProblem()
 	accessWarning();
 }
 
-void Device::SetPos(hddpos pos)
+void Device::SetPos(hddsize pos)
 {
 	// set position
 	lseek64(__fd, pos, SEEK_SET);
 }
 
-hddtime Device::SeekTo(hddpos pos)
+hddtime Device::SeekTo(hddsize pos)
 {
 	timeval __start;
 	timeval __end;
@@ -149,7 +149,7 @@ hddsize Device::GetSize()
 	return __device_size;
 }
 
-hddtime Device::ReadAt(hddsize size, hddpos pos)
+hddtime Device::ReadAt(hddsize size, hddsize pos)
 {
 	timeval __start;
 	timeval __end;
