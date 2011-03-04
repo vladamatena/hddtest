@@ -42,6 +42,12 @@ TestWidget::TestThread::TestThread(TestWidget *widget)
 
 void TestWidget::TestThread::run()
 {
+	// prepare device for test
+	widget->device->Warmup();
+	widget->device->DropCaches();
+	widget->device->Sync();
+
+	// start test
 	widget->go = true;
 	widget->running = true;
 	widget->TestLoop();
@@ -65,11 +71,6 @@ void TestWidget::StartTest()
 {
 	if(!device)
 		return;
-
-	// prepare device for test
-	device->Warmup();
-	device->DropCaches();
-	device->Sync();
 
 	// prepare ui for test
 	ui->startstop->setText("Stop");
