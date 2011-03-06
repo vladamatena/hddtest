@@ -304,36 +304,6 @@ QString Device::GetSafeTemp()
 	return mountpoint + "/tmp/hddtest.temp.dir";
 }
 
-hddtime Device::Write(hddsize size)
-{
-	// TODO: check for writting to block device
-	std::cout << "Not writting to device - this is not implemented" << std::endl;
-	std::cerr << "Not writting to device - this is not implemented" << std::endl;
-	return 0;
-
-	timeval __start;
-	timeval __end;
-	char *buffer = new char[size];
-
-	// get seek start timeout
-	gettimeofday(&__start, 0);
-
-	// read data
-	int ret = write(__fd, buffer, sizeof(char) * size);
-	if(ret <= 0)
-		std::cerr << "Write failed" << std::endl;
-
-	// get seek end timeout
-	gettimeofday(&__end, 0);
-
-	// count seek duration
-	hddtime timediff = (__end.tv_sec * 1000 * 1000 + __end.tv_usec) - (__start.tv_sec * 1000 * 1000 + __start.tv_usec);
-
-	delete buffer;
-
-	return timediff;
-}
-
 hddtime Device::MkDir(QString path)
 {
 	QString temp = GetSafeTemp();

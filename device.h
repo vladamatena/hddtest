@@ -58,7 +58,6 @@ public:
 	void SetPos(hddsize pos);					/// Set actual position
 	hddtime SeekTo(hddsize pos);				/// Seek to position returns operation time
 	hddtime Read(hddsize size);					/// Read data at current position and return operation time
-	hddtime Write(hddsize size);				/// Write data at current position and return operation time
 	hddtime ReadAt(hddsize size, hddsize pos);	/// Read data at position return operation time
 	hddsize GetSize();							/// Get size of drive
 
