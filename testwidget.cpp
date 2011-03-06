@@ -429,8 +429,8 @@ void TestWidget::LineGraph::erase()
 	for(int i = 0; i < lines.size(); ++i)
 		test->scene->removeItem(lines[i]);
 
-	lines.erase(lines.begin(), lines.end());
-	values.erase(values.begin(), values.end());
+	lines.clear();
+	values.clear();
 
 	size = 10;
 
