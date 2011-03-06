@@ -68,6 +68,10 @@ void FileRW::TestLoop()
 			break;
 	}
 
+	// sync filesystem and drop caches
+	device->Sync();
+	device->DropCaches();
+
 	Device file_read;
 	file_read.Open(temp + "/file.1G", false);
 
