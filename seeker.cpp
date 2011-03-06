@@ -72,7 +72,7 @@ void Seeker::TestLoop()
 		// count test progress
 		result.progress = i * 100 / (SEEKER_SEEKCOUNT - 1);
 
-		if(go == false)
+		if(!go)
 			return;
 	}
 }
@@ -89,6 +89,8 @@ void Seeker::UpdateScene()
 	while(!result.newseeks.empty())
 	{
 		QPointF seek = result.newseeks.pop();
+
+		// mark seek as important if it is close to average
 		if(seek.ry() < SEEKER_IMPORTANT * result.avg())
 			dataTicks->AddTick(seek.y(), seek.x(), true);
 		else
@@ -99,6 +101,8 @@ void Seeker::UpdateScene()
 	while(!reference.newseeks.empty())
 	{
 		QPointF seek = reference.newseeks.pop();
+
+		// mark seek as important if it is close to average
 		if(seek.ry() < SEEKER_IMPORTANT * reference.avg())
 			referenceTicks->AddTick(seek.y(), seek.x(), true);
 		else
