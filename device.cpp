@@ -18,6 +18,20 @@ Device::Device()
 	DriveInfo();	// TODO: is this useless
 }
 
+QList<Device::Item> Device::GetDevices()
+{
+	QList<Item> list;
+	QDir block = QDir("/dev/disk/by-path");
+	QFileInfoList devList = block.entryInfoList(QDir::Files | QDir::Readable);
+	for(int i = 0; i < devList.size(); ++i)
+	{
+		QString path = QFile::symLinkTarget(devList[i].absoluteFilePath());
+		Device::Item data = Device::Item(Device::Item::HDD_ITEM_DEVICE, path);
+		list.append(data);
+	}
+	return list;
+}
+
 void Device::Open(QString path, bool close, bool rw)
 {
 	this->path = path;
@@ -574,5 +588,20 @@ hddtime File::Write(hddsize size)
 	delete buffer;
 
 	return timediff;
+}
+
+Device::Item Device::Item::None()
+{
+	return Item::Item(HDD_ITEM_NONE, "");
+}
+
+Device::Item Device::Item::Open()
+{
+	return Item::Item(HDD_ITEM_OPEN, "");
+}
+
+Device::Item Device::Item::Saved(QString path)
+{
+	return Item::Item(HDD_ITEM_SAVED, path);
 }
 

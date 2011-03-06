@@ -49,6 +49,10 @@ public:
 		Item(Type type, QString path):
 			type(type), path(path) {}
 
+		static Item None();
+		static Item Open();
+		static Item Saved(QString path);
+
 		Type type;
 		QString path;
 	};

@@ -26,20 +26,15 @@ HDDTest::HDDTest(QWidget *parent) :
 	connect(&refDevice, SIGNAL(accessWarning()), this, SLOT(refDevice_accessWarning()));
 
 	// Add drive selection to results combo box
-	QDir block = QDir("/dev/disk/by-path");
-	QFileInfoList devList = block.entryInfoList(QDir::Files | QDir::Readable);
+	QList<Device::Item> devList = device.GetDevices();
 	for(int i = 0; i < devList.size(); ++i)
-	{
-		QString path = QFile::symLinkTarget(devList[i].absoluteFilePath());
-		Device::Item data = Device::Item(Device::Item::HDD_ITEM_DEVICE, path);
-		ui->drive->addItem(path, QVariant::fromValue(data));
-	}
+		ui->drive->addItem(devList[i].path, QVariant::fromValue(devList[i]));
 
 	// Add nothing opetion to reference combo box
 	ui->drive->insertSeparator(ui->drive->count());
 	ui->reference->addItem(
 				"Nothing",
-				QVariant::fromValue(Device::Item(Device::Item::HDD_ITEM_NONE, "")));
+				QVariant::fromValue(Device::Item::None()));
 
 	// Add saved resutls for both combo boxes
 	QFileInfoList savedList = QDir().entryInfoList(QStringList("*.xml"), QDir::Files);
@@ -47,7 +42,7 @@ HDDTest::HDDTest(QWidget *parent) :
 	{
 		QString label = "Saved: " + savedList[i].fileName();
 		QString path = savedList[i].absoluteFilePath();
-		Device::Item item = Device::Item(Device::Item::HDD_ITEM_SAVED, path);
+		Device::Item item = Device::Item::Saved(path);
 
 		ui->drive->addItem(label, QVariant::fromValue(item));
 		ui->reference->addItem(label, QVariant::fromValue(item));
@@ -56,9 +51,8 @@ HDDTest::HDDTest(QWidget *parent) :
 	// Add file open dialog for both combo boxes
 	ui->drive->insertSeparator(ui->drive->count());
 	ui->reference->insertSeparator(ui->reference->count());
-	Device::Item item = Device::Item(Device::Item::HDD_ITEM_OPEN, "");
-	ui->drive->addItem("--- Launch file open dialog ---", QVariant::fromValue(item));
-	ui->reference->addItem("--- Launch file open dialog ---", QVariant::fromValue(item));
+	ui->drive->addItem("--- Launch file open dialog ---", QVariant::fromValue(Device::Item::Open()));
+	ui->reference->addItem("--- Launch file open dialog ---", QVariant::fromValue(Device::Item::Open()));
 
 	// Initialize tests
 	ui->filerwwidget->SetDevice(&device);
