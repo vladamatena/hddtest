@@ -33,7 +33,6 @@ public:
 	int blocks;
 	qreal avg;
 	int blocks_done;
-	int progress;
 
 	void AddResult(qreal result);
 	void erase();

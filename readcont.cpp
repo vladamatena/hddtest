@@ -42,8 +42,6 @@ void ReadCont::TestLoop()
 	if(bytes_to_read > device->GetSize())
 		bytes_to_read = device->GetSize();
 
-	results.progress = 0;
-
 	// get block count
 	results.blocks = bytes_to_read / READ_CONT_BLOCK;
 
@@ -52,9 +50,8 @@ void ReadCont::TestLoop()
 	{
 		hddtime time = device->Read(READ_CONT_BLOCK);
 		results.AddResult((qreal)READ_CONT_BLOCK / time);
-		results.progress = 100 * results.blocks_done / (results.blocks - 1);
 
-		if(go == false)
+		if(!go)
 			break;
 	}
 }
@@ -96,7 +93,7 @@ void ReadCont::UpdateScene()
 
 int ReadCont::GetProgress()
 {
-	return results.progress;
+	return 100 * results.blocks_done / (results.blocks - 1);
 }
 
 ReadContResults::ReadContResults()
@@ -163,7 +160,7 @@ void ReadCont::RestoreResults(QDomElement &root, DataSet dataset)
 		results.AddResult(res.at(i).toElement().attribute("value", "0").toDouble());
 
 	// set progress
-	results.progress = 100;
+	results.blocks_done = results.blocks = READ_CONT_SIZE / READ_CONT_BLOCK;
 
 	// refresh view
 	UpdateScene();
