@@ -113,7 +113,7 @@ void HDDTest::on_drive_currentIndexChanged(QString)
 		break;
 		case DeviceItem::HDD_ITEM_NONE:
 			EraseResults(TestWidget::RESULTS);
-			device.Open(data.value<DeviceItem>().path, true);
+			device.Open(ui->drive->currentText(), true);
 			ReloadTests(false);
 		break;
 	}
