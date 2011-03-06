@@ -46,7 +46,7 @@ void ReadCont::TestLoop()
 	results.blocks = bytes_to_read / READ_CONT_BLOCK;
 
 	// read block until enough data is read
-	for(results.blocks_done = 0; results.blocks_done < results.blocks; ++results.blocks_done)
+	for(results.blocks_done = 1; results.blocks_done <= results.blocks; ++results.blocks_done)
 	{
 		hddtime time = device->Read(READ_CONT_BLOCK);
 		results.AddResult((qreal)READ_CONT_BLOCK / time);
@@ -93,7 +93,7 @@ void ReadCont::UpdateScene()
 
 int ReadCont::GetProgress()
 {
-	return 100 * results.blocks_done / (results.blocks - 1);
+	return 100 * results.blocks_done / results.blocks;
 }
 
 ReadContResults::ReadContResults()
