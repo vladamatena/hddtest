@@ -36,7 +36,7 @@ public:
 	~FileRW();
 
 	static const hddsize FILERW_SIZE = 1024 * Device::M;
-	static const hddsize FILERW_BLOCK = 5 * Device::M;
+	static const hddsize FILERW_BLOCK = 4 * Device::M;
 
 	// members from Test
 	void TestLoop();

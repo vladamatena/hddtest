@@ -53,7 +53,6 @@ public:
 
 	static const hddsize SEEKER_BLOCKSIZE = 512 * Device::B;	/// seek read size
 	static const hddsize SEEKER_SEEKCOUNT = 1000;
-	static const int SEEKER_MAX_AVG = 15;	/// how many max values are used to calculate final max
 
 	SeekResult result;		// seek results
 	SeekResult reference;	// seek reference results

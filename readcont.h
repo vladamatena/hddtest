@@ -45,7 +45,7 @@ public:
 	~ReadCont();
 
 	static const hddsize READ_CONT_SIZE = 4096 * Device::M;
-	static const hddsize READ_CONT_BLOCK = 5 * Device::M;
+	static const hddsize READ_CONT_BLOCK = 4 * Device::M;
 
 	void TestLoop();
 	void InitScene();
