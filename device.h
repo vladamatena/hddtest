@@ -40,8 +40,24 @@ class Device: public QObject
 {
 	Q_OBJECT
 public:
+	struct Item
+	{
+		enum Type	{ HDD_ITEM_DEVICE, HDD_ITEM_OPEN, HDD_ITEM_SAVED, HDD_ITEM_NONE };
+
+		Item():
+			type(HDD_ITEM_NONE), path("") {}
+		Item(Type type, QString path):
+			type(type), path(path) {}
+
+		Type type;
+		QString path;
+	};
+
 	Device();									/// Device constructor
 	~Device();									/// Device destructor - close device file descriptor
+
+	// device listing
+	QList<Item> GetDevices();					/// Gets list of devices
 
 	// device access operations
 	void Open(QString path, bool close, bool rw = false);	/// Opens device specified by path
@@ -130,5 +146,6 @@ private:
 	void fdopen();	// open file by path stored internally
 };
 
+Q_DECLARE_METATYPE(Device::Item)
 
 #endif // DEVICE_H

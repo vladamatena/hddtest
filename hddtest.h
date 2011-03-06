@@ -37,20 +37,7 @@ namespace Ui {
 class HDDTest : public QDialog {
 	Q_OBJECT
 public:
-	struct DeviceItem
-	{
-		enum Type	{ HDD_ITEM_DEVICE, HDD_ITEM_OPEN, HDD_ITEM_SAVED, HDD_ITEM_NONE };
-
-		DeviceItem():
-			type(HDD_ITEM_NONE), path("") {}
-		DeviceItem(Type type, QString path):
-			type(type), path(path) {}
-
-		Type type;
-		QString path;
-	};
-
-    HDDTest(QWidget *parent = 0);
+	HDDTest(QWidget *parent = 0);
     ~HDDTest();
 
 	void ReloadTests(bool loaded);
@@ -71,7 +58,5 @@ private slots:
 	void device_accessWarning();
 	void refDevice_accessWarning();
 };
-
-Q_DECLARE_METATYPE(HDDTest::DeviceItem)
 
 #endif // HDDTEST_H

@@ -31,7 +31,7 @@ HDDTest::HDDTest(QWidget *parent) :
 	for(int i = 0; i < devList.size(); ++i)
 	{
 		QString path = QFile::symLinkTarget(devList[i].absoluteFilePath());
-		DeviceItem data = DeviceItem(DeviceItem::HDD_ITEM_DEVICE, path);
+		Device::Item data = Device::Item(Device::Item::HDD_ITEM_DEVICE, path);
 		ui->drive->addItem(path, QVariant::fromValue(data));
 	}
 
@@ -39,7 +39,7 @@ HDDTest::HDDTest(QWidget *parent) :
 	ui->drive->insertSeparator(ui->drive->count());
 	ui->reference->addItem(
 				"Nothing",
-				QVariant::fromValue(DeviceItem(DeviceItem::HDD_ITEM_NONE, "")));
+				QVariant::fromValue(Device::Item(Device::Item::HDD_ITEM_NONE, "")));
 
 	// Add saved resutls for both combo boxes
 	QFileInfoList savedList = QDir().entryInfoList(QStringList("*.xml"), QDir::Files);
@@ -47,7 +47,7 @@ HDDTest::HDDTest(QWidget *parent) :
 	{
 		QString label = "Saved: " + savedList[i].fileName();
 		QString path = savedList[i].absoluteFilePath();
-		DeviceItem item = DeviceItem(DeviceItem::HDD_ITEM_SAVED, path);
+		Device::Item item = Device::Item(Device::Item::HDD_ITEM_SAVED, path);
 
 		ui->drive->addItem(label, QVariant::fromValue(item));
 		ui->reference->addItem(label, QVariant::fromValue(item));
@@ -56,7 +56,7 @@ HDDTest::HDDTest(QWidget *parent) :
 	// Add file open dialog for both combo boxes
 	ui->drive->insertSeparator(ui->drive->count());
 	ui->reference->insertSeparator(ui->reference->count());
-	DeviceItem item = DeviceItem(DeviceItem::HDD_ITEM_OPEN, "");
+	Device::Item item = Device::Item(Device::Item::HDD_ITEM_OPEN, "");
 	ui->drive->addItem("--- Launch file open dialog ---", QVariant::fromValue(item));
 	ui->reference->addItem("--- Launch file open dialog ---", QVariant::fromValue(item));
 
@@ -79,9 +79,9 @@ void HDDTest::on_drive_currentIndexChanged(QString)
 {	
 	QVariant data = ui->drive->itemData(ui->drive->currentIndex());
 
-	switch(data.value<DeviceItem>().type)
+	switch(data.value<Device::Item>().type)
 	{
-		case DeviceItem::HDD_ITEM_OPEN:
+		case Device::Item::HDD_ITEM_OPEN:
 		{
 			QString filename = QFileDialog::getOpenFileName(this, tr("Open Saved results"), "", tr("Results (*.xml)"));
 			if(filename.length() > 0)
@@ -90,28 +90,27 @@ void HDDTest::on_drive_currentIndexChanged(QString)
 				ui->drive->insertItem(
 							index,
 							"Saved: " + filename,
-							QVariant::fromValue(DeviceItem(DeviceItem::HDD_ITEM_SAVED, filename)));
+							QVariant::fromValue(Device::Item(Device::Item::HDD_ITEM_SAVED, filename)));
 				ui->drive->setCurrentIndex(index);
 			}
 		}
 		break;
-		case DeviceItem::HDD_ITEM_DEVICE:
+		case Device::Item::HDD_ITEM_DEVICE:
 		{
 			EraseResults(TestWidget::RESULTS);
-			device.Open(data.value<DeviceItem>().path, true);
+			device.Open(data.value<Device::Item>().path, true);
 			ReloadTests(false);
 		}
 		break;
-		// TODO: handle dynamic added devices without DeviceItem
-		case DeviceItem::HDD_ITEM_SAVED:
+		case Device::Item::HDD_ITEM_SAVED:
 		{
 			device.Open("", true);
 			EraseResults(TestWidget::RESULTS);
-			OpenResultFile(data.value<DeviceItem>().path, TestWidget::RESULTS);
+			OpenResultFile(data.value<Device::Item>().path, TestWidget::RESULTS);
 			ReloadTests(true);
 		}
 		break;
-		case DeviceItem::HDD_ITEM_NONE:
+		case Device::Item::HDD_ITEM_NONE:
 			EraseResults(TestWidget::RESULTS);
 			device.Open(ui->drive->currentText(), true);
 			ReloadTests(false);
@@ -123,9 +122,9 @@ void HDDTest::on_reference_currentIndexChanged(QString )
 {
 	QVariant data = ui->reference->itemData(ui->reference->currentIndex());
 
-	switch(data.value<DeviceItem>().type)
+	switch(data.value<Device::Item>().type)
 	{
-		case DeviceItem::HDD_ITEM_OPEN:
+		case Device::Item::HDD_ITEM_OPEN:
 		{
 			QString filename = QFileDialog::getOpenFileName(this, tr("Open Saved results"), "", tr("Results (*.xml)"));
 			if(filename.length() > 0)
@@ -134,24 +133,24 @@ void HDDTest::on_reference_currentIndexChanged(QString )
 				ui->reference->insertItem(
 							index,
 							"Saved: " + filename,
-							QVariant::fromValue(DeviceItem(DeviceItem::HDD_ITEM_SAVED, filename)));
+							QVariant::fromValue(Device::Item(Device::Item::HDD_ITEM_SAVED, filename)));
 				ui->reference->setCurrentIndex(index);
 			}
 		}
 		break;
-		case DeviceItem::HDD_ITEM_SAVED:
+		case Device::Item::HDD_ITEM_SAVED:
 		{
 			refDevice.Open("", true);
 			EraseResults(TestWidget::REFERENCE);
-			OpenResultFile(data.value<DeviceItem>().path, TestWidget::REFERENCE);
+			OpenResultFile(data.value<Device::Item>().path, TestWidget::REFERENCE);
 			UpdateInfo(TestWidget::REFERENCE);
 		}
 		break;
-		case DeviceItem::HDD_ITEM_NONE:
+		case Device::Item::HDD_ITEM_NONE:
 			EraseResults(TestWidget::REFERENCE);
 			UpdateInfo(TestWidget::REFERENCE);
 		break;
-		case  DeviceItem::HDD_ITEM_DEVICE:
+		case  Device::Item::HDD_ITEM_DEVICE:
 			// silently ignore
 			// this should not happend
 		break;
