@@ -20,7 +20,7 @@ public:
 	FileRWResults();
 
 	QList<qreal> results;		/// all colected results
-	QStack<qreal> new_results;	/// new results to be drawn to graph
+	QQueue<qreal> new_results;	/// new results to be drawn to graph
 	int blocks;					/// total blocks count
 	qreal avg;					/// average speed
 	qreal max;					/// max speed

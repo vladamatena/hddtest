@@ -107,38 +107,30 @@ void FileRW::UpdateScene()
 	__read_reference_graph->SetSize(reference_read.blocks);
 
 	// add new values to write graph
-	int nrws = results_write.new_results.size();
-	for(int i = 0; i < nrws; ++i)
+	while(!results_write.new_results.empty())
 	{
-		qreal data = results_write.new_results.front();
-		results_write.new_results.pop_front();
+		qreal data = results_write.new_results.dequeue();
 		__write_graph->AddValue(data);
 	}
 
 	// add new values to read graph
-	int nrrs = results_read.new_results.size();
-	for(int i = 0; i < nrrs; ++i)
+	while(!results_read.new_results.empty())
 	{
-		qreal data = results_read.new_results.front();
-		results_read.new_results.pop_front();
+		qreal data = results_read.new_results.dequeue();
 		__read_graph->AddValue(data);
 	}
 
 	// add new values to reference write graph
-	int nrwsr = reference_write.new_results.size();
-	for(int i = 0; i < nrwsr; ++i)
+	while(!reference_write.new_results.empty())
 	{
-		qreal data = reference_write.new_results.front();
-		reference_write.new_results.pop_front();
+		qreal data = reference_write.new_results.dequeue();
 		__write_reference_graph->AddValue(data);
 	}
 
 	// add new values to reference read graph
-	int nrrsr = reference_read.new_results.size();
-	for(int i = 0; i < nrrsr; ++i)
+	while(!reference_read.new_results.empty())
 	{
-		qreal data = reference_read.new_results.front();
-		reference_read.new_results.pop_front();
+		qreal data = reference_read.new_results.dequeue();
 		__read_reference_graph->AddValue(data);
 	}
 
@@ -169,7 +161,7 @@ FileRWResults::FileRWResults()
 void FileRWResults::AddResult(qreal result)
 {
 	results.push_back(result);		// add to results
-	new_results.push_back(result);	// add to results to draw
+	new_results.enqueue(result);	// add to results to draw
 
 	// update max
 	if(result > max || max == 0)
@@ -184,8 +176,9 @@ void FileRWResults::AddResult(qreal result)
 
 void FileRWResults::erase()
 {
-	results.erase(results.begin(), results.end());						// erase results
-	this->new_results.erase(new_results.begin(), new_results.end());	// clear results to draw
+	// celar results
+	results.clear();
+	new_results.clear();
 
 	// reset statistics
 	max = 0;
