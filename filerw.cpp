@@ -155,7 +155,6 @@ int FileRW::GetProgress()
 
 FileRWResults::FileRWResults()
 {
-	max = 0;
 	avg = 0;
 
 	// zero block count
@@ -167,10 +166,6 @@ void FileRWResults::AddResult(qreal result)
 {
 	results.push_back(result);		// add to results
 	new_results.enqueue(result);	// add to results to draw
-
-	// update max
-	if(result > max || max == 0)
-		max = result;
 
 	// calc sum
 	qreal sum = 0;
@@ -186,7 +181,6 @@ void FileRWResults::erase()
 	new_results.clear();
 
 	// reset statistics
-	max = 0;
 	avg = 0;
 
 	// zero block count

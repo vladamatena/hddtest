@@ -23,7 +23,6 @@ public:
 	QQueue<qreal> new_results;	/// new results to be drawn to graph
 	int blocks;					/// total blocks count
 	qreal avg;					/// average speed
-	qreal max;					/// max speed
 	int blocks_done;			/// blocks already done
 
 	void AddResult(qreal result);
