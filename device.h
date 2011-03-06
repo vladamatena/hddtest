@@ -114,5 +114,22 @@ signals:
 	void accessWarning();
 };
 
+/// Class for file manipulation
+class File
+{
+public:
+	File(QString path);				/// Open file specified by path
+	~File();						/// File destructor - close open file
+	void Close();					/// Close file
+	void SetPos(hddsize pos);		/// Set current position in file
+	void Reopen();					/// Reopen file to clear caches
+	hddtime Write(hddsize size);	/// Write at current position in file
+	hddtime Read(hddsize size);		/// Read at current position in file
+private:
+	int fd;			// file`s file descriptor
+	QString path;	// path to file
+	void fdopen();	// open file by path stored internally
+};
+
 
 #endif // DEVICE_H

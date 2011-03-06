@@ -50,8 +50,7 @@ void FileRW::TestLoop()
 	// prepare test file
 	QString filename = device->GetSafeTemp() + "/" + "hddtestfile";
 
-	Device file_write;
-	file_write.Open(filename, false, true);
+	File file(filename);
 
 	// get block count	
 	results_write.blocks = FILERW_SIZE / FILERW_BLOCK;
@@ -60,34 +59,32 @@ void FileRW::TestLoop()
 	results_read.blocks_done = 0;
 
 	// write blocks until enough data is written
-	file_write.SetPos(0);
+	file.SetPos(0);
 	for(results_write.blocks_done = 1; results_write.blocks_done <= results_write.blocks; ++results_write.blocks_done)
 	{
-		hddtime time = file_write.Write(FILERW_BLOCK);
+		hddtime time = file.Write(FILERW_BLOCK);
 		results_write.AddResult((qreal)FILERW_BLOCK / time);
 		if(go == false)
 			break;
 	}
-	file_write.Close();
 
 	// sync filesystem and drop caches
+	file.Reopen();
 	device->Sync();
 	device->DropCaches();
 
-	Device file_read;
-	file_read.Open(filename, false);
-
 	// read block until enough data is read
-	file_read.SetPos(0);
+	file.SetPos(0);
 	for(results_read.blocks_done = 1; results_read.blocks_done <= results_read.blocks; ++results_read.blocks_done)
 	{
-		hddtime time = file_read.Read(FILERW_BLOCK);
+		hddtime time = file.Read(FILERW_BLOCK);
 		results_read.AddResult((qreal)FILERW_BLOCK / time);
 		if(go == false)
 			break;
-	}
-	file_read.Close();
+	}	
 
+	// close and delete file
+	file.Close();
 	device->DelFile(filename);
 }
 
