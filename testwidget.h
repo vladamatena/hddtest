@@ -13,11 +13,6 @@
 
 #include "device.h"
 
-#define LINEGRAPH_WIDTH 0.88
-#define LINEGRAPH_NET_WIDTH 0.89
-
-#define TICKS_WIDTH 0.88
-
 
 namespace Ui {
     class TestWidget;
@@ -35,10 +30,13 @@ public:
 	public:
 		Marker(TestWidget *test);
 
-		TestWidget *test;
-		qreal max;						// maximal value used by this marker
-		qreal min;						// minimal value used by this marker
-		virtual void Reposition() = 0;	// reposition marker on view change
+		static const qreal NET_WIDTH = 0.88;			// Width of net lines
+		static const qreal NET_HIGHLIGHT_WIDTH = 0.89;	// Width of extended net lines
+
+		TestWidget *test;				/// pointer to test containing this marker
+		qreal max;						/// maximal value used by this marker
+		qreal min;						/// minimal value used by this marker
+		virtual void Reposition() = 0;	/// reposition marker on view change
 	};
 
 	class Ticks : public Marker

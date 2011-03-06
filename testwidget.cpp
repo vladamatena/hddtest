@@ -291,7 +291,7 @@ void TestWidget::Ticks::AddTick(qreal value, qreal position)
 	Tick tick;
 
 	tick.tick = test->scene->addRect(
-			test->graph.left() + position *  test->graph.width() * LINEGRAPH_WIDTH,
+			test->graph.left() + position *  test->graph.width() * NET_WIDTH,
 			test->graph.top() + test->graph.height() - value * test->Yscale,
 			1,
 			1,
@@ -307,7 +307,7 @@ void TestWidget::Ticks::Reposition()
 	// reposition ticks
 	for(int i = 0; i < ticks.size(); ++i)
 		ticks[i].tick->setRect(
-					test->graph.left() + ticks[i].position *  test->graph.width() * LINEGRAPH_WIDTH,
+					test->graph.left() + ticks[i].position *  test->graph.width() * NET_WIDTH,
 					test->graph.top() + test->graph.height() - ticks[i].value * test->Yscale,
 					1,
 					1);
@@ -444,9 +444,9 @@ void TestWidget::LineGraph::Reposition()
 	for(int i = 0; i < lines.size(); ++i)
 	{
 		lines[i]->setLine(
-				test->graph.left() + (qreal)i  / (size - 1) * test->graph.width() * LINEGRAPH_WIDTH,
+				test->graph.left() + (qreal)i  / (size - 1) * test->graph.width() * NET_WIDTH,
 				test->graph.top() + test->graph.height() - values[i] * test->Yscale,
-				test->graph.left() + (qreal)(i + 1)  / (size - 1) * test->graph.width() * LINEGRAPH_WIDTH,
+				test->graph.left() + (qreal)(i + 1)  / (size - 1) * test->graph.width() * NET_WIDTH,
 				test->graph.top() + test->graph.height() - values[i + 1] * test->Yscale);
 	}	
 }
@@ -539,7 +539,7 @@ void TestWidget::Net::Reposition()
 			net[i]->setLine(
 					test->graph.left(),
 					test->graph.top() + test->graph.height() - test->Yscale * dist * i,
-					test->graph.left() + test->graph.width() * LINEGRAPH_WIDTH,
+					test->graph.left() + test->graph.width() * NET_WIDTH,
 					test->graph.top() + test->graph.height() - test->Yscale * dist * i);
 			net[i]->setPen(QPen(QColor(230,230,230)));
 		}
@@ -549,7 +549,7 @@ void TestWidget::Net::Reposition()
 			net[i]->setLine(
 					test->graph.left(),
 					test->graph.top() + test->graph.height() - test->Yscale * dist * i,
-					test->graph.left() + test->graph.width() * LINEGRAPH_NET_WIDTH,
+					test->graph.left() + test->graph.width() * NET_HIGHLIGHT_WIDTH,
 					test->graph.top() + test->graph.height() - test->Yscale * dist * i);
 			net[i]->setPen(QPen(QColor(200,200,200)));
 
@@ -558,7 +558,7 @@ void TestWidget::Net::Reposition()
 			{
 				net_markups[i / 10]->setPlainText(QString::number(i * dist) + " " + unit);
 				net_markups[i / 10]->setPos(
-						test->graph.left() + test->graph.width() * LINEGRAPH_NET_WIDTH,
+						test->graph.left() + test->graph.width() * NET_HIGHLIGHT_WIDTH,
 						test->graph.top() + test->graph.height() - (i * test->Yscale * dist)
 							- net_markups[i / 10]->boundingRect().height() / 2);
 			}
