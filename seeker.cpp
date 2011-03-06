@@ -89,14 +89,20 @@ void Seeker::UpdateScene()
 	while(!result.newseeks.empty())
 	{
 		QPointF seek = result.newseeks.pop();
-		dataTicks->AddTick(seek.y(), seek.x());
+		if(seek.ry() < SEEKER_IMPORTANT * result.avg())
+			dataTicks->AddTick(seek.y(), seek.x(), true);
+		else
+			dataTicks->AddTick(seek.y(), seek.x(), false);
 	}
 
 	// draw new reference seeks
 	while(!reference.newseeks.empty())
 	{
 		QPointF seek = reference.newseeks.pop();
-		referenceTicks->AddTick(seek.y(), seek.x());
+		if(seek.ry() < SEEKER_IMPORTANT * reference.avg())
+			referenceTicks->AddTick(seek.y(), seek.x(), true);
+		else
+			referenceTicks->AddTick(seek.y(), seek.x(), false);
 	}
 
 	// update lines

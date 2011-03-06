@@ -52,7 +52,8 @@ public:
 	~Seeker();
 
 	static const hddsize SEEKER_BLOCKSIZE = 512 * Device::B;	/// seek read size
-	static const hddsize SEEKER_SEEKCOUNT = 1000;
+	static const hddsize SEEKER_SEEKCOUNT = 1000;				/// number of seeke per test
+	static const int SEEKER_IMPORTANT = 2;						/// seeks slower than N * average are not important
 
 	SeekResult result;		// seek results
 	SeekResult reference;	// seek reference results

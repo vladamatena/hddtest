@@ -279,13 +279,16 @@ void TestWidget::Line::Reposition()
 TestWidget::Ticks::Ticks(TestWidget *test, QColor color):
 	 Marker(test), color(color) {}
 
-void TestWidget::Ticks::AddTick(qreal value, qreal position)
+void TestWidget::Ticks::AddTick(qreal value, qreal position, bool important)
 {
 	// update max and min for ticks
-	if(value > max)
-		max = value;
-	if(value < min)
-		min = value;
+	if(important)
+	{
+		if(value > max)
+			max = value;
+		if(value < min)
+			min = value;
+	}
 
 	// add tick
 	Tick tick;

@@ -43,7 +43,7 @@ public:
 	{
 	public:
 		Ticks(TestWidget *test, QColor color);
-		void AddTick(qreal value, qreal position);
+		void AddTick(qreal value, qreal position, bool important = true);
 		void erase();
 		void Reposition();
 
