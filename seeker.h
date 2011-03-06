@@ -41,15 +41,11 @@ private:
 
 		void erase();
 		void AddSeek(QPointF seek);		// add seek to this test
-		qreal max();	// get max seek time (average of slowest seeks)
-		qreal min();	// get min seek time (average of fastest seeks)
 		qreal avg();	// get overall average seek time
 
 		QList<QPointF> seeks;		// list of seeks
 		QStack<QPointF> newseeks;	// list of new seeks (not yet displayed)
-		unsigned int progress;		// percentage progress of the test
-		QList<qreal> maxims;		// list of longest seek times
-		QList<qreal> mins;			// list of shortest seek times
+		unsigned int progress;		// percentage progress of the test		
 	};
 public:
 	explicit Seeker(QWidget *parent = 0);
@@ -58,7 +54,6 @@ public:
 	static const hddsize SEEKER_BLOCKSIZE = 512 * Device::B;	/// seek read size
 	static const hddsize SEEKER_SEEKCOUNT = 1000;
 	static const int SEEKER_MAX_AVG = 15;	/// how many max values are used to calculate final max
-	static const int SEEKER_MIN_AVG = 10;	/// how many min values are used to calculate final min
 
 	SeekResult result;		// seek results
 	SeekResult reference;	// seek reference results

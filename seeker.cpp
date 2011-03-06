@@ -116,36 +116,6 @@ void Seeker::SeekResult::AddSeek(QPointF seek)
 {
 	seeks.push_back(seek);		// add seek to result seek list
 	newseeks.push_back(seek);	// add sekk to stack used for drawing new results
-
-	// if seek lasted long add it to maxims
-	if(maxims.count() < SEEKER_MAX_AVG)	// not enough maxims - add any seek
-	{
-		maxims.push_front(seek.y());
-		qSort(maxims);
-	}
-	else	// enough maxims - add slower seeks
-	{
-		if(seek.y() > maxims[0])
-		{
-			maxims[0] = seek.y();
-			qSort(maxims);
-		}
-	}
-
-	// is seek was extraordinary fast - add to mins
-	if(mins.count() < SEEKER_MIN_AVG)	// too few minims - add any seek
-	{
-		mins.push_front(seek.y());
-		qSort(mins);
-	}
-	else	// min pool is full add only fastest seeks
-	{
-		if(seek.y() < mins[SEEKER_MIN_AVG - 1])
-		{
-			mins[SEEKER_MIN_AVG - 1] = seek.y();
-			qSort(mins);
-		}
-	}
 }
 
 qreal Seeker::SeekResult::avg()
@@ -158,46 +128,10 @@ qreal Seeker::SeekResult::avg()
 	return sum / seeks.count();
 }
 
-qreal Seeker::SeekResult::max()
-{
-	// count arithmetic average from MAX_AVG slowest seeks
-	if(maxims.count() > 0)
-	{
-		qreal sum = 0;
-		for(int i = 0; i < maxims.count(); ++i)
-			sum += maxims[i];
-
-		return sum / maxims.count();
-	}
-	else
-	{
-		return 0;
-	}
-}
-
-qreal Seeker::SeekResult::min()
-{
-	// count arithmetic average from MIN_AVG fastest seeks
-	if(mins.count() > 0)
-	{
-		qreal sum = 0;
-		for(int i = 0; i < mins.count(); ++i)
-			sum += mins[i];
-
-		return sum / mins.count();
-	}
-	else
-	{
-		return 0;
-	}
-}
-
 void Seeker::SeekResult::erase()
 {
 	seeks.erase(seeks.begin(), seeks.end());
 	newseeks.erase(newseeks.begin(), newseeks.end());
-	mins.erase(mins.begin(), mins.end());
-	maxims.erase(maxims.begin(), maxims.end());
 	progress = 0.0f;
 }
 
