@@ -15,7 +15,7 @@ Device::Device()
 	problemReported = false;
 	size = -1;
 	fs = false;
-	DriveInfo();
+	DriveInfo();	// TODO: is this useless
 }
 
 void Device::Open(QString path, bool close, bool rw)
