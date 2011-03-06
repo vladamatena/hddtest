@@ -72,20 +72,16 @@ void ReadCont::UpdateScene()
 	refGraph->SetSize(reference.blocks);
 
 	// add all new values to line graph
-	int resSize = results.new_results.size();
-	for(int i = 0; i < resSize; ++i)
+	while(!results.new_results.empty())
 	{
-		qreal data = results.new_results.front();
-		results.new_results.pop_front();
+		qreal data = results.new_results.dequeue();
 		graph->AddValue(data);
 	}
 
 	// add all new values to reference line graph
-	int refSize = reference.new_results.size();
-	for(int i = 0; i < refSize; ++i)
+	while(!reference.new_results.empty())
 	{
-		qreal data = reference.new_results.front();
-		reference.new_results.pop_front();
+		qreal data = reference.new_results.dequeue();
 		refGraph->AddValue(data);
 	}
 
@@ -105,23 +101,15 @@ int ReadCont::GetProgress()
 
 ReadContResults::ReadContResults()
 {
-	min = 0;
-	max = 0;
-	avg = 0;
+	erase();
 }
 
 void ReadContResults::AddResult(qreal result)
 {
 	results.push_back(result);		// add result
-	new_results.push_back(result);	// add results to new results (not yet drawn)
+	new_results.enqueue(result);	// add results to new results (not yet drawn)
 
-	// update min / max
-	if(result > max || max == 0)
-		max = result;
-	if(result < min || min == 0)
-		min = result;
-
-	// update sum
+	// update average
 	qreal sum = 0;
 	for(int i = 0; i < results.size(); ++i)
 		sum += results[i];
@@ -130,9 +118,7 @@ void ReadContResults::AddResult(qreal result)
 
 void ReadContResults::erase()
 {
-	results.erase(results.begin(), results.end());
-	min = 0;
-	max = 0;
+	results.clear();
 	avg = 0;
 }
 

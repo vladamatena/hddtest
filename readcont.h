@@ -29,11 +29,9 @@ public:
 	ReadContResults();
 
 	QList<qreal> results;
-	QStack<qreal> new_results;
+	QQueue<qreal> new_results;
 	int blocks;
 	qreal avg;
-	qreal max;
-	qreal min;
 	int blocks_done;
 	int progress;
 
