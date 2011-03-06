@@ -48,9 +48,10 @@ void FileRW::TestLoop()
 	results_read.erase();
 
 	// prepare test file
-	QString temp = device->GetSafeTemp();
+	QString filename = device->GetSafeTemp() + "/" + "hddtestfile";
+
 	Device file_write;
-	file_write.Open(temp + "/file.1G", false, true);
+	file_write.Open(filename, false, true);
 
 	// get block count	
 	results_write.blocks = FILERW_SIZE / FILERW_BLOCK;
@@ -67,13 +68,14 @@ void FileRW::TestLoop()
 		if(go == false)
 			break;
 	}
+	file_write.Close();
 
 	// sync filesystem and drop caches
 	device->Sync();
 	device->DropCaches();
 
 	Device file_read;
-	file_read.Open(temp + "/file.1G", false);
+	file_read.Open(filename, false);
 
 	// read block until enough data is read
 	file_read.SetPos(0);
@@ -84,6 +86,9 @@ void FileRW::TestLoop()
 		if(go == false)
 			break;
 	}
+	file_read.Close();
+
+	device->DelFile(filename);
 }
 
 void FileRW::InitScene()
