@@ -288,26 +288,27 @@ void TestWidget::Ticks::AddTick(qreal value, qreal position)
 		min = value;
 
 	// add tick
-	QGraphicsRectItem *tick;
+	Tick tick;
 
-	tick = test->scene->addRect(
+	tick.tick = test->scene->addRect(
 			test->graph.left() + position *  test->graph.width() * LINEGRAPH_WIDTH,
 			test->graph.top() + test->graph.height() - value * test->Yscale,
 			1,
 			1,
 			QPen(color));
+	tick.position = position;
+	tick.value = value;
 
-	ticks.push_back(tick);
-	positions.push_back(QPointF(position, value));
+	ticks.push_back(tick);	
 }
 
 void TestWidget::Ticks::Reposition()
 {
 	// reposition ticks
 	for(int i = 0; i < ticks.size(); ++i)
-		ticks[i]->setRect(
-					test->graph.left() + positions[i].rx() *  test->graph.width() * LINEGRAPH_WIDTH,
-					test->graph.top() + test->graph.height() - positions[i].ry() * test->Yscale,
+		ticks[i].tick->setRect(
+					test->graph.left() + ticks[i].position *  test->graph.width() * LINEGRAPH_WIDTH,
+					test->graph.top() + test->graph.height() - ticks[i].value * test->Yscale,
 					1,
 					1);
 }
@@ -316,9 +317,8 @@ void TestWidget::Ticks::erase()
 {
 	// erase all ticks
 	for(int i = 0; i < ticks.size(); ++i)
-		test->scene->removeItem(ticks[i]);
+		test->scene->removeItem(ticks[i].tick);
 	ticks.clear();
-	positions.clear();
 
 	// reset min and max
 	min = max = 0.0f;

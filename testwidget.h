@@ -50,9 +50,15 @@ public:
 		void Reposition();
 
 	private:
+		struct Tick
+		{
+			qreal value;
+			qreal position;
+			QGraphicsRectItem *tick;
+		};
+
 		QColor color;
-		QList<QGraphicsRectItem*> ticks;
-		QList<QPointF> positions;
+		QList<Tick> ticks;
 	};
 
 	class Line : public Marker
