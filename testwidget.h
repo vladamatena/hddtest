@@ -167,17 +167,17 @@ public:
 
 	void Rescale(bool force = false);
 
-	Device *device;				// pointer to device selecte dfor testing in GUI
-	QGraphicsScene *scene;		// pointer to current grephics scene
+	Device *device;				/// pointer to device selecte dfor testing in GUI
+	QGraphicsScene *scene;		/// pointer to current grephics scene
 
-	qreal Yscale;				// Y axis multipiler
-	QRect graph;				// rect in graphics scene occupied by graph
+	qreal Yscale;				/// Y axis multipiler
+	QRect graph;				/// rect in graphics scene occupied by graph
 
-	QString testName;			// test name
-	QString testDescription;	// test description - used by info box
+	QString testName;			/// test name
+	QString testDescription;	/// test description - used by info box
 
-	bool running;
-	bool go;
+	bool running;				/// True if test is running
+	bool go;					/// Setting this to false ends test
 
 protected:
 	 void resizeEvent(QResizeEvent*);
