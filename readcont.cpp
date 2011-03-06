@@ -160,7 +160,7 @@ void ReadCont::RestoreResults(QDomElement &root, DataSet dataset)
 		results.AddResult(res.at(i).toElement().attribute("value", "0").toDouble());
 
 	// set progress
-	results.blocks_done = results.blocks = READ_CONT_SIZE / READ_CONT_BLOCK;
+	results.blocks_done = results.blocks = res.size();
 
 	// refresh view
 	UpdateScene();
