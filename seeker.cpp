@@ -86,14 +86,14 @@ void Seeker::InitScene()
 void Seeker::UpdateScene()
 {
 	// draw new seeks
-	for(int i = 0; i < result.newseeks.count(); ++i)
+	while(!result.newseeks.empty())
 	{
 		QPointF seek = result.newseeks.pop();
 		dataTicks->AddTick(seek.y(), seek.x());
 	}
 
 	// draw new reference seeks
-	for(int i = 0; i < reference.newseeks.count(); ++i)
+	while(!reference.newseeks.empty())
 	{
 		QPointF seek = reference.newseeks.pop();
 		referenceTicks->AddTick(seek.y(), seek.x());
