@@ -24,7 +24,7 @@ ReadCont::ReadCont(QWidget *parent):
 
 	testName = "Read Continuous";
 	testDescription = "Read Continuous test reads " + Device::Format(READ_CONT_SIZE) + " from device." +
-			" Read operation is divided into block of " + Device::Format(READ_CONT_BLOCK) + " in order to draw graph." +
+			" Read operation is divided into blocks of " + Device::Format(READ_CONT_BLOCK) + " in order to draw graph." +
 			" Horizontal axis is device position and vertical is read speed.";
  }
 
