@@ -29,7 +29,7 @@ ReadRnd::ReadRnd(QWidget *parent):
 	{
 		if(i > 0)
 			testDescription += ", ";
-		testDescription += Device::Format(results[i].__block_size);
+		testDescription += Format(results[i].__block_size);
 	}
 
 	// add bars to scene
@@ -37,7 +37,7 @@ ReadRnd::ReadRnd(QWidget *parent):
 	{
 		Bar *bar = this->addBar(
 				"MB/s",
-				Device::Format(results[i].__block_size),
+				Format(results[i].__block_size),
 				QColor(0xff, 0xa0 * (i+1) / results.size(), 0),
 				2*i * 1.0f / (results.size() + reference.size()),
 				1.0f / (results.size() + reference.size() + 1));
@@ -49,7 +49,7 @@ ReadRnd::ReadRnd(QWidget *parent):
 	{
 		Bar *bar = this->addBar(
 				"MB/s",
-				Device::Format(reference[i].__block_size),
+				Format(reference[i].__block_size),
 				QColor(0, 0xc0 * (i+1) / reference.size(), 0xff),
 				(2*i + 1) * 1.0f / (reference.size() + reference.size()),
 				1.0f / (reference.size() + reference.size() + 1));

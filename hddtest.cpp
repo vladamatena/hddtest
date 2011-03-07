@@ -17,8 +17,8 @@
 #include "seeker.h"
 
 
-HDDTest::HDDTest(QWidget *parent) :
-	QDialog(parent), ui(new Ui::HDDTest)
+HDDTestWidget::HDDTestWidget(QWidget *parent) :
+	QDialog(parent), ui(new Ui::HDDTestWidget)
 {
     ui->setupUi(this);
 
@@ -64,12 +64,12 @@ HDDTest::HDDTest(QWidget *parent) :
 	ui->smallfileswidget->SetDevice(&device);
 }
 
-HDDTest::~HDDTest()
+HDDTestWidget::~HDDTestWidget()
 {
     delete ui;
 }
 
-void HDDTest::on_drive_currentIndexChanged(QString)
+void HDDTestWidget::on_drive_currentIndexChanged(QString)
 {	
 	QVariant data = ui->drive->itemData(ui->drive->currentIndex());
 
@@ -112,7 +112,7 @@ void HDDTest::on_drive_currentIndexChanged(QString)
 	}
 }
 
-void HDDTest::on_reference_currentIndexChanged(QString )
+void HDDTestWidget::on_reference_currentIndexChanged(QString )
 {
 	QVariant data = ui->reference->itemData(ui->reference->currentIndex());
 
@@ -151,7 +151,7 @@ void HDDTest::on_reference_currentIndexChanged(QString )
 	}
 }
 
-void HDDTest::device_accessWarning()
+void HDDTestWidget::device_accessWarning()
 {
 	QString user = QString::fromAscii(getenv("USER"));
 	QMessageBox box;
@@ -167,9 +167,9 @@ void HDDTest::device_accessWarning()
 	box.exec();
 }
 
-void HDDTest::refDevice_accessWarning() {}
+void HDDTestWidget::refDevice_accessWarning() {}
 
-void HDDTest::UpdateInfo(TestWidget::DataSet dataset)
+void HDDTestWidget::UpdateInfo(TestWidget::DataSet dataset)
 {
 	if(dataset == TestWidget::RESULTS)
 	{
@@ -177,7 +177,7 @@ void HDDTest::UpdateInfo(TestWidget::DataSet dataset)
 		this->ui->model->setText(device.model);
 		this->ui->serial->setText(device.serial);
 		this->ui->firmware->setText(device.firmware);
-		this->ui->size->setText(Device::Format(device.size));
+		this->ui->size->setText(Format(device.size));
 		this->ui->mountpoint->setText(device.mountpoint);
 		this->ui->fstype->setText(device.fstype);
 		this->ui->fsoptions->setText(device.fsoptions);
@@ -189,7 +189,7 @@ void HDDTest::UpdateInfo(TestWidget::DataSet dataset)
 		this->ui->reference_model->setText(refDevice.model);
 		this->ui->reference_serial->setText(refDevice.serial);
 		this->ui->reference_firmware->setText(refDevice.firmware);
-		this->ui->reference_size->setText(Device::Format(refDevice.size));
+		this->ui->reference_size->setText(Format(refDevice.size));
 		this->ui->reference_mountpoint->setText(refDevice.mountpoint);
 		this->ui->reference_fstype->setText(refDevice.fstype);
 		this->ui->reference_fsoptions->setText(refDevice.fsoptions);
@@ -197,7 +197,7 @@ void HDDTest::UpdateInfo(TestWidget::DataSet dataset)
 	}
 }
 
-void HDDTest::ReloadTests(bool loaded)
+void HDDTestWidget::ReloadTests(bool loaded)
 {
 	// check test modes - FS, Valid
 	bool fs = device.fs;
@@ -217,7 +217,7 @@ void HDDTest::ReloadTests(bool loaded)
 	ui->filestructurewidget->SetStartEnabled(!loaded && fs);
 }
 
-void HDDTest::EraseResults(TestWidget::DataSet dataset)
+void HDDTestWidget::EraseResults(TestWidget::DataSet dataset)
 {
 	if(dataset == TestWidget::RESULTS)
 		device.EraseDriveInfo();
@@ -233,7 +233,7 @@ void HDDTest::EraseResults(TestWidget::DataSet dataset)
 	ui->filestructurewidget->EraseResults(dataset);
 }
 
-void HDDTest::on_save_clicked()
+void HDDTestWidget::on_save_clicked()
 {
 	QString filename = QFileDialog::getSaveFileName(this, tr("Save results"), "", tr("Results (*.xml)"));
 	if(filename.length() > 0)
@@ -266,7 +266,7 @@ void HDDTest::on_save_clicked()
 	}
 }
 
-void HDDTest::OpenResultFile(QString filename, TestWidget::DataSet dataset)
+void HDDTestWidget::OpenResultFile(QString filename, TestWidget::DataSet dataset)
 {
 	if(filename.length() == 0)
 		return;

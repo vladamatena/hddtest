@@ -26,7 +26,8 @@ HEADERS += hddtest.h \
     filestructure.h \
     filestructure.h \
     smallfiles.h \
-    testwidget.h
+    testwidget.h \
+    definitions.h
 FORMS += hddtest.ui \
     testwidget.ui
 QT += xml

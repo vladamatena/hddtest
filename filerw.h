@@ -12,7 +12,9 @@
 #ifndef FILERW_H
 #define FILERW_H
 
+#include "definitions.h"
 #include "testwidget.h"
+
 
 class FileRWResults
 {
@@ -35,8 +37,8 @@ public:
 	FileRW(QWidget *parent = 0);
 	~FileRW();
 
-	static const hddsize FILERW_SIZE = 1024 * Device::M;
-	static const hddsize FILERW_BLOCK = 4 * Device::M;
+	static const hddsize FILERW_SIZE = 1024 * M;
+	static const hddsize FILERW_BLOCK = 4 * M;
 
 	// members from Test
 	void TestLoop();

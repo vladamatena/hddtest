@@ -210,20 +210,6 @@ hddtime Device::Read(hddsize size)
 	return timediff;
 }
 
-QString Device::Format(hddsize size)
-{
-	// return size in KB
-	if((size >= 1024) && (size < 1024 * 1024))
-		return 	QString::number(size / 1024) + " KB";
-
-	// return size in MB
-	if(size >= 1024 * 1024)
-		return QString::number(size / 1024 / 1024) + "MB";
-
-	// default return size in bytes
-	return QString::number(size) + " B";
-}
-
 void Device::EraseDriveInfo()
 {
 	size = -1;

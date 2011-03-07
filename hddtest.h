@@ -30,15 +30,15 @@
 #include "smallfiles.h"
 
 namespace Ui {
-    class HDDTest;
+	class HDDTestWidget;
 }
 
 
-class HDDTest : public QDialog {
+class HDDTestWidget : public QDialog {
 	Q_OBJECT
 public:
-	HDDTest(QWidget *parent = 0);
-    ~HDDTest();
+	HDDTestWidget(QWidget *parent = 0);
+	~HDDTestWidget();
 
 	void ReloadTests(bool loaded);
 	void EraseResults(TestWidget::DataSet dataset);
@@ -46,7 +46,7 @@ public:
 	void OpenResultFile(QString filename, TestWidget::DataSet = TestWidget::RESULTS);
 
 private:
-    Ui::HDDTest *ui;
+	Ui::HDDTestWidget *ui;
 
 	Device device;
 	Device refDevice;

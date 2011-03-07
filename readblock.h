@@ -37,7 +37,7 @@ public:
 	// ReadRnd class constructor
 	ReadBlock(QWidget *parent = 0);
 
-	static const hddsize READ_BLOCK_SIZE = 100 * Device::M;
+	static const hddsize READ_BLOCK_SIZE = 100 * M;
 
 	void TestLoop();
 	void InitScene();

@@ -44,8 +44,8 @@ public:
 	ReadCont(QWidget *parent = 0);
 	~ReadCont();
 
-	static const hddsize READ_CONT_SIZE = 4096 * Device::M;
-	static const hddsize READ_CONT_BLOCK = 4 * Device::M;
+	static const hddsize READ_CONT_SIZE = 4096 * M;
+	static const hddsize READ_CONT_BLOCK = 4 * M;
 
 	void TestLoop();
 	void InitScene();

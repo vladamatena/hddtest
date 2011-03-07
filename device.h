@@ -31,9 +31,9 @@
 #include <QMessageBox>
 #include <QtXml>
 
-typedef qint64 hddtime; /// time interval in microseconds
-typedef qint64 hddsize; /// size on drive in bytes
+#include "definitions.h"
 
+using namespace HDDTest;
 
 /// Class for device manipulation via device file
 class Device: public QObject
@@ -72,7 +72,6 @@ public:
 	void Warmup();								/// Make device redy for operation
 	void DriveInfo();							/// Read driveinfo from device
 	void EraseDriveInfo();						/// Erase drive info to default values
-	static QString Format(hddsize size);		/// Size to human readable format convertor
 
 	// raw disk operations
 	void SetPos(hddsize pos);					/// Set actual position
@@ -112,17 +111,6 @@ public:
 
 	QDomElement WriteInfo(QDomDocument &doc);	// store information to XML element
 	void ReadInfo(QDomElement &root);			// read information from XML element
-
-	// size units
-	static const hddsize G = 1024 * 1024 * 1024;
-	static const hddsize M = 1024 * 1024;
-	static const hddsize K = 1024;
-	static const hddsize B = 1;
-
-	// time units
-	static const hddtime s	= 1000000;
-	static const hddtime ms = 1000;
-	static const hddtime us = 1;
 
 private:
 	int __fd;				// device's file destriptor

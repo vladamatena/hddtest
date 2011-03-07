@@ -74,7 +74,7 @@ void SmallFiles::TestLoop()
 		files.push_back(file);
 
 		// create file
-		hddtime time = device->MkFile(file, Device::K + random.Get64() % (9 * Device::K));
+		hddtime time = device->MkFile(file, K + random.Get64() % (9 * K));
 		results.file_build_time += time;
 
 		++results.files_build;
@@ -135,30 +135,30 @@ void SmallFiles::UpdateScene()
 	// update bars
 	this->build_dir_bar->Set(
 			100 * results.dirs_build / SMALLFILES_SIZE,
-			(qreal)results.dir_build_time / Device::s);
+			(qreal)results.dir_build_time / s);
 	this->build_files_bar->Set(
 			100 * results.files_build / SMALLFILES_SIZE,
-			(qreal)results.file_build_time / Device::s);
+			(qreal)results.file_build_time / s);
 	this->read_files_bar->Set(
 			100 * results.files_read / SMALLFILES_SIZE,
-			(qreal)results.file_read_time / Device::s);
+			(qreal)results.file_read_time / s);
 	this->destroy_bar->Set(
 			100 * results.destroyed / (SMALLFILES_SIZE * 2),
-			(qreal)results.destroy_time / Device::s);
+			(qreal)results.destroy_time / s);
 
 	// update reference bars
 	this->build_dir_reference_bar->Set(
 			100 * reference.dirs_build / SMALLFILES_SIZE,
-			(qreal)reference.dir_build_time / Device::s);
+			(qreal)reference.dir_build_time / s);
 	this->build_files_reference_bar->Set(
 			100 * reference.files_build / SMALLFILES_SIZE,
-			(qreal)reference.file_build_time / Device::s);
+			(qreal)reference.file_build_time / s);
 	this->read_files_reference_bar->Set(
 			100 * reference.files_read / SMALLFILES_SIZE,
-			(qreal)reference.file_read_time / Device::s);
+			(qreal)reference.file_read_time / s);
 	this->destroy_reference_bar->Set(
 			100 * reference.destroyed / (SMALLFILES_SIZE * 2),
-			(qreal)reference.destroy_time / Device::s);
+			(qreal)reference.destroy_time / s);
 
 	// rescale
 	Rescale();
