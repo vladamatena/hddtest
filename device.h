@@ -64,7 +64,7 @@ public:
 	QList<Item> GetDevices();					/// Gets list of devices
 
 	// device access operations
-	void Open(QString path, bool close, bool rw = false);	/// Opens device specified by path
+	void Open(QString path, bool close);		/// Opens device specified by path
 	void Close();								/// Close device file descriptor
 	void ReportProblem();						/// Reports a problem with accessing device
 	void DropCaches();							/// Disables some caches for device

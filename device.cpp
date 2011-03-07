@@ -32,7 +32,7 @@ QList<Device::Item> Device::GetDevices()
 	return list;
 }
 
-void Device::Open(QString path, bool close, bool rw)
+void Device::Open(QString path, bool close)
 {
 	this->path = path;
 	temp_created = false;
@@ -46,11 +46,7 @@ void Device::Open(QString path, bool close, bool rw)
 		return;
 
 	// open device file
-	if(!rw)
-		__fd = open(path.toUtf8(), O_RDONLY | O_LARGEFILE);
-	else
-		__fd = open(path.toUtf8(), O_CREAT | O_RDWR | O_SYNC | O_LARGEFILE, S_IRWXU);
-
+	__fd = open(path.toUtf8(), O_RDONLY | O_LARGEFILE);
 	if(__fd < 0)
 		ReportProblem();
 
