@@ -14,7 +14,8 @@ SOURCES += main.cpp \
     filerw.cpp \
     filestructure.cpp \
 	smallfiles.cpp \
-    testwidget.cpp
+    testwidget.cpp \
+    definitions.cpp
 HEADERS += hddtest.h \
     randomgenerator.h \
     seeker.h \

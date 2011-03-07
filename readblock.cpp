@@ -22,14 +22,14 @@ ReadBlock::ReadBlock(QWidget *parent):
 
 	// test name and description
 	testName = "Read block";
-	testDescription = "Read Block test reads " + Format(READ_BLOCK_SIZE) +
+	testDescription = "Read Block test reads " + Def::Format(READ_BLOCK_SIZE) +
 			" with different block sizes. Blocks of specified size are place next to each other." +
 			" No seekeing is required to access next block. Block sizes are: ";
 	for(int i = 0; i < results.size(); ++i)
 	{
 		if(i > 0)
 			testDescription += ", ";
-		testDescription += Format(results[i].__block_size);
+		testDescription += Def::Format(results[i].__block_size);
 	}
 
 	// add bars to scene
@@ -37,7 +37,7 @@ ReadBlock::ReadBlock(QWidget *parent):
 	{
 		Bar *bar = this->addBar(
 				"MB/s",
-				Format(results[i].__block_size),
+				Def::Format(results[i].__block_size),
 				QColor(0xff, 0xa0 * (i+1) / results.size(), 0),
 				2*i * 1.0f / (results.size() + reference.size()),
 				1.0f / (results.size() + reference.size() + 1));
@@ -49,7 +49,7 @@ ReadBlock::ReadBlock(QWidget *parent):
 	{
 		Bar *bar = this->addBar(
 				"MB/s",
-				Format(reference[i].__block_size),
+				Def::Format(reference[i].__block_size),
 				QColor(0, 0xc0 * (i+1) / reference.size(), 0xff),
 				(2*i + 1) * 1.0f / (reference.size() + reference.size()),
 				1.0f / (reference.size() + reference.size() + 1));

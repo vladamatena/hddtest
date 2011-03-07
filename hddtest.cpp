@@ -177,7 +177,7 @@ void HDDTestWidget::UpdateInfo(TestWidget::DataSet dataset)
 		this->ui->model->setText(device.model);
 		this->ui->serial->setText(device.serial);
 		this->ui->firmware->setText(device.firmware);
-		this->ui->size->setText(Format(device.size));
+		this->ui->size->setText(Def::Format(device.size));
 		this->ui->mountpoint->setText(device.mountpoint);
 		this->ui->fstype->setText(device.fstype);
 		this->ui->fsoptions->setText(device.fsoptions);
@@ -189,7 +189,7 @@ void HDDTestWidget::UpdateInfo(TestWidget::DataSet dataset)
 		this->ui->reference_model->setText(refDevice.model);
 		this->ui->reference_serial->setText(refDevice.serial);
 		this->ui->reference_firmware->setText(refDevice.firmware);
-		this->ui->reference_size->setText(Format(refDevice.size));
+		this->ui->reference_size->setText(Def::Format(refDevice.size));
 		this->ui->reference_mountpoint->setText(refDevice.mountpoint);
 		this->ui->reference_fstype->setText(refDevice.fstype);
 		this->ui->reference_fsoptions->setText(refDevice.fsoptions);
