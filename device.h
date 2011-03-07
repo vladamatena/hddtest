@@ -17,7 +17,6 @@
 #define DEVICE_H
 
 #include <fcntl.h>
-#include <sys/time.h>
 #include <iostream>
 #include <linux/hdreg.h>
 #include <sys/ioctl.h>
@@ -32,6 +31,7 @@
 #include <QtXml>
 
 #include "definitions.h"
+#include "timer.h"
 
 using namespace HDDTest;
 
@@ -87,6 +87,8 @@ public:
 	hddtime DelDir(QString path);				/// Delete dir from tmp path and return operation time
 	hddtime ReadFile(QString path);				/// Reads file and return operation time
 
+	Timer timer;								/// Timer for device operation measuring
+
 	// temp directory operations
 	QString GetSafeTemp();						/// Prepares and returns path to temp for FS tests
 	void ClearSafeTemp();						/// Clears temp
@@ -109,9 +111,8 @@ public:
 	// kernel info
 	QString kernel;
 
-	QDomElement WriteInfo(QDomDocument &doc);	// store information to XML element
-	void ReadInfo(QDomElement &root);			// read information from XML element
-
+	QDomElement WriteInfo(QDomDocument &doc);	/// Store information to XML element
+	void ReadInfo(QDomElement &root);			/// Read information from XML element
 private:
 	int __fd;				// device's file destriptor
 	hddsize __device_size;	// device's size

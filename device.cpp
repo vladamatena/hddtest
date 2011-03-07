@@ -93,22 +93,14 @@ void Device::DropCaches()
 
 hddtime Device::Sync()
 {
-	timeval __start;
-	timeval __end;
-
-	// get sync start timestamp
-	gettimeofday(&__start, 0);
+	timer.MarkStart();
 
 	// sync
 	sync();
 
-	// get sync end timestamp
-	gettimeofday(&__end, 0);
+	timer.MarkEnd();
 
-	// count sync time
-	hddtime timediff = (__end.tv_sec * 1000 * 1000 + __end.tv_usec) - (__start.tv_sec * 1000 * 1000 + __start.tv_usec);
-
-	return timediff;
+	return timer.GetOffset();
 }
 
 void Device::Warmup()
@@ -133,24 +125,17 @@ void Device::SetPos(hddsize pos)
 
 hddtime Device::SeekTo(hddsize pos)
 {
-	timeval __start;
-	timeval __end;
 	char c;
 
-	// get seek start timestamp
-	gettimeofday(&__start, 0);
+	timer.MarkStart();
 
 	// seek to new position
 	SetPos(pos);
 	read(__fd, &c, sizeof(char));
 
-	// get seek end timestamp
-	gettimeofday(&__end, 0);
+	timer.MarkEnd();
 
-	// count seek duration
-	hddtime timediff = (__end.tv_sec * 1000 * 1000 + __end.tv_usec) - (__start.tv_sec * 1000 * 1000 + __start.tv_usec);
-
-	return timediff;
+	return timer.GetOffset();
 }
 
 hddsize Device::GetSize()
@@ -161,12 +146,9 @@ hddsize Device::GetSize()
 
 hddtime Device::ReadAt(hddsize size, hddsize pos)
 {
-	timeval __start;
-	timeval __end;
 	char *buffer = new char[size];
 
-	// get seek start timestamp
-	gettimeofday(&__start, 0);
+	timer.MarkStart();
 
 	// seek to new position
 	SetPos(pos);
@@ -174,40 +156,29 @@ hddtime Device::ReadAt(hddsize size, hddsize pos)
 	if(ret <= 0)
 		std::cerr << "Read failed" << std::endl;
 
-	// get seek end timestamp
-	gettimeofday(&__end, 0);
-
-	// count seek duration
-	hddtime timediff = (__end.tv_sec * 1000 * 1000 + __end.tv_usec) - (__start.tv_sec * 1000 * 1000 + __start.tv_usec);
+	timer.MarkEnd();
 
 	delete buffer;
 
-	return timediff;
+	return timer.GetOffset();
 }
 
 hddtime Device::Read(hddsize size)
 {
-	timeval __start;
-	timeval __end;
 	char *buffer = new char[size];
 
-	// get seek start timestamp
-	gettimeofday(&__start, 0);
+	timer.MarkStart();
 
 	// read data
 	int ret = read(__fd, buffer, sizeof(char) * size);
 	if(ret <= 0)
 		std::cerr << "Read failed" << std::endl;
 
-	// get seek end timestamp
-	gettimeofday(&__end, 0);
-
-	// count seek duration
-	hddtime timediff = (__end.tv_sec * 1000 * 1000 + __end.tv_usec) - (__start.tv_sec * 1000 * 1000 + __start.tv_usec);
+	timer.MarkEnd();
 
 	delete buffer;
 
-	return timediff;
+	return timer.GetOffset();
 }
 
 void Device::EraseDriveInfo()
@@ -305,33 +276,21 @@ hddtime Device::MkDir(QString path)
 	QString temp = GetSafeTemp();
 	QDir dir(temp);
 
-	timeval __start;
-	timeval __end;
-
-	// get start time
-	gettimeofday(&__start, 0);
+	timer.MarkStart();
 
 	// make dir
 	dir.mkdir(path);
 
-	// get end time
-	gettimeofday(&__end, 0);
+	timer.MarkEnd();
 
-	// count seek duration
-	hddtime timediff = (__end.tv_sec * 1000 * 1000 + __end.tv_usec) - (__start.tv_sec * 1000 * 1000 + __start.tv_usec);
-
-	return timediff;
+	return timer.GetOffset();
 }
 
 hddtime Device::MkFile(QString path, hddsize size)
 {
 	QFile file(path);
 
-	timeval __start;
-	timeval __end;
-
-	// get start time
-	gettimeofday(&__start, 0);
+	timer.MarkStart();
 
 	// write file
 	file.open(QIODevice::WriteOnly);
@@ -343,13 +302,9 @@ hddtime Device::MkFile(QString path, hddsize size)
 	}
 	file.close();
 
-	// get end time
-	gettimeofday(&__end, 0);
+	timer.MarkEnd();
 
-	// count seek duration
-	hddtime timediff = (__end.tv_sec * 1000 * 1000 + __end.tv_usec) - (__start.tv_sec * 1000 * 1000 + __start.tv_usec);
-
-	return timediff;
+	return timer.GetOffset();
 }
 
 hddtime Device::DelDir(QString path)
@@ -357,51 +312,31 @@ hddtime Device::DelDir(QString path)
 	QString temp = GetSafeTemp();
 	QDir dir(temp);
 
-	timeval __start;
-	timeval __end;
-
-	// get start time
-	gettimeofday(&__start, 0);
+	timer.MarkStart();
 
 	// del dir
 	dir.rmdir(path);
 
-	// get end time
-	gettimeofday(&__end, 0);
+	timer.MarkEnd();
 
-	// count seek duration
-	hddtime timediff = (__end.tv_sec * 1000 * 1000 + __end.tv_usec) - (__start.tv_sec * 1000 * 1000 + __start.tv_usec);
-
-	return timediff;
+	return timer.GetOffset();
 }
 
 hddtime Device::DelFile(QString path)
 {
-	timeval __start;
-	timeval __end;
-
-	// get start time
-	gettimeofday(&__start, 0);
+	timer.MarkStart();
 
 	// del file
 	QFile::remove(path);
 
-	// get end time
-	gettimeofday(&__end, 0);
+	timer.MarkEnd();
 
-	// count seek duration
-	hddtime timediff = (__end.tv_sec * 1000 * 1000 + __end.tv_usec) - (__start.tv_sec * 1000 * 1000 + __start.tv_usec);
-
-	return timediff;
+	return timer.GetOffset();
 }
 
 hddtime Device::ReadFile(QString path)
 {
-	timeval __start;
-	timeval __end;
-
-	// get start time
-	gettimeofday(&__start, 0);
+	timer.MarkStart();
 
 	// read file
 	QFile file(path);
@@ -411,13 +346,9 @@ hddtime Device::ReadFile(QString path)
 	delete buffer;
 	file.close();
 
-	// get end time
-	gettimeofday(&__end, 0);
+	timer.MarkEnd();
 
-	// count seek duration
-	hddtime timediff = (__end.tv_sec * 1000 * 1000 + __end.tv_usec) - (__start.tv_sec * 1000 * 1000 + __start.tv_usec);
-
-	return timediff;
+	return timer.GetOffset();
 }
 
 QDomElement Device::WriteInfo(QDomDocument &doc)
