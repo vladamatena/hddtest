@@ -15,7 +15,8 @@ SOURCES += main.cpp \
     filestructure.cpp \
 	smallfiles.cpp \
     testwidget.cpp \
-    definitions.cpp
+    definitions.cpp \
+    file.cpp
 HEADERS += hddtest.h \
     randomgenerator.h \
     seeker.h \
@@ -28,7 +29,8 @@ HEADERS += hddtest.h \
     filestructure.h \
     smallfiles.h \
     testwidget.h \
-    definitions.h
+    definitions.h \
+    file.h
 FORMS += hddtest.ui \
     testwidget.ui
 QT += xml

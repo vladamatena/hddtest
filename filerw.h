@@ -14,6 +14,7 @@
 
 #include "definitions.h"
 #include "testwidget.h"
+#include "file.h"
 
 
 class FileRWResults
