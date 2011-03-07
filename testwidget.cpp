@@ -96,7 +96,7 @@ void TestWidget::SetStartEnabled(bool enabled)
 
 void TestWidget::on_startstop_clicked()
 {
-	if(running == false)
+	if(!running)
 		StartTest();
 	else
 		StopTest();
@@ -105,10 +105,28 @@ void TestWidget::on_startstop_clicked()
 
 void TestWidget::on_info_clicked()
 {
+	// Show test description
 	QMessageBox box;
 	box.setText(testName);
 	box.setInformativeText(testDescription);
 	box.exec();
+}
+
+
+void TestWidget::on_image_clicked()
+{
+	// save test result as image
+	QString filename = QFileDialog::getSaveFileName(this, tr("Save result image"), "", tr("Images (*.png)"));
+	if(filename.length() > 0)
+	{
+		if(!filename.contains("\.png"))
+			filename += ".png";
+		QImage image(scene->width(), scene->height(), QImage::Format_RGB32);
+		image.fill(QColor(Qt::white).rgb());
+		QPainter painter(&image);
+		scene->render(&painter);
+		image.save(filename);
+	}
 }
 
 void TestWidget::Rescale(bool force)
@@ -598,3 +616,4 @@ void TestWidget::Legend::Reposition()
 		pos -= width;
 	}
 }
+

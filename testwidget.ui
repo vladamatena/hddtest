@@ -27,6 +27,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="image">
+       <property name="text">
+        <string>Export</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="info">
        <property name="text">
         <string>Info</string>

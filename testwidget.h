@@ -10,6 +10,7 @@
 #include <QGraphicsLineItem>
 #include <QGraphicsRectItem>
 #include <QGraphicsTextItem>
+#include <QFileDialog>
 
 #include "device.h"
 
@@ -200,6 +201,7 @@ private slots:
 	void refresh_timer_timeout();
 	void on_startstop_clicked();
 	void on_info_clicked();
+	void on_image_clicked();
 };
 
 #endif // TESTWIDGET_H
