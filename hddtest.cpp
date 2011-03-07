@@ -84,7 +84,7 @@ void HDDTestWidget::on_drive_currentIndexChanged(QString)
 				ui->drive->insertItem(
 							index,
 							"Saved: " + filename,
-							QVariant::fromValue(Device::Item(Device::Item::HDD_ITEM_SAVED, filename)));
+							QVariant::fromValue(Device::Item::Saved(filename)));
 				ui->drive->setCurrentIndex(index);
 			}
 		}
@@ -127,7 +127,7 @@ void HDDTestWidget::on_reference_currentIndexChanged(QString )
 				ui->reference->insertItem(
 							index,
 							"Saved: " + filename,
-							QVariant::fromValue(Device::Item(Device::Item::HDD_ITEM_SAVED, filename)));
+							QVariant::fromValue(Device::Item::Saved(filename)));
 				ui->reference->setCurrentIndex(index);
 			}
 		}
