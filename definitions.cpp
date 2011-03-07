@@ -2,20 +2,40 @@
 
 using namespace HDDTest;
 
-QString Def::Format(hddsize size)		/// Size to human readable format convertor
+QString Def::FormatSize(hddsize size)		/// Size to human readable format convertor
 {
-	// return size in KB
+	QString value;
+	QString unit;
+
+	// get string representation of value
 	if((size >= K) && (size < M))
-		return 	QString::number(size / K) + "KB";
+	{
+		// return size in KB
+		value = QString::number((qreal)size / K);
+		unit = "KB";
+	}
 
-	// return size in MB
-	if((size >= M) && (size < G))
-		return QString::number(size / M) + "MB";
+	else if((size >= M) && (size < G))
+	{
+		// return size in MB
+		value = QString::number((qreal)size / M);
+		unit = "MB";
+	} else if(size >= G)
+	{
+		// return size in GB
+		value = QString::number((qreal)size / G);
+		unit = "GB";
+	} else
+	{
+		// default return size in bytes
+		value = QString::number(size);
+		unit = "B";
+	}
 
-	// return size in GB
-	if(size >= G)
-		return QString::number(size / G) + "GB";
+	// trim to 2 digits
+	int dotpos = value.lastIndexOf(".");
+	if(dotpos > 0)
+		value.truncate(dotpos + 3);
 
-	// default return size in bytes
-	return QString::number(size) + "B";
+	return value + unit;
 }

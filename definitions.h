@@ -23,7 +23,7 @@ namespace HDDTest {
 	class Def
 	{
 	public:
-		static QString Format(hddsize size);	/// Size to human readable format convertor
+		static QString FormatSize(hddsize size);	/// Size to human readable format convertor
 	};
 }
 

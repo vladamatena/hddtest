@@ -30,7 +30,7 @@ FileRW::FileRW(QWidget *parent) :
 	__legend->AddItem("Write", QColor(0, 0, 255));
 
 	testName = "File write and read";
-	testDescription = "R/W File test writes " + Def::Format(FILERW_SIZE) +
+	testDescription = "R/W File test writes " + Def::FormatSize(FILERW_SIZE) +
 			" to file on mounted device. Then whole file is read again." +
 			" Process is shown in graph where darker color shows write speed" +
 			"and lighter read speed depending on file position." +
