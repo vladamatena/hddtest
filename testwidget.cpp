@@ -119,8 +119,6 @@ void TestWidget::on_image_clicked()
 	QString filename = QFileDialog::getSaveFileName(this, tr("Save result image"), "", tr("Images (*.png)"));
 	if(filename.length() > 0)
 	{
-		if(!filename.contains("\.png"))
-			filename += ".png";
 		QImage image(scene->width(), scene->height(), QImage::Format_RGB32);
 		image.fill(QColor(Qt::white).rgb());
 		QPainter painter(&image);

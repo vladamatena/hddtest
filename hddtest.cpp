@@ -235,37 +235,35 @@ void HDDTest::EraseResults(TestWidget::DataSet dataset)
 
 void HDDTest::on_save_clicked()
 {
-	// Create base document for tests results
-	QDomDocument doc("HddTest");
-
-	QDomElement results = doc.createElement("Results");
-	doc.appendChild(results);
-
-	// save drive info
-	results.appendChild(device.WriteInfo(doc));
-
-	// save tests results
-	results.appendChild(ui->filerwwidget->WriteResults(doc));
-	results.appendChild(ui->filestructurewidget->WriteResults(doc));
-	results.appendChild(ui->readblockwidget->WriteResults(doc));
-	results.appendChild(ui->readcontwidget->WriteResults(doc));
-	results.appendChild(ui->readrndwidget->WriteResults(doc));
-	results.appendChild(ui->seekwidget->WriteResults(doc));
-	results.appendChild(ui->smallfileswidget->WriteResults(doc));
-
-	// write document to file
 	QString filename = QFileDialog::getSaveFileName(this, tr("Save results"), "", tr("Results (*.xml)"));
-	if(!filename.contains("xml"))
-		filename = filename + ".xml";
+	if(filename.length() > 0)
+	{
+		// Create base document for tests results
+		QDomDocument doc("HddTest");
 
-	if(filename.length() == 0)
-		return;
+		// Create base element
+		QDomElement results = doc.createElement("Results");
+		doc.appendChild(results);
 
-	QFile file(filename);
-	file.open(QIODevice::WriteOnly);
-	QTextStream stream(&file);
-	stream << doc.toString();
-	file.close();
+		// save drive info
+		results.appendChild(device.WriteInfo(doc));
+
+		// save tests results
+		results.appendChild(ui->filerwwidget->WriteResults(doc));
+		results.appendChild(ui->filestructurewidget->WriteResults(doc));
+		results.appendChild(ui->readblockwidget->WriteResults(doc));
+		results.appendChild(ui->readcontwidget->WriteResults(doc));
+		results.appendChild(ui->readrndwidget->WriteResults(doc));
+		results.appendChild(ui->seekwidget->WriteResults(doc));
+		results.appendChild(ui->smallfileswidget->WriteResults(doc));
+
+		// write document to file
+		QFile file(filename);
+		file.open(QIODevice::WriteOnly);
+		QTextStream stream(&file);
+		stream << doc.toString();
+		file.close();
+	}
 }
 
 void HDDTest::OpenResultFile(QString filename, TestWidget::DataSet dataset)
