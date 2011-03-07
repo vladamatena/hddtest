@@ -100,7 +100,7 @@ hddtime Device::Sync()
 
 	timer.MarkEnd();
 
-	return timer.GetOffset();
+	return timer.GetFinalOffset();
 }
 
 void Device::Warmup()
@@ -135,7 +135,7 @@ hddtime Device::SeekTo(hddsize pos)
 
 	timer.MarkEnd();
 
-	return timer.GetOffset();
+	return timer.GetFinalOffset();
 }
 
 hddsize Device::GetSize()
@@ -160,7 +160,7 @@ hddtime Device::ReadAt(hddsize size, hddsize pos)
 
 	delete buffer;
 
-	return timer.GetOffset();
+	return timer.GetFinalOffset();
 }
 
 hddtime Device::Read(hddsize size)
@@ -178,7 +178,7 @@ hddtime Device::Read(hddsize size)
 
 	delete buffer;
 
-	return timer.GetOffset();
+	return timer.GetFinalOffset();
 }
 
 void Device::EraseDriveInfo()
@@ -283,7 +283,7 @@ hddtime Device::MkDir(QString path)
 
 	timer.MarkEnd();
 
-	return timer.GetOffset();
+	return timer.GetFinalOffset();
 }
 
 hddtime Device::MkFile(QString path, hddsize size)
@@ -304,7 +304,7 @@ hddtime Device::MkFile(QString path, hddsize size)
 
 	timer.MarkEnd();
 
-	return timer.GetOffset();
+	return timer.GetFinalOffset();
 }
 
 hddtime Device::DelDir(QString path)
@@ -319,7 +319,7 @@ hddtime Device::DelDir(QString path)
 
 	timer.MarkEnd();
 
-	return timer.GetOffset();
+	return timer.GetFinalOffset();
 }
 
 hddtime Device::DelFile(QString path)
@@ -331,7 +331,7 @@ hddtime Device::DelFile(QString path)
 
 	timer.MarkEnd();
 
-	return timer.GetOffset();
+	return timer.GetFinalOffset();
 }
 
 hddtime Device::ReadFile(QString path)
@@ -348,7 +348,7 @@ hddtime Device::ReadFile(QString path)
 
 	timer.MarkEnd();
 
-	return timer.GetOffset();
+	return timer.GetFinalOffset();
 }
 
 QDomElement Device::WriteInfo(QDomDocument &doc)

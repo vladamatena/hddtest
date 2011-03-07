@@ -14,7 +14,8 @@ public:
 
 	void MarkStart();
 	void MarkEnd();
-	hddtime GetOffset();
+	hddtime GetFinalOffset();
+	hddtime GetCurrentOffset();
 
 private:
 	timeval start;

@@ -46,6 +46,7 @@ void SmallFiles::TestLoop()
 	nodes.push_back(device->GetSafeTemp());	//	add initial node
 
 	// build dirs
+	results.phase = SmallFilesResults::PHASE_DIR_BUILD;
 	device->DropCaches();
 	device->Sync();
 	for(int i = 0; i < SMALLFILES_SIZE; ++i)
@@ -60,12 +61,13 @@ void SmallFiles::TestLoop()
 
 		++results.dirs_build;
 
-		if(go == false)
+		if(!go)
 			return;
 	}
 	results.dir_build_time += device->Sync();
 
 	// build files
+	results.phase = SmallFilesResults::PHASE_FILE_BUILD;
 	device->DropCaches();
 	for(int i = 0; i < SMALLFILES_SIZE; ++i)
 	{
@@ -79,12 +81,13 @@ void SmallFiles::TestLoop()
 
 		++results.files_build;
 
-		if(go == false)
+		if(!go)
 			return;
 	}
 	results.file_build_time += device->Sync();
 
 	// read files in random order
+	results.phase = SmallFilesResults::PHASE_FILE_READ;
 	device->DropCaches();
 	QList<QString> files_to_read(files);
 	while(!files_to_read.empty())
@@ -97,7 +100,7 @@ void SmallFiles::TestLoop()
 
 		++results.files_read;
 
-		if(go == false)
+		if(!go)
 			return;
 	}
 	results.file_read_time += device->Sync();
@@ -106,12 +109,13 @@ void SmallFiles::TestLoop()
 	device->DropCaches();
 
 	// del files
+	results.phase = SmallFilesResults::PHASE_DESTROY;
 	for(int i = 0; i < files.size(); ++i)
 	{
 		results.destroy_time += device->DelFile(files[i]);
 		++results.destroyed;
 
-		if(go == false)
+		if(!go)
 			return;
 	}
 	results.destroy_time += device->Sync();
@@ -122,7 +126,7 @@ void SmallFiles::TestLoop()
 		results.destroy_time += device->DelDir(nodes[i]);
 		++results.destroyed;
 
-		if(go == false)
+		if(!go)
 			return;
 	}
 	results.destroy_time += device->Sync();
@@ -132,31 +136,58 @@ void SmallFiles::TestLoop()
 
 void SmallFiles::UpdateScene()
 {
+	// get progress
+	hddtime dir_build = results.dir_build_time;
+	hddtime file_build = results.file_build_time;
+	hddtime file_read =  results.file_read_time;
+	hddtime destroy = results.destroy_time;
+
+	// add current operation progress
+	if(device)
+	{
+		switch(results.phase)
+		{
+		case SmallFilesResults::PHASE_DIR_BUILD:
+			dir_build += device->timer.GetCurrentOffset();
+			break;
+		case SmallFilesResults::PHASE_FILE_BUILD:
+			file_build += device->timer.GetCurrentOffset();
+			break;
+		case SmallFilesResults::PHASE_FILE_READ:
+			file_read += device->timer.GetCurrentOffset();
+			break;
+		case SmallFilesResults::PHASE_DESTROY:
+			destroy += device->timer.GetCurrentOffset();
+		default:
+			break;
+		}
+	}
+
 	// update bars
-	this->build_dir_bar->Set(
+	build_dir_bar->Set(
 			100 * results.dirs_build / SMALLFILES_SIZE,
-			(qreal)results.dir_build_time / s);
-	this->build_files_bar->Set(
+			(qreal)dir_build / s);
+	build_files_bar->Set(
 			100 * results.files_build / SMALLFILES_SIZE,
-			(qreal)results.file_build_time / s);
-	this->read_files_bar->Set(
+			(qreal)file_build / s);
+	read_files_bar->Set(
 			100 * results.files_read / SMALLFILES_SIZE,
-			(qreal)results.file_read_time / s);
-	this->destroy_bar->Set(
+			(qreal)file_read / s);
+	destroy_bar->Set(
 			100 * results.destroyed / (SMALLFILES_SIZE * 2),
-			(qreal)results.destroy_time / s);
+			(qreal)(destroy) / s);
 
 	// update reference bars
-	this->build_dir_reference_bar->Set(
+	build_dir_reference_bar->Set(
 			100 * reference.dirs_build / SMALLFILES_SIZE,
 			(qreal)reference.dir_build_time / s);
-	this->build_files_reference_bar->Set(
+	build_files_reference_bar->Set(
 			100 * reference.files_build / SMALLFILES_SIZE,
 			(qreal)reference.file_build_time / s);
-	this->read_files_reference_bar->Set(
+	read_files_reference_bar->Set(
 			100 * reference.files_read / SMALLFILES_SIZE,
 			(qreal)reference.file_read_time / s);
-	this->destroy_reference_bar->Set(
+	destroy_reference_bar->Set(
 			100 * reference.destroyed / (SMALLFILES_SIZE * 2),
 			(qreal)reference.destroy_time / s);
 
@@ -190,6 +221,7 @@ void SmallFilesResults::erase()
 	destroyed = 0;
 
 	done = false;
+	phase = PHASE_NONE;
 }
 
 QDomElement SmallFiles::WriteResults(QDomDocument &doc)

@@ -53,7 +53,7 @@ hddtime File::Read(hddsize size)
 
 	delete buffer;
 
-	return timer.GetOffset();
+	return timer.GetFinalOffset();
 }
 
 hddtime File::Write(hddsize size)
@@ -71,5 +71,5 @@ hddtime File::Write(hddsize size)
 
 	delete buffer;
 
-	return timer.GetOffset();
+	return timer.GetFinalOffset();
 }

@@ -20,6 +20,7 @@
 class SmallFilesResults
 {
 public:
+	enum Phase { PHASE_NONE, PHASE_DIR_BUILD, PHASE_FILE_BUILD, PHASE_FILE_READ, PHASE_DESTROY };
 	SmallFilesResults();
 
 	hddtime dir_build_time;
@@ -32,6 +33,7 @@ public:
 	int files_read;
 	int destroyed;
 	bool done;
+	Phase phase;
 
 	void erase();
 };
