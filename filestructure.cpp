@@ -36,6 +36,7 @@ void FileStructure::TestLoop()
 
 	// create structure
 	device->DropCaches();
+	results.phase = FileStructureResults::PHASE_BUILD;
 	while((results.build_files < FILESTRUCTURE_SIZE) || (results.build_dirs < FILESTRUCTURE_SIZE))
 	{
 		if((!(results.build_files < FILESTRUCTURE_SIZE)) || (random.Get32() % 2 == 0))
@@ -71,6 +72,7 @@ void FileStructure::TestLoop()
 
 	// make sure structure is not cached
 	device->DropCaches();
+	results.phase = FileStructureResults::PHASE_DESTROY;
 
 	// delete files
 	for(int i = 0; i < files.size(); ++i)
@@ -106,23 +108,36 @@ void FileStructure::InitScene()
 
 void FileStructure::UpdateScene()
 {
+	// get result progress
+	hddtime build = results.build;
+	hddtime destroy = results.destroy;
+
+	// add current operation progress
+	if(device)
+	{
+		if(results.phase == FileStructureResults::PHASE_BUILD)
+			build += device->timer.GetCurrentOffset();
+		else if (results.phase == FileStructureResults::PHASE_DESTROY)
+			destroy += device->timer.GetCurrentOffset();
+	}
+
 	// update result bars
 	build_bar->Set(
 			(100 * (results.build_dirs + results.build_files)) / (2 * FILESTRUCTURE_SIZE),
-			(qreal)results.build / 1000000);
+			(qreal) build / s);
 
 	destroy_bar->Set(
 			100 * results.destroyed / (2 * FILESTRUCTURE_SIZE),
-			(qreal)results.destroy / 1000000) ;
+			(qreal)destroy / s) ;
 
 	// update reference bars
 	build_reference_bar->Set(
 			(100 * (reference.build_dirs + reference.build_files)) / (2 * FILESTRUCTURE_SIZE),
-			(qreal)reference.build / 1000000);
+			(qreal)reference.build / s);
 
 	destroy_reference_bar->Set(
 			100 * reference.destroyed / (2 * FILESTRUCTURE_SIZE),
-			(qreal)reference.destroy / 1000000) ;
+			(qreal)reference.destroy / s) ;
 
 	// rescale
 	Rescale();
@@ -151,6 +166,7 @@ void FileStructureResults::erase()
 	build = 0.0f;
 
 	done = false;
+	phase = PHASE_NONE;
 }
 
 QDomElement FileStructure::WriteResults(QDomDocument &doc)

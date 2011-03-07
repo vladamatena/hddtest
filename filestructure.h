@@ -20,6 +20,7 @@
 class FileStructureResults
 {
 public:
+	enum Phase { PHASE_NONE, PHASE_BUILD, PHASE_DESTROY };
 	FileStructureResults();
 	void erase();
 
@@ -27,6 +28,7 @@ public:
 	int build_dirs;
 	int destroyed;
 	bool done;
+	Phase phase;
 
 	hddtime build;
 	hddtime destroy;
