@@ -40,50 +40,36 @@ void File::SetPos(hddsize pos)
 
 hddtime File::Read(hddsize size)
 {
-	timeval __start;
-	timeval __end;
 	char *buffer = new char[size];
 
-	// get seek start timestamp
-	gettimeofday(&__start, 0);
+	timer.MarkStart();
 
 	// read data
 	int ret = read(fd, buffer, sizeof(char) * size);
 	if(ret <= 0)
 		std::cerr << "Read failed" << std::endl;
 
-	// get seek end timestamp
-	gettimeofday(&__end, 0);
-
-	// count seek duration
-	hddtime timediff = (__end.tv_sec * 1000 * 1000 + __end.tv_usec) - (__start.tv_sec * 1000 * 1000 + __start.tv_usec);
+	timer.MarkEnd();
 
 	delete buffer;
 
-	return timediff;
+	return timer.GetOffset();
 }
 
 hddtime File::Write(hddsize size)
 {
-	timeval __start;
-	timeval __end;
 	char *buffer = new char[size];
 
-	// get seek start timeout
-	gettimeofday(&__start, 0);
+	timer.MarkStart();
 
 	// read data
 	int ret = write(fd, buffer, sizeof(char) * size);
 	if(ret <= 0)
 		std::cerr << "Write failed" << std::endl;
 
-	// get seek end timeout
-	gettimeofday(&__end, 0);
-
-	// count seek duration
-	hddtime timediff = (__end.tv_sec * 1000 * 1000 + __end.tv_usec) - (__start.tv_sec * 1000 * 1000 + __start.tv_usec);
+	timer.MarkEnd();
 
 	delete buffer;
 
-	return timediff;
+	return timer.GetOffset();
 }

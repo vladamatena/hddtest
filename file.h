@@ -4,11 +4,11 @@
 #include <iostream>
 #include <stdio.h>
 #include <fcntl.h>
-#include <sys/time.h>
 
 #include <QObject>
 
 #include "definitions.h"
+#include "timer.h"
 
 using namespace HDDTest;
 
@@ -26,6 +26,8 @@ public:
 
 	hddtime Write(hddsize size);	/// Write at current position in file
 	hddtime Read(hddsize size);		/// Read at current position in file
+
+	Timer timer;					/// Timer used for opeartion time measuring
 
 private:
 	int fd;			// file`s file descriptor

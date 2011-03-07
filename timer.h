@@ -10,10 +10,10 @@ using namespace HDDTest;
 class Timer
 {
 public:
-    Timer();
+	Timer();
 
-	inline void MarkStart();
-	inline void MarkEnd();
+	void MarkStart();
+	void MarkEnd();
 	hddtime GetOffset();
 
 private:
