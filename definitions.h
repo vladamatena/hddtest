@@ -24,6 +24,7 @@ namespace HDDTest {
 	{
 	public:
 		static QString FormatSize(hddsize size);	/// Size to human readable format convertor
+		static QString FormatSpeed(hddsize size);	/// Speed to human readable format convertor
 	};
 }
 

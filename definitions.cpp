@@ -39,3 +39,41 @@ QString Def::FormatSize(hddsize size)		/// Size to human readable format convert
 
 	return value + unit;
 }
+
+QString Def::FormatSpeed(hddsize size)		/// Speed to human readable format convertor
+{
+	QString value;
+	QString unit;
+
+	// get string representation of value
+	if((size >= K) && (size < M))
+	{
+		// return size in KB
+		value = QString::number((qreal)size / K);
+		unit = "KB/s";
+	}
+
+	else if((size >= M) && (size < G))
+	{
+		// return size in MB
+		value = QString::number((qreal)size / M);
+		unit = "MB/s";
+	} else if(size >= G)
+	{
+		// return size in GB
+		value = QString::number((qreal)size / G);
+		unit = "GB/s";
+	} else
+	{
+		// default return size in bytes
+		value = QString::number(size);
+		unit = "B/s";
+	}
+
+	// trim to 2 digits
+	int dotpos = value.lastIndexOf(".");
+	if(dotpos > 0)
+		value.truncate(dotpos + 3);
+
+	return value + unit;
+}
