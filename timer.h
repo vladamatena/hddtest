@@ -11,6 +11,7 @@ class Timer
 {
 public:
     Timer();
+
 	inline void MarkStart();
 	inline void MarkEnd();
 	hddtime GetOffset();

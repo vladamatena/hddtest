@@ -115,7 +115,7 @@ public:
 private:
 	int __fd;				// device's file destriptor
 	hddsize __device_size;	// device's size
-	bool problemReported;	// whenever device acces problem was reported
+	bool problemReported;	// whenever device access problem was reported
 
 signals:
 	void accessWarning();
