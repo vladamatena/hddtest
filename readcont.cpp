@@ -93,6 +93,9 @@ void ReadCont::UpdateScene()
 
 int ReadCont::GetProgress()
 {
+	if(results.blocks == 0)
+		return 0;
+
 	return 100 * results.blocks_done / results.blocks;
 }
 
@@ -115,6 +118,8 @@ void ReadContResults::AddResult(qreal result)
 
 void ReadContResults::erase()
 {
+	this->blocks = 0;
+	this->blocks_done = 0;
 	results.clear();
 	avg = 0;
 }

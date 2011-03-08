@@ -42,15 +42,19 @@ TestWidget::TestThread::TestThread(TestWidget *widget)
 
 void TestWidget::TestThread::run()
 {
+	// mark test started
+	widget->go = true;
+	widget->running = true;
+
 	// prepare device for test
 	widget->device->Warmup();
 	widget->device->DropCaches();
 	widget->device->Sync();
 
-	// start test
-	widget->go = true;
-	widget->running = true;
+	// run test
 	widget->TestLoop();
+
+	// mark test finished
 	widget->running = false;
 }
 
