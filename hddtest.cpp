@@ -183,7 +183,7 @@ void HDDTestWidget::UpdateInfo(TestWidget::DataSet dataset)
 		ui->fsoptions->setText(device.fsoptions);
 		ui->kernel->setText(device.kernel);
 	}
-	else
+	else if(dataset == TestWidget::REFERENCE)
 	{
 		// update info tab - reference devices
 		ui->reference_model->setText(refDevice.model);
@@ -194,6 +194,10 @@ void HDDTestWidget::UpdateInfo(TestWidget::DataSet dataset)
 		ui->reference_fstype->setText(refDevice.fstype);
 		ui->reference_fsoptions->setText(refDevice.fsoptions);
 		ui->reference_kernel->setText(refDevice.kernel);
+	}
+	else
+	{
+		std::cerr << "WARNING: Cannot update info for unknown dataset." << std::endl;
 	}
 }
 
