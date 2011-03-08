@@ -70,7 +70,10 @@ void TestWidget::refresh_timer_timeout()
 void TestWidget::StartTest()
 {
 	if(!device)
+	{
+		std::cerr << "WARNING: Start test without valid device pointer - ignoring" << std::endl;
 		return;
+	}
 
 	// prepare ui for test
 	ui->startstop->setText("Stop");
