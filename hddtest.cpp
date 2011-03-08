@@ -269,13 +269,16 @@ void HDDTestWidget::on_save_clicked()
 void HDDTestWidget::OpenResultFile(QString filename, TestWidget::DataSet dataset)
 {
 	if(filename.length() == 0)
+	{
+		std::cerr << "WARNING: no filename given for results file" << std::endl;
 		return;
+	}
 
 	// open file
 	QFile file(filename);
 	if(!file.open(QIODevice::ReadOnly))
 	{
-		std::cerr << "can't open file" << std::endl;
+		std::cerr << "Cannot open results file" << std::endl;
 		file.close();
 		return;
 	}
@@ -287,11 +290,11 @@ void HDDTestWidget::OpenResultFile(QString filename, TestWidget::DataSet dataset
 	if(!doc.setContent(&file, &err, &row, &col))
 	{
 		file.close();
+		std::cerr << "Cannot set XML document context to file" << std::endl;
 		return;
 	}
 	file.close();
 	QDomElement root = doc.documentElement();
-	QDomElement results = root.firstChildElement("Results");
 
 	// restore device info
 	(dataset == TestWidget::REFERENCE)?refDevice.ReadInfo(root):device.ReadInfo(root);
