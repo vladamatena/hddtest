@@ -71,6 +71,14 @@ void TestWidget::refresh_timer_timeout()
 	UpdateScene();
 }
 
+void TestWidget::on_startstop_clicked()
+{
+	if(!running)
+		StartTest();
+	else
+		StopTest();
+}
+
 void TestWidget::StartTest()
 {
 	if(!device)
@@ -100,15 +108,6 @@ void TestWidget::SetStartEnabled(bool enabled)
 {
 	ui->startstop->setEnabled(enabled);
 }
-
-void TestWidget::on_startstop_clicked()
-{
-	if(!running)
-		StartTest();
-	else
-		StopTest();
-}
-
 
 void TestWidget::on_info_clicked()
 {
