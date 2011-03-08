@@ -158,6 +158,9 @@ void TestWidget::Rescale(bool force)
 		for(int i = 0; i < markers.size(); ++i)
 			markers[i]->Reposition();
 	}
+
+	// redraw scene
+	scene->update();
 }
 
 void TestWidget::resizeEvent(QResizeEvent*)
