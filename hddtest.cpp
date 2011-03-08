@@ -174,26 +174,26 @@ void HDDTestWidget::UpdateInfo(TestWidget::DataSet dataset)
 	if(dataset == TestWidget::RESULTS)
 	{
 		// update info tab - tested device
-		this->ui->model->setText(device.model);
-		this->ui->serial->setText(device.serial);
-		this->ui->firmware->setText(device.firmware);
-		this->ui->size->setText(Def::FormatSize(device.size));
-		this->ui->mountpoint->setText(device.mountpoint);
-		this->ui->fstype->setText(device.fstype);
-		this->ui->fsoptions->setText(device.fsoptions);
-		this->ui->kernel->setText(device.kernel);
+		ui->model->setText(device.model);
+		ui->serial->setText(device.serial);
+		ui->firmware->setText(device.firmware);
+		ui->size->setText(Def::FormatSize(device.size));
+		ui->mountpoint->setText(device.mountpoint);
+		ui->fstype->setText(device.fstype);
+		ui->fsoptions->setText(device.fsoptions);
+		ui->kernel->setText(device.kernel);
 	}
 	else
 	{
 		// update info tab - reference devices
-		this->ui->reference_model->setText(refDevice.model);
-		this->ui->reference_serial->setText(refDevice.serial);
-		this->ui->reference_firmware->setText(refDevice.firmware);
-		this->ui->reference_size->setText(Def::FormatSize(refDevice.size));
-		this->ui->reference_mountpoint->setText(refDevice.mountpoint);
-		this->ui->reference_fstype->setText(refDevice.fstype);
-		this->ui->reference_fsoptions->setText(refDevice.fsoptions);
-		this->ui->reference_kernel->setText(refDevice.kernel);
+		ui->reference_model->setText(refDevice.model);
+		ui->reference_serial->setText(refDevice.serial);
+		ui->reference_firmware->setText(refDevice.firmware);
+		ui->reference_size->setText(Def::FormatSize(refDevice.size));
+		ui->reference_mountpoint->setText(refDevice.mountpoint);
+		ui->reference_fstype->setText(refDevice.fstype);
+		ui->reference_fsoptions->setText(refDevice.fsoptions);
+		ui->reference_kernel->setText(refDevice.kernel);
 	}
 }
 
