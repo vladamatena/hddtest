@@ -144,9 +144,9 @@ void HDDTestWidget::on_reference_currentIndexChanged(QString )
 			EraseResults(TestWidget::REFERENCE);
 			UpdateInfo(TestWidget::REFERENCE);
 		break;
-		case  Device::Item::HDD_ITEM_DEVICE:
-			// silently ignore
+		default:
 			// this should not happend
+			std::cerr << "WARNING: Device selected in reference combo box." << std::endl;
 		break;
 	}
 }
