@@ -208,7 +208,7 @@ TestWidget::Line* TestWidget::addLine(QString unit, QString name, QColor color)
 TestWidget::Ticks* TestWidget::addTicks(QColor color)
 {
 	Ticks *ticks = new Ticks(this, color);
-	markers.push_back(ticks); // TODO delete markers on exit
+	markers.push_back(ticks);
 
 	return ticks;
 }
@@ -216,7 +216,7 @@ TestWidget::Ticks* TestWidget::addTicks(QColor color)
 TestWidget::Bar* TestWidget::addBar(QString unit, QString name, QColor color, qreal position, qreal width)
 {
 	Bar *bar = new Bar(this, unit, name, color, position, width);
-	markers.push_back(bar);	// TODO delete markers on exit
+	markers.push_back(bar);
 
 	return bar;
 }
@@ -224,7 +224,7 @@ TestWidget::Bar* TestWidget::addBar(QString unit, QString name, QColor color, qr
 TestWidget::LineGraph* TestWidget::addLineGraph(QString unit, QColor color)
 {
 	LineGraph *linegraph = new LineGraph(this, unit, color);
-	markers.push_back(linegraph); // TODO delete markers on exit
+	markers.push_back(linegraph);
 
 	return linegraph;
 }
@@ -232,7 +232,7 @@ TestWidget::LineGraph* TestWidget::addLineGraph(QString unit, QColor color)
 TestWidget::Net* TestWidget::addNet(QString unit, QString xAxis, QString yAxis)
 {
 	Net *net = new Net(this, unit, xAxis, yAxis);
-	markers.push_back(net);	// TODO delete merkers on exit
+	markers.push_back(net);
 
 	return net;
 }
@@ -240,7 +240,7 @@ TestWidget::Net* TestWidget::addNet(QString unit, QString xAxis, QString yAxis)
 TestWidget::Legend* TestWidget::addLegend()
 {
 	Legend *legend = new Legend(this);
-	markers.push_back(legend);	// TODO delete merkers on exit
+	markers.push_back(legend);
 
 	return legend;
 }
