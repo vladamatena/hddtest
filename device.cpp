@@ -159,7 +159,7 @@ hddtime Device::ReadAt(hddsize size, hddsize pos)
 
 	timer.MarkEnd();
 
-	delete buffer;
+	delete [] buffer;
 
 	return timer.GetFinalOffset();
 }
@@ -177,7 +177,7 @@ hddtime Device::Read(hddsize size)
 
 	timer.MarkEnd();
 
-	delete buffer;
+	delete [] buffer;
 
 	return timer.GetFinalOffset();
 }
