@@ -15,7 +15,7 @@ Device::Device()
 	problemReported = false;
 	size = -1;
 	fs = false;
-	DriveInfo();	// TODO: is this useless
+	__fd = 0;
 }
 
 QList<Device::Item> Device::GetDevices()
@@ -69,7 +69,8 @@ Device::~Device()
 void Device::Close()
 {
 	// close device file
-	close(__fd);
+	if(__fd > 0)
+		close(__fd);
 }
 
 void Device::DropCaches()
@@ -202,6 +203,7 @@ void Device::DriveInfo()
 	EraseDriveInfo();
 
 	hd_driveid id;
+	memset(&id, 0, sizeof(hd_driveid));
 
 	// use device size
 	size = this->__device_size;
@@ -215,42 +217,38 @@ void Device::DriveInfo()
 	}
 
 	QFile mounts("/proc/mounts");
-	mounts.open(QFile::ReadOnly);
-
-	while(true)	// read all mounts lines
+	if(mounts.open(QFile::ReadOnly | QIODevice::Text))
 	{
-		QString line = mounts.readLine();	// get line
-		if(line.length() == 0)	// no more lines -> end reading
-			break;
-
-		QStringList list = line.split(' ');		// split line to fields
-
-		// if this line describes selected device
-		if((list.size() == 6) &&
-				(
-						(QFile::symLinkTarget(list.at(0)).compare(this->path) == 0)
-						||
-						(path.compare(list.at(0)) == 0)
-				)
-			)
+		while(true)	// read all mounts lines
 		{
-			// assign information to apropriate fileds
-			fs = true;	// TODO: check fs rw option
-			mountpoint = (QString)(list.at(1)).trimmed();
-			fstype = (QString)(list.at(2)).trimmed();
-			fsoptions = (QString)(list.at(3)).trimmed().replace(",","\n");
+			QString line = mounts.readLine();	// get line
+
+			// check line end - this is not normal file atEnd() won`t help
+			if(line.length() == 0)
+				break;
+
+			QStringList list = line.split(' ');		// split line to fields
+
+			// if this line describes selected device
+			if((list.size() == 6) && ((!QFile::symLinkTarget(list[0]).compare(path)) || (!path.compare(list[0]))))
+			{
+				// assign information to apropriate fileds
+				fs = true;	// TODO: check fs rw option
+				mountpoint = (QString)(list[1]).trimmed();
+				fstype = (QString)(list[2]).trimmed();
+				fsoptions = (QString)(list[3]).trimmed().replace(",","\n");
+				break;
+			}
 		}
+		mounts.close();
 	}
 
 	// get info about kernel
 	utsname buf;
+	memset(&buf, 0, sizeof(utsname));
 
 	if(!uname(&buf))
-	{
 		kernel = QString::fromAscii(buf.sysname) + " - " + QString::fromAscii(buf.release);
-	}
-
-	mounts.close();
 }
 
 QString Device::GetSafeTemp()
