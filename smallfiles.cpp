@@ -145,7 +145,7 @@ void SmallFiles::UpdateScene()
 		case SmallFilesResults::PHASE_DESTROY:
 			destroy += device->timer.GetCurrentOffset();
 		default:
-			break;
+			break;	// other phases do not add extra time
 		}
 	}
 
