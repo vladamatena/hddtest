@@ -65,7 +65,7 @@ void FileStructure::TestLoop()
 		}
 
 		if(testState == STOPPING)
-			return;
+			break;
 	}
 	results.build += device->Sync();
 
@@ -79,9 +79,6 @@ void FileStructure::TestLoop()
 	{
 		results.destroy += device->DelFile(files[i]);
 		++results.destroyed;
-
-		if(testState == STOPPING)
-			return;
 	}
 	results.destroy += device->Sync();
 
@@ -90,9 +87,6 @@ void FileStructure::TestLoop()
 	{
 		results.destroy += device->DelDir(nodes[i]);
 		++results.destroyed;
-
-		if(testState == STOPPING)
-			return;
 	}
 	results.destroy += device->Sync();
 
