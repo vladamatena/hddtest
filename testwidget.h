@@ -14,6 +14,8 @@
 
 #include "device.h"
 
+// Forward declaration od TestThread class
+class TestThread;
 
 namespace Ui {
     class TestWidget;
@@ -25,6 +27,7 @@ class TestWidget : public QWidget
 
 public:
 	enum DataSet { RESULTS, REFERENCE };
+	enum TestState { STARTING, RUNNING, STOPPING, STOPEED };
 
 	class Marker
 	{
@@ -182,16 +185,7 @@ protected:
 	 void resizeEvent(QResizeEvent*);
 
 private:
-	class TestThread : public QThread
-	{
-	public:
-		TestThread(TestWidget *widget);
-		void run();
-	private:
-		TestWidget *widget;
-	};
-
-    Ui::TestWidget *ui;
+	Ui::TestWidget *ui;
 
 	QTimer refresh_timer;
 	TestThread *test_thread;
@@ -202,6 +196,8 @@ private slots:
 	void on_startstop_clicked();
 	void on_info_clicked();
 	void on_image_clicked();
+	void test_started();
+	void test_stopped();
 };
 
 #endif // TESTWIDGET_H

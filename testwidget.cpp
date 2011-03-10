@@ -1,5 +1,6 @@
 #include "testwidget.h"
 #include "ui_testwidget.h"
+#include "testthread.h"		// test thread holds pointer to TestWidget and vice versa
 
 TestWidget::TestWidget(QWidget *parent) :
 	QWidget(parent), ui(new Ui::TestWidget)
@@ -12,6 +13,8 @@ TestWidget::TestWidget(QWidget *parent) :
 	running = false;
 	go = false;
 	connect(&refresh_timer, SIGNAL(timeout()), this, SLOT(refresh_timer_timeout()));
+	connect(test_thread, SIGNAL(test_started()), this, SLOT(test_started()));
+	connect(test_thread, SIGNAL(test_stopped()), this, SLOT(test_stopped()));
 
 	Yscale = 1;
 
@@ -33,29 +36,6 @@ TestWidget::~TestWidget()
 void TestWidget::SetDevice(Device *device)
 {
 	this->device = device;
-}
-
-TestWidget::TestThread::TestThread(TestWidget *widget)
-{
-	this->widget = widget;
-}
-
-void TestWidget::TestThread::run()
-{
-	// mark test started
-	widget->go = true;
-	widget->running = true;
-
-	// prepare device for test
-	widget->device->Warmup();
-	widget->device->DropCaches();
-	widget->device->Sync();
-
-	// run test
-	widget->TestLoop();
-
-	// mark test finished
-	widget->running = false;
 }
 
 void TestWidget::refresh_timer_timeout()
@@ -88,7 +68,8 @@ void TestWidget::StartTest()
 	}
 
 	// prepare ui for test
-	ui->startstop->setText("Stop");
+	ui->startstop->setText("Starting");
+	ui->startstop->setEnabled(false);
 	InitScene();
 
 	// start ui refresh
@@ -99,9 +80,25 @@ void TestWidget::StartTest()
 void TestWidget::StopTest()
 {
 	refresh_timer.stop();
-	ui->startstop->setText("Start");
+	ui->startstop->setText("Stopping");
+	ui->startstop->setEnabled(false);
 	go = false;
+
+}
+
+void TestWidget::test_started()
+{
+	running = true;
+	ui->startstop->setText("Stop");
+	ui->startstop->setEnabled(true);
+}
+
+void TestWidget::test_stopped()
+{
 	running = false;
+	refresh_timer.stop();
+	ui->startstop->setText("Start");
+	ui->startstop->setEnabled(true);
 }
 
 void TestWidget::SetStartEnabled(bool enabled)
@@ -117,7 +114,6 @@ void TestWidget::on_info_clicked()
 	box.setInformativeText(testDescription);
 	box.exec();
 }
-
 
 void TestWidget::on_image_clicked()
 {
