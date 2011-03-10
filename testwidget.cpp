@@ -44,12 +44,6 @@ void TestWidget::refresh_timer_timeout()
 {
 	int progress = GetProgress();
 	ui->progress->setValue(progress);
-	if(progress == 100)
-	{
-		refresh_timer.stop();
-		ui->startstop->setText("Start");
-	}
-
 	UpdateScene();
 }
 
@@ -77,14 +71,12 @@ void TestWidget::StartTest()
 	ui->startstop->setEnabled(false);
 	InitScene();
 
-	// start ui refresh
+	// start test in another thread
 	test_thread->start();
-	refresh_timer.start(100);
 }
 
 void TestWidget::StopTest()
 {
-	refresh_timer.stop();
 	testState = STOPPING;
 	ui->startstop->setText("Stopping");
 	ui->startstop->setEnabled(false);
@@ -92,6 +84,9 @@ void TestWidget::StopTest()
 
 void TestWidget::test_started()
 {
+	// start ui refresh
+	refresh_timer.start(100);
+
 	testState = STARTED;
 	ui->startstop->setText("Stop");
 	ui->startstop->setEnabled(true);
@@ -99,7 +94,10 @@ void TestWidget::test_started()
 
 void TestWidget::test_stopped()
 {
+	// stop scene refresh but make sure it is up-to-date
+	refresh_timer_timeout();
 	refresh_timer.stop();
+
 	testState = STOPPED;
 	ui->startstop->setText("Start");
 	ui->startstop->setEnabled(true);

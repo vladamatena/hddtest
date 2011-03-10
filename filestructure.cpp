@@ -83,22 +83,20 @@ void FileStructure::TestLoop()
 	results.destroy += device->Sync();
 
 	// delete dirs
-	for(int i = nodes.size() - 1; i > 0 ; --i)
+	for(int i = nodes.size() - 1; i > 0 ; --i)	// node 0 is temp directory in which is test running
 	{
 		results.destroy += device->DelDir(nodes[i]);
 		++results.destroyed;
 	}
 	results.destroy += device->Sync();
-
-	// mark test as finished
 	results.done = true;
+	results.phase = FileStructureResults::PHASE_DONE;
 }
 
 void FileStructure::InitScene()
 {
 	results.erase();
 }
-
 
 void FileStructure::UpdateScene()
 {
@@ -139,9 +137,9 @@ void FileStructure::UpdateScene()
 
 int FileStructure::GetProgress()
 {
-	// "+ done" and "+ 1" stops at 99% until final sync is finished
+	// do not show 100% until done
 	int state = results.build_files + results.build_dirs + results.destroyed + results.done;
-	int target = 4 * FILESTRUCTURE_SIZE + 1;
+	int target = 4 * FILESTRUCTURE_SIZE;
 	return (100 * state) / target;
 }
 
@@ -211,7 +209,6 @@ void FileStructure::RestoreResults(QDomElement &results, DataSet dataset)
 	res->build_dirs = FILESTRUCTURE_SIZE;
 	res->build_files = FILESTRUCTURE_SIZE;
 	res->destroyed = FILESTRUCTURE_SIZE * 2;
-	res->done = true;
 
 	UpdateScene();
 }

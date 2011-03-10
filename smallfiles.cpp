@@ -49,7 +49,7 @@ void SmallFiles::TestLoop()
 	results.phase = SmallFilesResults::PHASE_DIR_BUILD;
 	device->DropCaches();
 	device->Sync();
-	for(int i = 0; i < SMALLFILES_SIZE; ++i)
+	for(int i = 0; (i < SMALLFILES_SIZE) && (testState != STOPPING); ++i)
 	{
 		// construct new node name and path
 		QString file = nodes.at(random.Get64() % nodes.size()) + "/" + QString::number(nodes.size());
@@ -60,16 +60,13 @@ void SmallFiles::TestLoop()
 		results.dir_build_time += time;
 
 		++results.dirs_build;
-
-		if(testState == STOPPING)
-			return;
 	}
 	results.dir_build_time += device->Sync();
 
 	// build files
 	results.phase = SmallFilesResults::PHASE_FILE_BUILD;
 	device->DropCaches();
-	for(int i = 0; i < SMALLFILES_SIZE; ++i)
+	for(int i = 0; (i < SMALLFILES_SIZE) && (testState != STOPPING); ++i)
 	{
 		// construct new node name and path
 		QString file = nodes.at(random.Get64() % nodes.size()) + "/" + QString::number(nodes.size());
@@ -80,9 +77,6 @@ void SmallFiles::TestLoop()
 		results.file_build_time += time;
 
 		++results.files_build;
-
-		if(testState == STOPPING)
-			return;
 	}
 	results.file_build_time += device->Sync();
 
@@ -90,7 +84,7 @@ void SmallFiles::TestLoop()
 	results.phase = SmallFilesResults::PHASE_FILE_READ;
 	device->DropCaches();
 	QList<QString> files_to_read(files);
-	while(!files_to_read.empty())
+	while(!files_to_read.empty() && (testState != STOPPING))
 	{
 		// generate random index
 		int index = random.Get64() % files_to_read.size();
@@ -99,9 +93,6 @@ void SmallFiles::TestLoop()
 		results.file_read_time += time;
 
 		++results.files_read;
-
-		if(testState == STOPPING)
-			return;
 	}
 	results.file_read_time += device->Sync();
 
@@ -114,9 +105,6 @@ void SmallFiles::TestLoop()
 	{
 		results.destroy_time += device->DelFile(files[i]);
 		++results.destroyed;
-
-		if(testState == STOPPING)
-			return;
 	}
 	results.destroy_time += device->Sync();
 
@@ -125,9 +113,6 @@ void SmallFiles::TestLoop()
 	{
 		results.destroy_time += device->DelDir(nodes[i]);
 		++results.destroyed;
-
-		if(testState == STOPPING)
-			return;
 	}
 	results.destroy_time += device->Sync();
 
