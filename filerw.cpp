@@ -32,8 +32,10 @@ FileRW::FileRW(QWidget *parent) :
 	testName = "File write and read";
 	testDescription = "R/W File test writes " + Def::FormatSize(FILERW_SIZE) +
 			" to file on mounted device. Then whole file is read again." +
+			" Both reading and writting are performed in blocks of " +
+			Def::FormatSize(FILERW_BLOCK) + "." +
 			" Process is shown in graph where darker color shows write speed" +
-			"and lighter read speed depending on file position." +
+			" and lighter read speed depending on file position." +
 			" This test is not aviable(grayed start button) when device is not mounted.";
 }
 
