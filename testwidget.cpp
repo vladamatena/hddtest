@@ -10,8 +10,6 @@ TestWidget::TestWidget(QWidget *parent) :
 	device = NULL;
 
 	test_thread = new TestThread(this);
-	//running = false;
-	//go = false;
 	testState = STOPPED;
 
 	connect(&refresh_timer, SIGNAL(timeout()), this, SLOT(refresh_timer_timeout()));
