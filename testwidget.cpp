@@ -32,6 +32,7 @@ TestWidget::~TestWidget()
 	for(int i = 0; i < markers.size(); ++i)
 		delete markers[i];
 
+	scene->clear();
 	delete scene;
 
     delete ui;
@@ -191,6 +192,11 @@ TestWidget::Marker::Marker(TestWidget *test):
 	this->test = test;
 }
 
+TestWidget::Marker::~Marker()
+{
+
+}
+
 TestWidget::Line* TestWidget::addLine(QString unit, QString name, QColor color)
 {
 	Line * line = new Line(this, unit, name, color);
@@ -251,6 +257,12 @@ TestWidget::Legend* TestWidget::addLegend()
 TestWidget::Line::Line(TestWidget *test, QString unit, QString name, QColor color):
 	Marker(test), unit(unit), name(name), color(color), line(NULL), text(NULL), value(0) {}
 
+TestWidget::Line::~Line()
+{
+	delete line;
+	delete text;
+}
+
 void TestWidget::Line::SetValue(qreal value)
 {
 	// update min and max for Line
@@ -305,6 +317,12 @@ void TestWidget::Line::Reposition()
 TestWidget::Ticks::Ticks(TestWidget *test, QColor color):
 	 Marker(test), color(color) {}
 
+TestWidget::Ticks::~Ticks()
+{
+	for(int i = 0; i < ticks.size(); ++i)
+		delete ticks[i].tick;
+}
+
 void TestWidget::Ticks::AddTick(qreal value, qreal position, bool important)
 {
 	// update max and min for ticks
@@ -356,6 +374,14 @@ void TestWidget::Ticks::erase()
 TestWidget::Bar::Bar(TestWidget *test, QString unit, QString name, QColor color, qreal position, qreal width) :
 		Marker(test), unit(unit), name(name), color(color), rect(NULL), inner_rect(NULL),
 		value_text(NULL), name_text(NULL), position(position), width(width), value(0), progress(0) {}
+
+TestWidget::Bar::~Bar()
+{
+	delete rect;
+	delete inner_rect;
+	delete value_text;
+	delete name_text;
+}
 
 void TestWidget::Bar::Set(qreal progress, qreal value)
 {
@@ -423,6 +449,12 @@ TestWidget::LineGraph::LineGraph(TestWidget *test, QString unit, QColor color):
 {
 	// set to something else than 0 should be changed by test before first use
 	size = 10;
+}
+
+TestWidget::LineGraph::~LineGraph()
+{
+	for(int i = 0; i < lines.size(); ++i)
+		delete lines[i];
 }
 
 void TestWidget::LineGraph::SetSize(int count)
@@ -497,6 +529,19 @@ TestWidget::Net::Net(TestWidget *test, QString unit, QString xAxis, QString yAxi
 	yAxisText->rotate(-90);
 }
 
+TestWidget::Net::~Net()
+{
+	for(int i = 0; i < net.size(); ++i)
+		delete net[i];
+
+	for(int i = 0; i < net_markups.size(); ++i)
+		delete net_markups[i];
+
+	delete left_line;
+	delete xAxisText;
+	delete yAxisText;
+}
+
 void TestWidget::Net::Reposition()
 {
 	// If Yscale is not set do not do anything
@@ -535,6 +580,7 @@ void TestWidget::Net::Reposition()
 		if(net.size() > count) // lines are too many - remove one
 		{
 			test->scene->removeItem(net.back());
+			delete net.back();
 			net.pop_back();
 		}
 		else	// missing some lines - add one
@@ -597,6 +643,15 @@ void TestWidget::Net::Reposition()
 
 TestWidget::Legend::Legend(TestWidget *test):
 	Marker(test) {}
+
+TestWidget::Legend::~Legend()
+{
+	for(int i = 0; i < items.size(); ++i)
+	{
+		delete items[i].rect;
+		delete items[i].text;
+	}
+}
 
 void TestWidget::Legend::AddItem(QString name, QColor color)
 {

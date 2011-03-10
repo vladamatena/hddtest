@@ -33,6 +33,7 @@ public:
 	{
 	public:
 		Marker(TestWidget *test);
+		virtual ~Marker();
 
 		static const qreal NET_WIDTH = 0.88;			// Width of net lines
 		static const qreal NET_HIGHLIGHT_WIDTH = 0.89;	// Width of extended net lines
@@ -47,6 +48,7 @@ public:
 	{
 	public:
 		Ticks(TestWidget *test, QColor color);
+		~Ticks();
 		void AddTick(qreal value, qreal position, bool important = true);
 		void erase();
 		void Reposition();
@@ -67,6 +69,7 @@ public:
 	{
 	public:
 		Line(TestWidget *test, QString unit, QString name, QColor color);
+		~Line();
 		void SetValue(qreal value);
 		void Reposition();
 
@@ -82,6 +85,7 @@ public:
 	{
 	public:
 		Bar(TestWidget *test, QString unit, QString name, QColor color, qreal position, qreal width);
+		~Bar();
 		void Set(qreal progress, qreal value);
 		void Reposition();
 
@@ -97,6 +101,7 @@ public:
 	{
 	public:
 		LineGraph(TestWidget *test, QString unit, QColor color);
+		~LineGraph();
 		void SetSize(int count);	// set graph final value count
 		void AddValue(qreal value);	// add new value to graph
 		void Reposition();			// repositions lines in screen acording to new scale and count
@@ -114,6 +119,7 @@ public:
 	{
 	public:
 		Net(TestWidget *test, QString unit, QString xAxis, QString yAxis);
+		~Net();
 		void Reposition();
 
 	private:
@@ -128,6 +134,7 @@ public:
 	{
 	public:
 		Legend(TestWidget *test);
+		~Legend();
 		void AddItem(QString name, QColor color);
 		void Reposition();
 	private:
