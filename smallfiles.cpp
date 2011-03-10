@@ -117,6 +117,7 @@ void SmallFiles::TestLoop()
 	results.destroy_time += device->Sync();
 
 	results.done = true;
+	results.phase = SmallFilesResults::PHASE_DONE;
 }
 
 void SmallFiles::UpdateScene()
