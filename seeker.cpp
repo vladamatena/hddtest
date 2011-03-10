@@ -27,11 +27,6 @@ Seeker::Seeker(QWidget *parent) :
 
 Seeker::~Seeker()
 {
-	delete dataAvgLine;
-	delete referenceAvgLine;
-
-	delete dataTicks;
-	delete referenceTicks;
 }
 
 void Seeker::TestLoop()

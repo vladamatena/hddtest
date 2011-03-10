@@ -29,6 +29,11 @@ TestWidget::TestWidget(QWidget *parent) :
 
 TestWidget::~TestWidget()
 {
+	for(int i = 0; i < markers.size(); ++i)
+		delete markers[i];
+
+	delete scene;
+
     delete ui;
 	delete test_thread;
 }
