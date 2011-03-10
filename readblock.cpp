@@ -74,11 +74,11 @@ void ReadBlock::TestLoop()
 			result->__time_elapsed += device->Read(result->__block_size);
 			result->__bytes_read += result->__block_size;
 
-			if(!go)
+			if(testState == STOPPING)
 				return;
 		}
 
-		if(!go)
+		if(testState == STOPPING)
 			return;
 	}
 }

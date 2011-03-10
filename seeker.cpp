@@ -72,7 +72,7 @@ void Seeker::TestLoop()
 		// count test progress
 		result.progress = i * 100 / (SEEKER_SEEKCOUNT - 1);
 
-		if(!go)
+		if(testState == STOPPING)
 			return;
 	}
 }

@@ -10,8 +10,10 @@ TestWidget::TestWidget(QWidget *parent) :
 	device = NULL;
 
 	test_thread = new TestThread(this);
-	running = false;
-	go = false;
+	//running = false;
+	//go = false;
+	testState = STOPPED;
+
 	connect(&refresh_timer, SIGNAL(timeout()), this, SLOT(refresh_timer_timeout()));
 	connect(test_thread, SIGNAL(test_started()), this, SLOT(test_started()));
 	connect(test_thread, SIGNAL(test_stopped()), this, SLOT(test_stopped()));
@@ -53,10 +55,12 @@ void TestWidget::refresh_timer_timeout()
 
 void TestWidget::on_startstop_clicked()
 {
-	if(!running)
+	if(testState == STOPPED)
 		StartTest();
-	else
+	else if(testState == STARTED)
 		StopTest();
+	else
+		std::cerr << "Start/stop test clicked but should be disabled" << std::endl;
 }
 
 void TestWidget::StartTest()
@@ -68,6 +72,7 @@ void TestWidget::StartTest()
 	}
 
 	// prepare ui for test
+	testState = STARTING;
 	ui->startstop->setText("Starting");
 	ui->startstop->setEnabled(false);
 	InitScene();
@@ -80,23 +85,22 @@ void TestWidget::StartTest()
 void TestWidget::StopTest()
 {
 	refresh_timer.stop();
+	testState = STOPPING;
 	ui->startstop->setText("Stopping");
 	ui->startstop->setEnabled(false);
-	go = false;
-
 }
 
 void TestWidget::test_started()
 {
-	running = true;
+	testState = STARTED;
 	ui->startstop->setText("Stop");
 	ui->startstop->setEnabled(true);
 }
 
 void TestWidget::test_stopped()
 {
-	running = false;
 	refresh_timer.stop();
+	testState = STOPPED;
 	ui->startstop->setText("Start");
 	ui->startstop->setEnabled(true);
 }

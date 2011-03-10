@@ -51,7 +51,7 @@ void ReadCont::TestLoop()
 		hddtime time = device->Read(READ_CONT_BLOCK);
 		results.AddResult((qreal)READ_CONT_BLOCK / time);
 
-		if(!go)
+		if(testState == STOPPING)
 			break;
 	}
 }

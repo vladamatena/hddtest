@@ -81,11 +81,11 @@ void ReadRnd::TestLoop()
 			result.__bytes_read += result.__block_size;
 			result.__blocks_done++;
 
-			if(!go)
+			if(testState == STOPPING)
 				return;
 		}
 
-		if(!go)
+		if(testState == STOPPING)
 			return;
 	}
 }

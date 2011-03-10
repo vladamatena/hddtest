@@ -27,7 +27,7 @@ class TestWidget : public QWidget
 
 public:
 	enum DataSet { RESULTS, REFERENCE };
-	enum TestState { STARTING, RUNNING, STOPPING, STOPEED };
+	enum TestState { STARTING, STARTED, STOPPING, STOPPED };
 
 	class Marker
 	{
@@ -178,8 +178,7 @@ public:
 	QString testName;			/// test name
 	QString testDescription;	/// test description - used by info box
 
-	bool running;				/// True if test is running
-	bool go;					/// Setting this to false ends test
+	TestState testState;		/// Current test state
 
 protected:
 	 void resizeEvent(QResizeEvent*);

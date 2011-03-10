@@ -61,7 +61,7 @@ void SmallFiles::TestLoop()
 
 		++results.dirs_build;
 
-		if(!go)
+		if(testState == STOPPING)
 			return;
 	}
 	results.dir_build_time += device->Sync();
@@ -81,7 +81,7 @@ void SmallFiles::TestLoop()
 
 		++results.files_build;
 
-		if(!go)
+		if(testState == STOPPING)
 			return;
 	}
 	results.file_build_time += device->Sync();
@@ -100,7 +100,7 @@ void SmallFiles::TestLoop()
 
 		++results.files_read;
 
-		if(!go)
+		if(testState == STOPPING)
 			return;
 	}
 	results.file_read_time += device->Sync();
@@ -115,7 +115,7 @@ void SmallFiles::TestLoop()
 		results.destroy_time += device->DelFile(files[i]);
 		++results.destroyed;
 
-		if(!go)
+		if(testState == STOPPING)
 			return;
 	}
 	results.destroy_time += device->Sync();
@@ -126,7 +126,7 @@ void SmallFiles::TestLoop()
 		results.destroy_time += device->DelDir(nodes[i]);
 		++results.destroyed;
 
-		if(!go)
+		if(testState == STOPPING)
 			return;
 	}
 	results.destroy_time += device->Sync();

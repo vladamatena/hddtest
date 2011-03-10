@@ -66,7 +66,7 @@ void FileRW::TestLoop()
 	{
 		hddtime time = file.Write(FILERW_BLOCK);
 		results_write.AddResult((qreal)FILERW_BLOCK / time);
-		if(go == false)
+		if(testState == STOPPING)
 			break;
 	}
 
@@ -81,7 +81,7 @@ void FileRW::TestLoop()
 	{
 		hddtime time = file.Read(FILERW_BLOCK);
 		results_read.AddResult((qreal)FILERW_BLOCK / time);
-		if(go == false)
+		if(testState == STOPPING)
 			break;
 	}	
 
