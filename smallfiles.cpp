@@ -11,7 +11,7 @@
 SmallFiles::SmallFiles(QWidget *parent):
 	TestWidget(parent)
 {
-	build_dir_bar = this->addBar(	"s", "Dirs",		QColor(255,	0,		0),		0.03, 0.1);
+	build_dir_bar = this->addBar(	"s", "Dirs",		QColor(255,	0,		0),	0.03, 0.1);
 	build_files_bar = this->addBar(	"s", "Files 1-10K",	QColor(255,	64,		0),	0.27, 0.1);
 	read_files_bar = this->addBar(	"s", "Read files",	QColor(255,	128,	0),	0.51, 0.1);
 	destroy_bar = this->addBar(		"s", "Delete",		QColor(255,	192,	0),	0.75, 0.1);
