@@ -1,6 +1,9 @@
 #include "testwidget.h"
 #include "ui_testwidget.h"
-#include "testthread.h"		// test thread holds pointer to TestWidget and vice versa
+
+// TestThread holds pointer to TestWidget and vice versa
+// so extra including in cpp file is needed
+#include "testthread.h"
 
 TestWidget::TestWidget(QWidget *parent) :
 	QWidget(parent), ui(new Ui::TestWidget)
