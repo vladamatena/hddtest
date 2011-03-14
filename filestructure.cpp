@@ -30,6 +30,7 @@ void FileStructure::TestLoop()
 	RandomGenerator random;
 
 	// list of nodes in test
+	int counter = 1;
 	QList<QString> files;
 	QList<QString> nodes;
 	nodes.push_back(device->GetSafeTemp());	//	add initial node
@@ -42,7 +43,7 @@ void FileStructure::TestLoop()
 		if((!(results.build_files < FILESTRUCTURE_SIZE)) || (random.Get32() % 2 == 0))
 		{
 			// construct new node name and path
-			QString name = QString::number(nodes.size());
+			QString name = QString::number(counter++);
 			QString path = nodes.at(random.Get64() % nodes.size());
 			nodes.push_back(path + "/" + name);
 
@@ -54,7 +55,7 @@ void FileStructure::TestLoop()
 		else
 		{
 			// construct file name and path
-			QString name = QString::number(files.size());
+			QString name = QString::number(counter++);
 			QString path = nodes.at(random.Get64() % nodes.size());
 			files.push_back(path + "/" + name);
 

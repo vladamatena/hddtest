@@ -41,6 +41,7 @@ void SmallFiles::TestLoop()
 	RandomGenerator random;
 
 	// list of nodes in test
+	int counter = 1;
 	QList<QString> files;
 	QList<QString> nodes;
 	nodes.push_back(device->GetSafeTemp());	//	add initial node
@@ -52,7 +53,7 @@ void SmallFiles::TestLoop()
 	for(int i = 0; (i < SMALLFILES_SIZE) && (testState != STOPPING); ++i)
 	{
 		// construct new node name and path
-		QString file = nodes.at(random.Get64() % nodes.size()) + "/" + QString::number(nodes.size());
+		QString file = nodes.at(random.Get64() % nodes.size()) + "/" + QString::number(counter++);
 		nodes.push_back(file);
 
 		// create node
@@ -69,7 +70,7 @@ void SmallFiles::TestLoop()
 	for(int i = 0; (i < SMALLFILES_SIZE) && (testState != STOPPING); ++i)
 	{
 		// construct new node name and path
-		QString file = nodes.at(random.Get64() % nodes.size()) + "/" + QString::number(nodes.size());
+		QString file = nodes.at(random.Get64() % nodes.size()) + "/" + QString::number(counter++);
 		files.push_back(file);
 
 		// create file

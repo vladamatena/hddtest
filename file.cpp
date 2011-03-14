@@ -21,12 +21,20 @@ void File::Close()
 
 void File::fdopen()
 {
+	// open file
 	fd = open(path.toUtf8(), O_CREAT | O_RDWR | O_SYNC | O_LARGEFILE, S_IRWXU);
 	if(fd < 0)
+	{
 		std::cout << "Error opening file" << std::endl;
-	int ret = posix_fadvise(fd, 0, 0, POSIX_FADV_DONTNEED);
-	if(ret)
+		ReportError();
+	}
+
+	// advice system not to cache file data
+	if(posix_fadvise(fd, 0, 0, POSIX_FADV_DONTNEED))
+	{
 		std::cout << "Error setting advice" << std::endl;
+		ReportError();
+	}
 }
 
 void File::Reopen()
@@ -38,7 +46,8 @@ void File::Reopen()
 void File::SetPos(hddsize pos)
 {
 	// set position
-	lseek64(fd, pos, SEEK_SET);
+	if(lseek64(fd, pos, SEEK_SET) < 0)
+		ReportError();
 }
 
 hddtime File::Read(hddsize size)
@@ -48,9 +57,11 @@ hddtime File::Read(hddsize size)
 	timer.MarkStart();
 
 	// read data
-	int ret = read(fd, buffer, sizeof(char) * size);
-	if(ret <= 0)
+	if(read(fd, buffer, sizeof(char) * size) <= 0)
+	{
 		std::cerr << "Read failed" << std::endl;
+		ReportError();
+	}
 
 	timer.MarkEnd();
 
@@ -66,9 +77,11 @@ hddtime File::Write(hddsize size)
 	timer.MarkStart();
 
 	// read data
-	int ret = write(fd, buffer, sizeof(char) * size);
-	if(ret <= 0)
+	if(write(fd, buffer, sizeof(char) * size) <= 0)
+	{
 		std::cerr << "Write failed" << std::endl;
+		ReportError();
+	}
 
 	timer.MarkEnd();
 

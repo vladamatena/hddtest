@@ -126,7 +126,8 @@ void Device::ReportError()
 void Device::SetPos(hddsize pos)
 {
 	// set position
-	lseek64(__fd, pos, SEEK_SET);
+	if(lseek64(__fd, pos, SEEK_SET) < 0)
+		ReportError();
 }
 
 hddtime Device::SeekTo(hddsize pos)
@@ -137,7 +138,8 @@ hddtime Device::SeekTo(hddsize pos)
 
 	// seek to new position
 	SetPos(pos);
-	read(__fd, &c, sizeof(char));
+	if(read(__fd, &c, sizeof(char)) < 0)
+		ReportError();
 
 	timer.MarkEnd();
 
@@ -158,9 +160,11 @@ hddtime Device::ReadAt(hddsize size, hddsize pos)
 
 	// seek to new position
 	SetPos(pos);
-	int ret = read(__fd, buffer, sizeof(char) * size);
-	if(ret <= 0)
+	if(read(__fd, buffer, sizeof(char) * size) <= 0)
+	{
 		std::cerr << "Read failed" << std::endl;
+		ReportError();
+	}
 
 	timer.MarkEnd();
 
@@ -176,9 +180,11 @@ hddtime Device::Read(hddsize size)
 	timer.MarkStart();
 
 	// read data
-	int ret = read(__fd, buffer, sizeof(char) * size);
-	if(ret <= 0)
+	if(read(__fd, buffer, sizeof(char) * size) <= 0)
+	{
 		std::cerr << "Read failed" << std::endl;
+		ReportError();
+	}
 
 	timer.MarkEnd();
 
@@ -282,7 +288,8 @@ hddtime Device::MkDir(QString path)
 	timer.MarkStart();
 
 	// make dir
-	dir.mkdir(path);
+	if(!dir.mkdir(path))
+		ReportError();
 
 	timer.MarkEnd();
 
@@ -296,14 +303,21 @@ hddtime Device::MkFile(QString path, hddsize size)
 	timer.MarkStart();
 
 	// write file
-	file.open(QIODevice::WriteOnly);
-	if(size > 0)
+	if(!file.open(QIODevice::WriteOnly))
+		ReportError();
+	else
 	{
-		char *data = new char[size];
-		file.write(data);
-		delete data;
+		// if size should be more then zero write data to file
+		if(size > 0)
+		{
+			char *data = new char[size];
+			if(file.write(data, size) != size)
+				ReportError();
+			delete data;
+		}
+
+		file.close();
 	}
-	file.close();
 
 	timer.MarkEnd();
 
@@ -318,7 +332,8 @@ hddtime Device::DelDir(QString path)
 	timer.MarkStart();
 
 	// del dir
-	dir.rmdir(path);
+	if(!dir.rmdir(path))
+		ReportError();
 
 	timer.MarkEnd();
 
@@ -330,7 +345,8 @@ hddtime Device::DelFile(QString path)
 	timer.MarkStart();
 
 	// del file
-	QFile::remove(path);
+	if(!QFile::remove(path))
+		ReportError();
 
 	timer.MarkEnd();
 
@@ -343,11 +359,18 @@ hddtime Device::ReadFile(QString path)
 
 	// read file
 	QFile file(path);
-	file.open(QIODevice::ReadOnly);
-	char *buffer = new char[file.size()];
-	file.read(buffer, file.size());
-	delete buffer;
-	file.close();
+	if(!file.open(QIODevice::ReadOnly))
+		ReportError();
+	else
+	{
+		// read data from file
+		char *buffer = new char[file.size()];
+		if(file.read(buffer, file.size()) < 0)
+			ReportError();
+		delete buffer;
+
+		file.close();
+	}
 
 	timer.MarkEnd();
 
@@ -432,4 +455,3 @@ Device::Item Device::Item::Saved(QString path)
 {
 	return Item::Item(HDD_ITEM_SAVED, path);
 }
-
