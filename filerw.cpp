@@ -52,7 +52,7 @@ void FileRW::TestLoop()
 	// prepare test file
 	QString filename = device->GetSafeTemp() + "/" + "hddtestfile";
 
-	File file(filename);
+	File file(filename, device);
 
 	// get block count	
 	results_write.blocks = FILERW_SIZE / FILERW_BLOCK;

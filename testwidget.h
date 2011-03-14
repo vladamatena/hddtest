@@ -29,6 +29,9 @@ public:
 	enum DataSet { RESULTS, REFERENCE };
 	enum TestState { STARTING, STARTED, STOPPING, STOPPED };
 
+	//////////////////////////////////////////////////////////////////////////////
+	//// Test markers ////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////
 	class Marker
 	{
 	public:
@@ -148,6 +151,10 @@ public:
 		QList<Item> items;
 	};
 
+	/////////////////////////////////////////////////////////////////////////
+	//// TestWidget class methods ///////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////
+
 	explicit TestWidget(QWidget *parent = 0);
 	~TestWidget();
 
@@ -166,7 +173,7 @@ public:
 	virtual QDomElement WriteResults(QDomDocument &doc) = 0;
 	virtual void RestoreResults(QDomElement &root, DataSet dataset) = 0;
 
-	// Graph creation functions
+	// Marker adding functions
 	Line* addLine(QString unit, QString name, QColor color);
 	Ticks* addTicks(QColor color);
 	Bar* addBar(QString unit, QString name, QColor color, qreal position, qreal width);
@@ -174,7 +181,7 @@ public:
 	Net* addNet(QString unit, QString xAxis, QString yAxis);
 	Legend* addLegend();
 
-	void Rescale(bool force = false);
+	void Rescale(bool force = false);	/// Rescales scene according new marker values and windows dimensions
 
 	Device *device;				/// pointer to device selecte dfor testing in GUI
 	QGraphicsScene *scene;		/// pointer to current grephics scene

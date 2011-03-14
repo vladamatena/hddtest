@@ -56,6 +56,7 @@ private slots:
 	void on_drive_currentIndexChanged(QString);
 	void on_reference_currentIndexChanged(QString);
 	void device_accessWarning();
+	void device_operationError();
 	void refDevice_accessWarning();
 };
 

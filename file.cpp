@@ -1,9 +1,12 @@
 #include "file.h"
 
-File::File(QString path, QObject *parent) :
+File::File(QString path, Device *device, QObject *parent) :
 	QObject(parent), path(path)
 {
-	fdopen();
+	// connect operation error signal to matchong signal in backlaying device
+	connect(this, SIGNAL(operationError()), device, SIGNAL(operationError()));
+
+	fdopen();	// open file
 }
 
 File::~File()
@@ -72,4 +75,9 @@ hddtime File::Write(hddsize size)
 	delete [] buffer;
 
 	return timer.GetFinalOffset();
+}
+
+void File::ReportError()
+{
+	operationError();
 }

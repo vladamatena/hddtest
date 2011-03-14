@@ -9,6 +9,7 @@
 
 #include "definitions.h"
 #include "timer.h"
+#include "device.h"
 
 using namespace HDDTest;
 
@@ -17,7 +18,7 @@ class File : public QObject
 {
     Q_OBJECT
 public:
-	explicit File(QString path, QObject *parent = 0);	/// Open file specified by path
+	explicit File(QString path, Device *device, QObject *parent = 0);	/// Open file specified by path
 	~File();						/// File destructor - close open file
 
 	void Close();					/// Close file
@@ -30,11 +31,13 @@ public:
 	Timer timer;					/// Timer used for opeartion time measuring
 
 private:
+	void ReportError();				/// Reports error in test
 	int fd;			// file`s file descriptor
 	QString path;	// path to file
 	void fdopen();	// open file by path stored internally
 
 signals:
+	void operationError();
 
 public slots:
 

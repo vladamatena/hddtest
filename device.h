@@ -66,7 +66,6 @@ public:
 	// device access operations
 	void Open(QString path, bool close);		/// Opens device specified by path
 	void Close();								/// Close device file descriptor
-	void ReportProblem();						/// Reports a problem with accessing device
 	void DropCaches();							/// Disables some caches for device
 	hddtime Sync();								/// Sync filesystem
 	void Warmup();								/// Make device redy for operation
@@ -114,12 +113,16 @@ public:
 	QDomElement WriteInfo(QDomDocument &doc);	/// Store information to XML element
 	void ReadInfo(QDomElement &root);			/// Read information from XML element
 private:
+	void ReportWarning();						/// Reports a problem with accessing device
+	void ReportError();							/// Reports error in test
+
 	int __fd;				// device's file destriptor
 	hddsize __device_size;	// device's size
 	bool problemReported;	// whenever device access problem was reported
 
 signals:
 	void accessWarning();
+	void operationError();
 };
 
 Q_DECLARE_METATYPE(Device::Item)

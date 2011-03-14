@@ -48,7 +48,7 @@ void Device::Open(QString path, bool close)
 	// open device file
 	__fd = open(path.toUtf8(), O_RDONLY | O_LARGEFILE);
 	if(__fd < 0)
-		ReportProblem();
+		ReportWarning();
 
 	DropCaches();
 
@@ -78,7 +78,7 @@ void Device::DropCaches()
 		// give advice to disable caching
 		int ret = posix_fadvise(__fd, 0, 0, POSIX_FADV_DONTNEED);
 		if(ret)
-			ReportProblem();
+			ReportWarning();
 
 		// empty caches
 		QFile caches("/proc/sys/vm/drop_caches");
@@ -89,7 +89,7 @@ void Device::DropCaches()
 			caches.close();
 		}
 		else
-			ReportProblem();
+			ReportWarning();
 }
 
 hddtime Device::Sync()
@@ -109,13 +109,18 @@ void Device::Warmup()
 	ReadAt(M, M);
 }
 
-void Device::ReportProblem()
+void Device::ReportWarning()
 {
 	if(problemReported)
 		return;
 
 	problemReported = true;
 	accessWarning();
+}
+
+void Device::ReportError()
+{
+	operationError();
 }
 
 void Device::SetPos(hddsize pos)

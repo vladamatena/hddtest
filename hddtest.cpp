@@ -22,8 +22,11 @@ HDDTestWidget::HDDTestWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
+	// connect access warning and error signals
 	connect(&device, SIGNAL(accessWarning()), this, SLOT(device_accessWarning()));
 	connect(&refDevice, SIGNAL(accessWarning()), this, SLOT(refDevice_accessWarning()));
+	connect(&device, SIGNAL(operationError()), this, SLOT(device_operationError()));
+	connect(&refDevice, SIGNAL(operationError()), this, SLOT(device_operationError()));
 
 	// Add drive selection to results combo box
 	QList<Device::Item> devList = device.GetDevices();
@@ -165,6 +168,61 @@ void HDDTestWidget::device_accessWarning()
 				"\nFailing to do so will cause HDDTest to show incorrect results.");
 	box.setInformativeText("Continue at your own risk.");
 	box.exec();
+}
+
+void HDDTestWidget::device_operationError()
+{
+	bool running = false;
+	if(ui->filerwwidget->testState == TestWidget::STARTED)
+	{
+		ui->filerwwidget->StopTest();
+		running = true;
+	}
+	if(ui->filestructurewidget->testState == TestWidget::STARTED)
+	{
+		ui->filestructurewidget->StopTest();
+		running = true;
+	}
+	if(ui->readblockwidget->testState == TestWidget::STARTED)
+	{
+		ui->readblockwidget->StopTest();
+		running = true;
+	}
+	if(ui->readcontwidget->testState == TestWidget::STARTED)
+	{
+		ui->readcontwidget->StopTest();
+		running = true;
+	}
+	if(ui->readrndwidget->testState == TestWidget::STARTED)
+	{
+		ui->readrndwidget->StopTest();
+		running = true;
+	}
+	if(ui->seekwidget->testState == TestWidget::STARTED)
+	{
+		ui->seekwidget->StopTest();
+		running = true;
+	}
+	if(ui->smallfileswidget->testState == TestWidget::STARTED)
+	{
+		ui->smallfileswidget->StopTest();
+		running = true;
+	}
+
+	if(running)
+	{
+		QMessageBox box;
+		box.setText(QString() + "An error occured while running test. I/O operation failed in test function." +
+					" This can be caused by missing permissions for operating device you are testing" +
+					" as well as hardware failture. Please check following:" +
+					"\n\tDo you have sufficent rights to read block device." +
+					"\n\tDo you have sufficent rights to read/write devices filesystem." +
+					"\n\tIs the device big enouh for selected test type." +
+					"\n\tIf you are running filesystem test check free space on target filesystem." +
+					"\n\tCheck you system logs for I/O errors indicating hardware failture.");
+		box.setInformativeText("Running test will be stopped.");
+		box.exec();
+	}
 }
 
 void HDDTestWidget::refDevice_accessWarning() {}
