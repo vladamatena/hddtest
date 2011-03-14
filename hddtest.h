@@ -20,6 +20,7 @@
 #include <QGraphicsLineItem>
 #include <QFont>
 #include <QFileDialog>
+#include <QCloseEvent>
 
 #include "seeker.h"
 #include "readrnd.h"
@@ -50,6 +51,9 @@ private:
 
 	Device device;
 	Device refDevice;
+
+protected:
+	void closeEvent(QCloseEvent *);
 
 private slots:
 	void on_save_clicked();

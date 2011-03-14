@@ -369,3 +369,34 @@ void HDDTestWidget::OpenResultFile(QString filename, TestWidget::DataSet dataset
 	ui->readrndwidget->RestoreResults(root, dataset);
 	ui->readcontwidget->RestoreResults(root, dataset);
 }
+
+void HDDTestWidget::closeEvent(QCloseEvent *ev)
+{
+	// Check whenever something is in progress
+	bool running = false;
+	if(ui->filerwwidget->testState == TestWidget::STARTED)
+		running = true;
+	if(ui->filestructurewidget->testState == TestWidget::STARTED)
+		running = true;
+	if(ui->readblockwidget->testState == TestWidget::STARTED)
+		running = true;
+	if(ui->readcontwidget->testState == TestWidget::STARTED)
+		running = true;
+	if(ui->readrndwidget->testState == TestWidget::STARTED)
+		running = true;
+	if(ui->seekwidget->testState == TestWidget::STARTED)
+		running = true;
+	if(ui->smallfileswidget->testState == TestWidget::STARTED)
+		running = true;
+
+	if(running)
+	{
+		// Refuse to close and report to user
+		ev->ignore();
+		QMessageBox box;
+		box.setText("Cannot close application since test is running.");
+		box.exec();
+	}
+	else
+		ev->accept();	// close
+}
