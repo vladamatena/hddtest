@@ -366,7 +366,10 @@ void TestWidget::Ticks::erase()
 {
 	// erase all ticks
 	for(int i = 0; i < ticks.size(); ++i)
+	{
 		test->scene->removeItem(ticks[i].tick);
+		delete ticks[i].tick;
+	}
 	ticks.clear();
 
 	// reset min and max
