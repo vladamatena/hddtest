@@ -490,7 +490,10 @@ void TestWidget::LineGraph::AddValue(qreal value)
 void TestWidget::LineGraph::erase()
 {
 	for(int i = 0; i < lines.size(); ++i)
+	{
 		test->scene->removeItem(lines[i]);
+		delete lines[i];
+	}
 
 	lines.clear();
 	values.clear();
