@@ -598,6 +598,7 @@ void TestWidget::Net::Reposition()
 		if(net_markups.size() > (count / 10) + 1) // markups are too many - remove one
 		{
 			test->scene->removeItem(net_markups.back());
+			delete net_markups.back();
 			net_markups.pop_back();
 		}
 		else	// missing some markups - add one
