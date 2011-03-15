@@ -39,6 +39,9 @@ public:
 	ReadRnd(QWidget *parent = 0);
 
 	static const hddsize READ_RND_SIZE = 100;
+	static const hddsize READ_RND_BASE_BLOCK_SIZE = 1 * M;
+	static const int READ_RND_BLOCK_SIZE_COUNT = 12;
+	static const int READ_RND_BLOCK_SIZE_STEP = 2;
 
 	void TestLoop();
 	void InitScene();

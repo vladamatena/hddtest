@@ -38,6 +38,9 @@ public:
 	ReadBlock(QWidget *parent = 0);
 
 	static const hddsize READ_BLOCK_SIZE = 100 * M;
+	static const hddsize READ_BLOCK_BASE_BLOCK_SIZE = 1 * M;
+	static const int READ_BLOCK_BLOCK_SIZE_COUNT = 12;
+	static const int READ_BLOCK_BLOCK_SIZE_STEP = 2;
 
 	void TestLoop();
 	void InitScene();

@@ -12,12 +12,12 @@ ReadBlock::ReadBlock(QWidget *parent):
 	TestWidget(parent)
 {
 	// add subtests to subtest list
-	int base = 1048576;
-	for(int i = 0; i < 12; ++i)
+	int base = READ_BLOCK_BASE_BLOCK_SIZE;
+	for(int i = 0; i < READ_BLOCK_BLOCK_SIZE_COUNT; ++i)
 	{
 		results.push_back(ReadBlockResult(base));
 		reference.push_back(ReadBlockResult(base));
-		base /= 2;
+		base /= READ_BLOCK_BLOCK_SIZE_STEP;;
 	}
 
 	// test name and description
