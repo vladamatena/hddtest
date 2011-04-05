@@ -443,15 +443,15 @@ void Device::ReadInfo(QDomElement &root)
 
 Device::Item Device::Item::None()
 {
-	return Item::Item(HDD_ITEM_NONE, "");
+	return Item(HDD_ITEM_NONE, "");
 }
 
 Device::Item Device::Item::Open()
 {
-	return Item::Item(HDD_ITEM_OPEN, "");
+	return Item(HDD_ITEM_OPEN, "");
 }
 
 Device::Item Device::Item::Saved(QString path)
 {
-	return Item::Item(HDD_ITEM_SAVED, path);
+	return Item(HDD_ITEM_SAVED, path);
 }
