@@ -1,13 +1,6 @@
 /**
-* \class Seeker
 *
-* Seeker test class. Implements Seeker test. The test test device for ramdom position access.
-* Attempts to access different random positions on drive are made. Results are shown as dots.
-* Dots shows dependency of seek time on seek length.
-*
-* \author Vladimír Matěna
-*
-* Contact vlada.matena@gmail.com
+* \author Vladimír Matěna vlada.matena@gmail.com
 *
 */
 
@@ -27,25 +20,27 @@
 #include "device.h"
 #include "randomgenerator.h"
 
-/// Seeker
-/// class implemeting function for running seek test
+/// Seeker benchmark main class
+/** Seeker test class. Implements Seeker test. The test test device for ramdom position access.
+Attempts to access different random positions on drive are made. Results are shown as dots.
+Dots shows dependency of seek time on seek length. **/
 class Seeker : public TestWidget
 {
 private:
-	/// Keeps information abou running or pased seek test
+	/// Keeps information about running or pased seek test
 	class SeekResult
 	{
 	public:
 		SeekResult():
 				progress(0) {}
 
-		void erase();
-		void AddSeek(QPointF seek);		// add seek to this test
-		qreal avg();	// get overall average seek time
+		void erase();					/// Erase all seeks
+		void AddSeek(QPointF seek);		/// Add seek to this test
+		qreal avg();					/// Get overall average seek time
 
-		QList<QPointF> seeks;		// list of seeks
-		QStack<QPointF> newseeks;	// list of new seeks (not yet displayed)
-		unsigned int progress;		// percentage progress of the test		
+		QList<QPointF> seeks;		/// List of seeks in results
+		QStack<QPointF> newseeks;	/// List of new seeks (not yet displayed)
+		unsigned int progress;		/// Percentage progress of the test
 	};
 public:
 	explicit Seeker(QWidget *parent = 0);
@@ -55,18 +50,17 @@ public:
 	static const hddsize SEEKER_SEEKCOUNT = 1000;				/// number of seeke per test
 	static const int SEEKER_IMPORTANT = 2;						/// seeks slower than N * average are not important
 
-	SeekResult result;		// seek results
-	SeekResult reference;	// seek reference results
+	SeekResult result;		/// Seek results
+	SeekResult reference;	/// Seek reference results
 
-	void TestLoop();
-	void InitScene();
-	void UpdateScene();
+	void TestLoop();	/// Main benchmark code
+	void InitScene();	/// Initializes scene before benchmark begins
+	void UpdateScene();	/// Updates scene
+	int GetProgress();	/// Returns benchmark progress
 
-	int GetProgress();
-
-	QDomElement WriteResults(QDomDocument &doc);	// writes results of test to XML
-	void RestoreResults(QDomElement &root, DataSet dataset);			// reads results from XML document
-	void EraseResults(DataSet dataset);
+	QDomElement WriteResults(QDomDocument &doc);				/// Writes results of test to XML
+	void RestoreResults(QDomElement &root, DataSet dataset);	/// Reads results from XML document
+	void EraseResults(DataSet dataset);							/// Erases selected results
 
 private:
 	Line *dataAvgLine;

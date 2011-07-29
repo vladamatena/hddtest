@@ -1,16 +1,6 @@
 /**
-* \class ReadCont
-*
-* Implenets read continuos test. The test reads blocks from different size from the device.
-* Blocks are read continuosly (one by one) for every size from the beginning of the device.
-* Bar graph for wvery block size are shown.
-*
-* \author Vladimír Matěna
-*
-* Contact vlada.matena@gmail.com
-*
+* \author Vladimír Matěna vlada.matena@gmail.com
 */
-
 
 #ifndef READCONT_H
 #define READCONT_H
@@ -23,6 +13,9 @@
 #include "device.h"
 #include "testwidget.h"
 
+/// Stores Read Continuous benchmark results
+/** ReadContResults class encapsulates read Continuous benchmark results
+  @see ReadCont class **/
 class ReadContResults
 {
 public:
@@ -38,26 +31,31 @@ public:
 	void erase();
 };
 
+/// Read Continuous benchmark main class
+/** Implenets read continuos test. The test reads blocks from different size from the device.
+Blocks are read continuosly (one by one) for every size from the beginning of the device.
+Bar graph for wvery block size are shown.
+@see ReadContResults **/
 class ReadCont : public TestWidget
 {
 public:
-	ReadCont(QWidget *parent = 0);
-	~ReadCont();
+	ReadCont(QWidget *parent = 0);	/// The constructor
+	~ReadCont(); /// The destructor
 
-	static const hddsize READ_CONT_SIZE = 4096 * M;
-	static const hddsize READ_CONT_BLOCK = 4 * M;
+	static const hddsize READ_CONT_SIZE = 4096 * M;	/// Size of data read from device
+	static const hddsize READ_CONT_BLOCK = 4 * M;	/// Block size by which data are read
 
-	void TestLoop();
-	void InitScene();
-	void UpdateScene();
-	int GetProgress();
+	void TestLoop();	/// Main benchmark code
+	void InitScene();	/// Initializes scene before benchmark begins
+	void UpdateScene();	/// Updates scene
+	int GetProgress();	/// Returns benchmark progress
 
-	ReadContResults results;
-	ReadContResults reference;
+	ReadContResults results;	/// Primary results
+	ReadContResults reference;	/// Reference results
 
-	QDomElement WriteResults(QDomDocument &doc);					// writes results of test to XML
-	void RestoreResults(QDomElement &root, DataSet dataset);		// reads results from XML document
-	void EraseResults(DataSet dataset);
+	QDomElement WriteResults(QDomDocument &doc);				/// Writes results of test to XML
+	void RestoreResults(QDomElement &root, DataSet dataset);	/// Reads results from XML document
+	void EraseResults(DataSet dataset);							/// Erase elected results
 
 private:
 	LineGraph *graph;

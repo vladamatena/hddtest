@@ -1,9 +1,5 @@
 /**
-*
-* \author Vladimír Matěna
-*
-* Contact vlada.matena@gmail.com
-*
+* \author Vladimír Matěna vlada.matena@gmail.com
 */
 
 #include "filestructure.h"

@@ -1,3 +1,7 @@
+/**
+* \author Vladimír Matěna vlada.matena@gmail.com
+*/
+
 #include "file.h"
 
 File::File(QString path, Device *device, QObject *parent) :

@@ -1,3 +1,7 @@
+/**
+* \author Vladimír Matěna vlada.matena@gmail.com
+*/
+
 #include "testthread.h"
 #include "testwidget.h"
 

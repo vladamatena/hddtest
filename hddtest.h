@@ -1,14 +1,6 @@
 /**
-* \class HDDTest
-*
-* This class implements callbacks to main app GUI.
-*
-* \author Vladimír Matěna
-*
-* Contact vlada.matena@gmail.com
-*
+* \author Vladimír Matěna vlada.matena@gmail.com
 */
-
 
 #ifndef HDDTEST_H
 #define HDDTEST_H
@@ -30,20 +22,36 @@
 #include "filestructure.h"
 #include "smallfiles.h"
 
+/// User interface classes
+/** This namespace contains user interface classses **/
 namespace Ui {
 	class HDDTestWidget;
 }
 
-
+/// Main application window class
+/** The HDDTestWidget class provides handles main application window.
+  The benchmarks placed as tabs on this window are managed by separate classes **/
 class HDDTestWidget : public QDialog {
 	Q_OBJECT
 public:
 	HDDTestWidget(QWidget *parent = 0);
 	~HDDTestWidget();
 
+	/** Enables or disables tests depending on capabilities of selected device
+	  @param loaded whenever the device is faked and resutls were loaded **/
 	void ReloadTests(bool loaded);
+
+	/** Erases results elected by dataset from all benchmarks
+	  @param dataset selected results type **/
 	void EraseResults(TestWidget::DataSet dataset);
+
+	/** Updates information about slected device
+	  @param dataset which device's information should be updated **/
 	void UpdateInfo(TestWidget::DataSet dataset);
+
+	/** Open results stored in file
+	  @param filename of the file with results (can be full path)
+	  @param dataset target dataset for stored results **/
 	void OpenResultFile(QString filename, TestWidget::DataSet = TestWidget::RESULTS);
 
 private:

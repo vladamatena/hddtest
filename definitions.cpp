@@ -1,3 +1,7 @@
+/**
+* \author Vladimír Matěna vlada.matena@gmail.com
+*/
+
 #include "definitions.h"
 
 using namespace HDDTest;

@@ -7,9 +7,7 @@
 * 2. running basic benchmark operations (timed reading, writing, ...)
 * Class can be used to access block device or regular file
 *
-* \author Vladimír Matěna
-*
-* Contact vlada.matena@gmail.com
+* \author Vladimír Matěna vlada.matena@gmail.com
 *
 */
 
@@ -40,21 +38,28 @@ class Device: public QObject
 {
 	Q_OBJECT
 public:
+	/// Stores one item in device selection combobox
 	struct Item
 	{
+		/// Item type enumeration
 		enum Type	{ HDD_ITEM_DEVICE, HDD_ITEM_OPEN, HDD_ITEM_SAVED, HDD_ITEM_NONE };
 
+		/// Constructor for empty item
 		Item():
 			type(HDD_ITEM_NONE), path("") {}
+
+		/// Constructor for type and path specified
 		Item(Type type, QString path):
 			type(type), path(path) {}
 
-		static Item None();
-		static Item Open();
+		static Item None();	/// Returns item of none type
+		static Item Open();	/// Returns item of open type
+
+		/// Return item of saved type and associtates path to saved results
 		static Item Saved(QString path);
 
-		Type type;
-		QString path;
+		Type type;		/// Item type
+		QString path;	/// Results path
 	};
 
 	Device();									/// Device constructor
@@ -91,27 +96,28 @@ public:
 	// temp directory operations
 	QString GetSafeTemp();						/// Prepares and returns path to temp for FS tests
 	void ClearSafeTemp();						/// Clears temp
-	bool temp_created;
+	bool temp_created;							/// Whenever tem directory was created
 
 	// drive info
-	QString path;
-	QString model;
-	QString serial;
-	QString firmware;
-	hddsize size;
+	QString path;		/// Path to device
+	QString model;		/// model of the device
+	QString serial;		/// Serial number of the device
+	QString firmware;	/// Firmware version of the device
+	hddsize size;		/// Device capacity
 
 	// fs info
-	bool fs;
-	QString mountpoint;
-	QString fstype;
-	QString fsversion;
-	QString fsoptions;
+	bool fs;			/// Whenever ounted
+	QString mountpoint;	/// Where mounted
+	QString fstype;		/// Filesystem type
+	QString fsversion;	/// Fileystem version
+	QString fsoptions;	/// Filesystem options
 
 	// kernel info
-	QString kernel;
+	QString kernel;		/// Kernel identification string
 
 	QDomElement WriteInfo(QDomDocument &doc);	/// Store information to XML element
 	void ReadInfo(QDomElement &root);			/// Read information from XML element
+
 private:
 	void ReportWarning();						/// Reports a problem with accessing device
 	void ReportError();							/// Reports error in test
