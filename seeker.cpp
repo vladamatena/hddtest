@@ -56,7 +56,7 @@ void Seeker::TestLoop()
 		last = next;
 
 		qreal pos = (qreal)posdiff / (qreal)device->GetSize();	// calculate pos relative to drivesize
-		qreal time = (qreal)timediff / 1000.0;					// evaluate seek time in miliseconds
+                qreal time = (qreal)timediff / 1000.0;			// evaluate seek time in miliseconds
 
 		result.AddSeek(QPointF(pos, time));	// add seek to results
 

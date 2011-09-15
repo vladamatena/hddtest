@@ -42,7 +42,7 @@ void Device::Open(QString path, bool close)
 		return;
 
 	// open device file
-	__fd = open(path.toUtf8(), O_RDONLY | O_LARGEFILE);
+        __fd = open(path.toUtf8(), O_RDONLY | O_LARGEFILE | O_SYNC);
 	if(__fd < 0)
 		ReportWarning();
 
@@ -134,7 +134,7 @@ hddtime Device::SeekTo(hddsize pos)
 
 	// seek to new position
 	SetPos(pos);
-	if(read(__fd, &c, sizeof(char)) < 0)
+        if(read(__fd, &c, sizeof(char)) < 0)
 		ReportError();
 
 	timer.MarkEnd();
