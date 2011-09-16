@@ -53,31 +53,33 @@ void HDDTestWidget::ListDevices()
 	// Add drive selection to results combo box
 	QList<Device::Item> devList = device.GetDevices();
 	for(int i = 0; i < devList.size(); ++i)
-		ui->drive->addItem(devList[i].label, QVariant::fromValue(devList[i]));
+		ui->drive->addItem(QIcon("icon/hdd.svg"), devList[i].label, QVariant::fromValue(devList[i]));
 
 	// Add nothing opetion to reference combo box
 	ui->drive->insertSeparator(ui->drive->count());
 	ui->reference->addItem(
+				QIcon::fromTheme("process-stop"),
 				"Nothing",
 				QVariant::fromValue(Device::Item::None()));
+	ui->reference->insertSeparator(ui->reference->count());
 
 	// Add saved resutls for both combo boxes
 	QFileInfoList savedList = QDir().entryInfoList(QStringList("*.xml"), QDir::Files);
 	for(int i = 0; i < savedList.size(); ++i)
 	{
-		QString label = "Saved: " + savedList[i].fileName();
+		QString label = savedList[i].fileName();
 		QString path = savedList[i].absoluteFilePath();
 		Device::Item item = Device::Item::Saved(path);
 
-		ui->drive->addItem(label, QVariant::fromValue(item));
-		ui->reference->addItem(label, QVariant::fromValue(item));
+		ui->drive->addItem(QIcon::fromTheme("document-open"), label, QVariant::fromValue(item));
+		ui->reference->addItem(QIcon::fromTheme("document-open"), label, QVariant::fromValue(item));
 	}
 
 	// Add file open dialog for both combo boxes
 	ui->drive->insertSeparator(ui->drive->count());
 	ui->reference->insertSeparator(ui->reference->count());
-	ui->drive->addItem("--- Launch file open dialog ---", QVariant::fromValue(Device::Item::Open()));
-	ui->reference->addItem("--- Launch file open dialog ---", QVariant::fromValue(Device::Item::Open()));
+	ui->drive->addItem(QIcon::fromTheme("document-open"), "Open another file", QVariant::fromValue(Device::Item::Open()));
+	ui->reference->addItem(QIcon::fromTheme("document-open"), "Open another file", QVariant::fromValue(Device::Item::Open()));
 }
 
 void HDDTestWidget::on_drive_currentIndexChanged(QString)
