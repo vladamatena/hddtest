@@ -1,0 +1,2079 @@
+<!DOCTYPE HddTest>
+<Results>
+ <Info>
+  <FS mountpoint="/media/Data_80G" fsoptions="rw&#xa;nosuid&#xa;nodev&#xa;relatime&#xa;user_id=0&#xa;group_id=0&#xa;default_permissions&#xa;allow_other&#xa;blksize=4096" fstype="fuseblk" fsversion="" fs="1"/>
+  <Device model="UNKNOWN" size="81963253760" serial="UNKNOWN" path="/dev/sdb1" firmware="UNKNOWN"/>
+  <Kernel kernel="Linux - 2.6.37-tuxonice"/>
+ </Info>
+ <File_Read_Write valid="yes">
+  <Write_data>
+   <Write speed="22.95848504686607"/>
+   <Write speed="68.89099127509724"/>
+   <Write speed="68.95940338162663"/>
+   <Write speed="69.16865109467865"/>
+   <Write speed="63.47850302083712"/>
+   <Write speed="67.00080510153225"/>
+   <Write speed="63.78083125003802"/>
+   <Write speed="66.32694886521772"/>
+   <Write speed="66.92212450378464"/>
+   <Write speed="63.66427044880513"/>
+   <Write speed="64.65228409181994"/>
+   <Write speed="64.1974824900818"/>
+   <Write speed="65.11276701440636"/>
+   <Write speed="68.08316127105329"/>
+   <Write speed="67.28369395036061"/>
+   <Write speed="67.31825068693665"/>
+   <Write speed="65.55279790446302"/>
+   <Write speed="67.47463047688912"/>
+   <Write speed="64.94781633828639"/>
+   <Write speed="65.60406421662475"/>
+   <Write speed="63.81965028027486"/>
+   <Write speed="66.54963411460812"/>
+   <Write speed="64.51346163311513"/>
+   <Write speed="58.36803990002728"/>
+   <Write speed="72.89472220677382"/>
+   <Write speed="80.16942543675216"/>
+   <Write speed="77.53388395530941"/>
+   <Write speed="86.58975862325244"/>
+   <Write speed="86.23016068814658"/>
+   <Write speed="85.70228277660175"/>
+   <Write speed="80.89054146834428"/>
+   <Write speed="76.6598188371362"/>
+   <Write speed="61.21069898310625"/>
+   <Write speed="63.4765816539642"/>
+   <Write speed="71.69848476560364"/>
+   <Write speed="83.39504994591843"/>
+   <Write speed="69.14903719335268"/>
+   <Write speed="69.84174348590611"/>
+   <Write speed="61.65301598687653"/>
+   <Write speed="63.31789499109326"/>
+   <Write speed="61.7423203066578"/>
+   <Write speed="57.02470619585493"/>
+   <Write speed="66.31478424750665"/>
+   <Write speed="62.51980992016409"/>
+   <Write speed="71.9661780047219"/>
+   <Write speed="65.86780908828221"/>
+   <Write speed="70.53992600067272"/>
+   <Write speed="58.11378058580652"/>
+   <Write speed="56.08647977877266"/>
+   <Write speed="59.21047133427069"/>
+   <Write speed="59.03645525434226"/>
+   <Write speed="58.52506320918473"/>
+   <Write speed="66.63590897247695"/>
+   <Write speed="60.29798906261681"/>
+   <Write speed="61.45320283654691"/>
+   <Write speed="58.87767134210024"/>
+   <Write speed="58.43993133736095"/>
+   <Write speed="57.80781741000055"/>
+   <Write speed="68.39579936077229"/>
+   <Write speed="68.56395569330562"/>
+   <Write speed="72.23637528503228"/>
+   <Write speed="71.5404820871796"/>
+   <Write speed="74.74399275780709"/>
+   <Write speed="75.30601399003174"/>
+   <Write speed="61.28654423883947"/>
+   <Write speed="64.89395542847949"/>
+   <Write speed="71.01382925408714"/>
+   <Write speed="60.53924228952808"/>
+   <Write speed="66.1290953236843"/>
+   <Write speed="72.35201170244329"/>
+   <Write speed="63.47158664439117"/>
+   <Write speed="62.65991012525098"/>
+   <Write speed="62.58287078484035"/>
+   <Write speed="75.13334575314197"/>
+   <Write speed="62.39555378362778"/>
+   <Write speed="77.80196624002969"/>
+   <Write speed="66.58851471064513"/>
+   <Write speed="72.09780112487796"/>
+   <Write speed="61.32453739443704"/>
+   <Write speed="60.37263075470395"/>
+   <Write speed="60.5787640170313"/>
+   <Write speed="59.77653121722078"/>
+   <Write speed="57.20951294963636"/>
+   <Write speed="59.13700631087399"/>
+   <Write speed="74.86994209335037"/>
+   <Write speed="74.43519248106423"/>
+   <Write speed="58.87006855044718"/>
+   <Write speed="54.43584978144176"/>
+   <Write speed="55.14583530550209"/>
+   <Write speed="53.51952798023724"/>
+   <Write speed="60.12752878572412"/>
+   <Write speed="60.263334846752"/>
+   <Write speed="53.00067730815499"/>
+   <Write speed="57.63781778205304"/>
+   <Write speed="54.25923530294484"/>
+   <Write speed="51.26257638719139"/>
+   <Write speed="57.08244644655543"/>
+   <Write speed="58.00704774654666"/>
+   <Write speed="54.13066820847444"/>
+   <Write speed="67.7357174233224"/>
+   <Write speed="65.25134102477939"/>
+   <Write speed="63.37912901568497"/>
+  </Write_data>
+  <Read_data>
+   <Read speed="10.79372660756711"/>
+   <Read speed="14.68009923223816"/>
+   <Read speed="12.1652591876725"/>
+   <Read speed="15.24695809971384"/>
+   <Read speed="12.46058889097508"/>
+   <Read speed="14.69328501785907"/>
+   <Read speed="11.94461562996588"/>
+   <Read speed="13.00543249075981"/>
+   <Read speed="14.47733498276929"/>
+   <Read speed="15.58625179671115"/>
+   <Read speed="13.46173152692601"/>
+   <Read speed="13.8453108268161"/>
+   <Read speed="12.94813219597248"/>
+   <Read speed="14.45010218382615"/>
+   <Read speed="14.99130753042364"/>
+   <Read speed="11.68362349926182"/>
+   <Read speed="11.53083408568818"/>
+   <Read speed="14.8725957003797"/>
+   <Read speed="12.03726748003692"/>
+   <Read speed="12.05035384215813"/>
+   <Read speed="14.85803352556927"/>
+   <Read speed="12.04193989227925"/>
+   <Read speed="12.36053121087884"/>
+   <Read speed="12.85637217879177"/>
+   <Read speed="14.08706072648229"/>
+   <Read speed="12.82017236594202"/>
+   <Read speed="13.66659063805384"/>
+   <Read speed="11.88987047387083"/>
+   <Read speed="322.6884136020926"/>
+   <Read speed="164.9612207976087"/>
+   <Read speed="286.6998414174004"/>
+   <Read speed="245.4819150181435"/>
+   <Read speed="267.0170613700025"/>
+   <Read speed="260.9696366351419"/>
+   <Read speed="253.3098200265732"/>
+   <Read speed="272.9813599916693"/>
+   <Read speed="271.2793314878535"/>
+   <Read speed="229.4778307874119"/>
+   <Read speed="264.3446693725263"/>
+   <Read speed="246.0290943219146"/>
+   <Read speed="249.4649442105013"/>
+   <Read speed="250.3763132760267"/>
+   <Read speed="251.855694864774"/>
+   <Read speed="289.1347267413004"/>
+   <Read speed="434.9674368440702"/>
+   <Read speed="298.0772073455"/>
+   <Read speed="341.2888946751725"/>
+   <Read speed="376.0493472959403"/>
+   <Read speed="252.7176323146631"/>
+   <Read speed="252.0675977787928"/>
+   <Read speed="248.6957759172734"/>
+   <Read speed="322.0145563983663"/>
+   <Read speed="436.8338610231628"/>
+   <Read speed="414.3095341578095"/>
+   <Read speed="411.8361415498213"/>
+   <Read speed="418.7269387429119"/>
+   <Read speed="435.8533543935489"/>
+   <Read speed="413.4763406940063"/>
+   <Read speed="431.1578947368421"/>
+   <Read speed="412.0303351801642"/>
+   <Read speed="250.1553069160484"/>
+   <Read speed="248.2776909598901"/>
+   <Read speed="263.9720061425371"/>
+   <Read speed="258.1682095725822"/>
+   <Read speed="247.0900393524519"/>
+   <Read speed="249.2277707793597"/>
+   <Read speed="241.5072089916625"/>
+   <Read speed="376.0763216412022"/>
+   <Read speed="286.3866280657672"/>
+   <Read speed="222.8783981975471"/>
+   <Read speed="301.9483399084286"/>
+   <Read speed="225.7915590008613"/>
+   <Read speed="295.5233639591906"/>
+   <Read speed="283.8284971849286"/>
+   <Read speed="232.0885347498893"/>
+   <Read speed="259.6256313756562"/>
+   <Read speed="207.2284584980237"/>
+   <Read speed="278.1073626140463"/>
+   <Read speed="255.943762356904"/>
+   <Read speed="295.1490415740141"/>
+   <Read speed="245.6256734598267"/>
+   <Read speed="273.1449113027169"/>
+   <Read speed="298.6119891784138"/>
+   <Read speed="290.3838271946829"/>
+   <Read speed="235.3336176133941"/>
+   <Read speed="222.6512368616626"/>
+   <Read speed="217.8542341893127"/>
+   <Read speed="298.9099201824401"/>
+   <Read speed="237.6160801287135"/>
+   <Read speed="290.0224035403126"/>
+   <Read speed="335.931312872429"/>
+   <Read speed="245.614166588588"/>
+   <Read speed="294.0234977427586"/>
+   <Read speed="291.2872937385411"/>
+   <Read speed="196.1274876552447"/>
+   <Read speed="222.6181478493482"/>
+   <Read speed="243.0747832537438"/>
+   <Read speed="305.7340292153833"/>
+   <Read speed="233.4890556458616"/>
+   <Read speed="298.3910531857375"/>
+   <Read speed="289.8300118853479"/>
+   <Read speed="161.1805213969503"/>
+  </Read_data>
+ </File_Read_Write>
+ <File_Structure valid="yes">
+  <Build time="1169365"/>
+  <Destroy time="2525498"/>
+ </File_Structure>
+ <Read_Block valid="yes">
+  <Result size="1048576" time="4004394"/>
+  <Result size="524288" time="4030045"/>
+  <Result size="262144" time="3990418"/>
+  <Result size="131072" time="3931148"/>
+  <Result size="65536" time="3958140"/>
+  <Result size="32768" time="4081038"/>
+  <Result size="16384" time="4114119"/>
+  <Result size="8192" time="4063800"/>
+  <Result size="4096" time="3980913"/>
+  <Result size="2048" time="3885700"/>
+  <Result size="1024" time="3802896"/>
+  <Result size="512" time="3761457"/>
+ </Read_Block>
+ <Read_Continuous valid="yes">
+  <Speed value="25.70997038112238"/>
+  <Speed value="26.44099936455423"/>
+  <Speed value="26.64972322894481"/>
+  <Speed value="26.78450825827743"/>
+  <Speed value="26.59956165273155"/>
+  <Speed value="26.44806868684831"/>
+  <Speed value="26.43526665288485"/>
+  <Speed value="26.10190080751959"/>
+  <Speed value="26.19999000549697"/>
+  <Speed value="26.33355935608629"/>
+  <Speed value="25.86202984338389"/>
+  <Speed value="25.94149546768001"/>
+  <Speed value="26.13534059470103"/>
+  <Speed value="26.21741500272531"/>
+  <Speed value="26.3840494378856"/>
+  <Speed value="26.10346029375156"/>
+  <Speed value="25.99126499006033"/>
+  <Speed value="26.00557523089591"/>
+  <Speed value="26.10411013468097"/>
+  <Speed value="25.68503150076915"/>
+  <Speed value="25.96089189068744"/>
+  <Speed value="25.43803128517641"/>
+  <Speed value="25.59262712402189"/>
+  <Speed value="25.91213494585658"/>
+  <Speed value="25.48390389485401"/>
+  <Speed value="26.02054692540573"/>
+  <Speed value="25.942907473292"/>
+  <Speed value="26.08540765912563"/>
+  <Speed value="25.92417881813102"/>
+  <Speed value="25.01624685679386"/>
+  <Speed value="25.68805181824418"/>
+  <Speed value="26.28365743734741"/>
+  <Speed value="25.44247529941573"/>
+  <Speed value="25.59025371196517"/>
+  <Speed value="25.50200158570338"/>
+  <Speed value="26.6153604044937"/>
+  <Speed value="26.38312005273725"/>
+  <Speed value="26.46435584091747"/>
+  <Speed value="26.66748049358603"/>
+  <Speed value="26.78573983058641"/>
+  <Speed value="27.2928780772214"/>
+  <Speed value="27.1181110507668"/>
+  <Speed value="25.20978987353945"/>
+  <Speed value="26.12947919262397"/>
+  <Speed value="25.77848580503683"/>
+  <Speed value="26.5170926121679"/>
+  <Speed value="26.56586641263922"/>
+  <Speed value="26.02868533016924"/>
+  <Speed value="25.49232975956045"/>
+  <Speed value="25.65675052728936"/>
+  <Speed value="25.01242778289307"/>
+  <Speed value="25.34567692344879"/>
+  <Speed value="26.28339390901115"/>
+  <Speed value="26.00622020724104"/>
+  <Speed value="26.0559796437659"/>
+  <Speed value="24.28856007189912"/>
+  <Speed value="25.04456821851324"/>
+  <Speed value="25.78114781103555"/>
+  <Speed value="25.65712719727518"/>
+  <Speed value="25.31324835843955"/>
+  <Speed value="25.75316088848719"/>
+  <Speed value="26.4981956756866"/>
+  <Speed value="25.65712719727518"/>
+  <Speed value="26.666395402065"/>
+  <Speed value="26.4320680806441"/>
+  <Speed value="26.61684672244334"/>
+  <Speed value="27.11264182361641"/>
+  <Speed value="27.09876830358758"/>
+  <Speed value="26.65121338741981"/>
+  <Speed value="26.92605565085202"/>
+  <Speed value="26.35116253354912"/>
+  <Speed value="26.87057955267636"/>
+  <Speed value="26.48253567369617"/>
+  <Speed value="26.33236901317904"/>
+  <Speed value="26.33673413003401"/>
+  <Speed value="25.71715873584249"/>
+  <Speed value="25.98946121319976"/>
+  <Speed value="26.1363828970523"/>
+  <Speed value="25.9447047936698"/>
+  <Speed value="26.68254525652575"/>
+  <Speed value="27.54322278317424"/>
+  <Speed value="25.97092260061919"/>
+  <Speed value="24.98286945044054"/>
+  <Speed value="24.56256734598266"/>
+  <Speed value="25.95716449980691"/>
+  <Speed value="25.67434025278272"/>
+  <Speed value="26.09111946054891"/>
+  <Speed value="26.02287166454892"/>
+  <Speed value="25.8949853556382"/>
+  <Speed value="25.9698934531387"/>
+  <Speed value="26.00854238700684"/>
+  <Speed value="25.67182595836985"/>
+  <Speed value="25.60912825372325"/>
+  <Speed value="25.57851804148859"/>
+  <Speed value="25.16284471918525"/>
+  <Speed value="25.4866293003291"/>
+  <Speed value="25.60475088151122"/>
+  <Speed value="25.82928535535171"/>
+  <Speed value="25.59487602579562"/>
+  <Speed value="25.53081249543473"/>
+  <Speed value="25.02090293022812"/>
+  <Speed value="25.2840725505042"/>
+  <Speed value="25.73546303295668"/>
+  <Speed value="25.59337671403397"/>
+  <Speed value="25.57789410519229"/>
+  <Speed value="25.7672100692482"/>
+  <Speed value="25.78203526854648"/>
+  <Speed value="25.70404616342519"/>
+  <Speed value="25.43815470905324"/>
+  <Speed value="25.04373080358636"/>
+  <Speed value="25.8631780421871"/>
+  <Speed value="25.5621809529846"/>
+  <Speed value="26.13651319069174"/>
+  <Speed value="25.81402448031039"/>
+  <Speed value="25.70530640661695"/>
+  <Speed value="25.70492832068404"/>
+  <Speed value="25.89421799449803"/>
+  <Speed value="26.58202946753602"/>
+  <Speed value="26.50007076282323"/>
+  <Speed value="26.21741500272531"/>
+  <Speed value="26.53333063422336"/>
+  <Speed value="26.51803146021951"/>
+  <Speed value="27.13130236337009"/>
+  <Speed value="27.09932857460368"/>
+  <Speed value="26.56627024945402"/>
+  <Speed value="26.82438655015042"/>
+  <Speed value="26.46542455187453"/>
+  <Speed value="26.15254922109212"/>
+  <Speed value="26.26890798406694"/>
+  <Speed value="27.18659254957272"/>
+  <Speed value="26.56613563581823"/>
+  <Speed value="25.37683747900543"/>
+  <Speed value="25.83564938008791"/>
+  <Speed value="27.06295908201663"/>
+  <Speed value="27.65100812725134"/>
+  <Speed value="24.97049480146502"/>
+  <Speed value="25.10272578845813"/>
+  <Speed value="24.83659016082806"/>
+  <Speed value="24.96799756171899"/>
+  <Speed value="25.10272578845813"/>
+  <Speed value="23.43542705930734"/>
+  <Speed value="26.19148245285375"/>
+  <Speed value="28.67468825202363"/>
+  <Speed value="28.89594356261023"/>
+  <Speed value="28.77572750524155"/>
+  <Speed value="29.07413158244976"/>
+  <Speed value="28.61552904190636"/>
+  <Speed value="28.87080254187821"/>
+  <Speed value="28.96890868203091"/>
+  <Speed value="28.67359048822239"/>
+  <Speed value="25.56243021730757"/>
+  <Speed value="26.07308388534145"/>
+  <Speed value="25.95767855905099"/>
+  <Speed value="25.91021408662305"/>
+  <Speed value="26.16847432755514"/>
+  <Speed value="26.08917197452229"/>
+  <Speed value="25.79916247988623"/>
+  <Speed value="26.08722477920139"/>
+  <Speed value="25.79624290254967"/>
+  <Speed value="25.94483318322628"/>
+  <Speed value="25.68855527355042"/>
+  <Speed value="24.94044221182022"/>
+  <Speed value="25.34285907636385"/>
+  <Speed value="25.78621981989071"/>
+  <Speed value="26.10294044430283"/>
+  <Speed value="25.78406397230227"/>
+  <Speed value="25.57789410519229"/>
+  <Speed value="26.13508003210257"/>
+  <Speed value="25.83004887277314"/>
+  <Speed value="25.94444801836887"/>
+  <Speed value="25.46892457761326"/>
+  <Speed value="26.16912740958142"/>
+  <Speed value="25.78140136409011"/>
+  <Speed value="24.93190291409876"/>
+  <Speed value="24.35399808619552"/>
+  <Speed value="25.8629228780868"/>
+  <Speed value="26.41635301882895"/>
+  <Speed value="24.83517836926298"/>
+  <Speed value="25.79763913969818"/>
+  <Speed value="25.40819788122862"/>
+  <Speed value="25.39269247161843"/>
+  <Speed value="25.81402448031039"/>
+  <Speed value="25.10260559806184"/>
+  <Speed value="25.10320656155286"/>
+  <Speed value="26.08631618751928"/>
+  <Speed value="25.62690324315077"/>
+  <Speed value="25.21063843087472"/>
+  <Speed value="26.12544286703774"/>
+  <Speed value="26.00725223594073"/>
+  <Speed value="25.91008603946647"/>
+  <Speed value="25.01254711130194"/>
+  <Speed value="26.10501996634103"/>
+  <Speed value="25.53130980613681"/>
+  <Speed value="25.81605822164009"/>
+  <Speed value="25.56043623882955"/>
+  <Speed value="26.23735768797698"/>
+  <Speed value="26.21898832295652"/>
+  <Speed value="25.79878162797335"/>
+  <Speed value="25.07259406622415"/>
+  <Speed value="25.99036307033372"/>
+  <Speed value="25.50696434392134"/>
+  <Speed value="24.83811978283321"/>
+  <Speed value="25.19319388583757"/>
+  <Speed value="24.89532139584135"/>
+  <Speed value="24.58940891204735"/>
+  <Speed value="24.47473578070732"/>
+  <Speed value="26.07087980666431"/>
+  <Speed value="25.1042883683515"/>
+  <Speed value="25.92648636887366"/>
+  <Speed value="26.00738124528751"/>
+  <Speed value="26.18690375106139"/>
+  <Speed value="25.58014041832757"/>
+  <Speed value="25.98379382976087"/>
+  <Speed value="25.67685503974298"/>
+  <Speed value="26.08761419501224"/>
+  <Speed value="24.97120839028944"/>
+  <Speed value="24.6611193949115"/>
+  <Speed value="25.84418209153871"/>
+  <Speed value="25.72144844063522"/>
+  <Speed value="25.62602643309611"/>
+  <Speed value="25.42273600093101"/>
+  <Speed value="26.11724385286733"/>
+  <Speed value="25.89664812747587"/>
+  <Speed value="25.97401053252151"/>
+  <Speed value="26.15228831525128"/>
+  <Speed value="25.95716449980691"/>
+  <Speed value="25.95896379624495"/>
+  <Speed value="26.10073131512264"/>
+  <Speed value="25.80551166762646"/>
+  <Speed value="26.10294044430283"/>
+  <Speed value="25.75214892676458"/>
+  <Speed value="25.04325230591393"/>
+  <Speed value="24.97037587395934"/>
+  <Speed value="24.85189486407698"/>
+  <Speed value="25.26932716406401"/>
+  <Speed value="25.36271986687049"/>
+  <Speed value="25.84876916022857"/>
+  <Speed value="25.25496392065434"/>
+  <Speed value="25.60062501525916"/>
+  <Speed value="25.70316406671308"/>
+  <Speed value="25.38347204268278"/>
+  <Speed value="25.65700163938438"/>
+  <Speed value="26.08800362244923"/>
+  <Speed value="25.62590117941474"/>
+  <Speed value="25.6591362906699"/>
+  <Speed value="25.29688208671485"/>
+  <Speed value="25.22652911967358"/>
+  <Speed value="25.04468785378879"/>
+  <Speed value="25.93161573045934"/>
+  <Speed value="26.13690407940457"/>
+  <Speed value="25.79890857736159"/>
+  <Speed value="25.98971888027998"/>
+  <Speed value="25.45606385767972"/>
+  <Speed value="25.3159373823021"/>
+  <Speed value="24.98477433128577"/>
+  <Speed value="24.73534976103869"/>
+  <Speed value="24.48845377774456"/>
+  <Speed value="25.58113890637274"/>
+  <Speed value="25.52981793214941"/>
+  <Speed value="25.42236618161188"/>
+  <Speed value="24.60464134031021"/>
+  <Speed value="26.85791565919429"/>
+  <Speed value="28.97227042141444"/>
+  <Speed value="28.87430056835705"/>
+  <Speed value="28.59835922499564"/>
+  <Speed value="28.16103128776689"/>
+  <Speed value="29.03323697821488"/>
+  <Speed value="29.02937886891908"/>
+  <Speed value="28.27768099370574"/>
+  <Speed value="25.33171634399354"/>
+  <Speed value="25.6108796217143"/>
+  <Speed value="25.1177586570339"/>
+  <Speed value="25.51751662107835"/>
+  <Speed value="25.76974308310109"/>
+  <Speed value="26.0685464824308"/>
+  <Speed value="26.08839306151289"/>
+  <Speed value="25.86381597446611"/>
+  <Speed value="26.12309976631672"/>
+  <Speed value="26.10281048517587"/>
+  <Speed value="26.08631618751928"/>
+  <Speed value="25.42347567184878"/>
+  <Speed value="25.19924828292247"/>
+  <Speed value="26.0099617010299"/>
+  <Speed value="28.74039315433446"/>
+  <Speed value="29.77623299029964"/>
+  <Speed value="25.25216620669393"/>
+  <Speed value="26.02325916145908"/>
+  <Speed value="24.97180307879896"/>
+  <Speed value="25.72069132992214"/>
+  <Speed value="25.71627573893679"/>
+  <Speed value="26.4928397457276"/>
+  <Speed value="26.58432082426971"/>
+  <Speed value="27.06603271951969"/>
+  <Speed value="26.28405273976037"/>
+  <Speed value="26.0733432132165"/>
+  <Speed value="25.56467381499198"/>
+  <Speed value="26.87209451321084"/>
+  <Speed value="27.03100671279349"/>
+  <Speed value="29.98861744905021"/>
+  <Speed value="29.94733535157366"/>
+  <Speed value="30.39086456250181"/>
+  <Speed value="30.29060698150053"/>
+  <Speed value="29.52637329218431"/>
+  <Speed value="29.98347239776048"/>
+  <Speed value="26.85103811367524"/>
+  <Speed value="26.58499482790094"/>
+  <Speed value="26.84059098774407"/>
+  <Speed value="26.87457390805128"/>
+  <Speed value="26.85709016771338"/>
+  <Speed value="26.87347189830595"/>
+  <Speed value="26.05999453239556"/>
+  <Speed value="26.31822539919984"/>
+  <Speed value="26.29934689045617"/>
+  <Speed value="25.59950000976544"/>
+  <Speed value="26.6673448523166"/>
+  <Speed value="26.92536424283198"/>
+  <Speed value="27.24069311303354"/>
+  <Speed value="26.5003386540775"/>
+  <Speed value="26.46502377515068"/>
+  <Speed value="26.5858036773729"/>
+  <Speed value="26.90657155320623"/>
+  <Speed value="26.84388920178178"/>
+  <Speed value="27.11306245507341"/>
+  <Speed value="27.32944120100083"/>
+  <Speed value="27.15308204634205"/>
+  <Speed value="27.19731081277364"/>
+  <Speed value="27.51012698079547"/>
+  <Speed value="27.48978874901033"/>
+  <Speed value="27.22329532473467"/>
+  <Speed value="26.96205786458494"/>
+  <Speed value="26.68498979503545"/>
+  <Speed value="27.13523417161371"/>
+  <Speed value="27.10100952666484"/>
+  <Speed value="27.25995559691986"/>
+  <Speed value="26.99676628699718"/>
+  <Speed value="26.75566714637109"/>
+  <Speed value="26.52634987452441"/>
+  <Speed value="26.3194144637102"/>
+  <Speed value="26.89014945582488"/>
+  <Speed value="26.89139076244454"/>
+  <Speed value="26.84182772302573"/>
+  <Speed value="26.94362932775571"/>
+  <Speed value="26.73820136473516"/>
+  <Speed value="26.15750742135855"/>
+  <Speed value="26.10125107658301"/>
+  <Speed value="25.33526626075191"/>
+  <Speed value="26.35103009102195"/>
+  <Speed value="26.26732866726454"/>
+  <Speed value="26.33726333345055"/>
+  <Speed value="26.1858574154172"/>
+  <Speed value="26.58688221990081"/>
+  <Speed value="26.36666750484045"/>
+  <Speed value="25.81745660470269"/>
+  <Speed value="25.57901721244292"/>
+  <Speed value="25.72094369520745"/>
+  <Speed value="25.89575276226039"/>
+  <Speed value="26.91085287233606"/>
+  <Speed value="26.78943522715079"/>
+  <Speed value="26.9275768734945"/>
+  <Speed value="26.8945635111982"/>
+  <Speed value="26.85502666099811"/>
+  <Speed value="27.08113161741538"/>
+  <Speed value="27.19068141625047"/>
+  <Speed value="27.100169024568"/>
+  <Speed value="27.22230587502272"/>
+  <Speed value="26.75703262156534"/>
+  <Speed value="26.8132744856367"/>
+  <Speed value="27.21481666043769"/>
+  <Speed value="26.50248197911296"/>
+  <Speed value="27.20591974511055"/>
+  <Speed value="26.92674709438187"/>
+  <Speed value="26.66978660630262"/>
+  <Speed value="26.4239418589414"/>
+  <Speed value="26.16220639823552"/>
+  <Speed value="30.05325216533966"/>
+  <Speed value="30.07307643772442"/>
+  <Speed value="29.21426700768404"/>
+  <Speed value="26.84223999344672"/>
+  <Speed value="26.3184896264727"/>
+  <Speed value="26.51870210667408"/>
+  <Speed value="25.84927893504252"/>
+  <Speed value="26.59969660532818"/>
+  <Speed value="27.13565550437348"/>
+  <Speed value="26.40358166261262"/>
+  <Speed value="26.73588340583073"/>
+  <Speed value="26.78902457718052"/>
+  <Speed value="25.83272153925747"/>
+  <Speed value="26.72266509001203"/>
+  <Speed value="27.18673352450388"/>
+  <Speed value="26.75239057445224"/>
+  <Speed value="27.15251955046869"/>
+  <Speed value="26.98967851535353"/>
+  <Speed value="26.1533319698504"/>
+  <Speed value="27.26023907199717"/>
+  <Speed value="26.92577908338298"/>
+  <Speed value="26.25036299730631"/>
+  <Speed value="26.84182772302573"/>
+  <Speed value="26.84100322017499"/>
+  <Speed value="26.83646935975922"/>
+  <Speed value="25.96204888483936"/>
+  <Speed value="26.86121813263382"/>
+  <Speed value="25.72094369520745"/>
+  <Speed value="26.77137853032338"/>
+  <Speed value="26.70333812099543"/>
+  <Speed value="26.53279352226721"/>
+  <Speed value="26.62292884309733"/>
+  <Speed value="27.04788043562375"/>
+  <Speed value="26.19567009588144"/>
+  <Speed value="27.06212093839523"/>
+  <Speed value="26.90795247504427"/>
+  <Speed value="26.38551003256116"/>
+  <Speed value="25.62565067572521"/>
+  <Speed value="26.26890798406694"/>
+  <Speed value="26.08683537501617"/>
+  <Speed value="26.25614727416592"/>
+  <Speed value="26.77206205255472"/>
+  <Speed value="26.83935436642214"/>
+  <Speed value="27.04760135989146"/>
+  <Speed value="26.92743857342428"/>
+  <Speed value="26.63456018694912"/>
+  <Speed value="27.1407125182478"/>
+  <Speed value="27.00316237291278"/>
+  <Speed value="25.3987201038644"/>
+  <Speed value="25.33037008406609"/>
+  <Speed value="26.68702725264433"/>
+  <Speed value="25.45346855747431"/>
+  <Speed value="26.10735982471865"/>
+  <Speed value="26.05390792716864"/>
+  <Speed value="25.2917567150355"/>
+  <Speed value="26.41781719238134"/>
+  <Speed value="26.63320718295192"/>
+  <Speed value="26.23643860843108"/>
+  <Speed value="26.90698581487488"/>
+  <Speed value="26.33541121453077"/>
+  <Speed value="26.50047260173574"/>
+  <Speed value="24.66216343349578"/>
+  <Speed value="26.53628513873283"/>
+  <Speed value="26.40078957439523"/>
+  <Speed value="26.30066618508708"/>
+  <Speed value="25.7363473480107"/>
+  <Speed value="26.15463665524277"/>
+  <Speed value="26.13651319069174"/>
+  <Speed value="26.75348267591978"/>
+  <Speed value="26.38577561260386"/>
+  <Speed value="26.07879029048945"/>
+  <Speed value="26.32945973905969"/>
+  <Speed value="26.82205362487146"/>
+  <Speed value="26.45047044875514"/>
+  <Speed value="26.44780185133806"/>
+  <Speed value="26.53937464249738"/>
+  <Speed value="26.16938865151939"/>
+  <Speed value="25.93033319979623"/>
+  <Speed value="26.61684672244334"/>
+  <Speed value="26.12362041904382"/>
+  <Speed value="26.18951995604176"/>
+  <Speed value="26.27035585797749"/>
+  <Speed value="24.95349966207533"/>
+  <Speed value="25.48501876300286"/>
+  <Speed value="26.22370941684298"/>
+  <Speed value="25.43975932844874"/>
+  <Speed value="26.94279855904375"/>
+  <Speed value="26.77506996506854"/>
+  <Speed value="25.81186398121298"/>
+  <Speed value="26.37170723364871"/>
+  <Speed value="26.87209451321084"/>
+  <Speed value="26.85791565919429"/>
+  <Speed value="26.30251341995686"/>
+  <Speed value="26.21466214662147"/>
+  <Speed value="26.77616391902106"/>
+  <Speed value="26.21977505388605"/>
+  <Speed value="25.75113704456822"/>
+  <Speed value="26.73888319384731"/>
+  <Speed value="25.27115417058299"/>
+  <Speed value="26.22161094300933"/>
+  <Speed value="24.81026315664943"/>
+  <Speed value="26.78697151615787"/>
+  <Speed value="25.97735662083488"/>
+  <Speed value="26.48440854511747"/>
+  <Speed value="24.72065445458189"/>
+  <Speed value="25.56330268072201"/>
+  <Speed value="26.10566988492927"/>
+  <Speed value="26.21833274991249"/>
+  <Speed value="25.47152303080653"/>
+  <Speed value="25.65775500516299"/>
+  <Speed value="25.81453288560202"/>
+  <Speed value="25.65838284377539"/>
+  <Speed value="26.05805168986084"/>
+  <Speed value="25.31703760219036"/>
+  <Speed value="25.58376030839799"/>
+  <Speed value="25.59700035152131"/>
+  <Speed value="25.68968812014602"/>
+  <Speed value="26.02532600656232"/>
+  <Speed value="25.72372004023256"/>
+  <Speed value="26.13690407940457"/>
+  <Speed value="25.8949853556382"/>
+  <Speed value="25.78672713053999"/>
+  <Speed value="25.95896379624495"/>
+  <Speed value="25.91251915188059"/>
+  <Speed value="25.37352149757051"/>
+  <Speed value="25.2270146467271"/>
+  <Speed value="25.14582803754454"/>
+  <Speed value="25.10825579112212"/>
+  <Speed value="25.18157759494339"/>
+  <Speed value="25.48824004122548"/>
+  <Speed value="25.57465012707131"/>
+  <Speed value="24.10098465555443"/>
+  <Speed value="25.06025017804991"/>
+  <Speed value="25.06001061119529"/>
+  <Speed value="25.81885513926644"/>
+  <Speed value="24.99775906624582"/>
+  <Speed value="25.27383425808535"/>
+  <Speed value="25.71766333272835"/>
+  <Speed value="25.42409209715979"/>
+  <Speed value="25.50274587632126"/>
+  <Speed value="25.58039003303132"/>
+  <Speed value="25.08987193966425"/>
+  <Speed value="25.56529710646681"/>
+  <Speed value="25.32914633557177"/>
+  <Speed value="25.43519286653374"/>
+  <Speed value="26.43819935756176"/>
+  <Speed value="26.72130312019"/>
+  <Speed value="26.32100005020332"/>
+  <Speed value="25.1058511427901"/>
+  <Speed value="25.79586213682994"/>
+  <Speed value="27.8797998436611"/>
+  <Speed value="24.99358818509885"/>
+  <Speed value="24.92965046337022"/>
+  <Speed value="26.72075837113297"/>
+  <Speed value="23.953216374269"/>
+  <Speed value="25.98984771573604"/>
+  <Speed value="25.13775016062062"/>
+  <Speed value="26.48373963205803"/>
+  <Speed value="25.25995268769543"/>
+  <Speed value="24.31897879288272"/>
+  <Speed value="25.7059365745553"/>
+  <Speed value="24.8671004951716"/>
+  <Speed value="25.91187881483678"/>
+  <Speed value="25.56454916034405"/>
+  <Speed value="26.21964392878576"/>
+  <Speed value="26.38391666456986"/>
+  <Speed value="30.24953698628556"/>
+  <Speed value="25.72157463008752"/>
+  <Speed value="25.99281128380556"/>
+  <Speed value="25.97645566609854"/>
+  <Speed value="25.40955242687862"/>
+  <Speed value="26.19985907821159"/>
+  <Speed value="25.94894232006573"/>
+  <Speed value="26.23578216246241"/>
+  <Speed value="25.34874051153121"/>
+  <Speed value="26.87622709214405"/>
+  <Speed value="26.9434908627459"/>
+  <Speed value="26.47879072539305"/>
+  <Speed value="25.95035513648625"/>
+  <Speed value="26.05973546998564"/>
+  <Speed value="25.72119606544509"/>
+  <Speed value="26.62076599288133"/>
+  <Speed value="26.90822867642153"/>
+  <Speed value="25.99461552572995"/>
+  <Speed value="26.27022422648127"/>
+  <Speed value="25.82877636881361"/>
+  <Speed value="25.04444858438066"/>
+  <Speed value="26.01422057269313"/>
+  <Speed value="26.05222489999752"/>
+  <Speed value="27.18955333018716"/>
+  <Speed value="26.87416064380542"/>
+  <Speed value="27.17165749349586"/>
+  <Speed value="25.51391545128497"/>
+  <Speed value="25.22895694185129"/>
+  <Speed value="26.65378769007082"/>
+  <Speed value="26.77151523197745"/>
+  <Speed value="25.7373580682058"/>
+  <Speed value="26.87608931903463"/>
+  <Speed value="26.08709497651461"/>
+  <Speed value="26.32073577252098"/>
+  <Speed value="26.46782946714794"/>
+  <Speed value="26.56761646084696"/>
+  <Speed value="26.45100423286296"/>
+  <Speed value="24.23534197437272"/>
+  <Speed value="25.39699763123859"/>
+  <Speed value="26.26601271498495"/>
+  <Speed value="24.3197684397048"/>
+  <Speed value="28.59430391483142"/>
+  <Speed value="25.96320598212296"/>
+  <Speed value="26.85709016771338"/>
+  <Speed value="24.63632049095207"/>
+  <Speed value="26.08865269401485"/>
+  <Speed value="25.4866293003291"/>
+  <Speed value="26.45313958475239"/>
+  <Speed value="26.49980287698513"/>
+  <Speed value="26.47103670081439"/>
+  <Speed value="26.30290928976004"/>
+  <Speed value="26.1363828970523"/>
+  <Speed value="25.55196529960767"/>
+  <Speed value="23.90527040520885"/>
+  <Speed value="26.13703437824041"/>
+  <Speed value="24.9993086052422"/>
+  <Speed value="26.35314933122892"/>
+  <Speed value="25.00860987488254"/>
+  <Speed value="25.42187310592286"/>
+  <Speed value="26.34123303707351"/>
+  <Speed value="25.37892576385393"/>
+  <Speed value="26.09021059755564"/>
+  <Speed value="26.97995625884472"/>
+  <Speed value="26.1862497814849"/>
+  <Speed value="26.30356909924645"/>
+  <Speed value="26.31214963589736"/>
+  <Speed value="26.07736345504374"/>
+  <Speed value="25.8449464899265"/>
+  <Speed value="26.01370427154503"/>
+  <Speed value="25.78152814248763"/>
+  <Speed value="26.22449643112598"/>
+  <Speed value="26.02480926450806"/>
+  <Speed value="26.17775114839225"/>
+  <Speed value="25.70530640661695"/>
+  <Speed value="26.10761983487536"/>
+  <Speed value="25.92533254215497"/>
+  <Speed value="25.4899749129733"/>
+  <Speed value="26.63577800808795"/>
+  <Speed value="25.65825727359483"/>
+  <Speed value="25.36505125860559"/>
+  <Speed value="25.83170331538261"/>
+  <Speed value="26.12674477129232"/>
+  <Speed value="25.16429401092413"/>
+  <Speed value="24.63632049095207"/>
+  <Speed value="26.23867077046268"/>
+  <Speed value="26.18690375106139"/>
+  <Speed value="25.59562574755291"/>
+  <Speed value="25.9772279091891"/>
+  <Speed value="25.24000943573351"/>
+  <Speed value="21.94141846168011"/>
+  <Speed value="22.76168066059443"/>
+  <Speed value="26.84086580795773"/>
+  <Speed value="25.60087502990825"/>
+  <Speed value="25.59125298970078"/>
+  <Speed value="26.17108685126116"/>
+  <Speed value="25.66051772490786"/>
+  <Speed value="25.62778011320865"/>
+  <Speed value="26.25312335695151"/>
+  <Speed value="26.20300169426299"/>
+  <Speed value="25.73723172384001"/>
+  <Speed value="25.40019669494358"/>
+  <Speed value="24.95718195882423"/>
+  <Speed value="24.91176386737496"/>
+  <Speed value="25.18218234565174"/>
+  <Speed value="26.08969127570214"/>
+  <Speed value="25.67421452636528"/>
+  <Speed value="26.12270929039073"/>
+  <Speed value="26.10618984310035"/>
+  <Speed value="25.87377179432768"/>
+  <Speed value="25.28907282532149"/>
+  <Speed value="25.12148959516246"/>
+  <Speed value="25.09972137378999"/>
+  <Speed value="25.37904861484246"/>
+  <Speed value="24.91602589082891"/>
+  <Speed value="24.8665107830071"/>
+  <Speed value="25.45631105673056"/>
+  <Speed value="26.02648875121622"/>
+  <Speed value="25.64294692771585"/>
+  <Speed value="26.35288440756174"/>
+  <Speed value="26.45434087170638"/>
+  <Speed value="26.24957442973585"/>
+  <Speed value="26.09579461348173"/>
+  <Speed value="26.55079861849635"/>
+  <Speed value="26.623875200585"/>
+  <Speed value="24.83823745386842"/>
+  <Speed value="26.07282456262495"/>
+  <Speed value="26.93034317326115"/>
+  <Speed value="26.7716519350276"/>
+  <Speed value="26.23683249178047"/>
+  <Speed value="26.84114063379921"/>
+  <Speed value="26.92840670374993"/>
+  <Speed value="26.07321354863415"/>
+  <Speed value="26.07036125407125"/>
+  <Speed value="26.25391213776734"/>
+  <Speed value="25.92174351570766"/>
+  <Speed value="26.11828471225889"/>
+  <Speed value="26.77288232530588"/>
+  <Speed value="26.50234801114105"/>
+  <Speed value="26.40025781501772"/>
+  <Speed value="25.58113890637274"/>
+  <Speed value="25.12341567434171"/>
+  <Speed value="25.2555722013748"/>
+  <Speed value="25.80132085314121"/>
+  <Speed value="24.5614166588588"/>
+  <Speed value="25.10609158689645"/>
+  <Speed value="26.08865269401485"/>
+  <Speed value="27.12386313077488"/>
+  <Speed value="29.09526795673624"/>
+  <Speed value="28.48060145801419"/>
+  <Speed value="27.63686968256144"/>
+  <Speed value="25.1051298381034"/>
+  <Speed value="25.56828932866464"/>
+  <Speed value="25.54835440077188"/>
+  <Speed value="25.5826367846042"/>
+  <Speed value="25.5660450963564"/>
+  <Speed value="25.25764057501831"/>
+  <Speed value="26.16729886204831"/>
+  <Speed value="25.92776851902221"/>
+  <Speed value="26.08943162252809"/>
+  <Speed value="26.20365650083466"/>
+  <Speed value="26.10657982532142"/>
+  <Speed value="26.22200438127057"/>
+  <Speed value="26.07476960874517"/>
+  <Speed value="25.21221447463332"/>
+  <Speed value="25.95896379624495"/>
+  <Speed value="24.98667950263789"/>
+  <Speed value="25.70681886157814"/>
+  <Speed value="26.23735768797698"/>
+  <Speed value="26.20470425942401"/>
+  <Speed value="26.02429254297358"/>
+  <Speed value="26.01163927187573"/>
+  <Speed value="25.78621981989071"/>
+  <Speed value="25.91264722308715"/>
+  <Speed value="25.81949088688509"/>
+  <Speed value="25.83310339390595"/>
+  <Speed value="26.21951280499697"/>
+  <Speed value="26.15633294087127"/>
+  <Speed value="26.09592450275748"/>
+  <Speed value="25.0410992926432"/>
+  <Speed value="25.22713603141074"/>
+  <Speed value="25.78660030100631"/>
+  <Speed value="25.73824251350025"/>
+  <Speed value="24.8548402389305"/>
+  <Speed value="25.59650047845021"/>
+  <Speed value="25.8813075715541"/>
+  <Speed value="25.31104867286543"/>
+  <Speed value="25.73925338255798"/>
+  <Speed value="25.39539840155001"/>
+  <Speed value="25.49232975956045"/>
+  <Speed value="25.28992672844181"/>
+  <Speed value="25.67685503974298"/>
+  <Speed value="26.12088722373901"/>
+  <Speed value="26.04381302468829"/>
+  <Speed value="25.6591362906699"/>
+  <Speed value="25.78393716896414"/>
+  <Speed value="25.96102044050071"/>
+  <Speed value="25.12221184024533"/>
+  <Speed value="25.86572996013735"/>
+  <Speed value="24.89898654103702"/>
+  <Speed value="25.61263122926834"/>
+  <Speed value="25.58113890637274"/>
+  <Speed value="25.01708243467639"/>
+  <Speed value="25.50026507653173"/>
+  <Speed value="25.99654892004998"/>
+  <Speed value="25.67522037218413"/>
+  <Speed value="26.12153793264943"/>
+  <Speed value="25.83323068129745"/>
+  <Speed value="26.222266680004"/>
+  <Speed value="25.7059365745553"/>
+  <Speed value="26.09111946054891"/>
+  <Speed value="26.08969127570214"/>
+  <Speed value="26.10735982471865"/>
+  <Speed value="25.70757515580334"/>
+  <Speed value="25.62990990462503"/>
+  <Speed value="25.97902998830595"/>
+  <Speed value="25.69082106666144"/>
+  <Speed value="25.36566485398564"/>
+  <Speed value="25.738621580092"/>
+  <Speed value="25.91239108193999"/>
+  <Speed value="25.91047018473308"/>
+  <Speed value="26.13964062780448"/>
+  <Speed value="25.6603921338306"/>
+  <Speed value="24.33331322141826"/>
+  <Speed value="27.22753663831157"/>
+  <Speed value="26.72320991681618"/>
+  <Speed value="25.84838684231285"/>
+  <Speed value="25.97864380744742"/>
+  <Speed value="25.97748533375614"/>
+  <Speed value="25.97980238446825"/>
+  <Speed value="25.3442066641852"/>
+  <Speed value="25.57165641598424"/>
+  <Speed value="25.54760744566806"/>
+  <Speed value="26.25456949132172"/>
+  <Speed value="25.0063435434175"/>
+  <Speed value="25.97825763806994"/>
+  <Speed value="26.37117664515545"/>
+  <Speed value="25.45878331132002"/>
+  <Speed value="25.28638950516061"/>
+  <Speed value="25.52149150562235"/>
+  <Speed value="25.27200686403995"/>
+  <Speed value="26.30462486328105"/>
+  <Speed value="26.9781514680608"/>
+  <Speed value="25.48923136759201"/>
+  <Speed value="24.20714364865364"/>
+  <Speed value="26.22685775743478"/>
+  <Speed value="28.48261287641316"/>
+  <Speed value="29.50560242218233"/>
+  <Speed value="29.19750955080583"/>
+  <Speed value="28.34632727430011"/>
+  <Speed value="26.00944556891693"/>
+  <Speed value="25.78431758272023"/>
+  <Speed value="25.22822854613171"/>
+  <Speed value="23.778419785114"/>
+  <Speed value="25.91264722308715"/>
+  <Speed value="26.06077175053062"/>
+  <Speed value="26.28695198748546"/>
+  <Speed value="25.84991618183611"/>
+  <Speed value="25.12967747192438"/>
+  <Speed value="23.1419579524438"/>
+  <Speed value="25.5943762356904"/>
+  <Speed value="25.50510308325469"/>
+  <Speed value="25.47461711886807"/>
+  <Speed value="25.7229627957865"/>
+  <Speed value="25.89754355460935"/>
+  <Speed value="25.78774181172501"/>
+  <Speed value="25.52633757077963"/>
+  <Speed value="25.64332319250296"/>
+  <Speed value="25.40942928039702"/>
+  <Speed value="25.1205266663153"/>
+  <Speed value="27.11769026264883"/>
+  <Speed value="25.16477714527076"/>
+  <Speed value="25.70946608606959"/>
+  <Speed value="26.43220133903364"/>
+  <Speed value="25.54262886095684"/>
+  <Speed value="26.23801421279151"/>
+  <Speed value="26.33713103060261"/>
+  <Speed value="27.01485000566794"/>
+  <Speed value="26.94487557688947"/>
+  <Speed value="26.73956505773389"/>
+ </Read_Continuous>
+ <Read_Random valid="yes">
+  <Result size="1048576" read="104857600" time="6597527"/>
+  <Result size="524288" read="52428800" time="4743871"/>
+  <Result size="262144" read="26214400" time="3649421"/>
+  <Result size="131072" read="13107200" time="2950152"/>
+  <Result size="65536" read="6553600" time="1689206"/>
+  <Result size="32768" read="3276800" time="1578602"/>
+  <Result size="16384" read="1638400" time="1540499"/>
+  <Result size="8192" read="819200" time="1546486"/>
+  <Result size="4096" read="409600" time="1494284"/>
+  <Result size="2048" read="204800" time="1485273"/>
+  <Result size="1024" read="102400" time="1454379"/>
+  <Result size="512" read="51200" time="1454624"/>
+ </Read_Random>
+ <Seeker valid="yes">
+  <Seek length="0.8630333655631585" time="10.234"/>
+  <Seek length="0.3295227442908191" time="11.714"/>
+  <Seek length="0.4246012894986369" time="13.9"/>
+  <Seek length="0.005532898283026874" time="12.231"/>
+  <Seek length="0.6708048911161235" time="21.456"/>
+  <Seek length="0.3250068935037847" time="15.751"/>
+  <Seek length="0.3088761258323183" time="12.634"/>
+  <Seek length="0.0105264593390393" time="7.701"/>
+  <Seek length="0.2430138586777353" time="8.9"/>
+  <Seek length="0.3077901498135938" time="16.245"/>
+  <Seek length="0.1935231909221853" time="10.234"/>
+  <Seek length="0.6071458870058406" time="19.859"/>
+  <Seek length="0.02669041637128877" time="10.468"/>
+  <Seek length="0.6685701431333709" time="17.754"/>
+  <Seek length="0.2176475118744725" time="10.966"/>
+  <Seek length="0.4003690175366703" time="19.002"/>
+  <Seek length="0.612766771961787" time="19.966"/>
+  <Seek length="0.4869531304219419" time="15.139"/>
+  <Seek length="0.7397230628683134" time="20.477"/>
+  <Seek length="0.2991982630387952" time="19.621"/>
+  <Seek length="0.5792493146382381" time="17.142"/>
+  <Seek length="0.3080914212110459" time="12.569"/>
+  <Seek length="0.3447167614981712" time="17.857"/>
+  <Seek length="0.2401888382279859" time="14.626"/>
+  <Seek length="0.08313779887207835" time="13.601"/>
+  <Seek length="0.2441000688013682" time="15.871"/>
+  <Seek length="0.0586622818571716" time="10.883"/>
+  <Seek length="0.3573688286676432" time="14.103"/>
+  <Seek length="0.2417500305200183" time="12.863"/>
+  <Seek length="0.03389096677559717" time="15.508"/>
+  <Seek length="0.2644185728577889" time="12.982"/>
+  <Seek length="0.2106589438305871" time="16.123"/>
+  <Seek length="0.1928909751227524" time="14.366"/>
+  <Seek length="0.2580699879965331" time="10.478"/>
+  <Seek length="0.3502170376746156" time="17.508"/>
+  <Seek length="0.7353684245685075" time="17.482"/>
+  <Seek length="0.08408219725121854" time="14.495"/>
+  <Seek length="0.4228798035701603" time="12.996"/>
+  <Seek length="0.2286797007947382" time="13.851"/>
+  <Seek length="0.2823927980430629" time="14.274"/>
+  <Seek length="0.0498076628089197" time="12.755"/>
+  <Seek length="0.3541665557958445" time="15.328"/>
+  <Seek length="0.7434643109268384" time="14.88"/>
+  <Seek length="0.3557659343708319" time="22.862"/>
+  <Seek length="0.2414565511021509" time="16.856"/>
+  <Seek length="0.04976925125428305" time="12.873"/>
+  <Seek length="0.3109742041309611" time="19.245"/>
+  <Seek length="0.3502098203427887" time="13.878"/>
+  <Seek length="0.05530075713285104" time="10.365"/>
+  <Seek length="0.1895246705491454" time="14.108"/>
+  <Seek length="0.2438253922973592" time="16.252"/>
+  <Seek length="0.1919035164716233" time="10.867"/>
+  <Seek length="0.6243471176954896" time="18.991"/>
+  <Seek length="0.1319314654547946" time="9.994999999999999"/>
+  <Seek length="0.2292429004468063" time="9.853999999999999"/>
+  <Seek length="0.01389120462852645" time="11.125"/>
+  <Seek length="0.3451471354326088" time="15.989"/>
+  <Seek length="0.6015483173761207" time="19.488"/>
+  <Seek length="0.2757686184614446" time="16.857"/>
+  <Seek length="0.2472670811403376" time="17.26"/>
+  <Seek length="0.07564685267565444" time="11.742"/>
+  <Seek length="0.7364602690219018" time="15.114"/>
+  <Seek length="0.09566247309994541" time="11.609"/>
+  <Seek length="0.7682164722056052" time="15.984"/>
+  <Seek length="0.7493728408324233" time="17.511"/>
+  <Seek length="0.2815389172514959" time="22.877"/>
+  <Seek length="0.3197553856358765" time="11.117"/>
+  <Seek length="0.07516229646078902" time="15.592"/>
+  <Seek length="0.203517604106399" time="12.259"/>
+  <Seek length="0.2159538417280129" time="12.136"/>
+  <Seek length="0.501364154653101" time="13.496"/>
+  <Seek length="0.009158184668924495" time="11.844"/>
+  <Seek length="0.0880154353452549" time="6.753"/>
+  <Seek length="0.6667093519494753" time="16"/>
+  <Seek length="0.6006875283180558" time="22.255"/>
+  <Seek length="0.3684603553981701" time="13.584"/>
+  <Seek length="0.8149477361841619" time="25.881"/>
+  <Seek length="0.8129602676476274" time="19.857"/>
+  <Seek length="0.931006795672627" time="15.505"/>
+  <Seek length="0.0739071271589304" time="11.636"/>
+  <Seek length="0.1244384718042702" time="9.356999999999999"/>
+  <Seek length="0.1252869276769912" time="13.592"/>
+  <Seek length="0.6734641100953774" time="13.878"/>
+  <Seek length="0.336566769967137" time="20.258"/>
+  <Seek length="0.2751780017914213" time="10.103"/>
+  <Seek length="0.1691119648639971" time="16.792"/>
+  <Seek length="0.2821259280617412" time="14.694"/>
+  <Seek length="0.03457552368892194" time="12.727"/>
+  <Seek length="0.04700354026062521" time="7.241"/>
+  <Seek length="0.3245257342746077" time="16.754"/>
+  <Seek length="0.1645523233312889" time="10.605"/>
+  <Seek length="0.4811242095082" time="17.874"/>
+  <Seek length="0.7681496799328627" time="20.499"/>
+  <Seek length="0.3567387432375159" time="11.496"/>
+  <Seek length="0.1999953540887833" time="12.612"/>
+  <Seek length="0.1613887959686582" time="16.386"/>
+  <Seek length="0.5887805648041662" time="20.611"/>
+  <Seek length="0.6471165110319798" time="19.112"/>
+  <Seek length="0.3091399888563917" time="11.485"/>
+  <Seek length="0.295116841710897" time="13.53"/>
+  <Seek length="0.19405626844163" time="9.965"/>
+  <Seek length="0.4428087503733575" time="14.982"/>
+  <Seek length="0.5608347854100613" time="17.658"/>
+  <Seek length="0.4579119614247974" time="19.359"/>
+  <Seek length="0.1249142215361461" time="7.713"/>
+  <Seek length="0.6451941442545289" time="20.116"/>
+  <Seek length="0.2560157462689778" time="16.256"/>
+  <Seek length="0.1697811718254559" time="11.982"/>
+  <Seek length="0.271791791273075" time="20.624"/>
+  <Seek length="0.05037710896751984" time="11.874"/>
+  <Seek length="0.4609622759075786" time="14.361"/>
+  <Seek length="0.5471632664232582" time="24.859"/>
+  <Seek length="0.208436438992829" time="14.639"/>
+  <Seek length="0.3027396555370717" time="17.745"/>
+  <Seek length="0.3956614211651326" time="17.739"/>
+  <Seek length="0.1314196064194902" time="11.599"/>
+  <Seek length="0.1862119155822054" time="15.627"/>
+  <Seek length="0.2301932207479997" time="16.625"/>
+  <Seek length="0.4617224887241958" time="22.265"/>
+  <Seek length="0.2195541737117099" time="13.091"/>
+  <Seek length="0.4170810705746194" time="18.357"/>
+  <Seek length="0.2524066266888036" time="13.236"/>
+  <Seek length="0.04964994662017674" time="11.64"/>
+  <Seek length="0.1480999275790586" time="15.735"/>
+  <Seek length="0.1691829396939744" time="12.385"/>
+  <Seek length="0.6962800815729842" time="22.495"/>
+  <Seek length="0.02136883763946855" time="15.969"/>
+  <Seek length="0.2454235443715015" time="11.371"/>
+  <Seek length="0.5352245736175127" time="13.255"/>
+  <Seek length="0.2157532895629155" time="10.482"/>
+  <Seek length="0.1147724461689306" time="13.878"/>
+  <Seek length="0.1399878310785109" time="15.479"/>
+  <Seek length="0.103157931513528" time="10.007"/>
+  <Seek length="0.1060409825047922" time="11.745"/>
+  <Seek length="0.02760876000147703" time="12.606"/>
+  <Seek length="0.4080880718076559" time="13.492"/>
+  <Seek length="0.3100915166743132" time="18.001"/>
+  <Seek length="0.3124636072280789" time="12.244"/>
+  <Seek length="0.6287020914626998" time="23.359"/>
+  <Seek length="0.4316139727881881" time="16.773"/>
+  <Seek length="0.3643694468431996" time="11.106"/>
+  <Seek length="0.1452770205641968" time="8.603999999999999"/>
+  <Seek length="0.5145498224544862" time="21.365"/>
+  <Seek length="0.3610180950678745" time="16.473"/>
+  <Seek length="0.3031283104347077" time="9.624000000000001"/>
+  <Seek length="0.1521229624010476" time="11.47"/>
+  <Seek length="0.4153845153303977" time="16.78"/>
+  <Seek length="0.317459666574369" time="11.503"/>
+  <Seek length="0.2859415895643428" time="14.628"/>
+  <Seek length="0.3677757958983204" time="23.336"/>
+  <Seek length="0.2175565770755463" time="17.261"/>
+  <Seek length="0.3352861518463954" time="15.372"/>
+  <Seek length="0.02823007389110269" time="10.854"/>
+  <Seek length="0.1188741131059754" time="11.379"/>
+  <Seek length="0.3661879222350677" time="19.129"/>
+  <Seek length="0.3851402403622684" time="19.115"/>
+  <Seek length="0.3929183395805687" time="11.236"/>
+  <Seek length="0.5950840594105765" time="16.23"/>
+  <Seek length="0.02107536134495205" time="7.762"/>
+  <Seek length="0.01642148270420249" time="11.367"/>
+  <Seek length="0.2308112282291122" time="14.524"/>
+  <Seek length="0.2875831300575249" time="15.96"/>
+  <Seek length="0.214808503839465" time="12.381"/>
+  <Seek length="0.1722910562256332" time="18.009"/>
+  <Seek length="0.7090069120018302" time="20.867"/>
+  <Seek length="0.7586416463171899" time="19.897"/>
+  <Seek length="0.1267117275311058" time="13.715"/>
+  <Seek length="0.248298521939986" time="16.858"/>
+  <Seek length="0.003968218525735599" time="7.246"/>
+  <Seek length="0.4716781846558064" time="20.994"/>
+  <Seek length="0.3391075363038394" time="14.498"/>
+  <Seek length="0.5332598925609076" time="20.61"/>
+  <Seek length="0.505171434643641" time="16.245"/>
+  <Seek length="0.1098382598177615" time="7.723"/>
+  <Seek length="0.03545740497942867" time="12.607"/>
+  <Seek length="0.5682927475572195" time="18.765"/>
+  <Seek length="0.4275408275104573" time="18.392"/>
+  <Seek length="0.7382071620432459" time="14.726"/>
+  <Seek length="0.09199501952519851" time="11.11"/>
+  <Seek length="0.1961551965845237" time="13.985"/>
+  <Seek length="0.5698572133649761" time="13.106"/>
+  <Seek length="0.3077651002955986" time="18.379"/>
+  <Seek length="0.5808795113162672" time="18.105"/>
+  <Seek length="0.04311929719565101" time="14.373"/>
+  <Seek length="0.3538571153229923" time="16.861"/>
+  <Seek length="0.2782797281912103" time="13.128"/>
+  <Seek length="0.2343261764868228" time="14.635"/>
+  <Seek length="0.7426923715869818" time="19.832"/>
+  <Seek length="0.4718861748857931" time="19.997"/>
+  <Seek length="0.1372933541529525" time="11.493"/>
+  <Seek length="0.06389352210607019" time="14.121"/>
+  <Seek length="0.2017932876411958" time="11.001"/>
+  <Seek length="0.6074446345405797" time="19.01"/>
+  <Seek length="0.1085166584045577" time="15.599"/>
+  <Seek length="0.2608287738868799" time="15.501"/>
+  <Seek length="0.578110664722347" time="20.622"/>
+  <Seek length="0.3839474121677426" time="18.24"/>
+  <Seek length="0.05770132405734304" time="15.121"/>
+  <Seek length="0.3602112085551251" time="12.867"/>
+  <Seek length="0.6109579190283233" time="12.977"/>
+  <Seek length="0.5081482802031699" time="20.381"/>
+  <Seek length="0.5645932452791879" time="13.365"/>
+  <Seek length="0.1525058605726098" time="9.494"/>
+  <Seek length="0.3901028531593522" time="11.246"/>
+  <Seek length="0.5195599759215805" time="20.26"/>
+  <Seek length="0.4277623058335746" time="15.512"/>
+  <Seek length="0.81331072967399" time="21.08"/>
+  <Seek length="0.2459524619780053" time="16.122"/>
+  <Seek length="0.3212408844956035" time="17.49"/>
+  <Seek length="0.2274290716249867" time="14.624"/>
+  <Seek length="0.7400602723217219" time="23.012"/>
+  <Seek length="0.5817321976213357" time="17.758"/>
+  <Seek length="0.3709925451597885" time="11.588"/>
+  <Seek length="0.03568877534517244" time="9.858000000000001"/>
+  <Seek length="0.4426704544482935" time="15.368"/>
+  <Seek length="0.7802761596222897" time="14.76"/>
+  <Seek length="0.2823740233857695" time="15.111"/>
+  <Seek length="0.1660671576784411" time="12.506"/>
+  <Seek length="0.1344712672129038" time="15.527"/>
+  <Seek length="0.09276525185619962" time="9.717000000000001"/>
+  <Seek length="0.3656728626923656" time="14.493"/>
+  <Seek length="0.4627323036376246" time="14.885"/>
+  <Seek length="0.2306222580834741" time="13.233"/>
+  <Seek length="0.05925999497558258" time="8.250999999999999"/>
+  <Seek length="0.1823220998736495" time="16.115"/>
+  <Seek length="0.4108616015245903" time="14.493"/>
+  <Seek length="0.8467351840523125" time="19.742"/>
+  <Seek length="0.2710474753363427" time="18.356"/>
+  <Seek length="0.1494452877367078" time="9.882"/>
+  <Seek length="0.164981118363059" time="8.984999999999999"/>
+  <Seek length="0.05237251613472305" time="8.869"/>
+  <Seek length="0.12932230388312" time="12.111"/>
+  <Seek length="0.3022431643640986" time="13.487"/>
+  <Seek length="0.4116998906950177" time="19.536"/>
+  <Seek length="0.2256729970745368" time="15.355"/>
+  <Seek length="0.07130884021654535" time="14.361"/>
+  <Seek length="0.7574197100542241" time="22.613"/>
+  <Seek length="0.6355961882936356" time="18.856"/>
+  <Seek length="0.7088027411419349" time="16.898"/>
+  <Seek length="0.0125044412829323" time="11.584"/>
+  <Seek length="0.4213906741566625" time="22.363"/>
+  <Seek length="0.4153769080677355" time="14.618"/>
+  <Seek length="0.7799313408565199" time="14.757"/>
+  <Seek length="0.3859019727866889" time="17.98"/>
+  <Seek length="0.3613200625333496" time="12.647"/>
+  <Seek length="0.01916232006356113" time="13.368"/>
+  <Seek length="0.6015674192044179" time="15.345"/>
+  <Seek length="0.2848150443411582" time="13.743"/>
+  <Seek length="0.7826401516200618" time="17.382"/>
+  <Seek length="0.4345543776762822" time="15.492"/>
+  <Seek length="0.02965470552349141" time="7.746"/>
+  <Seek length="0.3734396731933742" time="12.979"/>
+  <Seek length="0.3859498252061583" time="20.392"/>
+  <Seek length="0.04496846419485043" time="8.085000000000001"/>
+  <Seek length="0.008754572971213386" time="10.244"/>
+  <Seek length="0.1334823243356804" time="10.382"/>
+  <Seek length="0.1847621427809945" time="10.722"/>
+  <Seek length="0.06295627678605227" time="10.745"/>
+  <Seek length="0.6093626854815579" time="20.757"/>
+  <Seek length="0.4927946740654138" time="16.111"/>
+  <Seek length="0.5891831851795923" time="14.725"/>
+  <Seek length="0.02646497934734991" time="12.236"/>
+  <Seek length="0.2537023076083406" time="14.236"/>
+  <Seek length="0.4072392449882165" time="14.255"/>
+  <Seek length="0.09940159596221476" time="14.641"/>
+  <Seek length="0.6434373520654142" time="18.719"/>
+  <Seek length="0.1105347588143382" time="11.378"/>
+  <Seek length="0.5108100822423963" time="16.137"/>
+  <Seek length="0.2330417128867286" time="11.791"/>
+  <Seek length="0.1448980956365586" time="12.543"/>
+  <Seek length="0.6281409213542671" time="16.754"/>
+  <Seek length="0.6278887123819327" time="17.228"/>
+  <Seek length="0.6630161646476832" time="17.248"/>
+  <Seek length="0.4096341215090386" time="17.99"/>
+  <Seek length="0.4884911633112795" time="14.724"/>
+  <Seek length="0.6068479739914122" time="24.258"/>
+  <Seek length="0.2730585168267483" time="14.859"/>
+  <Seek length="0.08117108514848691" time="7.86"/>
+  <Seek length="0.2803614472076322" time="12.36"/>
+  <Seek length="0.02637278310509083" time="8.989000000000001"/>
+  <Seek length="0.4223446563915425" time="18.13"/>
+  <Seek length="0.2737562603322399" time="16.355"/>
+  <Seek length="0.03746801134801606" time="11.139"/>
+  <Seek length="0.4566773437716682" time="16.253"/>
+  <Seek length="0.2293848093567924" time="17.351"/>
+  <Seek length="0.1801275038840039" time="14.484"/>
+  <Seek length="0.3040363046953787" time="17.65"/>
+  <Seek length="0.0420690657803383" time="10.469"/>
+  <Seek length="0.09506363484318561" time="15.001"/>
+  <Seek length="0.8761872741690434" time="17.252"/>
+  <Seek length="0.680243033948583" time="22.107"/>
+  <Seek length="0.2911638164082567" time="12.585"/>
+  <Seek length="0.2962075450675715" time="17.013"/>
+  <Seek length="0.4058891564189654" time="11.115"/>
+  <Seek length="0.1555377697343381" time="10.858"/>
+  <Seek length="0.04855631082745342" time="7.74"/>
+  <Seek length="0.03440244676299195" time="8.997999999999999"/>
+  <Seek length="0.3408825197668678" time="17.117"/>
+  <Seek length="0.3956626002300863" time="15.387"/>
+  <Seek length="0.02385987320276925" time="8.106"/>
+  <Seek length="0.1401537086806838" time="9.843999999999999"/>
+  <Seek length="0.5473080007945258" time="15.923"/>
+  <Seek length="0.7930234321385731" time="22.57"/>
+  <Seek length="0.3870847381303375" time="15.995"/>
+  <Seek length="0.1081659824286605" time="10.124"/>
+  <Seek length="0.02523408682696005" time="14.352"/>
+  <Seek length="0.1547755963806189" time="16.244"/>
+  <Seek length="0.6463812191879484" time="23.873"/>
+  <Seek length="0.2266685419834655" time="13.713"/>
+  <Seek length="0.1499029265233504" time="11.504"/>
+  <Seek length="0.5391132575017968" time="17.748"/>
+  <Seek length="0.3355940171743616" time="18.609"/>
+  <Seek length="0.1028132377305954" time="10.501"/>
+  <Seek length="0.4996099908125463" time="17.251"/>
+  <Seek length="0.09172239628277051" time="14.879"/>
+  <Seek length="0.7219166161858336" time="24.986"/>
+  <Seek length="0.02943180422123837" time="14.722"/>
+  <Seek length="0.2642198619568321" time="16.163"/>
+  <Seek length="0.08604663449124643" time="11.477"/>
+  <Seek length="0.3616528877781828" time="12.479"/>
+  <Seek length="0.09691838678416077" time="15.904"/>
+  <Seek length="0.3767517552734109" time="17.218"/>
+  <Seek length="0.1524498729465764" time="8.871"/>
+  <Seek length="0.06595134553623655" time="13.476"/>
+  <Seek length="0.5480178351816569" time="19.37"/>
+  <Seek length="0.9852680631062346" time="24.233"/>
+  <Seek length="0.6509366303859141" time="20.868"/>
+  <Seek length="0.1162162676202668" time="9.096"/>
+  <Seek length="0.7352630386107307" time="16.412"/>
+  <Seek length="0.1188741099826245" time="14.483"/>
+  <Seek length="0.1969889311773462" time="14.994"/>
+  <Seek length="0.2380651491354362" time="11.617"/>
+  <Seek length="0.02326833572986744" time="7.749"/>
+  <Seek length="0.3768927612909836" time="13.24"/>
+  <Seek length="0.03111688754411889" time="7.752"/>
+  <Seek length="0.1834699277560745" time="9.603999999999999"/>
+  <Seek length="0.0202385393685962" time="10.357"/>
+  <Seek length="0.1026990041006395" time="10.871"/>
+  <Seek length="0.5558864411046046" time="12.123"/>
+  <Seek length="0.4910045768051266" time="12.766"/>
+  <Seek length="0.1444635690119289" time="16.105"/>
+  <Seek length="0.2758874374144905" time="13.491"/>
+  <Seek length="0.3788335164550695" time="17.515"/>
+  <Seek length="0.1448366558111614" time="8.609999999999999"/>
+  <Seek length="0.1256498487499772" time="11.738"/>
+  <Seek length="0.2387743609996968" time="9.625"/>
+  <Seek length="0.09648771144636413" time="14.917"/>
+  <Seek length="0.1019832597480327" time="10.708"/>
+  <Seek length="0.1444335261343339" time="11.225"/>
+  <Seek length="0.4218913926386321" time="18.992"/>
+  <Seek length="0.01600585054665355" time="9.269"/>
+  <Seek length="0.3603071170951035" time="14.074"/>
+  <Seek length="0.3970108692034434" time="12.398"/>
+  <Seek length="0.07060518191414464" time="15.236"/>
+  <Seek length="0.8522865279427384" time="20.896"/>
+  <Seek length="0.7417440725330229" time="15.469"/>
+  <Seek length="0.7528817585828355" time="14.238"/>
+  <Seek length="0.8437054201446089" time="23"/>
+  <Seek length="0.2328898779676753" time="19.503"/>
+  <Seek length="0.2156200415584868" time="10.48"/>
+  <Seek length="0.5117938466038759" time="18.502"/>
+  <Seek length="0.5038393160784153" time="20.117"/>
+  <Seek length="0.06330334841504467" time="14.504"/>
+  <Seek length="0.01912933342777045" time="15.357"/>
+  <Seek length="0.3797609335659444" time="14.883"/>
+  <Seek length="0.4401381489762858" time="13.226"/>
+  <Seek length="0.5018219240348518" time="11.874"/>
+  <Seek length="0.02083251905786713" time="14.621"/>
+  <Seek length="0.7945902129349531" time="21.351"/>
+  <Seek length="0.1704426542033853" time="14.656"/>
+  <Seek length="0.404106451398154" time="17.318"/>
+  <Seek length="0.2271172280752559" time="17.786"/>
+  <Seek length="0.6269066787472543" time="19.855"/>
+  <Seek length="0.2420117050511783" time="15.882"/>
+  <Seek length="0.09466484515999771" time="11.216"/>
+  <Seek length="0.1238907373752362" time="15.768"/>
+  <Seek length="0.3659796233789731" time="17.22"/>
+  <Seek length="0.1516601760393559" time="13.858"/>
+  <Seek length="0.2863870994035072" time="9.750999999999999"/>
+  <Seek length="0.3723325827371351" time="13.116"/>
+  <Seek length="0.2412179552057842" time="17.002"/>
+  <Seek length="0.1993492761261507" time="14.126"/>
+  <Seek length="0.05351161625236094" time="13.472"/>
+  <Seek length="0.2158353169555771" time="15.263"/>
+  <Seek length="0.443681513968242" time="12.113"/>
+  <Seek length="0.008098281407221674" time="9.978999999999999"/>
+  <Seek length="0.3243916172466016" time="16.66"/>
+  <Seek length="0.1425551255470315" time="13.342"/>
+  <Seek length="0.2463660676176651" time="13.756"/>
+  <Seek length="0.009298612476167272" time="10.727"/>
+  <Seek length="0.4163293906549764" time="11.898"/>
+  <Seek length="0.601285913347323" time="19.596"/>
+  <Seek length="0.122544691398059" time="15.496"/>
+  <Seek length="0.5043036896391752" time="16.406"/>
+  <Seek length="0.7382644002296865" time="19.867"/>
+  <Seek length="0.2091462558111114" time="11.215"/>
+  <Seek length="0.449102390026933" time="17.878"/>
+  <Seek length="0.1058094557762954" time="15.605"/>
+  <Seek length="0.04692447863602237" time="11.495"/>
+  <Seek length="0.01974933497320446" time="10.129"/>
+  <Seek length="0.5887122477505705" time="15.848"/>
+  <Seek length="0.0433594395411176" time="14.981"/>
+  <Seek length="0.5748504673077537" time="21.382"/>
+  <Seek length="0.03268107966825547" time="12.641"/>
+  <Seek length="0.4115099394755897" time="18.336"/>
+  <Seek length="0.2370577650186249" time="11.75"/>
+  <Seek length="0.3394663587108429" time="15.005"/>
+  <Seek length="0.1006362969697703" time="10.604"/>
+  <Seek length="0.07300538252814233" time="11.015"/>
+  <Seek length="0.3838620494755722" time="15.985"/>
+  <Seek length="0.3618720510150719" time="12.49"/>
+  <Seek length="0.6275891773235529" time="24.513"/>
+  <Seek length="0.6757648456976045" time="15.096"/>
+  <Seek length="0.3857262227604372" time="24.993"/>
+  <Seek length="0.1317434003488736" time="8.619"/>
+  <Seek length="0.4848012217078679" time="16.875"/>
+  <Seek length="0.3256384163585455" time="12.252"/>
+  <Seek length="0.1964455007258121" time="16.597"/>
+  <Seek length="0.1512402178944439" time="16.745"/>
+  <Seek length="0.3487665271769709" time="12.616"/>
+  <Seek length="0.4389900309150441" time="23.753"/>
+  <Seek length="0.4177910654239015" time="18.862"/>
+  <Seek length="0.8721706752067331" time="18.127"/>
+  <Seek length="0.6854859369848423" time="16.856"/>
+  <Seek length="0.4839953142192094" time="19.367"/>
+  <Seek length="0.04038125943232442" time="7.621"/>
+  <Seek length="0.5326360032732795" time="19.745"/>
+  <Seek length="0.7106072031809002" time="18.884"/>
+  <Seek length="0.846385923393581" time="17.122"/>
+  <Seek length="0.6378215258154242" time="16.725"/>
+  <Seek length="0.2821849828183297" time="17.998"/>
+  <Seek length="0.03062687288318799" time="8.112"/>
+  <Seek length="0.01342529237824148" time="11.747"/>
+  <Seek length="0.2728348577702926" time="18.379"/>
+  <Seek length="0.134085360034394" time="10.375"/>
+  <Seek length="0.09718890078870387" time="8.481"/>
+  <Seek length="0.1880870380175595" time="10.633"/>
+  <Seek length="0.143640707974744" time="10.479"/>
+  <Seek length="0.3839688301559199" time="17.865"/>
+  <Seek length="0.0698476062793142" time="11.5"/>
+  <Seek length="0.2266545245311647" time="14.618"/>
+  <Seek length="0.236130632913517" time="14.387"/>
+  <Seek length="0.2440189087242014" time="12.372"/>
+  <Seek length="0.38216555342861" time="13.388"/>
+  <Seek length="0.6582024883000448" time="22.723"/>
+  <Seek length="0.143440358534639" time="11.865"/>
+  <Seek length="0.4065591288942016" time="16.626"/>
+  <Seek length="0.4291465261371293" time="11.092"/>
+  <Seek length="0.3183491963167276" time="14.867"/>
+  <Seek length="0.09347964794607978" time="15.11"/>
+  <Seek length="0.6435336557092777" time="18.642"/>
+  <Seek length="0.1557076292184524" time="8.727"/>
+  <Seek length="0.4581674012107935" time="12.755"/>
+  <Seek length="0.3458489513972169" time="17.742"/>
+  <Seek length="0.426797500846311" time="15.497"/>
+  <Seek length="0.4115735343642853" time="13.729"/>
+  <Seek length="0.6897354871676583" time="19.374"/>
+  <Seek length="0.5153630877769585" time="19.377"/>
+  <Seek length="0.2722263981287802" time="15.495"/>
+  <Seek length="0.4577557824127064" time="16.487"/>
+  <Seek length="0.242071839657528" time="15.74"/>
+  <Seek length="0.2583702948153921" time="12.984"/>
+  <Seek length="0.1028157210385495" time="15.86"/>
+  <Seek length="0.6418482292570226" time="18.114"/>
+  <Seek length="0.7725215582998348" time="23.105"/>
+  <Seek length="0.196502142693853" time="11.862"/>
+  <Seek length="0.2551533531750314" time="14.006"/>
+  <Seek length="0.3129016856882769" time="15.74"/>
+  <Seek length="0.1988319375133601" time="11.568"/>
+  <Seek length="0.5156658974247145" time="14.544"/>
+  <Seek length="0.3661443413395306" time="19.235"/>
+  <Seek length="0.3770193383547784" time="14.612"/>
+  <Seek length="0.4909754980669035" time="18.999"/>
+  <Seek length="0.5390502903090215" time="17.777"/>
+  <Seek length="0.7232185225780866" time="19.109"/>
+  <Seek length="0.1809868570303083" time="15.863"/>
+  <Seek length="0.8049358818182671" time="19.249"/>
+  <Seek length="0.6933112079761339" time="15.718"/>
+  <Seek length="0.5267376591517101" time="20.51"/>
+  <Seek length="0.01212903012502367" time="10.007"/>
+  <Seek length="0.718142636630242" time="21.335"/>
+  <Seek length="0.6940863359644155" time="26.273"/>
+  <Seek length="0.6991800227185124" time="16.622"/>
+  <Seek length="0.1323820638669579" time="13.801"/>
+  <Seek length="0.5205439079679601" time="24.222"/>
+  <Seek length="0.6356519973518435" time="19.573"/>
+  <Seek length="0.0192826999112047" time="7.452"/>
+  <Seek length="0.03364380001402228" time="13.488"/>
+  <Seek length="0.01096641098011968" time="5.992"/>
+  <Seek length="0.6836252640978611" time="19.258"/>
+  <Seek length="0.1229447827377223" time="14.372"/>
+  <Seek length="0.357561848628104" time="17.551"/>
+  <Seek length="0.8313705140297252" time="22.959"/>
+  <Seek length="0.8231740971577554" time="18.863"/>
+  <Seek length="0.3929857425172087" time="13.596"/>
+  <Seek length="0.08364382968585556" time="10.616"/>
+  <Seek length="0.04899744778018925" time="11.876"/>
+  <Seek length="0.6270905732525179" time="19.253"/>
+  <Seek length="0.6634757793929728" time="21.673"/>
+  <Seek length="0.541019120932468" time="13.934"/>
+  <Seek length="0.1770927055251156" time="10.122"/>
+  <Seek length="0.9581674753415743" time="21.363"/>
+  <Seek length="0.009514479553038184" time="11.874"/>
+  <Seek length="0.2976729053905241" time="14.749"/>
+  <Seek length="0.1785589852356784" time="13.499"/>
+  <Seek length="0.4675623994407906" time="19.265"/>
+  <Seek length="0.02397592750227099" time="7.965"/>
+  <Seek length="0.8028202115874615" time="19.622"/>
+  <Seek length="0.02448571482870326" time="10.119"/>
+  <Seek length="0.3633761949130312" time="12.744"/>
+  <Seek length="0.2112490059106214" time="13.361"/>
+  <Seek length="0.399507307138901" time="18.016"/>
+  <Seek length="0.1907984056342079" time="15.238"/>
+  <Seek length="0.05637879969395691" time="9.247"/>
+  <Seek length="0.4088491066511803" time="20.615"/>
+  <Seek length="0.4141536465279536" time="16.983"/>
+  <Seek length="0.01909754040003597" time="13.742"/>
+  <Seek length="0.6462263896098407" time="19.515"/>
+  <Seek length="0.4472003906205102" time="18.615"/>
+  <Seek length="0.06217305531722219" time="6.612"/>
+  <Seek length="0.4350255764907301" time="13.862"/>
+  <Seek length="0.7298645945067957" time="16.998"/>
+  <Seek length="0.0004950098018168282" time="3.12"/>
+  <Seek length="0.8624657781033411" time="16.743"/>
+  <Seek length="0.8850425064677179" time="22.011"/>
+  <Seek length="0.3145526680223389" time="21.855"/>
+  <Seek length="0.2290995057002481" time="16.756"/>
+  <Seek length="0.0534980653993988" time="12.765"/>
+  <Seek length="0.6329605839942682" time="14.464"/>
+  <Seek length="0.6760133232904979" time="16.242"/>
+  <Seek length="0.5792088410863986" time="16.01"/>
+  <Seek length="0.6427408930867705" time="15.489"/>
+  <Seek length="0.2463030102869357" time="16.763"/>
+  <Seek length="0.3748634786018529" time="16.718"/>
+  <Seek length="0.1032405609320701" time="10.128"/>
+  <Seek length="0.6366783917437296" time="14.615"/>
+  <Seek length="0.5473176206664053" time="15.998"/>
+  <Seek length="0.1179138878295307" time="8.106999999999999"/>
+  <Seek length="0.06729402429716329" time="9.266"/>
+  <Seek length="0.1577332974097879" time="13.238"/>
+  <Seek length="0.4315175332785617" time="17.396"/>
+  <Seek length="0.4808072949543188" time="17.968"/>
+  <Seek length="0.4358453595144342" time="13.877"/>
+  <Seek length="0.645998984289225" time="19.492"/>
+  <Seek length="0.8938077479514644" time="17.875"/>
+  <Seek length="0.8718041384646953" time="19.739"/>
+  <Seek length="0.884047675098056" time="16.503"/>
+  <Seek length="0.2744073120359247" time="21.981"/>
+  <Seek length="0.1373543695442478" time="10.373"/>
+  <Seek length="0.2326207921153178" time="11.245"/>
+  <Seek length="0.2492581353812765" time="10.493"/>
+  <Seek length="0.05428513600775822" time="9.632"/>
+  <Seek length="0.1421546036241693" time="14.614"/>
+  <Seek length="0.08487863981548212" time="8.015000000000001"/>
+  <Seek length="0.3579824251964884" time="13.845"/>
+  <Seek length="0.345148482816893" time="16.255"/>
+  <Seek length="0.07611447139796906" time="14.002"/>
+  <Seek length="0.3637407154832795" time="13.637"/>
+  <Seek length="0.1530724792202295" time="10.081"/>
+  <Seek length="0.3885342228024306" time="14.124"/>
+  <Seek length="0.03656643698865281" time="9.391"/>
+  <Seek length="0.3292960920881821" time="10.614"/>
+  <Seek length="0.3040138485834558" time="14.735"/>
+  <Seek length="0.5207333112833221" time="14.857"/>
+  <Seek length="0.4017115692650609" time="11.621"/>
+  <Seek length="0.1439161869847174" time="7.617"/>
+  <Seek length="0.24211560365951" time="15.769"/>
+  <Seek length="0.3200527729513114" time="17.167"/>
+  <Seek length="0.5756391893878861" time="21.185"/>
+  <Seek length="0.07926371387138059" time="11.369"/>
+  <Seek length="0.2825837200877858" time="13.869"/>
+  <Seek length="0.5433535711552503" time="13.998"/>
+  <Seek length="0.8211199428840245" time="18.878"/>
+  <Seek length="0.7193458054586631" time="20.374"/>
+  <Seek length="0.6138523688349973" time="13.134"/>
+  <Seek length="0.5108087025021492" time="16.457"/>
+  <Seek length="0.03385513418153496" time="7.375"/>
+  <Seek length="0.7707081359040473" time="14.63"/>
+  <Seek length="0.347729482353825" time="18.859"/>
+  <Seek length="0.1746310769446935" time="13.504"/>
+  <Seek length="0.4374783728205179" time="14.99"/>
+  <Seek length="0.8417479224533899" time="20.635"/>
+  <Seek length="0.01977253502826289" time="11.724"/>
+  <Seek length="0.5689253276174476" time="20.237"/>
+  <Seek length="0.2037442305413913" time="9.634"/>
+  <Seek length="0.6324731796738275" time="14.747"/>
+  <Seek length="0.6387535467942848" time="18.999"/>
+  <Seek length="0.611776384534786" time="14.874"/>
+  <Seek length="0.2337708975549582" time="14.61"/>
+  <Seek length="0.3891605125804122" time="17.489"/>
+  <Seek length="0.7036122254842021" time="14.566"/>
+  <Seek length="0.7175968587365168" time="13.291"/>
+  <Seek length="0.248077690296906" time="23.592"/>
+  <Seek length="0.2634803032250925" time="14.615"/>
+  <Seek length="0.270149162096905" time="9.255000000000001"/>
+  <Seek length="0.3708913921232792" time="15.111"/>
+  <Seek length="0.3592179287100083" time="13.879"/>
+  <Seek length="0.5340421817095027" time="12.712"/>
+  <Seek length="0.9398331775305061" time="19.998"/>
+  <Seek length="0.08372811199143883" time="14.295"/>
+  <Seek length="0.5675020170648726" time="18.331"/>
+  <Seek length="0.6005498935185269" time="13.472"/>
+  <Seek length="0.7457211661822636" time="22.247"/>
+  <Seek length="0.3780656382521825" time="21.615"/>
+  <Seek length="0.2137810865501687" time="13.618"/>
+  <Seek length="0.3326007880778402" time="16.598"/>
+  <Seek length="0.2339744098758434" time="17.361"/>
+  <Seek length="0.526222064003136" time="19.52"/>
+  <Seek length="0.6866222044184499" time="15.977"/>
+  <Seek length="0.4765188865776916" time="19.747"/>
+  <Seek length="0.1399343998663627" time="18.613"/>
+  <Seek length="0.6224685000353016" time="17.492"/>
+  <Seek length="0.04873889601427165" time="12.606"/>
+  <Seek length="0.8677430850446511" time="22.487"/>
+  <Seek length="0.2188494536652226" time="11.117"/>
+  <Seek length="0.6752510285165136" time="21.125"/>
+  <Seek length="0.2398370422867898" time="17.991"/>
+  <Seek length="0.3839523663878519" time="16.744"/>
+  <Seek length="0.4123465036290916" time="13.734"/>
+  <Seek length="0.2315122452503282" time="15.738"/>
+  <Seek length="0.5829853810576687" time="19.862"/>
+  <Seek length="0.03356227103983628" time="13.872"/>
+  <Seek length="0.4226342131247279" time="19.863"/>
+  <Seek length="0.2303468454935091" time="10.117"/>
+  <Seek length="0.07725481602452186" time="7.361"/>
+  <Seek length="0.2738330140933634" time="11.367"/>
+  <Seek length="0.4943618073612211" time="15.623"/>
+  <Seek length="0.2540799417624292" time="10.992"/>
+  <Seek length="0.2778673505652687" time="13.489"/>
+  <Seek length="0.4327012709603782" time="16.735"/>
+  <Seek length="0.2509916546046109" time="15.865"/>
+  <Seek length="0.373266916752525" time="17.251"/>
+  <Seek length="0.2276260240794033" time="11.978"/>
+  <Seek length="0.08506348909006513" time="12.135"/>
+  <Seek length="0.3283845511649927" time="12.503"/>
+  <Seek length="0.7453246442470173" time="17.729"/>
+  <Seek length="0.530958822028102" time="16.624"/>
+  <Seek length="0.4923592517711196" time="19.63"/>
+  <Seek length="0.006536928116212452" time="7.473"/>
+  <Seek length="0.2796509163132569" time="13.367"/>
+  <Seek length="0.1144024676894428" time="9.868"/>
+  <Seek length="0.3381971246183968" time="17.136"/>
+  <Seek length="0.4579998300692156" time="14.614"/>
+  <Seek length="0.1220964884008041" time="14.356"/>
+  <Seek length="0.4961085557811803" time="15.743"/>
+  <Seek length="0.4252231543180747" time="16.883"/>
+  <Seek length="0.07389874403639098" time="12.232"/>
+  <Seek length="0.4168623389945812" time="13.253"/>
+  <Seek length="0.1619589406842016" time="9.115"/>
+  <Seek length="0.970340971954113" time="23.506"/>
+  <Seek length="0.1060816427256487" time="10.972"/>
+  <Seek length="0.632661119894516" time="21.223"/>
+  <Seek length="0.2354764023706811" time="9.385"/>
+  <Seek length="0.5663957698645662" time="17.119"/>
+  <Seek length="0.281740636183353" time="11.37"/>
+  <Seek length="0.5426602627591929" time="16.376"/>
+  <Seek length="0.7307822847710237" time="22.097"/>
+  <Seek length="0.2071084634061263" time="13.222"/>
+  <Seek length="0.06548876028905956" time="11.885"/>
+  <Seek length="0.3313416368940403" time="11.386"/>
+  <Seek length="0.8083905030907352" time="17.224"/>
+  <Seek length="0.153049708235497" time="9.99"/>
+  <Seek length="0.01523940664504923" time="10.489"/>
+  <Seek length="0.6901081058546791" time="13.866"/>
+  <Seek length="0.7634717662775227" time="17.243"/>
+  <Seek length="0.7684284484169311" time="14.515"/>
+  <Seek length="0.3842409513196954" time="16.822"/>
+  <Seek length="0.1301183918982574" time="15.38"/>
+  <Seek length="0.01485345783812866" time="6.605"/>
+  <Seek length="0.00627552273005322" time="11.117"/>
+  <Seek length="0.190351883341338" time="11.498"/>
+  <Seek length="0.04697944809847432" time="8.874000000000001"/>
+  <Seek length="0.4190781301896427" time="17.994"/>
+  <Seek length="0.6480415601060687" time="20.992"/>
+  <Seek length="0.7861067129260828" time="21.27"/>
+  <Seek length="0.6339667396581402" time="15.72"/>
+  <Seek length="0.6349000051459158" time="19.616"/>
+  <Seek length="0.4357264273399192" time="14.997"/>
+  <Seek length="0.1425386082915799" time="14.991"/>
+  <Seek length="0.2811486299638088" time="10.126"/>
+  <Seek length="0.2737596686400752" time="18.242"/>
+  <Seek length="0.6336355097135665" time="18.36"/>
+  <Seek length="0.2205836467515074" time="8.743"/>
+  <Seek length="0.10931732666734" time="9.233000000000001"/>
+  <Seek length="0.09234510694466602" time="11.877"/>
+  <Seek length="0.2007628428000563" time="9.257"/>
+  <Seek length="0.1247519045051635" time="11.593"/>
+  <Seek length="0.1062985804774376" time="11.116"/>
+  <Seek length="0.3661513411592507" time="12.762"/>
+  <Seek length="0.34633117256569" time="15.597"/>
+  <Seek length="0.1504332783335321" time="12.639"/>
+  <Seek length="0.5554611830236839" time="16.244"/>
+  <Seek length="0.6209615343362377" time="13.858"/>
+  <Seek length="0.7127677583550338" time="22.605"/>
+  <Seek length="0.1433372336388808" time="14.745"/>
+  <Seek length="0.1822119562716589" time="9.414"/>
+  <Seek length="0.08804756276674197" time="11.463"/>
+  <Seek length="0.3091544065856275" time="9.736000000000001"/>
+  <Seek length="0.07901987821231171" time="9.987"/>
+  <Seek length="0.2939616014336227" time="16.487"/>
+  <Seek length="0.05908897023758174" time="13.248"/>
+  <Seek length="0.004855891045582619" time="17.232"/>
+  <Seek length="0.5101079051403438" time="13.492"/>
+  <Seek length="0.02708296569704165" time="13.112"/>
+  <Seek length="0.2450674696836242" time="14.504"/>
+  <Seek length="0.2420121623780691" time="15.983"/>
+  <Seek length="0.1262593265550711" time="10.349"/>
+  <Seek length="0.07493522704679897" time="7.245"/>
+  <Seek length="0.6712607379290063" time="17.456"/>
+  <Seek length="0.2882667048234079" time="16.332"/>
+  <Seek length="0.4592702052583814" time="15.333"/>
+  <Seek length="0.3264306398126086" time="16.468"/>
+  <Seek length="0.04018509977220309" time="13.131"/>
+  <Seek length="0.158896753027097" time="13.871"/>
+  <Seek length="0.1498086173830296" time="12.503"/>
+  <Seek length="0.451118881764608" time="18.35"/>
+  <Seek length="0.5072663597731726" time="16.243"/>
+  <Seek length="0.9598688535763664" time="22.757"/>
+  <Seek length="0.2565683896295334" time="16.232"/>
+  <Seek length="0.2618051917366927" time="14.259"/>
+  <Seek length="0.5967405213221247" time="14.991"/>
+  <Seek length="0.4426693247713254" time="14.114"/>
+  <Seek length="0.4390740930243909" time="11.371"/>
+  <Seek length="0.2352258529713108" time="9.733000000000001"/>
+  <Seek length="0.3187694189704164" time="14.744"/>
+  <Seek length="0.385168550024142" time="13.871"/>
+  <Seek length="0.2142145791504508" time="13.361"/>
+  <Seek length="0.8045110635929932" time="15.496"/>
+  <Seek length="0.3551654894916656" time="19.09"/>
+  <Seek length="0.124589275724722" time="9.026"/>
+  <Seek length="0.1346882526445958" time="10.721"/>
+  <Seek length="0.6537538860389918" time="18.741"/>
+  <Seek length="0.08210208806137079" time="13.744"/>
+  <Seek length="0.6896483393828605" time="15.126"/>
+  <Seek length="0.1635563688729773" time="12.111"/>
+  <Seek length="0.04180474284284929" time="15.613"/>
+  <Seek length="0.8171538087313727" time="20.858"/>
+  <Seek length="0.1980907716223881" time="9.385999999999999"/>
+  <Seek length="0.369629795697364" time="15.504"/>
+  <Seek length="0.1279149724912043" time="10.098"/>
+  <Seek length="0.6657411835037428" time="15.99"/>
+  <Seek length="0.1549834971070821" time="8.868"/>
+  <Seek length="0.6341896167056216" time="23.737"/>
+  <Seek length="0.9110644440331208" time="22.973"/>
+  <Seek length="0.1486174812150357" time="9.625999999999999"/>
+  <Seek length="0.1719259913138909" time="10.121"/>
+  <Seek length="0.5013861205453443" time="19.112"/>
+  <Seek length="0.8125521811641656" time="16.625"/>
+  <Seek length="0.6490291849292246" time="13.725"/>
+  <Seek length="0.09215685809786964" time="11.25"/>
+  <Seek length="0.4791133171577985" time="16.349"/>
+  <Seek length="0.4053325280531176" time="16.421"/>
+  <Seek length="0.1439385320224749" time="9.695"/>
+  <Seek length="0.2085961882877794" time="17.119"/>
+  <Seek length="0.09560687496552601" time="15.991"/>
+  <Seek length="0.2057203506265489" time="11.971"/>
+  <Seek length="0.2882270765772" time="17.255"/>
+  <Seek length="0.152487424408467" time="16.979"/>
+  <Seek length="0.1963819635215028" time="14.492"/>
+  <Seek length="0.26886316693243" time="13.266"/>
+  <Seek length="0.5059329530209221" time="13.752"/>
+  <Seek length="0.5677477515748638" time="14.21"/>
+  <Seek length="0.2260977571762031" time="17.486"/>
+  <Seek length="0.3209699785105261" time="17.239"/>
+  <Seek length="0.2949717616237298" time="11.012"/>
+  <Seek length="0.5273406716693039" time="19.344"/>
+  <Seek length="0.3215521158685636" time="16.12"/>
+  <Seek length="0.3983949444663921" time="15.743"/>
+  <Seek length="0.6990698939036361" time="15.093"/>
+  <Seek length="0.7293465227361906" time="19.614"/>
+  <Seek length="0.7412509484786954" time="15.995"/>
+  <Seek length="0.5567973806363443" time="18.003"/>
+  <Seek length="0.07803337228080293" time="11.359"/>
+  <Seek length="0.372489472701968" time="14.596"/>
+  <Seek length="0.4270672709077185" time="16.866"/>
+  <Seek length="0.4763121398805727" time="18.754"/>
+  <Seek length="0.2093136623911403" time="17.51"/>
+  <Seek length="0.116416718959694" time="10.2"/>
+  <Seek length="0.2184056606441877" time="14.749"/>
+  <Seek length="0.1682242675525526" time="9.375"/>
+  <Seek length="0.5058108729479507" time="15.731"/>
+  <Seek length="0.05159625534612256" time="14.373"/>
+  <Seek length="0.0291893082844836" time="14.746"/>
+  <Seek length="0.01456584685493091" time="11.872"/>
+  <Seek length="0.6505323817198347" time="14.733"/>
+  <Seek length="0.5798053544476564" time="12.118"/>
+  <Seek length="0.00428175258912513" time="10.989"/>
+  <Seek length="0.5313779427245617" time="18.238"/>
+  <Seek length="0.2485519728347104" time="14.856"/>
+  <Seek length="0.1124134022421708" time="12.494"/>
+  <Seek length="0.5306777801838207" time="19.631"/>
+  <Seek length="0.8208841652261902" time="20.5"/>
+  <Seek length="0.2229231422107955" time="16.853"/>
+  <Seek length="0.04288905821495782" time="14.379"/>
+  <Seek length="0.1123473750439846" time="8.356999999999999"/>
+  <Seek length="0.4564546225501139" time="18.375"/>
+  <Seek length="0.6633481276524666" time="19.976"/>
+  <Seek length="0.6049744622778626" time="20.367"/>
+  <Seek length="0.3401542626850445" time="14.493"/>
+  <Seek length="0.3534647923425728" time="14.753"/>
+  <Seek length="0.7672388263420742" time="20.978"/>
+  <Seek length="0.1584673302994066" time="13.731"/>
+  <Seek length="0.04023265942633071" time="11.484"/>
+  <Seek length="0.5924931127331566" time="20.471"/>
+  <Seek length="0.1484274729456519" time="12.867"/>
+  <Seek length="0.8608752919522945" time="19.252"/>
+  <Seek length="0.8150436632690361" time="15.116"/>
+  <Seek length="0.1676883091323484" time="12.963"/>
+  <Seek length="0.1384321965453413" time="14.364"/>
+  <Seek length="0.03335158462601278" time="11.242"/>
+  <Seek length="0.4301281024449169" time="19.263"/>
+  <Seek length="0.09660356453374649" time="9.472"/>
+  <Seek length="0.08112997321301071" time="15.503"/>
+  <Seek length="0.3396157622964528" time="12.375"/>
+  <Seek length="0.5250876022567507" time="20.741"/>
+  <Seek length="0.1132338314090863" time="13.989"/>
+  <Seek length="0.3264144472392405" time="17.499"/>
+  <Seek length="0.7226613452345209" time="21.488"/>
+  <Seek length="0.5549743914168397" time="18.246"/>
+  <Seek length="0.2439627791809128" time="11.497"/>
+  <Seek length="0.8243232343586259" time="16.61"/>
+  <Seek length="0.1300193745017084" time="16.882"/>
+  <Seek length="0.4794716482714705" time="11.626"/>
+  <Seek length="0.3723796943368198" time="12.991"/>
+  <Seek length="0.06749573912962237" time="15.494"/>
+  <Seek length="0.4090399118142574" time="15.485"/>
+  <Seek length="0.7791804670054133" time="19.35"/>
+  <Seek length="0.4405333102530067" time="14.492"/>
+  <Seek length="0.142594665802589" time="10.133"/>
+  <Seek length="0.006172071102512561" time="13.474"/>
+  <Seek length="0.3193447530846291" time="14.745"/>
+  <Seek length="0.6099268991002048" time="19.129"/>
+  <Seek length="0.03312285144205578" time="9.227"/>
+  <Seek length="0.1942718046873204" time="14.235"/>
+  <Seek length="0.1179012146381632" time="14.872"/>
+  <Seek length="0.3111006067263282" time="11.487"/>
+  <Seek length="0.4332997063536781" time="15.863"/>
+  <Seek length="0.1298964300413835" time="9.754"/>
+  <Seek length="0.3365190929921423" time="16.234"/>
+  <Seek length="0.368311661252429" time="13.771"/>
+  <Seek length="0.5490680495649469" time="16.474"/>
+  <Seek length="0.5230028300184456" time="17.286"/>
+  <Seek length="0.4736452739623401" time="18.827"/>
+  <Seek length="0.3770801541444321" time="15.503"/>
+  <Seek length="0.007240498427962848" time="12.069"/>
+  <Seek length="0.07850548843316198" time="9.018000000000001"/>
+  <Seek length="0.1859146543232595" time="13.37"/>
+  <Seek length="0.06483226868420505" time="15.363"/>
+  <Seek length="0.2968463398151948" time="18.106"/>
+  <Seek length="0.1336622971323095" time="15.501"/>
+  <Seek length="0.4646327230677281" time="13.496"/>
+  <Seek length="0.587259654124302" time="14.861"/>
+  <Seek length="0.8645385778545256" time="22.995"/>
+  <Seek length="0.3289071310533585" time="27.985"/>
+  <Seek length="0.3751902589914947" time="11.785"/>
+  <Seek length="0.703519911921076" time="16.933"/>
+  <Seek length="0.277027021602711" time="17.104"/>
+  <Seek length="0.02304229980339912" time="13.373"/>
+  <Seek length="0.1864312073645037" time="13.746"/>
+  <Seek length="0.02223846499965987" time="9.471"/>
+  <Seek length="0.04919631138372221" time="9.259"/>
+  <Seek length="0.3440277020793568" time="13.343"/>
+  <Seek length="0.1432513616453091" time="12.867"/>
+  <Seek length="0.2524395711593576" time="16.106"/>
+  <Seek length="0.08032897724239882" time="12.722"/>
+  <Seek length="0.6297016789637024" time="14.696"/>
+  <Seek length="0.4752019286111855" time="18.663"/>
+  <Seek length="0.2493217447154699" time="16.483"/>
+  <Seek length="0.0263824898939688" time="14.279"/>
+  <Seek length="0.8819409317944579" time="19.081"/>
+  <Seek length="0.6216441157301367" time="26.995"/>
+  <Seek length="0.2443939489353918" time="10.838"/>
+  <Seek length="0.1578900078307482" time="11.507"/>
+  <Seek length="0.03105555942731769" time="16.128"/>
+  <Seek length="0.3293457780122174" time="13.491"/>
+  <Seek length="0.6406426069876902" time="14.995"/>
+  <Seek length="0.6594396685161563" time="16.755"/>
+  <Seek length="0.2970006255886345" time="14.837"/>
+  <Seek length="0.8704715770180766" time="22.884"/>
+  <Seek length="0.8504943203709144" time="19.745"/>
+  <Seek length="0.3604426297241228" time="14.616"/>
+  <Seek length="0.4403260557673595" time="19.274"/>
+  <Seek length="0.6287630934821492" time="20.744"/>
+  <Seek length="0.2237947903790002" time="14.473"/>
+  <Seek length="0.636120342985271" time="20.379"/>
+  <Seek length="0.1466281930826071" time="15.218"/>
+  <Seek length="0.09870555526857601" time="14.632"/>
+  <Seek length="0.04007069435794931" time="13.109"/>
+  <Seek length="0.2912370662089245" time="14.998"/>
+  <Seek length="0.4659937079345153" time="12.461"/>
+  <Seek length="0.7422638728831256" time="19.768"/>
+  <Seek length="0.6639669511089942" time="20.101"/>
+  <Seek length="0.6023030023009179" time="13.507"/>
+  <Seek length="0.06818303190310047" time="10.995"/>
+  <Seek length="0.2741178361682454" time="12.229"/>
+  <Seek length="0.218060042300595" time="13.375"/>
+  <Seek length="0.209476518590567" time="12.847"/>
+  <Seek length="0.3378371646772457" time="16.033"/>
+  <Seek length="0.3404120664084285" time="20.842"/>
+  <Seek length="0.5197562740339897" time="14.392"/>
+  <Seek length="0.635762268620801" time="15.732"/>
+  <Seek length="0.05287945750288379" time="12.375"/>
+  <Seek length="0.02370099844606267" time="11.502"/>
+  <Seek length="0.09278151904837215" time="16.374"/>
+  <Seek length="0.3747710158987226" time="12.497"/>
+  <Seek length="0.3178379195911512" time="14.68"/>
+  <Seek length="0.3910396272438075" time="16.16"/>
+  <Seek length="0.3637301654384688" time="15.496"/>
+  <Seek length="0.1752001104305599" time="14.258"/>
+  <Seek length="0.43141323697982" time="11.589"/>
+  <Seek length="0.01385024183305433" time="10.254"/>
+  <Seek length="0.1296765933807653" time="13.258"/>
+  <Seek length="0.3590060569845294" time="15.223"/>
+  <Seek length="0.03538328430069392" time="7.509"/>
+  <Seek length="0.1421090780522962" time="9.853999999999999"/>
+  <Seek length="0.2718544255849708" time="13.638"/>
+  <Seek length="0.02267471102894391" time="11.347"/>
+  <Seek length="0.2878423877007393" time="18.271"/>
+  <Seek length="0.6125344787434657" time="18.712"/>
+  <Seek length="0.1855111830299305" time="15.008"/>
+  <Seek length="0.07342865903814505" time="9.98"/>
+  <Seek length="0.1907637054012435" time="10.742"/>
+  <Seek length="0.262059651961772" time="12.786"/>
+  <Seek length="0.02546251138480913" time="12.581"/>
+  <Seek length="0.002470146226659511" time="9.516999999999999"/>
+  <Seek length="0.240363274397173" time="12.997"/>
+  <Seek length="0.4202558440500838" time="18.737"/>
+  <Seek length="0.5855629260221307" time="17.36"/>
+  <Seek length="0.4651963228991264" time="19.996"/>
+  <Seek length="0.1084148808930838" time="13.518"/>
+  <Seek length="0.6758339869254112" time="20.112"/>
+  <Seek length="0.2350039420152956" time="11.61"/>
+  <Seek length="0.4611362377178522" time="12.874"/>
+  <Seek length="0.1456880358235305" time="12.122"/>
+  <Seek length="0.0825838770361671" time="14.757"/>
+  <Seek length="0.4269965193973285" time="14.723"/>
+  <Seek length="0.007232217643966798" time="7.881"/>
+  <Seek length="0.3710261789148376" time="14.607"/>
+  <Seek length="0.08265649245499157" time="8.74"/>
+  <Seek length="0.1552959075449959" time="16.239"/>
+  <Seek length="0.3772597220279021" time="16.885"/>
+  <Seek length="0.201700097929348" time="16.104"/>
+  <Seek length="0.1559447846644394" time="11.249"/>
+  <Seek length="0.04713145846200237" time="14.744"/>
+  <Seek length="0.4582605574930265" time="15.259"/>
+  <Seek length="0.5138956485223849" time="16.231"/>
+  <Seek length="0.06505890600212307" time="10.131"/>
+  <Seek length="0.1380774116549665" time="10.504"/>
+  <Seek length="0.1983205347312947" time="11.859"/>
+  <Seek length="0.3400619969970309" time="13.129"/>
+  <Seek length="0.4522906562317518" time="16.615"/>
+  <Seek length="0.2583931825841659" time="17.369"/>
+  <Seek length="0.1349312544177846" time="9.112"/>
+  <Seek length="0.2757657857774142" time="11.016"/>
+  <Seek length="0.6575194804223448" time="13.329"/>
+  <Seek length="0.2563696000103742" time="17.525"/>
+  <Seek length="0.2692267290731822" time="12.365"/>
+  <Seek length="0.8485001968521168" time="22.503"/>
+  <Seek length="0.2729533727334545" time="13.214"/>
+  <Seek length="0.3555828367592614" time="13.761"/>
+  <Seek length="0.3009025387671481" time="9.622999999999999"/>
+  <Seek length="0.4094551025056817" time="15.118"/>
+  <Seek length="0.8580995819412428" time="20.373"/>
+  <Seek length="0.1271709965604957" time="15.981"/>
+  <Seek length="0.2855722042775087" time="14.389"/>
+  <Seek length="0.2304480637787701" time="15.372"/>
+  <Seek length="0.1733094425410961" time="13.977"/>
+  <Seek length="0.05180379278783771" time="10.895"/>
+  <Seek length="0.4600073486150484" time="12.113"/>
+  <Seek length="0.3570181938809355" time="16.473"/>
+  <Seek length="0.1397997520639181" time="13.505"/>
+  <Seek length="0.529268123896403" time="19.89"/>
+  <Seek length="0.2453448115283802" time="14.732"/>
+  <Seek length="0.1517644826841974" time="13.621"/>
+  <Seek length="0.1615338024130681" time="9.246"/>
+  <Seek length="0.6396011157329633" time="20.868"/>
+  <Seek length="0.1900315136781607" time="10.876"/>
+  <Seek length="0.630239237857216" time="19.188"/>
+  <Seek length="0.1934732719668937" time="15.803"/>
+  <Seek length="0.7738851863999011" time="17.498"/>
+  <Seek length="0.07620338538888186" time="14.986"/>
+  <Seek length="0.0571193719530541" time="14.124"/>
+  <Seek length="0.8850633210147464" time="16.99"/>
+  <Seek length="0.3772684976678017" time="12.116"/>
+  <Seek length="0.2348120523662335" time="9.6"/>
+  <Seek length="0.3276405969025308" time="11.397"/>
+  <Seek length="0.7605927250831482" time="16.856"/>
+  <Seek length="0.1073587964646464" time="14.745"/>
+  <Seek length="0.3143248485161163" time="17.004"/>
+  <Seek length="0.1714421022760529" time="8.353999999999999"/>
+  <Seek length="0.750911442122817" time="18.323"/>
+  <Seek length="0.8974586760719637" time="16.052"/>
+  <Seek length="0.03534861998626444" time="10.829"/>
+  <Seek length="0.9512494267528698" time="16.402"/>
+  <Seek length="0.9975556008722316" time="16.37"/>
+  <Seek length="0.6911428149970019" time="16.755"/>
+  <Seek length="0.114994627685215" time="15.479"/>
+  <Seek length="0.1350200310300614" time="8.263"/>
+  <Seek length="0.5536942682496064" time="13.829"/>
+  <Seek length="0.04525664055335814" time="10.755"/>
+ </Seeker>
+ <Small_Files valid="yes">
+  <Build_dirs time="984319"/>
+  <Build_files time="1662380"/>
+  <Read_files time="1379111"/>
+  <Destroy time="2348638"/>
+ </Small_Files>
+</Results>
