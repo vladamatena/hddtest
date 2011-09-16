@@ -279,6 +279,7 @@ void SmallFiles::RestoreResults(QDomElement &results, DataSet dataset)
 	res.files_build = SMALLFILES_SIZE;
 	res.files_read = SMALLFILES_SIZE;
 	res.destroyed = 2 * SMALLFILES_SIZE;
+	res.done = true;
 
 	UpdateScene();
 }

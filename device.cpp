@@ -235,13 +235,8 @@ void Device::DriveInfo()
 	{
 		// List mountpoints
 		QStringList mountpoints = device.deviceMountPaths();
-		mountpoint = "";
-		for(int i = 0; i < mountpoints.size(); ++i)
-		{
-			if(!mountpoint.isEmpty())
-				mountpoint += ", ";
-			mountpoint += mountpoints.at(i);
-		}
+		if(!mountpoints.isEmpty())
+			mountpoint = mountpoints.first();
 
 		// get partition type
 		fstype = device.idType();
