@@ -216,20 +216,36 @@ void Device::DriveInfo()
 {
 	EraseDriveInfo();
 
-	hd_driveid id;
-	memset(&id, 0, sizeof(hd_driveid));
+	QDBusObjectPath object = udisks->FindDeviceByDeviceFile(path).value();
+	UDisksDeviceInterface device("org.freedesktop.UDisks", object.path(), QDBusConnection::systemBus(), 0);
 
-	// use device size
-	size = this->device_size;
+	size = device.deviceSize();
+	model = device.driveModel();
+	serial = device.driveSerial();
+	firmware = device.driveRevision();
 
-	// get drive info from ioctl
-	if (ioctl(fd, HDIO_GET_IDENTITY, &id) == 0)
+	fs = device.deviceIsMounted();
+
+	if(fs)
 	{
-		model = QString::fromAscii((char*)id.model, 40).trimmed();
-		serial = QString::fromAscii((char*)id.serial_no, 20).trimmed();
-		firmware = QString::fromAscii((char*)id.fw_rev, 8).trimmed();
+		// List mountpoints
+		QStringList mountpoints = device.deviceMountPaths();
+		mountpoint = "";
+		for(int i = 0; i < mountpoints.size(); ++i)
+		{
+			if(!mountpoint.isEmpty())
+				mountpoint += ", ";
+			mountpoint += mountpoints.at(i);
+		}
+
+		// get partition type
+		fstype = device.idType();
+
+		// TODO: Reading with udisks not possible?
+	//	fsoptions = device.partitionFlags().first();
 	}
 
+	// Old way reading only for filesystem mount options
 	QFile mounts("/proc/mounts");
 	if(mounts.open(QFile::ReadOnly | QIODevice::Text))
 	{
@@ -246,10 +262,6 @@ void Device::DriveInfo()
 			// if this line describes selected device
 			if((list.size() == 6) && ((!QFile::symLinkTarget(list[0]).compare(path)) || (!path.compare(list[0]))))
 			{
-				// assign information to apropriate fileds
-				fs = true;	// TODO: check fs rw option
-				mountpoint = (QString)(list[1]).trimmed();
-				fstype = (QString)(list[2]).trimmed();
 				fsoptions = (QString)(list[3]).trimmed().replace(",","\n");
 				break;
 			}
@@ -267,7 +279,7 @@ void Device::DriveInfo()
 
 QString Device::GetSafeTemp()
 {
-	if(!fs)		// no FS = no temp
+	if(!fs)		// no FS => no temp
 		return "";
 
 	// check / create tmp dir
