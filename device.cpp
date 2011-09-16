@@ -11,32 +11,25 @@ Device::Device()
 	problemReported = false;
 	size = -1;
 	fs = false;
-	__fd = 0;
+	fd = 0;
 }
 
 QList<Device::Item> Device::GetDevices()
 {
-	return GetDevicesByPath();
-}
-
-QList<Device::Item> Device::GetDevicesByPath()
-{
 	QList<Item> list;
-	QDir block = QDir("/dev/disk/by-path");
-	QFileInfoList devList = block.entryInfoList(QDir::Files | QDir::Readable);
-	for(int i = 0; i < devList.size(); ++i)
+
+	UDisksInterface *client = new UDisksInterface("org.freedesktop.UDisks", "/org/freedesktop/UDisks", QDBusConnection::systemBus(), 0);
+
+	QDBusPendingReply<QStringList> rep = client->EnumerateDeviceFiles();
+
+	for(int i = 0; i < rep.argumentAt(0).toStringList().size(); ++i)
 	{
-			QString path = QFile::symLinkTarget(devList[i].absoluteFilePath());
-			Device::Item data = Device::Item(Device::Item::HDD_ITEM_DEVICE, path);
-			list.append(data);
+		list.append(Device::Item(Device::Item::HDD_ITEM_DEVICE, rep.argumentAt(0).toStringList().at(i)));
 	}
-	return list;
-}
 
-QList<Device::Item> Device::GetDevicesByUdisks()
-{
-	QList<Item> list;
-	list.append(Device::Item(Device::Item::HDD_ITEM_DEVICE, "path"));
+	delete client;
+
+
 	return list;
 }
 
@@ -54,14 +47,14 @@ void Device::Open(QString path, bool close)
 		return;
 
 	// open device file
-	__fd = open(path.toUtf8(), O_RDONLY | O_LARGEFILE | O_SYNC);
-	if(__fd < 0)
+	fd = open(path.toUtf8(), O_RDONLY | O_LARGEFILE | O_SYNC);
+	if(fd < 0)
 		ReportWarning();
 
 	DropCaches();
 
 	// get drive size
-	__device_size = lseek64(__fd, 0, SEEK_END);
+	device_size = lseek64(fd, 0, SEEK_END);
 
 	// set pos to begin of device
 	SetPos(0);
@@ -77,14 +70,14 @@ Device::~Device()
 void Device::Close()
 {
 	// close device file
-	if(__fd > 0)
-		close(__fd);
+	if(fd > 0)
+		close(fd);
 }
 
 void Device::DropCaches()
 {
 		// give advice to disable caching
-		int ret = posix_fadvise(__fd, 0, 0, POSIX_FADV_DONTNEED);
+		int ret = posix_fadvise(fd, 0, 0, POSIX_FADV_DONTNEED);
 		if(ret)
 			ReportWarning();
 
@@ -134,7 +127,7 @@ void Device::ReportError()
 void Device::SetPos(hddsize pos)
 {
 	// set position
-	if(lseek64(__fd, pos, SEEK_SET) < 0)
+	if(lseek64(fd, pos, SEEK_SET) < 0)
 		ReportError();
 }
 
@@ -146,7 +139,7 @@ hddtime Device::SeekTo(hddsize pos)
 
 	// seek to new position
 	SetPos(pos);
-        if(read(__fd, &c, sizeof(char)) < 0)
+		if(read(fd, &c, sizeof(char)) < 0)
 		ReportError();
 
 	timer.MarkEnd();
@@ -157,7 +150,7 @@ hddtime Device::SeekTo(hddsize pos)
 hddsize Device::GetSize()
 {
 	// return private __device_size
-	return __device_size;
+	return device_size;
 }
 
 hddtime Device::ReadAt(hddsize size, hddsize pos)
@@ -168,7 +161,7 @@ hddtime Device::ReadAt(hddsize size, hddsize pos)
 
 	// seek to new position
 	SetPos(pos);
-	if(read(__fd, buffer, sizeof(char) * size) <= 0)
+	if(read(fd, buffer, sizeof(char) * size) <= 0)
 	{
 		std::cerr << "Read failed" << std::endl;
 		ReportError();
@@ -188,7 +181,7 @@ hddtime Device::Read(hddsize size)
 	timer.MarkStart();
 
 	// read data
-	if(read(__fd, buffer, sizeof(char) * size) <= 0)
+	if(read(fd, buffer, sizeof(char) * size) <= 0)
 	{
 		std::cerr << "Read failed" << std::endl;
 		ReportError();
@@ -225,10 +218,10 @@ void Device::DriveInfo()
 	memset(&id, 0, sizeof(hd_driveid));
 
 	// use device size
-	size = this->__device_size;
+	size = this->device_size;
 
 	// get drive info from ioctl
-	if (ioctl(__fd, HDIO_GET_IDENTITY, &id) == 0)
+	if (ioctl(fd, HDIO_GET_IDENTITY, &id) == 0)
 	{
 		model = QString::fromAscii((char*)id.model, 40).trimmed();
 		serial = QString::fromAscii((char*)id.serial_no, 20).trimmed();

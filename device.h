@@ -27,10 +27,10 @@
 #include <QtCore>
 #include <QMessageBox>
 #include <QtXml>
-#include <QtDBus>
 
 #include "definitions.h"
 #include "timer.h"
+#include "udisksinterface.h"
 
 using namespace HDDTest;
 
@@ -126,11 +126,8 @@ private:
 	void ReportWarning();						/// Reports a problem with accessing device
 	void ReportError();							/// Reports error in test
 
-	QList<Item> GetDevicesByPath();         	/// Gets list of devices by probing /dev/block
-	QList<Item> GetDevicesByUdisks();       	/// Gets list of devices by udisks utility
-
-	int __fd;				// device's file destriptor
-	hddsize __device_size;	// device's size
+	int fd;					// device's file destriptor
+	hddsize device_size;	// device's size
 	bool problemReported;	// whenever device access problem was reported
 
 signals:

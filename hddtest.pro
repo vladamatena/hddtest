@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     definitions.cpp \
     file.cpp \
     timer.cpp \
-    testthread.cpp
+    testthread.cpp \
+    udisksinterface.cpp
 HEADERS += hddtest.h \
     randomgenerator.h \
     seeker.h \
@@ -34,8 +35,11 @@ HEADERS += hddtest.h \
     definitions.h \
     file.h \
     timer.h \
-    testthread.h
+    testthread.h \
+    udisksinterface.h
 FORMS += hddtest.ui \
     testwidget.ui
 QT += xml
 QT += dbus
+
+
