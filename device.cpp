@@ -38,7 +38,8 @@ QList<Device::Item> Device::GetDevices()
 	{
 		UDisksDeviceInterface device("org.freedesktop.UDisks", devices.at(i).path(), QDBusConnection::systemBus(), 0);
 
-		list.append(Device::Item(
+		if(!device.driveIsMediaEjectable())
+			list.append(Device::Item(
 						Device::Item::DEVICE,
 						device.deviceFile(),
 						device.deviceFile() + " (" + device.driveModel() + ")"));
