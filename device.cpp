@@ -214,7 +214,7 @@ void Device::EraseDriveInfo()
 	fsoptions = "NOT MOUNTED";
 	fs = false;
 
-	// kernel is left unchanged
+	kernel = "UNKNOWN";
 }
 
 void Device::DriveInfo()
