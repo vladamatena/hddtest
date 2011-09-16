@@ -98,7 +98,7 @@
         </palette>
        </property>
        <property name="editable">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <property name="maxVisibleItems">
         <number>20</number>
@@ -145,7 +145,7 @@
         </palette>
        </property>
        <property name="editable">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <property name="maxVisibleItems">
         <number>20</number>
@@ -174,7 +174,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>4</number>
        </property>
        <property name="elideMode">
         <enum>Qt::ElideNone</enum>
