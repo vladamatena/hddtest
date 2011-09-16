@@ -38,3 +38,4 @@ HEADERS += hddtest.h \
 FORMS += hddtest.ui \
     testwidget.ui
 QT += xml
+QT += dbus

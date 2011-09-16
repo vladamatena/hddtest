@@ -21,23 +21,23 @@ QList<Device::Item> Device::GetDevices()
 
 QList<Device::Item> Device::GetDevicesByPath()
 {
-		QList<Item> list;
-		QDir block = QDir("/dev/disk/by-path");
-		QFileInfoList devList = block.entryInfoList(QDir::Files | QDir::Readable);
-		for(int i = 0; i < devList.size(); ++i)
-		{
-				QString path = QFile::symLinkTarget(devList[i].absoluteFilePath());
-				Device::Item data = Device::Item(Device::Item::HDD_ITEM_DEVICE, path);
-				list.append(data);
-		}
-		return list;
+	QList<Item> list;
+	QDir block = QDir("/dev/disk/by-path");
+	QFileInfoList devList = block.entryInfoList(QDir::Files | QDir::Readable);
+	for(int i = 0; i < devList.size(); ++i)
+	{
+			QString path = QFile::symLinkTarget(devList[i].absoluteFilePath());
+			Device::Item data = Device::Item(Device::Item::HDD_ITEM_DEVICE, path);
+			list.append(data);
+	}
+	return list;
 }
 
 QList<Device::Item> Device::GetDevicesByUdisks()
 {
-		QList<Item> list;
-		list.append(Device::Item(Device::Item::HDD_ITEM_DEVICE, "path"));
-		return list;
+	QList<Item> list;
+	list.append(Device::Item(Device::Item::HDD_ITEM_DEVICE, "path"));
+	return list;
 }
 
 void Device::Open(QString path, bool close)

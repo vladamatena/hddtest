@@ -27,6 +27,7 @@
 #include <QtCore>
 #include <QMessageBox>
 #include <QtXml>
+#include <QtDBus>
 
 #include "definitions.h"
 #include "timer.h"
@@ -50,19 +51,19 @@ public:
 
 		/// Constructor for type and path specified
 		Item(Type type, QString path):
-            type(type), path(path), label(path) {}
+			type(type), path(path), label(path) {}
 
-        /// Constructor for type, path and label specified
-        Item(Type type, QString path, QString label):
-            type(type), path(path), label(label) {}
+		/// Constructor for type, path and label specified
+		Item(Type type, QString path, QString label):
+			type(type), path(path), label(label) {}
 
-        static Item None();             /// Returns item of none type
-        static Item Open();             /// Returns item of open type
-        static Item Saved(QString path);/// Returns item of saved type
+		static Item None();             /// Returns item of none type
+		static Item Open();             /// Returns item of open type
+		static Item Saved(QString path);/// Returns item of saved type
 
 		Type type;		/// Item type
-        QString path;	/// Item path
-        QString label;  /// Item label
+		QString path;	/// Item path
+		QString label;  /// Item label
 	};
 
 	Device();									/// Device constructor
@@ -125,8 +126,8 @@ private:
 	void ReportWarning();						/// Reports a problem with accessing device
 	void ReportError();							/// Reports error in test
 
-    QList<Item> GetDevicesByPath();         	/// Gets list of devices by probing /dev/block
-    QList<Item> GetDevicesByUdisks();       	/// Gets list of devices by udisks utility
+	QList<Item> GetDevicesByPath();         	/// Gets list of devices by probing /dev/block
+	QList<Item> GetDevicesByUdisks();       	/// Gets list of devices by udisks utility
 
 	int __fd;				// device's file destriptor
 	hddsize __device_size;	// device's size
