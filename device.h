@@ -1,7 +1,7 @@
 /**
 * \class Device
 *
-* This class provides abstraction to block device or file.
+* This class provides abstraction to block device.
 * It contains methods for:
 * 1. querying and storing information about device
 * 2. running basic benchmark operations (timed reading, writing, ...)
