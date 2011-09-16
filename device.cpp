@@ -15,9 +15,8 @@ Device::Device()
 
 	// connect to udisks dbus interface and connect device update signals
 	udisks = new UDisksInterface("org.freedesktop.UDisks", "/org/freedesktop/UDisks", QDBusConnection::systemBus(), 0);
-	connect(udisks, SIGNAL(DeviceAdded(QDBusObjectPath)), this, SLOT(devicesChanged()));
-	connect(udisks, SIGNAL(DeviceRemoved(QDBusObjectPath)), this, SLOT(devicesChanged()));
-	connect(udisks, SIGNAL(DeviceChanged(QDBusObjectPath)), this, SLOT(devicesChanged()));
+	connect(udisks, SIGNAL(DeviceAdded(QDBusObjectPath)), this, SIGNAL(udisksUpdate()));
+	connect(udisks, SIGNAL(DeviceRemoved(QDBusObjectPath)), this, SIGNAL(udisksUpdate()));
 }
 
 Device::~Device()
@@ -454,11 +453,6 @@ void Device::ReadInfo(QDomElement &root)
 	if(ker.isNull())
 		return;
 	kernel = ker.attribute("kernel", "NO DATA");
-}
-
-void Device::devicesChanged()
-{
-	udisksUpdate();
 }
 
 Device::Item Device::Item::None()

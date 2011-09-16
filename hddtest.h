@@ -13,6 +13,7 @@
 #include <QFont>
 #include <QFileDialog>
 #include <QCloseEvent>
+#include <QMutex>
 
 #include "seeker.h"
 #include "readrnd.h"
@@ -60,7 +61,7 @@ private:
 	Device device;
 	Device refDevice;
 
-	void ListDevices();
+	QMutex driveRefreshMutex;
 
 protected:
 	void closeEvent(QCloseEvent *);

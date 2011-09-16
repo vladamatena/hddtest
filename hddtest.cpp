@@ -25,9 +25,9 @@ HDDTestWidget::HDDTestWidget(QWidget *parent) :
 	connect(&refDevice, SIGNAL(operationError()), this, SLOT(device_operationError()));
 
 	// connect device refresh signal
-	connect(&device, SIGNAL(udisksUpdate()), this, SLOT(device_list_refresh()));
+	connect(&device, SIGNAL(udisksUpdate()), this, SLOT(device_list_refresh()), Qt::QueuedConnection);
 
-	ListDevices();
+	device_list_refresh();
 
 	// Initialize tests
 	ui->filerwwidget->SetDevice(&device);
@@ -42,44 +42,6 @@ HDDTestWidget::HDDTestWidget(QWidget *parent) :
 HDDTestWidget::~HDDTestWidget()
 {
     delete ui;
-}
-
-void HDDTestWidget::ListDevices()
-{
-	// Clear device lists
-	ui->drive->clear();
-	ui->reference->clear();
-
-	// Add drive selection to results combo box
-	QList<Device::Item> devList = device.GetDevices();
-	for(int i = 0; i < devList.size(); ++i)
-		ui->drive->addItem(QIcon("icon/hdd.svg"), devList[i].label, QVariant::fromValue(devList[i]));
-
-	// Add nothing opetion to reference combo box
-	ui->drive->insertSeparator(ui->drive->count());
-	ui->reference->addItem(
-				QIcon::fromTheme("process-stop"),
-				"Nothing",
-				QVariant::fromValue(Device::Item::None()));
-	ui->reference->insertSeparator(ui->reference->count());
-
-	// Add saved resutls for both combo boxes
-	QFileInfoList savedList = QDir("reference").entryInfoList(QStringList("*.hddtest"), QDir::Files);
-	for(int i = 0; i < savedList.size(); ++i)
-	{
-		QString label = savedList[i].fileName();
-		QString path = savedList[i].absoluteFilePath();
-		Device::Item item = Device::Item::Saved(path);
-
-		ui->drive->addItem(QIcon::fromTheme("document-open"), label, QVariant::fromValue(item));
-		ui->reference->addItem(QIcon::fromTheme("document-open"), label, QVariant::fromValue(item));
-	}
-
-	// Add file open dialog for both combo boxes
-	ui->drive->insertSeparator(ui->drive->count());
-	ui->reference->insertSeparator(ui->reference->count());
-	ui->drive->addItem(QIcon::fromTheme("document-open"), "Open another file", QVariant::fromValue(Device::Item::Open()));
-	ui->reference->addItem(QIcon::fromTheme("document-open"), "Open another file", QVariant::fromValue(Device::Item::Open()));
 }
 
 void HDDTestWidget::on_drive_currentIndexChanged(QString)
@@ -118,7 +80,7 @@ void HDDTestWidget::on_drive_currentIndexChanged(QString)
 
 	default:
 		// this should not happend
-		std::cerr << "WARNING: Device selected in reference combo box." << std::endl;
+		std::cerr << "WARNING: Bad item selected in device combo box." << std::endl;
 		break;
 	}
 }
@@ -412,5 +374,45 @@ void HDDTestWidget::closeEvent(QCloseEvent *ev)
 
 void HDDTestWidget::device_list_refresh()
 {
-	ListDevices();
+	// Improves performance and sychromization
+	ui->drive->blockSignals(true);
+	ui->reference->blockSignals(true);
+
+	// Clear device lists
+	ui->drive->clear();
+	ui->reference->clear();
+
+	// Add drive selection to results combo box
+	QList<Device::Item> devList = device.GetDevices();
+	for(int i = 0; i < devList.size(); ++i)
+		ui->drive->addItem(QIcon("icon/hdd.svg"), devList[i].label, QVariant::fromValue(devList[i]));
+
+	// Add nothing operation to reference combo box
+	ui->drive->insertSeparator(ui->drive->count());
+	ui->reference->addItem(
+				QIcon::fromTheme("process-stop"),
+				"Nothing",
+				QVariant::fromValue(Device::Item::None()));
+	ui->reference->insertSeparator(ui->reference->count());
+
+	// Add saved resutls for both combo boxes
+	QFileInfoList savedList = QDir("reference").entryInfoList(QStringList("*.hddtest"), QDir::Files);
+	for(int i = 0; i < savedList.size(); ++i)
+	{
+		QString label = savedList[i].fileName();
+		QString path = savedList[i].absoluteFilePath();
+		Device::Item item = Device::Item::Saved(path);
+
+		ui->drive->addItem(QIcon::fromTheme("document-open"), label, QVariant::fromValue(item));
+		ui->reference->addItem(QIcon::fromTheme("document-open"), label, QVariant::fromValue(item));
+	}
+
+	// Add file open dialog for both combo boxes
+	ui->drive->insertSeparator(ui->drive->count());
+	ui->reference->insertSeparator(ui->reference->count());
+	ui->drive->addItem(QIcon::fromTheme("document-open"), "Open another file", QVariant::fromValue(Device::Item::Open()));
+	ui->reference->addItem(QIcon::fromTheme("document-open"), "Open another file", QVariant::fromValue(Device::Item::Open()));
+
+	ui->drive->blockSignals(false);
+	ui->reference->blockSignals(false);
 }
