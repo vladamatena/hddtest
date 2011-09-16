@@ -27,7 +27,7 @@ HDDTestWidget::HDDTestWidget(QWidget *parent) :
 	// Add drive selection to results combo box
 	QList<Device::Item> devList = device.GetDevices();
 	for(int i = 0; i < devList.size(); ++i)
-		ui->drive->addItem(devList[i].path, QVariant::fromValue(devList[i]));
+        ui->drive->addItem(devList[i].label, QVariant::fromValue(devList[i]));
 
 	// Add nothing opetion to reference combo box
 	ui->drive->insertSeparator(ui->drive->count());
