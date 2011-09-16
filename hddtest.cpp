@@ -88,7 +88,7 @@ void HDDTestWidget::on_drive_currentIndexChanged(QString)
 
 	switch(data.value<Device::Item>().type)
 	{
-		case Device::Item::OPEN_DIALOG:
+	case Device::Item::OPEN_DIALOG:
 		{
 			QString filename = QFileDialog::getOpenFileName(this, tr("Open Saved results"), "", tr("Results (*.xml)"));
 			if(filename.length() > 0)
@@ -102,20 +102,23 @@ void HDDTestWidget::on_drive_currentIndexChanged(QString)
 			}
 		}
 		break;
-		case Device::Item::DEVICE:
-		{
-			EraseResults(TestWidget::RESULTS);
-			device.Open(data.value<Device::Item>().path, true);
-			ReloadTests(false);
-		}
+
+	case Device::Item::DEVICE:
+		EraseResults(TestWidget::RESULTS);
+		device.Open(data.value<Device::Item>().path, true);
+		ReloadTests(false);
 		break;
-		case Device::Item::RESULT:
-		{
-			device.Open("", true);
-			EraseResults(TestWidget::RESULTS);
-			OpenResultFile(data.value<Device::Item>().path, TestWidget::RESULTS);
-			ReloadTests(true);
-		}
+
+	case Device::Item::RESULT:
+		device.Open("", true);
+		EraseResults(TestWidget::RESULTS);
+		OpenResultFile(data.value<Device::Item>().path, TestWidget::RESULTS);
+		ReloadTests(true);
+		break;
+
+	default:
+		// this should not happend
+		std::cerr << "WARNING: Device selected in reference combo box." << std::endl;
 		break;
 	}
 }
@@ -126,7 +129,7 @@ void HDDTestWidget::on_reference_currentIndexChanged(QString )
 
 	switch(data.value<Device::Item>().type)
 	{
-		case Device::Item::OPEN_DIALOG:
+	case Device::Item::OPEN_DIALOG:
 		{
 			QString filename = QFileDialog::getOpenFileName(this, tr("Open Saved results"), "", tr("Results (*.xml)"));
 			if(filename.length() > 0)
@@ -140,21 +143,22 @@ void HDDTestWidget::on_reference_currentIndexChanged(QString )
 			}
 		}
 		break;
-		case Device::Item::RESULT:
-		{
-			refDevice.Open("", true);
-			EraseResults(TestWidget::REFERENCE);
-			OpenResultFile(data.value<Device::Item>().path, TestWidget::REFERENCE);
-			UpdateInfo(TestWidget::REFERENCE);
-		}
+
+	case Device::Item::RESULT:
+		refDevice.Open("", true);
+		EraseResults(TestWidget::REFERENCE);
+		OpenResultFile(data.value<Device::Item>().path, TestWidget::REFERENCE);
+		UpdateInfo(TestWidget::REFERENCE);
 		break;
-		case Device::Item::NOTHING:
-			EraseResults(TestWidget::REFERENCE);
-			UpdateInfo(TestWidget::REFERENCE);
+
+	case Device::Item::NOTHING:
+		EraseResults(TestWidget::REFERENCE);
+		UpdateInfo(TestWidget::REFERENCE);
 		break;
-		default:
-			// this should not happend
-			std::cerr << "WARNING: Device selected in reference combo box." << std::endl;
+
+	default:
+		// this should not happend
+		std::cerr << "WARNING: Device selected in reference combo box." << std::endl;
 		break;
 	}
 }
