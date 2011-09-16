@@ -60,6 +60,8 @@ private:
 	Device device;
 	Device refDevice;
 
+	void ListDevices();
+
 protected:
 	void closeEvent(QCloseEvent *);
 
@@ -70,6 +72,7 @@ private slots:
 	void device_accessWarning();
 	void device_operationError();
 	void refDevice_accessWarning();
+	void device_list_refresh();
 };
 
 #endif // HDDTEST_H

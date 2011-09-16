@@ -24,10 +24,36 @@ HDDTestWidget::HDDTestWidget(QWidget *parent) :
 	connect(&device, SIGNAL(operationError()), this, SLOT(device_operationError()));
 	connect(&refDevice, SIGNAL(operationError()), this, SLOT(device_operationError()));
 
+	// connect device refresh signal
+	connect(&device, SIGNAL(udisksUpdate()), this, SLOT(device_list_refresh()));
+
+	ListDevices();
+
+	// Initialize tests
+	ui->filerwwidget->SetDevice(&device);
+	ui->filestructurewidget->SetDevice(&device);
+	ui->readblockwidget->SetDevice(&device);
+	ui->readcontwidget->SetDevice(&device);
+	ui->readrndwidget->SetDevice(&device);
+	ui->seekwidget->SetDevice(&device);
+	ui->smallfileswidget->SetDevice(&device);
+}
+
+HDDTestWidget::~HDDTestWidget()
+{
+    delete ui;
+}
+
+void HDDTestWidget::ListDevices()
+{
+	// Clear device lists
+	ui->drive->clear();
+	ui->reference->clear();
+
 	// Add drive selection to results combo box
 	QList<Device::Item> devList = device.GetDevices();
 	for(int i = 0; i < devList.size(); ++i)
-        ui->drive->addItem(devList[i].label, QVariant::fromValue(devList[i]));
+		ui->drive->addItem(devList[i].label, QVariant::fromValue(devList[i]));
 
 	// Add nothing opetion to reference combo box
 	ui->drive->insertSeparator(ui->drive->count());
@@ -52,20 +78,6 @@ HDDTestWidget::HDDTestWidget(QWidget *parent) :
 	ui->reference->insertSeparator(ui->reference->count());
 	ui->drive->addItem("--- Launch file open dialog ---", QVariant::fromValue(Device::Item::Open()));
 	ui->reference->addItem("--- Launch file open dialog ---", QVariant::fromValue(Device::Item::Open()));
-
-	// Initialize tests
-	ui->filerwwidget->SetDevice(&device);
-	ui->filestructurewidget->SetDevice(&device);
-	ui->readblockwidget->SetDevice(&device);
-	ui->readcontwidget->SetDevice(&device);
-	ui->readrndwidget->SetDevice(&device);
-	ui->seekwidget->SetDevice(&device);
-	ui->smallfileswidget->SetDevice(&device);
-}
-
-HDDTestWidget::~HDDTestWidget()
-{
-    delete ui;
 }
 
 void HDDTestWidget::on_drive_currentIndexChanged(QString)
@@ -390,4 +402,9 @@ void HDDTestWidget::closeEvent(QCloseEvent *ev)
 	}
 	else
 		ev->accept();	// close
+}
+
+void HDDTestWidget::device_list_refresh()
+{
+	ListDevices();
 }

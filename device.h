@@ -135,6 +135,10 @@ private:
 signals:
 	void accessWarning();
 	void operationError();
+	void udisksUpdate();
+
+private slots:
+	void devicesChanged();
 };
 
 Q_DECLARE_METATYPE(Device::Item)
