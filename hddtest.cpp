@@ -74,7 +74,7 @@ void HDDTestWidget::on_drive_currentIndexChanged(QString)
 
 	switch(data.value<Device::Item>().type)
 	{
-		case Device::Item::HDD_ITEM_OPEN:
+		case Device::Item::OPEN_DIALOG:
 		{
 			QString filename = QFileDialog::getOpenFileName(this, tr("Open Saved results"), "", tr("Results (*.xml)"));
 			if(filename.length() > 0)
@@ -88,25 +88,20 @@ void HDDTestWidget::on_drive_currentIndexChanged(QString)
 			}
 		}
 		break;
-		case Device::Item::HDD_ITEM_DEVICE:
+		case Device::Item::DEVICE:
 		{
 			EraseResults(TestWidget::RESULTS);
 			device.Open(data.value<Device::Item>().path, true);
 			ReloadTests(false);
 		}
 		break;
-		case Device::Item::HDD_ITEM_SAVED:
+		case Device::Item::RESULT:
 		{
 			device.Open("", true);
 			EraseResults(TestWidget::RESULTS);
 			OpenResultFile(data.value<Device::Item>().path, TestWidget::RESULTS);
 			ReloadTests(true);
 		}
-		break;
-		case Device::Item::HDD_ITEM_NONE:
-			EraseResults(TestWidget::RESULTS);
-			device.Open(ui->drive->currentText(), true);
-			ReloadTests(false);
 		break;
 	}
 }
@@ -117,7 +112,7 @@ void HDDTestWidget::on_reference_currentIndexChanged(QString )
 
 	switch(data.value<Device::Item>().type)
 	{
-		case Device::Item::HDD_ITEM_OPEN:
+		case Device::Item::OPEN_DIALOG:
 		{
 			QString filename = QFileDialog::getOpenFileName(this, tr("Open Saved results"), "", tr("Results (*.xml)"));
 			if(filename.length() > 0)
@@ -131,7 +126,7 @@ void HDDTestWidget::on_reference_currentIndexChanged(QString )
 			}
 		}
 		break;
-		case Device::Item::HDD_ITEM_SAVED:
+		case Device::Item::RESULT:
 		{
 			refDevice.Open("", true);
 			EraseResults(TestWidget::REFERENCE);
@@ -139,7 +134,7 @@ void HDDTestWidget::on_reference_currentIndexChanged(QString )
 			UpdateInfo(TestWidget::REFERENCE);
 		}
 		break;
-		case Device::Item::HDD_ITEM_NONE:
+		case Device::Item::NOTHING:
 			EraseResults(TestWidget::REFERENCE);
 			UpdateInfo(TestWidget::REFERENCE);
 		break;

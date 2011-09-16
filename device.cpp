@@ -12,23 +12,37 @@ Device::Device()
 	size = -1;
 	fs = false;
 	fd = 0;
+
+	udisks = new UDisksInterface("org.freedesktop.UDisks", "/org/freedesktop/UDisks", QDBusConnection::systemBus(), 0);
+}
+
+Device::~Device()
+{
+	delete udisks;
+	Close();
+}
+
+void Device::Close()
+{
+	// close device file
+	if(fd > 0)
+		close(fd);
 }
 
 QList<Device::Item> Device::GetDevices()
 {
 	QList<Item> list;
 
-	UDisksInterface *client = new UDisksInterface("org.freedesktop.UDisks", "/org/freedesktop/UDisks", QDBusConnection::systemBus(), 0);
-
-	QDBusPendingReply<QStringList> rep = client->EnumerateDeviceFiles();
-
-	for(int i = 0; i < rep.argumentAt(0).toStringList().size(); ++i)
+	QList<QDBusObjectPath> devices = udisks->EnumerateDevices().value();
+	for(int i = 0; i < devices.size(); ++i)
 	{
-		list.append(Device::Item(Device::Item::HDD_ITEM_DEVICE, rep.argumentAt(0).toStringList().at(i)));
+		UDisksDeviceInterface device("org.freedesktop.UDisks", devices.at(i).path(), QDBusConnection::systemBus(), 0);
+
+		list.append(Device::Item(
+						Device::Item::DEVICE,
+						device.deviceFile(),
+						device.deviceFile() + " (" + device.driveModel() + ")"));
 	}
-
-	delete client;
-
 
 	return list;
 }
@@ -60,18 +74,6 @@ void Device::Open(QString path, bool close)
 	SetPos(0);
 
 	DriveInfo();
-}
-
-Device::~Device()
-{
-	Close();
-}
-
-void Device::Close()
-{
-	// close device file
-	if(fd > 0)
-		close(fd);
 }
 
 void Device::DropCaches()
@@ -444,15 +446,15 @@ void Device::ReadInfo(QDomElement &root)
 
 Device::Item Device::Item::None()
 {
-	return Item(HDD_ITEM_NONE, "");
+	return Item(NOTHING, "");
 }
 
 Device::Item Device::Item::Open()
 {
-	return Item(HDD_ITEM_OPEN, "");
+	return Item(OPEN_DIALOG, "");
 }
 
 Device::Item Device::Item::Saved(QString path)
 {
-	return Item(HDD_ITEM_SAVED, path);
+	return Item(RESULT, path);
 }

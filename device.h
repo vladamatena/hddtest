@@ -31,6 +31,7 @@
 #include "definitions.h"
 #include "timer.h"
 #include "udisksinterface.h"
+#include "udisksdeviceinterface.h"
 
 using namespace HDDTest;
 
@@ -43,11 +44,11 @@ public:
 	struct Item
 	{
 		/// Item type enumeration
-		enum Type	{ HDD_ITEM_DEVICE, HDD_ITEM_OPEN, HDD_ITEM_SAVED, HDD_ITEM_NONE };
+		enum Type	{ DEVICE, OPEN_DIALOG, RESULT, NOTHING };
 
 		/// Constructor for empty item
 		Item():
-			type(HDD_ITEM_NONE), path("") {}
+			type(NOTHING), path("") {}
 
 		/// Constructor for type and path specified
 		Item(Type type, QString path):
@@ -126,9 +127,10 @@ private:
 	void ReportWarning();						/// Reports a problem with accessing device
 	void ReportError();							/// Reports error in test
 
-	int fd;					// device's file destriptor
-	hddsize device_size;	// device's size
-	bool problemReported;	// whenever device access problem was reported
+	int fd;						// device's file destriptor
+	hddsize device_size;		// device's size
+	bool problemReported;		// whenever device access problem was reported
+	UDisksInterface *udisks;	// udisks dbus connection
 
 signals:
 	void accessWarning();

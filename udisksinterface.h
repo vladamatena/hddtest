@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef UDISKSINTERFACE_H_1316167127
-#define UDISKSINTERFACE_H_1316167127
+#ifndef UDISKSINTERFACE_H_1316173604
+#define UDISKSINTERFACE_H_1316173604
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
@@ -227,8 +227,10 @@ Q_SIGNALS: // SIGNALS
 };
 
 namespace org {
-  namespace freedesktop {
-    typedef ::UDisksInterface UDisks;
-  }
+	namespace freedesktop {
+		namespace UDisks {
+			typedef ::UDisksInterface UDisks;
+		}
+	}
 }
 #endif
