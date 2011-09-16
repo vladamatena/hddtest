@@ -64,7 +64,7 @@ void HDDTestWidget::ListDevices()
 	ui->reference->insertSeparator(ui->reference->count());
 
 	// Add saved resutls for both combo boxes
-	QFileInfoList savedList = QDir().entryInfoList(QStringList("*.xml"), QDir::Files);
+	QFileInfoList savedList = QDir("reference").entryInfoList(QStringList("*.hddtest"), QDir::Files);
 	for(int i = 0; i < savedList.size(); ++i)
 	{
 		QString label = savedList[i].fileName();
@@ -90,7 +90,7 @@ void HDDTestWidget::on_drive_currentIndexChanged(QString)
 	{
 	case Device::Item::OPEN_DIALOG:
 		{
-			QString filename = QFileDialog::getOpenFileName(this, tr("Open Saved results"), "", tr("Results (*.xml)"));
+			QString filename = QFileDialog::getOpenFileName(this, tr("Open Saved results"), "", tr("Results (*.hddtest)"));
 			if(filename.length() > 0)
 			{
 				int index = ui->drive->count();
@@ -131,7 +131,7 @@ void HDDTestWidget::on_reference_currentIndexChanged(QString )
 	{
 	case Device::Item::OPEN_DIALOG:
 		{
-			QString filename = QFileDialog::getOpenFileName(this, tr("Open Saved results"), "", tr("Results (*.xml)"));
+			QString filename = QFileDialog::getOpenFileName(this, tr("Open Saved results"), "", tr("Results (*.hddtest)"));
 			if(filename.length() > 0)
 			{
 				int index = ui->reference->count();
@@ -306,7 +306,7 @@ void HDDTestWidget::EraseResults(TestWidget::DataSet dataset)
 
 void HDDTestWidget::on_save_clicked()
 {
-	QString filename = QFileDialog::getSaveFileName(this, tr("Save results"), "", tr("Results (*.xml)"));
+	QString filename = QFileDialog::getSaveFileName(this, tr("Save results"), "", tr("Results (*.hddtest)"));
 	if(filename.length() > 0)
 	{
 		// Create base document for tests results
