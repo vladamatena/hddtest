@@ -40,10 +40,6 @@
        <property name="text">
         <string/>
        </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>icon/document-save.png</normaloff>icon/document-save.png</iconset>
-       </property>
        <property name="iconSize">
         <size>
          <width>16</width>
@@ -152,10 +148,26 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="about">
+       <property name="maximumSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="horizontalLayout" stretch="1">
      <item>
       <widget class="QTabWidget" name="Tabs">
        <property name="sizePolicy">
@@ -195,9 +207,12 @@
         <attribute name="title">
          <string>Info</string>
         </attribute>
-        <layout class="QHBoxLayout" name="horizontalLayout_9">
+        <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="0,0">
          <item>
           <layout class="QVBoxLayout" name="info_layout">
+           <property name="sizeConstraint">
+            <enum>QLayout::SetMinimumSize</enum>
+           </property>
            <property name="leftMargin">
             <number>50</number>
            </property>
@@ -214,6 +229,12 @@
              </property>
              <item>
               <widget class="QLabel" name="serial_label">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="maximumSize">
                 <size>
                  <width>16777215</width>
@@ -227,6 +248,12 @@
              </item>
              <item>
               <widget class="QLabel" name="model">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="maximumSize">
                 <size>
                  <width>16777215</width>
@@ -280,6 +307,12 @@
              </item>
              <item>
               <widget class="QLabel" name="reference_model">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="palette">
                 <palette>
                  <active>
@@ -331,6 +364,12 @@
             <layout class="QHBoxLayout" name="horizontalLayout_8">
              <item>
               <widget class="QLabel" name="serial_label_2">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="maximumSize">
                 <size>
                  <width>16777215</width>
@@ -344,6 +383,12 @@
              </item>
              <item>
               <widget class="QLabel" name="serial">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="maximumSize">
                 <size>
                  <width>16777215</width>
@@ -397,6 +442,12 @@
              </item>
              <item>
               <widget class="QLabel" name="reference_serial">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="palette">
                 <palette>
                  <active>
@@ -448,6 +499,12 @@
             <layout class="QHBoxLayout" name="firmware_layout">
              <item>
               <widget class="QLabel" name="firmware_label">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="maximumSize">
                 <size>
                  <width>16777215</width>
@@ -461,6 +518,12 @@
              </item>
              <item>
               <widget class="QLabel" name="firmware">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="maximumSize">
                 <size>
                  <width>16777215</width>
@@ -514,6 +577,12 @@
              </item>
              <item>
               <widget class="QLabel" name="reference_firmware">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="palette">
                 <palette>
                  <active>
@@ -572,6 +641,18 @@
             <layout class="QHBoxLayout" name="size_layout">
              <item>
               <widget class="QLabel" name="size_label">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>30</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Size</string>
                </property>
@@ -579,6 +660,12 @@
              </item>
              <item>
               <widget class="QLabel" name="size">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="palette">
                 <palette>
                  <active>
@@ -626,6 +713,12 @@
              </item>
              <item>
               <widget class="QLabel" name="reference_size">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="palette">
                 <palette>
                  <active>
@@ -684,6 +777,18 @@
             <layout class="QHBoxLayout" name="mountpoint_layout">
              <item>
               <widget class="QLabel" name="mountpoint_label">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>30</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Mount Point</string>
                </property>
@@ -691,6 +796,12 @@
              </item>
              <item>
               <widget class="QLabel" name="mountpoint">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="palette">
                 <palette>
                  <active>
@@ -738,6 +849,12 @@
              </item>
              <item>
               <widget class="QLabel" name="reference_mountpoint">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="palette">
                 <palette>
                  <active>
@@ -789,6 +906,18 @@
             <layout class="QHBoxLayout" name="fstype_layout">
              <item>
               <widget class="QLabel" name="fstype_label">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>30</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Filesystem type</string>
                </property>
@@ -796,6 +925,12 @@
              </item>
              <item>
               <widget class="QLabel" name="fstype">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="palette">
                 <palette>
                  <active>
@@ -843,6 +978,12 @@
              </item>
              <item>
               <widget class="QLabel" name="reference_fstype">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="palette">
                 <palette>
                  <active>
@@ -894,6 +1035,18 @@
             <layout class="QHBoxLayout" name="horizontalLayout_7">
              <item>
               <widget class="QLabel" name="fsoptions_label">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>30</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Filesystem options</string>
                </property>
@@ -904,6 +1057,12 @@
              </item>
              <item>
               <widget class="QLabel" name="fsoptions">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="palette">
                 <palette>
                  <active>
@@ -957,6 +1116,12 @@
              </item>
              <item>
               <widget class="QLabel" name="reference_fsoptions">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="palette">
                 <palette>
                  <active>
@@ -1015,6 +1180,18 @@
             <layout class="QHBoxLayout" name="horizontalLayout_12">
              <item>
               <widget class="QLabel" name="kernel_label">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>30</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Kernel</string>
                </property>
@@ -1022,6 +1199,12 @@
              </item>
              <item>
               <widget class="QLabel" name="kernel">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="palette">
                 <palette>
                  <active>
@@ -1069,6 +1252,12 @@
              </item>
              <item>
               <widget class="QLabel" name="reference_kernel">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="palette">
                 <palette>
                  <active>
@@ -1133,10 +1322,22 @@
          </item>
          <item>
           <widget class="QLabel" name="image">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>350</width>
+             <height>450</height>
+            </size>
+           </property>
            <property name="maximumSize">
             <size>
-             <width>360</width>
-             <height>500</height>
+             <width>350</width>
+             <height>450</height>
             </size>
            </property>
            <property name="text">
@@ -1147,6 +1348,9 @@
            </property>
            <property name="scaledContents">
             <bool>true</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
            <property name="margin">
             <number>10</number>

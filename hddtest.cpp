@@ -37,6 +37,10 @@ HDDTestWidget::HDDTestWidget(QWidget *parent) :
 	ui->readrndwidget->SetDevice(&device);
 	ui->seekwidget->SetDevice(&device);
 	ui->smallfileswidget->SetDevice(&device);
+
+	// set icons to buttons
+	ui->save->setIcon(QIcon::fromTheme("document-save"));
+	ui->about->setIcon(QIcon::fromTheme("help-about"));
 }
 
 HDDTestWidget::~HDDTestWidget()
