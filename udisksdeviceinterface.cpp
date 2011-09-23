@@ -23,4 +23,3 @@ UDisksDeviceInterface::UDisksDeviceInterface(const QString &service, const QStri
 UDisksDeviceInterface::~UDisksDeviceInterface()
 {
 }
-
