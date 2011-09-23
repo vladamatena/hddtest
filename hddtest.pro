@@ -20,7 +20,8 @@ SOURCES += main.cpp \
     timer.cpp \
     testthread.cpp \
     udisksinterface.cpp \
-    udisksdeviceinterface.cpp
+    udisksdeviceinterface.cpp \
+    about.cpp
 HEADERS += hddtest.h \
     randomgenerator.h \
     seeker.h \
@@ -38,14 +39,19 @@ HEADERS += hddtest.h \
     timer.h \
     testthread.h \
     udisksinterface.h \
-    udisksdeviceinterface.h
+    udisksdeviceinterface.h \
+    about.h
 FORMS += hddtest.ui \
-    testwidget.ui
+    testwidget.ui \
+    about.ui
 QT += xml
 QT += dbus
 
 RESOURCES += \
     resource.qrc
+
+
+
 
 
 

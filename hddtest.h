@@ -15,6 +15,7 @@
 #include <QCloseEvent>
 #include <QMutex>
 
+#include "about.h"
 #include "seeker.h"
 #include "readrnd.h"
 #include "readcont.h"
@@ -74,6 +75,7 @@ private slots:
 	void device_operationError();
 	void refDevice_accessWarning();
 	void device_list_refresh();
+	void on_about_clicked();
 };
 
 #endif // HDDTEST_H

@@ -420,3 +420,9 @@ void HDDTestWidget::device_list_refresh()
 	ui->drive->blockSignals(false);
 	ui->reference->blockSignals(false);
 }
+
+void HDDTestWidget::on_about_clicked()
+{
+	About about;
+	about.exec();
+}
