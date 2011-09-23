@@ -84,6 +84,7 @@ void FileRW::TestLoop()
 	// close and delete file
 	file.Close();
 	device->DelFile(filename);
+	device->ClearSafeTemp();
 }
 
 void FileRW::InitScene()

@@ -88,6 +88,8 @@ void FileStructure::TestLoop()
 	results.destroy += device->Sync();
 	results.done = true;
 	results.phase = FileStructureResults::PHASE_DONE;
+
+	device->ClearSafeTemp();
 }
 
 void FileStructure::InitScene()

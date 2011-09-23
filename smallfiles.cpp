@@ -115,6 +115,8 @@ void SmallFiles::TestLoop()
 
 	results.done = true;
 	results.phase = SmallFilesResults::PHASE_DONE;
+
+	device->ClearSafeTemp();
 }
 
 void SmallFiles::UpdateScene()

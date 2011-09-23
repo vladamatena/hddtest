@@ -101,7 +101,7 @@ public:
 	// temp directory operations
 	QString GetSafeTemp();						/// Prepares and returns path to temp for FS tests
 	void ClearSafeTemp();						/// Clears temp
-	bool temp_created;							/// Whenever tem directory was created
+	bool tmp_created;							/// Whenever tmp directory was created
 
 	// drive info
 	QString path;		/// Path to device
