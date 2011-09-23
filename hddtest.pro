@@ -44,5 +44,11 @@ FORMS += hddtest.ui \
 QT += xml
 QT += dbus
 
+RESOURCES += \
+    resource.qrc
+
+
+
+
 
 

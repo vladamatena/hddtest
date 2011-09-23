@@ -1321,39 +1321,24 @@
           </layout>
          </item>
          <item>
-          <widget class="QLabel" name="image">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>350</width>
-             <height>450</height>
-            </size>
-           </property>
+          <widget class="QLabel" name="logo">
            <property name="maximumSize">
             <size>
              <width>350</width>
-             <height>450</height>
+             <height>470</height>
             </size>
            </property>
            <property name="text">
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap>icon/hdd.svg</pixmap>
+            <pixmap resource="logo.qrc">:/icon/icon/hdd.svg</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
            </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
            <property name="margin">
-            <number>10</number>
+            <number>5</number>
            </property>
           </widget>
          </item>
@@ -1507,6 +1492,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="logo.qrc"/>
+ </resources>
  <connections/>
 </ui>

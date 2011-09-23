@@ -389,7 +389,7 @@ void HDDTestWidget::device_list_refresh()
 	// Add drive selection to results combo box
 	QList<Device::Item> devList = device.GetDevices();
 	for(int i = 0; i < devList.size(); ++i)
-		ui->drive->addItem(QIcon("icon/hdd.svg"), devList[i].label, QVariant::fromValue(devList[i]));
+		ui->drive->addItem(QIcon(":/icon/icon/hdd.svg"), devList[i].label, QVariant::fromValue(devList[i]));
 
 	// Add nothing operation to reference combo box
 	ui->drive->insertSeparator(ui->drive->count());
