@@ -394,6 +394,10 @@ void HDDTestWidget::closeEvent(QCloseEvent *ev)
 
 void HDDTestWidget::device_list_refresh()
 {
+	// save selection
+	QString selectedDrive = ui->drive->currentText();
+	QString selectedReference = ui->reference->currentText();
+
 	// Improves performance and sychromization
 	ui->drive->blockSignals(true);
 	ui->reference->blockSignals(true);
@@ -433,8 +437,29 @@ void HDDTestWidget::device_list_refresh()
 	ui->drive->addItem(QIcon::fromTheme("document-open", QIcon(":/icon/document-open.png")), "Open another file", QVariant::fromValue(Device::Item::Open()));
 	ui->reference->addItem(QIcon::fromTheme("document-open", QIcon(":/icon/document-open.png")), "Open another file", QVariant::fromValue(Device::Item::Open()));
 
+	// unblock signals
 	ui->drive->blockSignals(false);
 	ui->reference->blockSignals(false);
+
+	// restore selection
+	int driveIndex = 0;
+	if(!selectedDrive.isEmpty())
+	{
+		driveIndex = ui->drive->findText(selectedDrive);
+		if(driveIndex < 0)
+			driveIndex = 0;
+	}
+	ui->drive->setCurrentIndex(driveIndex);
+	on_drive_currentIndexChanged("");
+
+	int referenceIndex = 0;
+	if(!selectedReference.isEmpty())
+	{
+		referenceIndex = ui->reference->findText(selectedReference);
+		if(referenceIndex < 0)
+			referenceIndex = 0;
+	}
+	ui->reference->setCurrentIndex(referenceIndex);
 }
 
 void HDDTestWidget::on_about_clicked()
