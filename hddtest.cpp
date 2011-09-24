@@ -55,8 +55,8 @@ HDDTestWidget::HDDTestWidget(QWidget *parent) :
 	ui->smallfileswidget->SetDevice(&device);
 
 	// set icons to buttons
-	ui->save->setIcon(QIcon::fromTheme("document-save"));
-	ui->about->setIcon(QIcon::fromTheme("help-about"));
+	ui->save->setIcon(QIcon::fromTheme("document-save", QIcon(":/icon/document-save.png")));
+	ui->about->setIcon(QIcon::fromTheme("help-about", QIcon(":/icon/help-about.png")));
 }
 
 HDDTestWidget::~HDDTestWidget()
@@ -405,12 +405,12 @@ void HDDTestWidget::device_list_refresh()
 	// Add drive selection to results combo box
 	QList<Device::Item> devList = device.GetDevices();
 	for(int i = 0; i < devList.size(); ++i)
-		ui->drive->addItem(QIcon(":/icon/icon/hdd.svg"), devList[i].label, QVariant::fromValue(devList[i]));
+		ui->drive->addItem(QIcon(":/icon/hdd.svg"), devList[i].label, QVariant::fromValue(devList[i]));
 
 	// Add nothing operation to reference combo box
 	ui->drive->insertSeparator(ui->drive->count());
 	ui->reference->addItem(
-				QIcon::fromTheme("process-stop"),
+				QIcon::fromTheme("process-stop", QIcon(":/icon/process-stop.png")),
 				"Nothing",
 				QVariant::fromValue(Device::Item::None()));
 	ui->reference->insertSeparator(ui->reference->count());
@@ -423,15 +423,15 @@ void HDDTestWidget::device_list_refresh()
 		QString path = savedList[i].absoluteFilePath();
 		Device::Item item = Device::Item::Saved(path);
 
-		ui->drive->addItem(QIcon::fromTheme("document-open"), label, QVariant::fromValue(item));
-		ui->reference->addItem(QIcon::fromTheme("document-open"), label, QVariant::fromValue(item));
+		ui->drive->addItem(QIcon::fromTheme("document-open", QIcon(":/icon/document-open.png")), label, QVariant::fromValue(item));
+		ui->reference->addItem(QIcon::fromTheme("document-open", QIcon(":/icon/document-open.png")), label, QVariant::fromValue(item));
 	}
 
 	// Add file open dialog for both combo boxes
 	ui->drive->insertSeparator(ui->drive->count());
 	ui->reference->insertSeparator(ui->reference->count());
-	ui->drive->addItem(QIcon::fromTheme("document-open"), "Open another file", QVariant::fromValue(Device::Item::Open()));
-	ui->reference->addItem(QIcon::fromTheme("document-open"), "Open another file", QVariant::fromValue(Device::Item::Open()));
+	ui->drive->addItem(QIcon::fromTheme("document-open", QIcon(":/icon/document-open.png")), "Open another file", QVariant::fromValue(Device::Item::Open()));
+	ui->reference->addItem(QIcon::fromTheme("document-open", QIcon(":/icon/document-open.png")), "Open another file", QVariant::fromValue(Device::Item::Open()));
 
 	ui->drive->blockSignals(false);
 	ui->reference->blockSignals(false);

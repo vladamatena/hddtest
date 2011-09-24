@@ -1,5 +1,9 @@
 <RCC>
-    <qresource prefix="/icon">
+    <qresource prefix="/">
         <file>icon/hdd.svg</file>
+        <file>icon/document-save.png</file>
+        <file>icon/document-open.png</file>
+        <file>icon/help-about.png</file>
+        <file>icon/process-stop.png</file>
     </qresource>
 </RCC>

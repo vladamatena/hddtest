@@ -24,7 +24,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="resource.qrc">
-    <normaloff>:/icon/icon/hdd.svg</normaloff>:/icon/icon/hdd.svg</iconset>
+    <normaloff>:/icon/hdd.svg</normaloff>:/icon/hdd.svg</iconset>
   </property>
   <property name="modal">
    <bool>true</bool>
@@ -98,7 +98,7 @@ p, li { white-space: pre-wrap; }
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="resource.qrc">:/icon/icon/hdd.svg</pixmap>
+        <pixmap resource="resource.qrc">:/icon/hdd.svg</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
