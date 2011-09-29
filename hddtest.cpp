@@ -301,12 +301,12 @@ void HDDTestWidget::on_open_clicked()
 	if(!filename.isNull())
 	{
 		// add open result to drive selection
-		ui->drive->addItem(QIcon::fromTheme("document-open", QIcon(":/icons/document-open.png")),
+		ui->drive->addItem(QIcon::fromTheme("document-open", QIcon(":/icon/document-open.png")),
 					filename,
 					QVariant::fromValue(Device::Item::Saved(filename)));
 
 		// add open result to reference selection
-		ui->reference->addItem(QIcon::fromTheme("document-open", QIcon(":/icons/document-open.png")),
+		ui->reference->addItem(QIcon::fromTheme("document-open", QIcon(":/icon/document-open.png")),
 					filename,
 					QVariant::fromValue(Device::Item::Saved(filename)));
 
