@@ -483,11 +483,6 @@ Device::Item Device::Item::None()
 	return Item(NOTHING, "");
 }
 
-Device::Item Device::Item::Open()
-{
-	return Item(OPEN_DIALOG, "");
-}
-
 Device::Item Device::Item::Saved(QString path)
 {
 	return Item(RESULT, path);

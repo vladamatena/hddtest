@@ -55,6 +55,7 @@ HDDTestWidget::HDDTestWidget(QWidget *parent) :
 	ui->smallfileswidget->SetDevice(&device);
 
 	// set icons to buttons
+	ui->open->setIcon(QIcon::fromTheme("document-open", QIcon(":/icon/document-open.png")));
 	ui->save->setIcon(QIcon::fromTheme("document-save", QIcon(":/icon/document-save.png")));
 	ui->about->setIcon(QIcon::fromTheme("help-about", QIcon(":/icon/help-about.png")));
 }
@@ -70,26 +71,6 @@ void HDDTestWidget::on_drive_currentIndexChanged(QString)
 
 	switch(data.value<Device::Item>().type)
 	{
-	case Device::Item::OPEN_DIALOG:
-		{
-			QString filename = QFileDialog::getOpenFileName(
-						this,
-						tr("Open Saved results"),
-						"",
-						tr("Results (*.hddtest)"));
-
-			if(filename.length() > 0)
-			{
-				int index = ui->drive->count();
-				ui->drive->insertItem(
-							index,
-							"Saved: " + filename,
-							QVariant::fromValue(Device::Item::Saved(filename)));
-				ui->drive->setCurrentIndex(index);
-			}
-		}
-		break;
-
 	case Device::Item::DEVICE:
 		EraseResults(TestWidget::RESULTS);
 		device.Open(data.value<Device::Item>().path, true);
@@ -116,26 +97,6 @@ void HDDTestWidget::on_reference_currentIndexChanged(QString )
 
 	switch(data.value<Device::Item>().type)
 	{
-	case Device::Item::OPEN_DIALOG:
-		{
-			QString filename = QFileDialog::getOpenFileName(
-						this,
-						tr("Open Saved results"),
-						"",
-						tr("Results (*.hddtest)"));
-
-			if(filename.length() > 0)
-			{
-				int index = ui->reference->count();
-				ui->reference->insertItem(
-							index,
-							"Saved: " + filename,
-							QVariant::fromValue(Device::Item::Saved(filename)));
-				ui->reference->setCurrentIndex(index);
-			}
-		}
-		break;
-
 	case Device::Item::RESULT:
 		refDevice.Open("", true);
 		EraseResults(TestWidget::REFERENCE);
@@ -329,6 +290,37 @@ void HDDTestWidget::on_save_clicked()
 	}
 }
 
+void HDDTestWidget::on_open_clicked()
+{
+	QString filename = QFileDialog::getOpenFileName(
+				this,
+				tr("Open Saved results"),
+				"",
+				tr("Results (*.hddtest)"));
+
+	if(!filename.isNull())
+	{
+		// add open result to drive selection
+		ui->drive->addItem(QIcon::fromTheme("document-open", QIcon(":/icons/document-open.png")),
+					filename,
+					QVariant::fromValue(Device::Item::Saved(filename)));
+
+		// add open result to reference selection
+		ui->reference->addItem(QIcon::fromTheme("document-open", QIcon(":/icons/document-open.png")),
+					filename,
+					QVariant::fromValue(Device::Item::Saved(filename)));
+
+		// open new result in reference seection
+		ui->reference->setCurrentIndex(ui->reference->count() - 1);
+	}
+}
+
+void HDDTestWidget::on_about_clicked()
+{
+	About about;
+	about.exec();
+}
+
 void HDDTestWidget::OpenResultFile(QString filename, TestWidget::DataSet dataset)
 {
 	if(filename.length() == 0)
@@ -447,17 +439,9 @@ void HDDTestWidget::device_list_refresh()
 					QVariant::fromValue(item));
 	}
 
-	// Add file open dialog for both combo boxes
+	// add separators behind the list in order to separate open results later
 	ui->drive->insertSeparator(ui->drive->count());
 	ui->reference->insertSeparator(ui->reference->count());
-	ui->drive->addItem(
-				QIcon::fromTheme("document-open", QIcon(":/icon/document-open.png")),
-				"Open another file",
-				QVariant::fromValue(Device::Item::Open()));
-	ui->reference->addItem(
-				QIcon::fromTheme("document-open", QIcon(":/icon/document-open.png")),
-				"Open another file",
-				QVariant::fromValue(Device::Item::Open()));
 
 	// unblock signals
 	ui->drive->blockSignals(false);
@@ -482,10 +466,4 @@ void HDDTestWidget::device_list_refresh()
 			referenceIndex = 0;
 	}
 	ui->reference->setCurrentIndex(referenceIndex);
-}
-
-void HDDTestWidget::on_about_clicked()
-{
-	About about;
-	about.exec();
 }

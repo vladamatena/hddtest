@@ -92,6 +92,7 @@ private slots:
 	void refDevice_accessWarning();
 	void device_list_refresh();
 	void on_about_clicked();
+	void on_open_clicked();
 };
 
 #endif // HDDTEST_H

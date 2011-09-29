@@ -64,7 +64,7 @@ public:
 	struct Item
 	{
 		/// Item type enumeration
-		enum Type	{ DEVICE, OPEN_DIALOG, RESULT, NOTHING };
+		enum Type	{ DEVICE, RESULT, NOTHING };
 
 		/// Constructor for empty item
 		Item():
@@ -79,7 +79,6 @@ public:
 			type(type), path(path), label(label) {}
 
 		static Item None();             /// Returns item of none type
-		static Item Open();             /// Returns item of open type
 		static Item Saved(QString path);/// Returns item of saved type
 
 		Type type;		/// Item type
