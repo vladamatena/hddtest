@@ -27,21 +27,30 @@
    <bool>false</bool>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
+   <property name="margin">
+    <number>3</number>
+   </property>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
      <item>
       <widget class="QPushButton" name="open">
        <property name="maximumSize">
         <size>
-         <width>30</width>
-         <height>30</height>
+         <width>22</width>
+         <height>22</height>
         </size>
        </property>
        <property name="text">
         <string/>
        </property>
        <property name="flat">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
       </widget>
      </item>
@@ -49,24 +58,18 @@
       <widget class="QPushButton" name="save">
        <property name="maximumSize">
         <size>
-         <width>30</width>
-         <height>30</height>
+         <width>22</width>
+         <height>22</height>
         </size>
        </property>
        <property name="text">
         <string/>
        </property>
-       <property name="iconSize">
-        <size>
-         <width>16</width>
-         <height>16</height>
-        </size>
-       </property>
        <property name="autoDefault">
         <bool>false</bool>
        </property>
        <property name="flat">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
       </widget>
      </item>
@@ -168,22 +171,22 @@
       <widget class="QPushButton" name="about">
        <property name="maximumSize">
         <size>
-         <width>30</width>
-         <height>30</height>
+         <width>22</width>
+         <height>22</height>
         </size>
        </property>
        <property name="text">
         <string/>
        </property>
        <property name="flat">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
       </widget>
      </item>
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout" stretch="1">
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QTabWidget" name="Tabs">
        <property name="sizePolicy">
