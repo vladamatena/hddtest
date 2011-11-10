@@ -51,6 +51,7 @@ private:
 		void erase();					/// Erase all seeks
 		void AddSeek(QPointF seek);		/// Add seek to this test
 		qreal avg();					/// Get overall average seek time
+		qreal average;
 
 		QList<QPointF> seeks;		/// List of seeks in results
 		QStack<QPointF> newseeks;	/// List of new seeks (not yet displayed)

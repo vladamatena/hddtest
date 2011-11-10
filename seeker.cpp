@@ -131,18 +131,16 @@ int Seeker::GetProgress()
 
 void Seeker::SeekResult::AddSeek(QPointF seek)
 {
+	// count new average seek
+	average = ((qreal)seeks.count() * average + seek.y()) / (seeks.count() + 1);
+
 	seeks.push_back(seek);		// add seek to result seek list
 	newseeks.push_back(seek);	// add sekk to stack used for drawing new results
 }
 
 qreal Seeker::SeekResult::avg()
 {
-	// count arithmetic average from seek times
-	qreal sum = 0;
-	for(int i = 0;i < seeks.count(); ++i)
-		sum += seeks[i].y();
-
-	return sum / seeks.count();
+	return average;
 }
 
 void Seeker::SeekResult::erase()
@@ -150,6 +148,7 @@ void Seeker::SeekResult::erase()
 	seeks.erase(seeks.begin(), seeks.end());
 	newseeks.erase(newseeks.begin(), newseeks.end());
 	progress = 0.0f;
+	average = 0.0f;
 }
 
 QDomElement Seeker::WriteResults(QDomDocument &doc)
