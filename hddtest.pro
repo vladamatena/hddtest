@@ -50,11 +50,6 @@ QT += dbus
 RESOURCES += \
     resource.qrc
 
+target.path = $$PREFIX/bin/
 
-
-
-
-
-
-
-
+INSTALLS += target
