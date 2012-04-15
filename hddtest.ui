@@ -20,7 +20,7 @@
    <string>HDDTest</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="resource.qrc">
+   <iconset>
     <normaloff>:/icon/hdd.svg</normaloff>:/icon/hdd.svg</iconset>
   </property>
   <property name="sizeGripEnabled">
@@ -49,6 +49,10 @@
        <property name="text">
         <string/>
        </property>
+       <property name="icon">
+        <iconset resource="resource.qrc">
+         <normaloff>:/icon/icon/document-open.png</normaloff>:/icon/icon/document-open.png</iconset>
+       </property>
        <property name="flat">
         <bool>false</bool>
        </property>
@@ -64,6 +68,10 @@
        </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="resource.qrc">
+         <normaloff>:/icon/icon/document-save.png</normaloff>:/icon/icon/document-save.png</iconset>
        </property>
        <property name="autoDefault">
         <bool>false</bool>
@@ -231,6 +239,10 @@
        </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="resource.qrc">
+         <normaloff>:/icon/icon/help-about.png</normaloff>:/icon/icon/help-about.png</iconset>
        </property>
        <property name="flat">
         <bool>false</bool>
@@ -1411,7 +1423,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="resource.qrc">:/icon/hdd.svg</pixmap>
+            <pixmap>:/icon/hdd.svg</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>

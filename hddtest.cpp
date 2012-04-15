@@ -55,9 +55,9 @@ HDDTestWidget::HDDTestWidget(QWidget *parent) :
 	ui->smallfileswidget->SetDevice(&device);
 
 	// set icons to buttons
-	ui->open->setIcon(QIcon::fromTheme("document-open", QIcon(":/icon/document-open.png")));
-	ui->save->setIcon(QIcon::fromTheme("document-save", QIcon(":/icon/document-save.png")));
-	ui->about->setIcon(QIcon::fromTheme("help-about", QIcon(":/icon/help-about.png")));
+	ui->open->setIcon(QIcon::fromTheme("document-open", QIcon("icon:/icon/document-open.png")));
+	ui->save->setIcon(QIcon::fromTheme("document-save", QIcon("icon:/icon/document-save.png")));
+	ui->about->setIcon(QIcon::fromTheme("help-about", QIcon("icon:/icon/help-about.png")));
 }
 
 HDDTestWidget::~HDDTestWidget()
@@ -301,12 +301,12 @@ void HDDTestWidget::on_open_clicked()
 	if(!filename.isNull())
 	{
 		// add open result to drive selection
-		ui->drive->addItem(QIcon::fromTheme("document-open", QIcon(":/icon/document-open.png")),
+		ui->drive->addItem(QIcon::fromTheme("document-open", QIcon(":icon/icon/document-open.png")),
 					filename,
 					QVariant::fromValue(Device::Item::Saved(filename)));
 
 		// add open result to reference selection
-		ui->reference->addItem(QIcon::fromTheme("document-open", QIcon(":/icon/document-open.png")),
+		ui->reference->addItem(QIcon::fromTheme("document-open", QIcon(":icon/icon/document-open.png")),
 					filename,
 					QVariant::fromValue(Device::Item::Saved(filename)));
 
@@ -391,7 +391,7 @@ void HDDTestWidget::closeEvent(QCloseEvent *ev)
 		box.exec();
 	}
 	else
-		ev->accept();	// close
+		ev->accept(); // close
 }
 
 void HDDTestWidget::device_list_refresh()
@@ -411,12 +411,12 @@ void HDDTestWidget::device_list_refresh()
 	// Add drive selection to results combo box
 	QList<Device::Item> devList = device.GetDevices();
 	for(int i = 0; i < devList.size(); ++i)
-		ui->drive->addItem(QIcon(":/icon/hdd.svg"), devList[i].label, QVariant::fromValue(devList[i]));
+		ui->drive->addItem(QIcon(":icon/icon/hdd.svg"), devList[i].label, QVariant::fromValue(devList[i]));
 
 	// Add nothing operation to reference combo box
 	ui->drive->insertSeparator(ui->drive->count());
 	ui->reference->addItem(
-				QIcon::fromTheme("process-stop", QIcon(":/icon/process-stop.png")),
+				QIcon::fromTheme("process-stop", QIcon(":icon/icon/process-stop.png")),
 				"Nothing",
 				QVariant::fromValue(Device::Item::None()));
 	ui->reference->insertSeparator(ui->reference->count());
@@ -430,11 +430,11 @@ void HDDTestWidget::device_list_refresh()
 		Device::Item item = Device::Item::Saved(path);
 
 		ui->drive->addItem(
-					QIcon::fromTheme("document-open", QIcon(":/icon/document-open.png")),
+					QIcon::fromTheme("document-open", QIcon(":icon/icon/document-open.png")),
 					label,
 					QVariant::fromValue(item));
 		ui->reference->addItem(
-					QIcon::fromTheme("document-open", QIcon(":/icon/document-open.png")),
+					QIcon::fromTheme("document-open", QIcon(":icon/icon/document-open.png")),
 					label,
 					QVariant::fromValue(item));
 	}

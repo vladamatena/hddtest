@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>277</width>
-    <height>317</height>
+    <height>337</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -23,7 +23,7 @@
    <string>About HDDTest</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="resource.qrc">
+   <iconset>
     <normaloff>:/icon/hdd.svg</normaloff>:/icon/hdd.svg</iconset>
   </property>
   <property name="modal">
@@ -104,7 +104,7 @@ p, li { white-space: pre-wrap; }
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="resource.qrc">:/icon/hdd.svg</pixmap>
+        <pixmap resource="resource.qrc">:/icon/icon/hdd.svg</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>

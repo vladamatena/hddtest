@@ -1,9 +1,17 @@
 <RCC>
-    <qresource prefix="/">
+    <qresource prefix="/icon">
         <file>icon/hdd.svg</file>
         <file>icon/document-save.png</file>
         <file>icon/document-open.png</file>
         <file>icon/help-about.png</file>
         <file>icon/process-stop.png</file>
+        <file>icon/hdd.png</file>
+    </qresource>
+    <qresource prefix="/reference">
+        <file>reference/KingMax 8G USB2.0.hddtest</file>
+        <file>reference/Kingston 4GB CF.hddtest</file>
+        <file>reference/Maxtor 6 Y080P0 USB.hddtest</file>
+        <file>reference/MicroSD 8G.hddtest</file>
+        <file>reference/TOSHIBA MK1652GSX.hddtest</file>
     </qresource>
 </RCC>
