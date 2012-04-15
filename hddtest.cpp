@@ -422,7 +422,7 @@ void HDDTestWidget::device_list_refresh()
 	ui->reference->insertSeparator(ui->reference->count());
 
 	// Add saved resutls for both combo boxes
-	QFileInfoList savedList = QDir("reference").entryInfoList(QStringList("*.hddtest"), QDir::Files);
+	QFileInfoList savedList = QDir(":reference/reference").entryInfoList(QStringList("*.hddtest"), QDir::Files);
 	for(int i = 0; i < savedList.size(); ++i)
 	{
 		QString label = savedList[i].fileName();
