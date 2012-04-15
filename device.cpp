@@ -23,7 +23,6 @@
 Device::Device()
 {
 	path = "";
-	tmp_created = false;
 	problemReported = false;
 	size = -1;
 	fs = false;
@@ -70,7 +69,6 @@ QList<Device::Item> Device::GetDevices()
 void Device::Open(QString path, bool close)
 {
 	this->path = path;
-	tmp_created = false;
 	problemReported = false;
 
 	if(close)
@@ -294,27 +292,20 @@ void Device::DriveInfo()
 
 QString Device::GetSafeTemp()
 {
-	if(!fs)		// no FS => no temp
+	// no fs => no temp
+	if(!fs)
 		return "";
 
-	// check / create tmp dir
-	if(!QDir(mountpoint).exists("tmp"))
-	{
-		tmp_created = true;
-		QDir(mountpoint).mkdir("tmp");
-	}
-
-	// create final temp dir
-	QDir(mountpoint + "/tmp").mkdir("hddtest.temp.dir");
-
-	return mountpoint + "/tmp/hddtest.temp.dir";
+	// create temp dir
+	if(QDir(mountpoint).mkdir("hddtest.temp.dir"))
+		return mountpoint + "/hddtest.temp.dir";
+	else
+		return "";
 }
 
 void Device::ClearSafeTemp()
 {
-	QDir(mountpoint + "/tmp").rmdir("hddtest.temp.dir");
-	if(tmp_created)
-		QDir(mountpoint).rmdir("tmp");
+	QDir(mountpoint).rmdir("hddtest.temp.dir");
 }
 
 hddtime Device::MkDir(QString path)
