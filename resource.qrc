@@ -5,7 +5,6 @@
         <file>icon/document-open.png</file>
         <file>icon/help-about.png</file>
         <file>icon/process-stop.png</file>
-        <file>icon/hdd.png</file>
     </qresource>
     <qresource prefix="/reference">
         <file>reference/KingMax 8G USB2.0.hddtest</file>
