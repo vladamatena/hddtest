@@ -341,7 +341,7 @@ hddtime Device::MkFile(QString path, hddsize size)
 			char *data = new char[size];
 			if(file.write(data, size) != size)
 				ReportError();
-			delete data;
+			delete [] data;
 		}
 
 		file.close();
@@ -395,7 +395,7 @@ hddtime Device::ReadFile(QString path)
 		char *buffer = new char[file.size()];
 		if(file.read(buffer, file.size()) < 0)
 			ReportError();
-		delete buffer;
+		delete [] buffer;
 
 		file.close();
 	}
