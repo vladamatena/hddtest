@@ -1,0 +1,52 @@
+<!DOCTYPE HddTest>
+<Results>
+ <Info>
+  <FS mountpoint="/mnt/ext" fsoptions="rw&#xa;noatime&#xa;user_xattr&#xa;commit=60&#xa;barrier=0&#xa;data=writeback" fstype="ext4" fsversion="" fs="1"/>
+  <Device model="TOSHIBA MK1652GSX" size="157629233664" serial="484HT183T" path="/dev/sda1" firmware="LV011D"/>
+  <Kernel kernel="Linux - 3.0.4-tuxonice"/>
+ </Info>
+ <File_Read_Write valid="no">
+  <Write_data/>
+  <Read_data/>
+ </File_Read_Write>
+ <File_Structure valid="no">
+  <Build time="0"/>
+  <Destroy time="0"/>
+ </File_Structure>
+ <Read_Block valid="no">
+  <Result size="1048576" time="0"/>
+  <Result size="524288" time="0"/>
+  <Result size="262144" time="0"/>
+  <Result size="131072" time="0"/>
+  <Result size="65536" time="0"/>
+  <Result size="32768" time="0"/>
+  <Result size="16384" time="0"/>
+  <Result size="8192" time="0"/>
+  <Result size="4096" time="0"/>
+  <Result size="2048" time="0"/>
+  <Result size="1024" time="0"/>
+  <Result size="512" time="0"/>
+ </Read_Block>
+ <Read_Continuous valid="no"/>
+ <Read_Random valid="no">
+  <Result size="1048576" read="0" time="0"/>
+  <Result size="524288" read="0" time="0"/>
+  <Result size="262144" read="0" time="0"/>
+  <Result size="131072" read="0" time="0"/>
+  <Result size="65536" read="0" time="0"/>
+  <Result size="32768" read="0" time="0"/>
+  <Result size="16384" read="0" time="0"/>
+  <Result size="8192" read="0" time="0"/>
+  <Result size="4096" read="0" time="0"/>
+  <Result size="2048" read="0" time="0"/>
+  <Result size="1024" read="0" time="0"/>
+  <Result size="512" read="0" time="0"/>
+ </Read_Random>
+ <Seeker valid="no"/>
+ <Small_Files valid="yes">
+  <Build_dirs time="400209"/>
+  <Build_files time="2956227"/>
+  <Read_files time="61444"/>
+  <Destroy time="3718941"/>
+ </Small_Files>
+</Results>
