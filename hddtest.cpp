@@ -1,22 +1,22 @@
 /*******************************************************************************
-*
-*	HDDTest the graphical drive benchmarking tool.
-*	Copyright (C) 2011  Vladimír Matěna <vlada.matena@gmail.com>
-*
-*	This program is free software: you can redistribute it and/or modify
-*	it under the terms of the GNU General Public License as published by
-*	the Free Software Foundation, either version 3 of the License, or
-*	(at your option) any later version.
-*
-*	This program is distributed in the hope that it will be useful,
-*	but WITHOUT ANY WARRANTY; without even the implied warranty of
-*	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*	GNU General Public License for more details.
-*
-*	You should have received a copy of the GNU General Public License
-*	along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*
-********************************************************************************/
+ *
+ *	HDDTest the graphical drive benchmarking tool.
+ *	Copyright (C) 2011  Vladimír Matěna <vlada.matena@gmail.com>
+ *
+ *	This program is free software: you can redistribute it and/or modify
+ *	it under the terms of the GNU General Public License as published by
+ *	the Free Software Foundation, either version 3 of the License, or
+ *	(at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *	GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License
+ *	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ ********************************************************************************/
 
 #include <QMessageBox>
 #include <iostream>
@@ -30,8 +30,7 @@
 
 
 HDDTestWidget::HDDTestWidget(QWidget *parent) :
-	QDialog(parent), ui(new Ui::HDDTestWidget)
-{
+	QDialog(parent), ui(new Ui::HDDTestWidget) {
     ui->setupUi(this);
 
 	// connect access warning and error signals
@@ -60,13 +59,11 @@ HDDTestWidget::HDDTestWidget(QWidget *parent) :
 	ui->about->setIcon(QIcon::fromTheme("help-about", QIcon("icon:/icon/help-about.png")));
 }
 
-HDDTestWidget::~HDDTestWidget()
-{
+HDDTestWidget::~HDDTestWidget() {
     delete ui;
 }
 
-void HDDTestWidget::on_drive_currentIndexChanged(QString)
-{	
+void HDDTestWidget::on_drive_currentIndexChanged(QString) {
 	QVariant data = ui->drive->itemData(ui->drive->currentIndex());
 
 	switch(data.value<Device::Item>().type)
@@ -91,8 +88,7 @@ void HDDTestWidget::on_drive_currentIndexChanged(QString)
 	}
 }
 
-void HDDTestWidget::on_reference_currentIndexChanged(QString )
-{
+void HDDTestWidget::on_reference_currentIndexChanged(QString ) {
 	QVariant data = ui->reference->itemData(ui->reference->currentIndex());
 
 	switch(data.value<Device::Item>().type)
@@ -132,8 +128,7 @@ void HDDTestWidget::device_accessWarning()
 	box.exec();
 }
 
-void HDDTestWidget::device_operationError()
-{
+void HDDTestWidget::device_operationError() {
 	bool running = false;
 	if(ui->filerwwidget->testState == TestWidget::STARTED)
 	{
@@ -189,8 +184,7 @@ void HDDTestWidget::device_operationError()
 
 void HDDTestWidget::refDevice_accessWarning() {}
 
-void HDDTestWidget::UpdateInfo(TestWidget::DataSet dataset)
-{
+void HDDTestWidget::UpdateInfo(TestWidget::DataSet dataset) {
 	if(dataset == TestWidget::RESULTS)
 	{
 		// update info tab - tested device
@@ -221,8 +215,7 @@ void HDDTestWidget::UpdateInfo(TestWidget::DataSet dataset)
 	}
 }
 
-void HDDTestWidget::ReloadTests(bool loaded)
-{
+void HDDTestWidget::ReloadTests(bool loaded) {
 	// check test modes - FS, Valid
 	bool fs = device.fs;
 	bool valid = device.size > 0;
@@ -241,8 +234,7 @@ void HDDTestWidget::ReloadTests(bool loaded)
 	ui->filestructurewidget->SetStartEnabled(!loaded && fs);
 }
 
-void HDDTestWidget::EraseResults(TestWidget::DataSet dataset)
-{
+void HDDTestWidget::EraseResults(TestWidget::DataSet dataset) {
 	if(dataset == TestWidget::RESULTS)
 		device.EraseDriveInfo();
 	else
@@ -260,8 +252,7 @@ void HDDTestWidget::EraseResults(TestWidget::DataSet dataset)
 void HDDTestWidget::on_save_clicked()
 {
 	QString filename = QFileDialog::getSaveFileName(this, tr("Save results"), "", tr("Results (*.hddtest)"));
-	if(filename.length() > 0)
-	{
+	if(filename.length() > 0) {
 		// Create base document for tests results
 		QDomDocument doc("HddTest");
 
@@ -290,16 +281,14 @@ void HDDTestWidget::on_save_clicked()
 	}
 }
 
-void HDDTestWidget::on_open_clicked()
-{
+void HDDTestWidget::on_open_clicked() {
 	QString filename = QFileDialog::getOpenFileName(
 				this,
 				tr("Open Saved results"),
 				"",
 				tr("Results (*.hddtest)"));
 
-	if(!filename.isNull())
-	{
+	if(!filename.isNull()) {
 		// add open result to drive selection
 		ui->drive->addItem(QIcon::fromTheme("document-open", QIcon(":icon/icon/document-open.png")),
 					filename,
@@ -315,14 +304,12 @@ void HDDTestWidget::on_open_clicked()
 	}
 }
 
-void HDDTestWidget::on_about_clicked()
-{
+void HDDTestWidget::on_about_clicked() {
 	About about;
 	about.exec();
 }
 
-void HDDTestWidget::OpenResultFile(QString filename, TestWidget::DataSet dataset)
-{
+void HDDTestWidget::OpenResultFile(QString filename, TestWidget::DataSet dataset) {
 	if(filename.length() == 0)
 	{
 		std::cerr << "WARNING: no filename given for results file" << std::endl;
@@ -363,8 +350,7 @@ void HDDTestWidget::OpenResultFile(QString filename, TestWidget::DataSet dataset
 	ui->readcontwidget->RestoreResults(root, dataset);
 }
 
-void HDDTestWidget::closeEvent(QCloseEvent *ev)
-{
+void HDDTestWidget::closeEvent(QCloseEvent *ev) {
 	// Check whenever something is in progress
 	bool running = false;
 	if(ui->filerwwidget->testState == TestWidget::STARTED)
@@ -382,20 +368,18 @@ void HDDTestWidget::closeEvent(QCloseEvent *ev)
 	if(ui->smallfileswidget->testState == TestWidget::STARTED)
 		running = true;
 
-	if(running)
-	{
+	if(running) {
 		// Refuse to close and report to user
 		ev->ignore();
 		QMessageBox box;
 		box.setText("Cannot close application since test is running.");
 		box.exec();
-	}
-	else
+	} else {
 		ev->accept(); // close
+	}
 }
 
-void HDDTestWidget::device_list_refresh()
-{
+void HDDTestWidget::device_list_refresh() {
 	// save selection
 	QString selectedDrive = ui->drive->currentText();
 	QString selectedReference = ui->reference->currentText();
@@ -423,8 +407,7 @@ void HDDTestWidget::device_list_refresh()
 
 	// Add saved resutls for both combo boxes
 	QFileInfoList savedList = QDir(":reference/reference").entryInfoList(QStringList("*.hddtest"), QDir::Files);
-	for(int i = 0; i < savedList.size(); ++i)
-	{
+	for(int i = 0; i < savedList.size(); ++i) {
 		QString label = savedList[i].fileName();
 		QString path = savedList[i].absoluteFilePath();
 		Device::Item item = Device::Item::Saved(path);
@@ -449,8 +432,7 @@ void HDDTestWidget::device_list_refresh()
 
 	// restore selection
 	int driveIndex = 0;
-	if(!selectedDrive.isEmpty())
-	{
+	if(!selectedDrive.isEmpty()) {
 		driveIndex = ui->drive->findText(selectedDrive);
 		if(driveIndex < 0)
 			driveIndex = 0;
@@ -459,8 +441,7 @@ void HDDTestWidget::device_list_refresh()
 	on_drive_currentIndexChanged("");
 
 	int referenceIndex = 0;
-	if(!selectedReference.isEmpty())
-	{
+	if(!selectedReference.isEmpty()) {
 		referenceIndex = ui->reference->findText(selectedReference);
 		if(referenceIndex < 0)
 			referenceIndex = 0;

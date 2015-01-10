@@ -20,7 +20,6 @@
 
 #include <QtGui/QApplication>
 #include "hddtest.h"
-#include <qpushbutton.h>
 
 int main(int argc, char *argv[])
 {

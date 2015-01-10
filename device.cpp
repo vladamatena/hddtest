@@ -20,8 +20,7 @@
 
 #include "device.h"
 
-Device::Device()
-{
+Device::Device() {
 	path = "";
 	problemReported = false;
 	size = -1;
@@ -29,31 +28,30 @@ Device::Device()
 	fd = 0;
 
 	// connect to udisks dbus interface and connect device update signals
-	udisks = new UDisksInterface("org.freedesktop.UDisks", "/org/freedesktop/UDisks", QDBusConnection::systemBus(), 0);
-	connect(udisks, SIGNAL(DeviceAdded(QDBusObjectPath)), this, SIGNAL(udisksUpdate()));
-	connect(udisks, SIGNAL(DeviceRemoved(QDBusObjectPath)), this, SIGNAL(udisksUpdate()));
+//	udisks = new UDisksInterface("org.freedesktop.UDisks2", "/org/freedesktop/UDisks2", QDBusConnection::systemBus(), 0);
+//	connect(udisks, SIGNAL(DeviceAdded(QDBusObjectPath)), this, SIGNAL(udisksUpdate()));
+//	connect(udisks, SIGNAL(DeviceRemoved(QDBusObjectPath)), this, SIGNAL(udisksUpdate()));
 }
 
-Device::~Device()
-{
-	delete udisks;
+Device::~Device() {
+//	delete udisks;
 	Close();
 }
 
-void Device::Close()
-{
+void Device::Close() {
 	// close device file
 	if(fd > 0)
 		close(fd);
 }
 
-QList<Device::Item> Device::GetDevices()
-{
+QList<Device::Item> Device::GetDevices() {
 	QList<Item> list;
 
-	QList<QDBusObjectPath> devices = udisks->EnumerateDevices().value();
-	for(int i = 0; i < devices.size(); ++i)
-	{
+/*	QList<QDBusObjectPath> devices = udisks->EnumerateDevices().value();
+
+	std::cout << "Devices: " << devices.size() << std::endl;
+
+	for(int i = 0; i < devices.size(); ++i) {
 		UDisksDeviceInterface device("org.freedesktop.UDisks", devices.at(i).path(), QDBusConnection::systemBus(), 0);
 
 		if(!device.driveIsMediaEjectable())
@@ -62,12 +60,11 @@ QList<Device::Item> Device::GetDevices()
 						device.deviceFile(),
 						device.deviceFile() + " (" + device.driveModel() + ")"));
 	}
-
+*/
 	return list;
 }
 
-void Device::Open(QString path, bool close)
-{
+void Device::Open(QString path, bool close) {
 	this->path = path;
 	problemReported = false;
 
@@ -94,8 +91,7 @@ void Device::Open(QString path, bool close)
 	DriveInfo();
 }
 
-void Device::DropCaches()
-{
+void Device::DropCaches() {
 		// give advice to disable caching
 		int ret = posix_fadvise(fd, 0, 0, POSIX_FADV_DONTNEED);
 		if(ret)
@@ -113,8 +109,7 @@ void Device::DropCaches()
 			ReportWarning();
 }
 
-hddtime Device::Sync()
-{
+hddtime Device::Sync() {
 	timer.MarkStart();
 
 	// sync
@@ -125,13 +120,11 @@ hddtime Device::Sync()
 	return timer.GetFinalOffset();
 }
 
-void Device::Warmup()
-{
+void Device::Warmup() {
 	ReadAt(M, M);
 }
 
-void Device::ReportWarning()
-{
+void Device::ReportWarning() {
 	if(problemReported)
 		return;
 
@@ -139,20 +132,17 @@ void Device::ReportWarning()
 	accessWarning();
 }
 
-void Device::ReportError()
-{
+void Device::ReportError() {
 	operationError();
 }
 
-void Device::SetPos(hddsize pos)
-{
+void Device::SetPos(hddsize pos) {
 	// set position
 	if(lseek64(fd, pos, SEEK_SET) < 0)
 		ReportError();
 }
 
-hddtime Device::SeekTo(hddsize pos)
-{
+hddtime Device::SeekTo(hddsize pos) {
 	char c;
 
 	timer.MarkStart();
@@ -167,14 +157,12 @@ hddtime Device::SeekTo(hddsize pos)
 	return timer.GetFinalOffset();
 }
 
-hddsize Device::GetSize()
-{
+hddsize Device::GetSize() {
 	// return private __device_size
 	return device_size;
 }
 
-hddtime Device::ReadAt(hddsize size, hddsize pos)
-{
+hddtime Device::ReadAt(hddsize size, hddsize pos) {
 	char *buffer = new char[size];
 
 	timer.MarkStart();
@@ -194,8 +182,7 @@ hddtime Device::ReadAt(hddsize size, hddsize pos)
 	return timer.GetFinalOffset();
 }
 
-hddtime Device::Read(hddsize size)
-{
+hddtime Device::Read(hddsize size) {
 	char *buffer = new char[size];
 
 	timer.MarkStart();
@@ -214,8 +201,7 @@ hddtime Device::Read(hddsize size)
 	return timer.GetFinalOffset();
 }
 
-void Device::EraseDriveInfo()
-{
+void Device::EraseDriveInfo() {
 	size = -1;
 
 	model = "UNKNOWN";
@@ -230,10 +216,9 @@ void Device::EraseDriveInfo()
 	kernel = "UNKNOWN";
 }
 
-void Device::DriveInfo()
-{
+void Device::DriveInfo() {
 	EraseDriveInfo();
-
+/*
 	QDBusObjectPath object = udisks->FindDeviceByDeviceFile(path).value();
 	UDisksDeviceInterface device("org.freedesktop.UDisks", object.path(), QDBusConnection::systemBus(), 0);
 
@@ -260,10 +245,8 @@ void Device::DriveInfo()
 
 	// Old way reading only for filesystem mount options
 	QFile mounts("/proc/mounts");
-	if(mounts.open(QFile::ReadOnly | QIODevice::Text))
-	{
-		while(true)	// read all mounts lines
-		{
+	if(mounts.open(QFile::ReadOnly | QIODevice::Text)) {
+		while(true)	{ // read all mounts lines
 			QString line = mounts.readLine();	// get line
 
 			// check line end - this is not normal file atEnd() won`t help
@@ -288,10 +271,11 @@ void Device::DriveInfo()
 
 	if(!uname(&buf))
 		kernel = QString::fromAscii(buf.sysname) + " - " + QString::fromAscii(buf.release);
+
+		*/
 }
 
-QString Device::GetSafeTemp()
-{
+QString Device::GetSafeTemp() {
 	// no fs => no temp
 	if(!fs)
 		return "";
@@ -303,13 +287,11 @@ QString Device::GetSafeTemp()
 		return "";
 }
 
-void Device::ClearSafeTemp()
-{
+void Device::ClearSafeTemp() {
 	QDir(mountpoint).rmdir("hddtest.temp.dir");
 }
 
-hddtime Device::MkDir(QString path)
-{
+hddtime Device::MkDir(QString path) {
 	QString temp = GetSafeTemp();
 	QDir dir(temp);
 
@@ -324,20 +306,17 @@ hddtime Device::MkDir(QString path)
 	return timer.GetFinalOffset();
 }
 
-hddtime Device::MkFile(QString path, hddsize size)
-{
+hddtime Device::MkFile(QString path, hddsize size) {
 	QFile file(path);
 
 	timer.MarkStart();
 
 	// write file
-	if(!file.open(QIODevice::WriteOnly))
+	if(!file.open(QIODevice::WriteOnly)) {
 		ReportError();
-	else
-	{
+	} else {
 		// if size should be more then zero write data to file
-		if(size > 0)
-		{
+		if(size > 0) {
 			char *data = new char[size];
 			if(file.write(data, size) != size)
 				ReportError();
@@ -352,8 +331,7 @@ hddtime Device::MkFile(QString path, hddsize size)
 	return timer.GetFinalOffset();
 }
 
-hddtime Device::DelDir(QString path)
-{
+hddtime Device::DelDir(QString path) {
 	QString temp = GetSafeTemp();
 	QDir dir(temp);
 
@@ -368,8 +346,7 @@ hddtime Device::DelDir(QString path)
 	return timer.GetFinalOffset();
 }
 
-hddtime Device::DelFile(QString path)
-{
+hddtime Device::DelFile(QString path) {
 	timer.MarkStart();
 
 	// del file
@@ -381,8 +358,7 @@ hddtime Device::DelFile(QString path)
 	return timer.GetFinalOffset();
 }
 
-hddtime Device::ReadFile(QString path)
-{
+hddtime Device::ReadFile(QString path) {
 	timer.MarkStart();
 
 	// read file
@@ -405,8 +381,7 @@ hddtime Device::ReadFile(QString path)
 	return timer.GetFinalOffset();
 }
 
-QDomElement Device::WriteInfo(QDomDocument &doc)
-{
+QDomElement Device::WriteInfo(QDomDocument &doc) {
 	// create main info element
 	QDomElement master = doc.createElement("Info");
 	doc.appendChild(master);
@@ -437,8 +412,7 @@ QDomElement Device::WriteInfo(QDomDocument &doc)
 	return master;
 }
 
-void Device::ReadInfo(QDomElement &root)
-{
+void Device::ReadInfo(QDomElement &root) {
 	// Locate main seek element
 	QDomElement info = root.firstChildElement("Info");
 
@@ -469,12 +443,10 @@ void Device::ReadInfo(QDomElement &root)
 	kernel = ker.attribute("kernel", "NO DATA");
 }
 
-Device::Item Device::Item::None()
-{
+Device::Item Device::Item::None() {
 	return Item(NOTHING, "");
 }
 
-Device::Item Device::Item::Saved(QString path)
-{
+Device::Item Device::Item::Saved(QString path) {
 	return Item(RESULT, path);
 }

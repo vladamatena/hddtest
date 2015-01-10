@@ -50,19 +50,15 @@
 
 #include "definitions.h"
 #include "timer.h"
-#include "udisksinterface.h"
-#include "udisksdeviceinterface.h"
 
 using namespace HDDTest;
 
 /// Class for device manipulation via device file
-class Device: public QObject
-{
+class Device: public QObject {
 	Q_OBJECT
 public:
 	/// Stores one item in device selection combobox
-	struct Item
-	{
+	struct Item {
 		/// Item type enumeration
 		enum Type	{ DEVICE, RESULT, NOTHING };
 
@@ -129,7 +125,7 @@ public:
 	hddsize size;		/// Device capacity
 
 	// fs info
-	bool fs;			/// Whenever ounted
+	bool fs;			/// Whenever the device is mounted
 	QString mountpoint;	/// Where mounted
 	QString fstype;		/// Filesystem type
 	QString fsversion;	/// Fileystem version
@@ -148,7 +144,7 @@ private:
 	int fd;						// device's file destriptor
 	hddsize device_size;		// device's size
 	bool problemReported;		// whenever device access problem was reported
-	UDisksInterface *udisks;	// udisks dbus connection
+//	UDisksInterface *udisks;	// udisks dbus connection
 
 signals:
 	void accessWarning();

@@ -1,5 +1,9 @@
+Makefile
+hddtest.pro.user
 hddtest
+
 doc
+
 *.o
 moc_*
 ui_*

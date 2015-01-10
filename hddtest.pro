@@ -19,9 +19,7 @@ SOURCES += main.cpp \
     file.cpp \
     timer.cpp \
     testthread.cpp \
-    udisksinterface.cpp \
-    udisksdeviceinterface.cpp \
-    about.cpp
+	about.cpp
 HEADERS += hddtest.h \
     randomgenerator.h \
     seeker.h \
@@ -38,14 +36,12 @@ HEADERS += hddtest.h \
     file.h \
     timer.h \
     testthread.h \
-    udisksinterface.h \
-    udisksdeviceinterface.h \
-    about.h
+	about.h
 FORMS += hddtest.ui \
     testwidget.ui \
     about.ui
 QT += xml
-QT += dbus
+#QT += dbus
 
 RESOURCES += \
     resource.qrc
@@ -53,3 +49,6 @@ RESOURCES += \
 target.path = $$PREFIX/bin/
 
 INSTALLS += target
+
+unix: CONFIG += link_pkgconfig
+unix: PKGCONFIG += udisks2
