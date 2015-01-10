@@ -41,7 +41,7 @@ FORMS += hddtest.ui \
     testwidget.ui \
     about.ui
 QT += xml
-#QT += dbus
+QT += dbus
 
 RESOURCES += \
     resource.qrc
@@ -50,5 +50,4 @@ target.path = $$PREFIX/bin/
 
 INSTALLS += target
 
-unix: CONFIG += link_pkgconfig
-unix: PKGCONFIG += udisks2
+QMAKE_CXXFLAGS += -std=c++1y
