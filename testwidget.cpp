@@ -26,8 +26,7 @@
 #include "testthread.h"
 
 TestWidget::TestWidget(QWidget *parent) :
-	QWidget(parent), ui(new Ui::TestWidget)
-{
+	QWidget(parent), ui(new Ui::TestWidget) {
     ui->setupUi(this);
 
 	device = NULL;
@@ -50,8 +49,7 @@ TestWidget::TestWidget(QWidget *parent) :
 	ui->graph->setScene(scene);
 }
 
-TestWidget::~TestWidget()
-{
+TestWidget::~TestWidget() {
 	for(int i = 0; i < markers.size(); ++i)
 		delete markers[i];
 
@@ -62,32 +60,28 @@ TestWidget::~TestWidget()
 	delete test_thread;
 }
 
-void TestWidget::SetDevice(Device *device)
-{
+void TestWidget::SetDevice(Device *device) {
 	this->device = device;
 }
 
-void TestWidget::refresh_timer_timeout()
-{
+void TestWidget::refresh_timer_timeout() {
 	int progress = GetProgress();
 	ui->progress->setValue(progress);
 	UpdateScene();
 }
 
-void TestWidget::on_startstop_clicked()
-{
-	if(testState == STOPPED)
+void TestWidget::on_startstop_clicked() {
+	if(testState == STOPPED) {
 		StartTest();
-	else if(testState == STARTED)
+	} else if(testState == STARTED) {
 		StopTest();
-	else
+	} else {
 		std::cerr << "Start/stop test clicked but should be disabled" << std::endl;
+	}
 }
 
-void TestWidget::StartTest()
-{
-	if(!device)
-	{
+void TestWidget::StartTest() {
+	if(!device) {
 		std::cerr << "WARNING: Start test without valid device pointer - ignoring" << std::endl;
 		return;
 	}
@@ -102,15 +96,13 @@ void TestWidget::StartTest()
 	test_thread->start();
 }
 
-void TestWidget::StopTest()
-{
+void TestWidget::StopTest() {
 	testState = STOPPING;
 	ui->startstop->setText("Stopping");
 	ui->startstop->setEnabled(false);
 }
 
-void TestWidget::test_started()
-{
+void TestWidget::test_started() {
 	// start ui refresh
 	refresh_timer.start(100);
 
@@ -119,8 +111,7 @@ void TestWidget::test_started()
 	ui->startstop->setEnabled(true);
 }
 
-void TestWidget::test_stopped()
-{
+void TestWidget::test_stopped() {
 	// stop scene refresh but make sure it is up-to-date
 	refresh_timer_timeout();
 	refresh_timer.stop();
@@ -130,13 +121,11 @@ void TestWidget::test_stopped()
 	ui->startstop->setEnabled(true);
 }
 
-void TestWidget::SetStartEnabled(bool enabled)
-{
+void TestWidget::SetStartEnabled(bool enabled) {
 	ui->startstop->setEnabled(enabled);
 }
 
-void TestWidget::on_info_clicked()
-{
+void TestWidget::on_info_clicked() {
 	// Show test description
 	QMessageBox box;
 	box.setText(testName);
@@ -144,12 +133,10 @@ void TestWidget::on_info_clicked()
 	box.exec();
 }
 
-void TestWidget::on_image_clicked()
-{
+void TestWidget::on_image_clicked() {
 	// save test result as image
 	QString filename = QFileDialog::getSaveFileName(this, tr("Save result image"), "", tr("Images (*.png)"));
-	if(filename.length() > 0)
-	{
+	if(filename.length() > 0) {
 		QImage image(scene->width(), scene->height(), QImage::Format_RGB32);
 		image.fill(QColor(Qt::white).rgb());
 		QPainter painter(&image);
@@ -158,13 +145,11 @@ void TestWidget::on_image_clicked()
 	}
 }
 
-void TestWidget::Rescale(bool force)
-{
+void TestWidget::Rescale(bool force) {
 	// get absolute min and max
 	qreal max = 0.0f;
 	qreal min = 0.0f;
-	for(int i = 0; i < markers.size(); ++i)
-	{
+	for(int i = 0; i < markers.size(); ++i) {
 		if(markers[i]->max > max)
 			max = markers[i]->max;
 		if(markers[i]->min < min)
@@ -172,23 +157,23 @@ void TestWidget::Rescale(bool force)
 	}
 
 	// calculate Y axis scale
-	if((max * Yscale > graph.height() * 0.9) || (max * Yscale < graph.height() / 2) || force)
-	{
+	if((max * Yscale > graph.height() * 0.9) || (max * Yscale < graph.height() / 2) || force) {
 		// calculate new Yscale to fit data in view
-		if(max != min)
+		if(max != min) {
 			Yscale = (qreal)graph.height() / (max * 1.5);
+		}
 
 		// reposition markers according new Yscale
-		for(int i = 0; i < markers.size(); ++i)
+		for(int i = 0; i < markers.size(); ++i) {
 			markers[i]->Reposition();
+		}
 	}
 
 	// redraw scene
 	scene->update();
 }
 
-void TestWidget::resizeEvent(QResizeEvent*)
-{
+void TestWidget::resizeEvent(QResizeEvent*) {
 	// resize scene to new window dimensions
 	QRect rect = ui->graph->rect();
 	scene->setSceneRect(rect);
@@ -209,68 +194,53 @@ void TestWidget::resizeEvent(QResizeEvent*)
 ///////////////////////////////////////////////////////////////////////////////
 
 TestWidget::Marker::Marker(TestWidget *test):
-	max(0.0f), min(0.0f)
-{
+	max(0.0f), min(0.0f) {
 	this->test = test;
 }
 
-TestWidget::Marker::~Marker()
-{
+TestWidget::Marker::~Marker() {}
 
-}
-
-TestWidget::Line* TestWidget::addLine(QString unit, QString name, QColor color)
-{
+TestWidget::Line* TestWidget::addLine(QString unit, QString name, QColor color) {
 	Line * line = new Line(this, unit, name, color);
 	markers.push_back(line);
 
 	return line;
 }
 
-TestWidget::Ticks* TestWidget::addTicks(QColor color)
-{
+TestWidget::Ticks* TestWidget::addTicks(QColor color) {
 	Ticks *ticks = new Ticks(this, color);
 	markers.push_back(ticks);
 
 	return ticks;
 }
 
-TestWidget::Bar* TestWidget::addBar(QString unit, QString name, QColor color, qreal position, qreal width)
-{
+TestWidget::Bar* TestWidget::addBar(QString unit, QString name, QColor color, qreal position, qreal width) {
 	Bar *bar = new Bar(this, unit, name, color, position, width);
 	markers.push_back(bar);
 
 	return bar;
 }
 
-TestWidget::LineGraph* TestWidget::addLineGraph(QString unit, QColor color)
-{
+TestWidget::LineGraph* TestWidget::addLineGraph(QString unit, QColor color) {
 	LineGraph *linegraph = new LineGraph(this, unit, color);
 	markers.push_back(linegraph);
 
 	return linegraph;
 }
 
-TestWidget::Net* TestWidget::addNet(QString unit, QString xAxis, QString yAxis)
-{
+TestWidget::Net* TestWidget::addNet(QString unit, QString xAxis, QString yAxis) {
 	Net *net = new Net(this, unit, xAxis, yAxis);
 	markers.push_back(net);
 
 	return net;
 }
 
-TestWidget::Legend* TestWidget::addLegend()
-{
+TestWidget::Legend* TestWidget::addLegend() {
 	Legend *legend = new Legend(this);
 	markers.push_back(legend);
 
 	return legend;
 }
-
-
-
-
-
 
 ///////////////////////////////////////////////////////////////////////////////
 /////// Marker management functions ///////////////////////////////////////////
@@ -279,28 +249,24 @@ TestWidget::Legend* TestWidget::addLegend()
 TestWidget::Line::Line(TestWidget *test, QString unit, QString name, QColor color):
 	Marker(test), unit(unit), name(name), color(color), line(NULL), text(NULL), value(0) {}
 
-TestWidget::Line::~Line()
-{
+TestWidget::Line::~Line() {
 	delete line;
 	delete text;
 }
 
-void TestWidget::Line::SetValue(qreal value)
-{
+void TestWidget::Line::SetValue(qreal value) {
 	// update min and max for Line
 	max = min = value;
 	this->value = value;
 
 	// add line
-	if(line == NULL)
-	{
+	if(line == NULL) {
 		line = test->scene->addLine(0, 0, 0, 0, QPen(color));
 		line->setZValue(100);
 	}
 
 	// add text
-	if(text == NULL)
-	{
+	if(text == NULL) {
 		text = test->scene->addText("NO DATA");
 		text->setDefaultTextColor(color);
 
@@ -325,35 +291,35 @@ void TestWidget::Line::SetValue(qreal value)
 			test->graph.left() + test->graph.width() - text->boundingRect().width(),
 			test->graph.top() + test->graph.height() - value * test->Yscale - text->boundingRect().height() / 2);
 
-	if(name.length() > 0)
+	if(name.length() > 0) {
 		text->setPlainText(name + ": " + QString::number(value, 'f', 2) + " " + unit);
-	else
+	} else {
 		text->setPlainText(QString::number(value, 'f', 2) + " " + unit);
+	}
 }
 
-void TestWidget::Line::Reposition()
-{
+void TestWidget::Line::Reposition() {
 	SetValue(value);
 }
 
 TestWidget::Ticks::Ticks(TestWidget *test, QColor color):
 	 Marker(test), color(color) {}
 
-TestWidget::Ticks::~Ticks()
-{
-	for(int i = 0; i < ticks.size(); ++i)
+TestWidget::Ticks::~Ticks() {
+	for(int i = 0; i < ticks.size(); ++i) {
 		delete ticks[i].tick;
+	}
 }
 
-void TestWidget::Ticks::AddTick(qreal value, qreal position, bool important)
-{
+void TestWidget::Ticks::AddTick(qreal value, qreal position, bool important) {
 	// update max and min for ticks
-	if(important)
-	{
-		if(value > max)
+	if(important) {
+		if(value > max) {
 			max = value;
-		if(value < min)
+		}
+		if(value < min) {
 			min = value;
+		}
 	}
 
 	// add tick
@@ -371,22 +337,20 @@ void TestWidget::Ticks::AddTick(qreal value, qreal position, bool important)
 	ticks.push_back(tick);	
 }
 
-void TestWidget::Ticks::Reposition()
-{
+void TestWidget::Ticks::Reposition() {
 	// reposition ticks
-	for(int i = 0; i < ticks.size(); ++i)
+	for(int i = 0; i < ticks.size(); ++i) {
 		ticks[i].tick->setRect(
 					test->graph.left() + ticks[i].position *  test->graph.width() * NET_WIDTH,
 					test->graph.top() + test->graph.height() - ticks[i].value * test->Yscale,
 					1,
 					1);
+	}
 }
 
-void TestWidget::Ticks::erase()
-{
+void TestWidget::Ticks::erase() {
 	// erase all ticks
-	for(int i = 0; i < ticks.size(); ++i)
-	{
+	for(int i = 0; i < ticks.size(); ++i) {
 		test->scene->removeItem(ticks[i].tick);
 		delete ticks[i].tick;
 	}
@@ -400,16 +364,14 @@ TestWidget::Bar::Bar(TestWidget *test, QString unit, QString name, QColor color,
 		Marker(test), unit(unit), name(name), color(color), rect(NULL), inner_rect(NULL),
 		value_text(NULL), name_text(NULL), position(position), width(width), value(0), progress(0) {}
 
-TestWidget::Bar::~Bar()
-{
+TestWidget::Bar::~Bar() {
 	delete rect;
 	delete inner_rect;
 	delete value_text;
 	delete name_text;
 }
 
-void TestWidget::Bar::Set(qreal progress, qreal value)
-{
+void TestWidget::Bar::Set(qreal progress, qreal value) {
 	this->value = value;
 	this->progress = progress;
 
@@ -419,27 +381,27 @@ void TestWidget::Bar::Set(qreal progress, qreal value)
 
 	//// Create bar items
 	// bar value
-	if(value_text == NULL)
-	{
+	if(value_text == NULL) {
 		value_text = test->scene->addText("NO DATA");
 		value_text->setDefaultTextColor(color);
 		value_text->setZValue(100);		
 	}
 
 	// bar name
-	if(name_text == NULL)
-	{
+	if(name_text == NULL) {
 		name_text = test->scene->addText(name);
 		name_text->setDefaultTextColor(color);
 	}
 
 	// outer rect (bar frame)
-	if(rect == NULL)
+	if(rect == NULL) {
 		rect = test->scene->addRect(0, 0, 0, 0, QPen(color));
+	}
 
 	// inner rect (progress)
-	if(inner_rect == NULL)
+	if(inner_rect == NULL) {
 		inner_rect = test->scene->addRect(0, 0, 0, 0, QPen(Qt::NoPen), QBrush(color.darker(70)));
+	}
 
 	// set items positions
 	int W = test->graph.width() * width;
@@ -464,43 +426,40 @@ void TestWidget::Bar::Set(qreal progress, qreal value)
 			test->graph.top() + test->graph.height() - name_text->boundingRect().height());
 }
 
-void TestWidget::Bar::Reposition()
-{
+void TestWidget::Bar::Reposition() {
 	Set(progress, value);
 }
 
 TestWidget::LineGraph::LineGraph(TestWidget *test, QString unit, QColor color):
-	 Marker(test), unit(unit), color(color)
-{
+	 Marker(test), unit(unit), color(color) {
 	// set to something else than 0 should be changed by test before first use
 	size = 10;
 }
 
-TestWidget::LineGraph::~LineGraph()
-{
-	for(int i = 0; i < lines.size(); ++i)
+TestWidget::LineGraph::~LineGraph() {
+	for(int i = 0; i < lines.size(); ++i) {
 		delete lines[i];
+	}
 }
 
-void TestWidget::LineGraph::SetSize(int count)
-{
+void TestWidget::LineGraph::SetSize(int count) {
 	size = count;
 	Reposition();
 }
 
-void TestWidget::LineGraph::AddValue(qreal value)
-{
+void TestWidget::LineGraph::AddValue(qreal value) {
 	// update max and min for linegraph
-	if(value > max)
+	if(value > max) {
 		max = value;
-	if(value < min)
+	}
+	if(value < min) {
 		min = value;
+	}
 
 	// add new line
 	values.push_back(value);
 
-	if(values.size() > 1)
-	{
+	if(values.size() > 1) {
 		QPen pen(color);
 		pen.setWidth(2);
 		pen.setCapStyle(Qt::RoundCap);
@@ -510,10 +469,8 @@ void TestWidget::LineGraph::AddValue(qreal value)
 	}
 }
 
-void TestWidget::LineGraph::erase()
-{
-	for(int i = 0; i < lines.size(); ++i)
-	{
+void TestWidget::LineGraph::erase() {
+	for(int i = 0; i < lines.size(); ++i) {
 		test->scene->removeItem(lines[i]);
 		delete lines[i];
 	}
@@ -527,22 +484,19 @@ void TestWidget::LineGraph::erase()
 	min = max = 0.0f;
 }
 
-void TestWidget::LineGraph::Reposition()
-{
+void TestWidget::LineGraph::Reposition() {
 	// reposition lines
-	for(int i = 0; i < lines.size(); ++i)
-	{
+	for(int i = 0; i < lines.size(); ++i) {
 		lines[i]->setLine(
 				test->graph.left() + (qreal)i  / (size - 1) * test->graph.width() * NET_WIDTH,
 				test->graph.top() + test->graph.height() - values[i] * test->Yscale,
 				test->graph.left() + (qreal)(i + 1)  / (size - 1) * test->graph.width() * NET_WIDTH,
 				test->graph.top() + test->graph.height() - values[i + 1] * test->Yscale);
-	}	
+	}
 }
 
 TestWidget::Net::Net(TestWidget *test, QString unit, QString xAxis, QString yAxis):
-	Marker(test), unit(unit), xAxis(xAxis), yAxis(yAxis)
-{
+	Marker(test), unit(unit), xAxis(xAxis), yAxis(yAxis) {
 	// left vertical line of net
 	left_line = test->scene->addLine(
 				test->graph.left(),
@@ -554,27 +508,28 @@ TestWidget::Net::Net(TestWidget *test, QString unit, QString xAxis, QString yAxi
 	// axis descriptions
 	xAxisText = test->scene->addText(xAxis);
 	yAxisText = test->scene->addText(yAxis);
-	yAxisText->rotate(-90);
+	yAxisText->setRotation(-90);
 }
 
-TestWidget::Net::~Net()
-{
-	for(int i = 0; i < net.size(); ++i)
+TestWidget::Net::~Net() {
+	for(int i = 0; i < net.size(); ++i) {
 		delete net[i];
+	}
 
-	for(int i = 0; i < net_markups.size(); ++i)
+	for(int i = 0; i < net_markups.size(); ++i) {
 		delete net_markups[i];
+	}
 
 	delete left_line;
 	delete xAxisText;
 	delete yAxisText;
 }
 
-void TestWidget::Net::Reposition()
-{
+void TestWidget::Net::Reposition() {
 	// If Yscale is not set do not do anything
-	if((test->Yscale == 0) || (test->Yscale == INFINITY))
+	if((test->Yscale == 0) || (test->Yscale == INFINITY)) {
 		return;
+	}
 
 	// reposition left line
 	left_line->setLine(
@@ -603,32 +558,28 @@ void TestWidget::Net::Reposition()
 	int count = test->graph.height() / (test->Yscale * dist);
 
 	// construct lines
-	while(net.size() != count)
-	{
-		if(net.size() > count) // lines are too many - remove one
-		{
+	while(net.size() != count) {
+		if(net.size() > count) {
+			// lines are too many - remove one
 			test->scene->removeItem(net.back());
 			delete net.back();
 			net.pop_back();
-		}
-		else	// missing some lines - add one
-		{
+		} else {
+			// missing some lines - add one
 			net.push_back(test->scene->addLine(0,0,0,0,QPen(QColor(200,200,200))));
 			net.back()->setZValue(-100);
 		}
 	}
 
 	// construct markups
-	while(net_markups.size() != (count / 10) + 1)
-	{
-		if(net_markups.size() > (count / 10) + 1) // markups are too many - remove one
-		{
+	while(net_markups.size() != (count / 10) + 1) {
+		if(net_markups.size() > (count / 10) + 1) {
+			// markups are too many - remove one
 			test->scene->removeItem(net_markups.back());
 			delete net_markups.back();
 			net_markups.pop_back();
-		}
-		else	// missing some markups - add one
-		{
+		} else {
+			// missing some markups - add one
 			net_markups.push_back(test->scene->addText(""));
 			net_markups.back()->setZValue(-100);
 			net_markups.back()->setDefaultTextColor(QColor(230,230,230));
@@ -636,19 +587,17 @@ void TestWidget::Net::Reposition()
 	}
 
 	// position lines and markups
-	for(int i = 0; i < net.size(); ++i)
-	{
-		if(i % 10)	// default line
-		{
+	for(int i = 0; i < net.size(); ++i) {
+		if(i % 10) {
+			// default line
 			net[i]->setLine(
 					test->graph.left(),
 					test->graph.top() + test->graph.height() - test->Yscale * dist * i,
 					test->graph.left() + test->graph.width() * NET_WIDTH,
 					test->graph.top() + test->graph.height() - test->Yscale * dist * i);
 			net[i]->setPen(QPen(QColor(230,230,230)));
-		}
-		else		// extra line with value
-		{
+		} else {
+			// extra line with value
 			// position line
 			net[i]->setLine(
 					test->graph.left(),
@@ -658,8 +607,7 @@ void TestWidget::Net::Reposition()
 			net[i]->setPen(QPen(QColor(200,200,200)));
 
 			// position and set text
-			if(i / 10 < net_markups.size())
-			{
+			if(i / 10 < net_markups.size()) {
 				net_markups[i / 10]->setPlainText(QString::number(i * dist) + " " + unit);
 				net_markups[i / 10]->setPos(
 						test->graph.left() + test->graph.width() * NET_HIGHLIGHT_WIDTH,
@@ -673,31 +621,26 @@ void TestWidget::Net::Reposition()
 TestWidget::Legend::Legend(TestWidget *test):
 	Marker(test) {}
 
-TestWidget::Legend::~Legend()
-{
-	for(int i = 0; i < items.size(); ++i)
-	{
+TestWidget::Legend::~Legend() {
+	for(int i = 0; i < items.size(); ++i) {
 		delete items[i].rect;
 		delete items[i].text;
 	}
 }
 
-void TestWidget::Legend::AddItem(QString name, QColor color)
-{
+void TestWidget::Legend::AddItem(QString name, QColor color) {
 	Item item;
 	item.rect = test->scene->addRect(0, 0, 0, 0, color, color);
 	item.text = test->scene->addText(name);
 	items.push_back(item);
 }
 
-void TestWidget::Legend::Reposition()
-{
+void TestWidget::Legend::Reposition() {
 	// first free position
 	int pos = test->graph.right();
 
 	// position items
-	for(int i = 0; i < items.size(); ++i)
-	{
+	for(int i = 0; i < items.size(); ++i) {
 		int width = items[i].text->boundingRect().height();
 		items[i].text->setPos(pos -= items[i].text->boundingRect().width(), 0);
 		items[i].rect->setRect(
@@ -708,4 +651,3 @@ void TestWidget::Legend::Reposition()
 		pos -= width;
 	}
 }
-

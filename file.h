@@ -36,8 +36,7 @@ using namespace HDDTest;
 /// Provides file red write benchmaring functions
 /** File class handles file manipulation during file writting reading benchmark.
 @see Device class **/
-class File : public QObject
-{
+class File : public QObject {
     Q_OBJECT
 public:
 	/** File constructor prepares file for reading and wtitting into/from it.
@@ -75,9 +74,6 @@ private:
 
 signals:
 	void operationError();	/// Emited when error occures
-
-public slots:
-
 };
 
 #endif // FILE_H

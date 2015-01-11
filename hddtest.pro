@@ -1,6 +1,7 @@
 # -------------------------------------------------
 # Project created by QtCreator 2010-04-12T15:07:24
 # -------------------------------------------------
+
 TARGET = hddtest
 TEMPLATE = app
 SOURCES += main.cpp \
@@ -41,13 +42,9 @@ FORMS += hddtest.ui \
     testwidget.ui \
     about.ui
 QT += xml
-QT += dbus
-
+QT += widgets
 RESOURCES += \
     resource.qrc
-
 target.path = $$PREFIX/bin/
-
 INSTALLS += target
-
 QMAKE_CXXFLAGS += -std=c++1y

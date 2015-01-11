@@ -28,8 +28,7 @@
 /// Stores FileRW benchmark resutls
 /** The FileRWResults class encapsules FileRW benchmark results.
   @see FileRW class **/
-class FileRWResults
-{
+class FileRWResults {
 public:
 	FileRWResults();	/// The constructor
 
@@ -50,8 +49,7 @@ public:
 file to safe temp an then reads it again. Both operations are
 visualised by line graph showing the speed.
 @see FileRWResults **/
-class FileRW : public TestWidget
-{
+class FileRW : public TestWidget {
 public:
 	FileRW(QWidget *parent = 0);	/// The constructor
 	~FileRW();	/// The destructor

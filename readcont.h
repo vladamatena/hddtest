@@ -32,8 +32,7 @@
 /// Stores Read Continuous benchmark results
 /** ReadContResults class encapsulates read Continuous benchmark results
   @see ReadCont class **/
-class ReadContResults
-{
+class ReadContResults {
 public:
 	ReadContResults();
 
@@ -52,8 +51,7 @@ public:
 Blocks are read continuosly (one by one) for every size from the beginning of the device.
 Bar graph for wvery block size are shown.
 @see ReadContResults **/
-class ReadCont : public TestWidget
-{
+class ReadCont : public TestWidget {
 public:
 	ReadCont(QWidget *parent = 0);	/// The constructor
 	~ReadCont(); /// The destructor

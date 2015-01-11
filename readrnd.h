@@ -28,8 +28,7 @@
 /// Stores Read Random benchmark results
 /** ReadRndResults class for keepeg subtest results and progress
 @see ReadRnd class **/
-class ReadRndResult
-{
+class ReadRndResult {
 public:
 	ReadRndResult(hddsize block_size);	/// The constructor
 
@@ -45,8 +44,7 @@ public:
 /** Read random test. The test reads blocks of differsent sizes from random positions on the device.
 Bar graphs for every block size aredrawn to the graph.
 @see ReadRndResults **/
-class ReadRnd : public TestWidget
-{
+class ReadRnd : public TestWidget {
 public:
 	ReadRnd(QWidget *parent = 0); ///ReadRnd class constructor
 

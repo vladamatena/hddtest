@@ -21,8 +21,7 @@
 #include "filerw.h"
 
 FileRW::FileRW(QWidget *parent) :
-	TestWidget(parent)
-{
+	TestWidget(parent) {
 	// Add two line graph components (reading + writting)
 	__read_graph = addLineGraph("MB/s", QColor(255, 192, 192));
 	__write_graph = addLineGraph("MB/s", QColor(255, 0, 0));
@@ -51,12 +50,9 @@ FileRW::FileRW(QWidget *parent) :
 			" This test is not aviable(grayed start button) when device is not mounted.";
 }
 
-FileRW::~FileRW()
-{
-}
+FileRW::~FileRW() {}
 
-void FileRW::TestLoop()
-{
+void FileRW::TestLoop() {
 	// erase old results
 	results_write.erase();
 	results_read.erase();
@@ -74,8 +70,7 @@ void FileRW::TestLoop()
 
 	// write blocks until enough data is written
 	file.SetPos(0);
-	for(results_write.blocks_done = 1; results_write.blocks_done <= results_write.blocks; ++results_write.blocks_done)
-	{
+	for(results_write.blocks_done = 1; results_write.blocks_done <= results_write.blocks; ++results_write.blocks_done) {
 		hddtime time = file.Write(FILERW_BLOCK);
 		results_write.AddResult((qreal)FILERW_BLOCK / time);
 		if(testState == STOPPING)
@@ -89,8 +84,7 @@ void FileRW::TestLoop()
 
 	// read block until enough data is read
 	file.SetPos(0);
-	for(results_read.blocks_done = 1; results_read.blocks_done <= results_read.blocks; ++results_read.blocks_done)
-	{
+	for(results_read.blocks_done = 1; results_read.blocks_done <= results_read.blocks; ++results_read.blocks_done) {
 		hddtime time = file.Read(FILERW_BLOCK);
 		results_read.AddResult((qreal)FILERW_BLOCK / time);
 		if(testState == STOPPING)
@@ -103,8 +97,7 @@ void FileRW::TestLoop()
 	device->ClearSafeTemp();
 }
 
-void FileRW::InitScene()
-{
+void FileRW::InitScene() {
 	// reset first value
 	__first = true;
 
@@ -115,8 +108,7 @@ void FileRW::InitScene()
 	results_write.erase();
 }
 
-void FileRW::UpdateScene()
-{
+void FileRW::UpdateScene() {
 	// set graph size
 	__write_graph->SetSize(results_write.blocks);
 	__read_graph->SetSize(results_read.blocks);
@@ -124,22 +116,19 @@ void FileRW::UpdateScene()
 	__read_reference_graph->SetSize(reference_read.blocks);
 
 	// add new values to write graph
-	while(!results_write.new_results.empty())
-	{
+	while(!results_write.new_results.empty()) {
 		qreal data = results_write.new_results.dequeue();
 		__write_graph->AddValue(data);
 	}
 
 	// add new values to read graph
-	while(!results_read.new_results.empty())
-	{
+	while(!results_read.new_results.empty()) {
 		qreal data = results_read.new_results.dequeue();
 		__read_graph->AddValue(data);
 	}
 
 	// add new values to reference write graph
-	while(!reference_write.new_results.empty())
-	{
+	while(!reference_write.new_results.empty()) {
 		qreal data = reference_write.new_results.dequeue();
 		__write_reference_graph->AddValue(data);
 	}
@@ -155,18 +144,17 @@ void FileRW::UpdateScene()
 	Rescale();
 }
 
-int FileRW::GetProgress()
-{
+int FileRW::GetProgress() {
 	int done = results_read.blocks_done + results_write.blocks_done;
 	int blocks = results_write.blocks + results_read.blocks;
-	if(blocks)
+	if(blocks) {
 		return (100 * done) / blocks;
-	else
+	} else {
 		return 0;
+	}
 }
 
-FileRWResults::FileRWResults()
-{
+FileRWResults::FileRWResults() {
 	avg = 0;
 
 	// zero block count
@@ -174,20 +162,21 @@ FileRWResults::FileRWResults()
 	blocks_done = 0;
 }
 
-void FileRWResults::AddResult(qreal result)
-{
-	results.push_back(result);		// add to results
-	new_results.enqueue(result);	// add to results to draw
+void FileRWResults::AddResult(qreal result) {
+	// add to results
+	results.push_back(result);
+	// add to results to draw
+	new_results.enqueue(result);
 
 	// calc sum
 	qreal sum = 0;
-	for(int i = 0; i < results.size(); ++i)
+	for(int i = 0; i < results.size(); ++i) {
 		sum += results[i];
+	}
 	avg = sum / results.size();
 }
 
-void FileRWResults::erase()
-{
+void FileRWResults::erase() {
 	// celar results
 	results.clear();
 	new_results.clear();
@@ -201,8 +190,7 @@ void FileRWResults::erase()
 }
 
 
-QDomElement FileRW::WriteResults(QDomDocument &doc)
-{
+QDomElement FileRW::WriteResults(QDomDocument &doc) {
 	// create main seek element
 	QDomElement master = doc.createElement("File_Read_Write");
 	master.setAttribute("valid", (GetProgress() == 100)?"yes":"no");
@@ -213,8 +201,7 @@ QDomElement FileRW::WriteResults(QDomDocument &doc)
 	master.appendChild(write);
 
 	// add values to write element
-	if(GetProgress() == 100) for(int i = 0; i < results_write.results.size(); ++i)
-	{
+	if(GetProgress() == 100) for(int i = 0; i < results_write.results.size(); ++i) {
 		QDomElement value = doc.createElement("Write");
 		value.setAttribute("speed", results_write.results[i]);
 		write.appendChild(value);
@@ -225,8 +212,7 @@ QDomElement FileRW::WriteResults(QDomDocument &doc)
 	master.appendChild(read);
 
 	// add values to read element
-	if(GetProgress() == 100) for(int i = 0; i < results_read.results.size(); ++i)
-	{
+	if(GetProgress() == 100) for(int i = 0; i < results_read.results.size(); ++i) {
 		QDomElement value = doc.createElement("Read");
 		value.setAttribute("speed", results_read.results[i]);
 		read.appendChild(value);
@@ -235,8 +221,7 @@ QDomElement FileRW::WriteResults(QDomDocument &doc)
 	return master;
 }
 
-void FileRW::RestoreResults(QDomElement &results, DataSet dataset)
-{
+void FileRW::RestoreResults(QDomElement &results, DataSet dataset) {
 	FileRWResults *res_write = (dataset == REFERENCE)?&reference_write:&results_write;
 	FileRWResults *res_read = (dataset == REFERENCE)?&reference_read:&results_read;
 
@@ -279,19 +264,15 @@ void FileRW::RestoreResults(QDomElement &results, DataSet dataset)
 	UpdateScene();
 }
 
-void FileRW::EraseResults(DataSet dataset)
-{
+void FileRW::EraseResults(DataSet dataset) {
 	// erase data
-	if(dataset == RESULTS)
-	{
+	if(dataset == RESULTS) {
 		results_read.erase();
 		results_write.erase();
 
 		__write_graph->erase();
 		__read_graph->erase();
-	}
-	else
-	{
+	} else {
 		reference_read.erase();
 		reference_write.erase();
 

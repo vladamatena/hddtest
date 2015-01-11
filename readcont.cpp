@@ -21,8 +21,7 @@
 #include "readcont.h"
 
 ReadCont::ReadCont(QWidget *parent):
-	TestWidget(parent)
-{
+	TestWidget(parent) {
 	// add line components to graph
 	averageLine = addLine("MB/s", "", QColor(255, 0, 0));
 	refAverageLine = addLine("MB/s", "", QColor(0, 0, 255));
@@ -40,12 +39,9 @@ ReadCont::ReadCont(QWidget *parent):
 			" Horizontal axis is device position and vertical is read speed.";
  }
 
-ReadCont::~ReadCont()
-{
-}
+ReadCont::~ReadCont() {}
 
-void ReadCont::TestLoop()
-{
+void ReadCont::TestLoop() {
 	// erase old results
 	results.erase();
 
@@ -58,8 +54,7 @@ void ReadCont::TestLoop()
 	results.blocks = bytes_to_read / READ_CONT_BLOCK;
 
 	// read block until enough data is read
-	for(results.blocks_done = 1; results.blocks_done <= results.blocks; ++results.blocks_done)
-	{
+	for(results.blocks_done = 1; results.blocks_done <= results.blocks; ++results.blocks_done) {
 		hddtime time = device->Read(READ_CONT_BLOCK);
 		results.AddResult((qreal)READ_CONT_BLOCK / time);
 
@@ -68,28 +63,24 @@ void ReadCont::TestLoop()
 	}
 }
 
-void ReadCont::InitScene()
-{
+void ReadCont::InitScene() {
 	graph->erase();
 	results.erase();
 }
 
-void ReadCont::UpdateScene()
-{
+void ReadCont::UpdateScene() {
 	// set line graph line count
 	graph->SetSize(results.blocks);
 	refGraph->SetSize(reference.blocks);
 
 	// add all new values to line graph
-	while(!results.new_results.empty())
-	{
+	while(!results.new_results.empty()) {
 		qreal data = results.new_results.dequeue();
 		graph->AddValue(data);
 	}
 
 	// add all new values to reference line graph
-	while(!reference.new_results.empty())
-	{
+	while(!reference.new_results.empty()) {
 		qreal data = reference.new_results.dequeue();
 		refGraph->AddValue(data);
 	}
@@ -103,21 +94,18 @@ void ReadCont::UpdateScene()
 	Rescale();
 }
 
-int ReadCont::GetProgress()
-{
+int ReadCont::GetProgress() {
 	if(results.blocks == 0)
 		return 0;
 
 	return 100 * results.blocks_done / results.blocks;
 }
 
-ReadContResults::ReadContResults()
-{
+ReadContResults::ReadContResults() {
 	erase();
 }
 
-void ReadContResults::AddResult(qreal result)
-{
+void ReadContResults::AddResult(qreal result) {
 	results.push_back(result);		// add result
 	new_results.enqueue(result);	// add results to new results (not yet drawn)
 
@@ -128,24 +116,21 @@ void ReadContResults::AddResult(qreal result)
 	avg = sum / results.size();
 }
 
-void ReadContResults::erase()
-{
+void ReadContResults::erase() {
 	this->blocks = 0;
 	this->blocks_done = 0;
 	results.clear();
 	avg = 0;
 }
 
-QDomElement ReadCont::WriteResults(QDomDocument &doc)
-{
+QDomElement ReadCont::WriteResults(QDomDocument &doc) {
 	// create main seek element
 	QDomElement master = doc.createElement("Read_Continuous");
 	master.setAttribute("valid", (GetProgress() == 100)?"yes":"no");
 	doc.appendChild(master);
 
 	// write subresults
-	for(int i = 0; i < results.results.size(); ++i)
-	{
+	for(int i = 0; i < results.results.size(); ++i) {
 		// add speed element
 		QDomElement speed = doc.createElement("Speed");
 		speed.setAttribute("value", results.results[i]);
@@ -155,14 +140,14 @@ QDomElement ReadCont::WriteResults(QDomDocument &doc)
 	return master;
 }
 
-void ReadCont::RestoreResults(QDomElement &root, DataSet dataset)
-{
+void ReadCont::RestoreResults(QDomElement &root, DataSet dataset) {
 	ReadContResults &results = (dataset == REFERENCE)?this->reference:this->results;
 
 	// Locate main readcont element
 	QDomElement main = root.firstChildElement("Read_Continuous");
-	if(!main.attribute("valid", "no").compare("no"))
+	if(!main.attribute("valid", "no").compare("no")) {
 		return;
+	}
 
 	// init scene and remove results
 	(dataset == REFERENCE)?refGraph->erase():graph->erase();
@@ -173,8 +158,9 @@ void ReadCont::RestoreResults(QDomElement &root, DataSet dataset)
 	results.blocks = res.size();
 
 	// read result data
-	for(int i = 0; i < res.size(); ++i)
+	for(int i = 0; i < res.size(); ++i) {
 		results.AddResult(res.at(i).toElement().attribute("value", "0").toDouble());
+	}
 
 	// set progress
 	results.blocks_done = results.blocks = res.size();
@@ -183,16 +169,12 @@ void ReadCont::RestoreResults(QDomElement &root, DataSet dataset)
 	UpdateScene();
 }
 
-void ReadCont::EraseResults(DataSet dataset)
-{
+void ReadCont::EraseResults(DataSet dataset) {
 	// erase data
-	if(dataset == RESULTS)
-	{
+	if(dataset == RESULTS) {
 		results.erase();
 		graph->erase();
-	}
-	else
-	{
+	} else {
 		reference.erase();
 		refGraph->erase();
 	}

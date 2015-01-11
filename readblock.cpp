@@ -21,12 +21,10 @@
 #include "readblock.h"
 
 ReadBlock::ReadBlock(QWidget *parent):
-	TestWidget(parent)
-{
+	TestWidget(parent) {
 	// add subtests to subtest list
 	int base = READ_BLOCK_BASE_BLOCK_SIZE;
-	for(int i = 0; i < READ_BLOCK_BLOCK_SIZE_COUNT; ++i)
-	{
+	for(int i = 0; i < READ_BLOCK_BLOCK_SIZE_COUNT; ++i) {
 		results.push_back(ReadBlockResult(base));
 		reference.push_back(ReadBlockResult(base));
 		base /= READ_BLOCK_BLOCK_SIZE_STEP;;
@@ -37,16 +35,14 @@ ReadBlock::ReadBlock(QWidget *parent):
 	testDescription = "Read Block test reads " + Def::FormatSize(READ_BLOCK_SIZE) +
 			" with different block sizes. Blocks of specified size are place next to each other." +
 			" No seekeing is required to access next block. Block sizes are: ";
-	for(int i = 0; i < results.size(); ++i)
-	{
+	for(int i = 0; i < results.size(); ++i) {
 		if(i > 0)
 			testDescription += ", ";
 		testDescription += Def::FormatSize(results[i].__block_size);
 	}
 
 	// add bars to scene
-	for(int i = 0; i < results.size(); ++i)
-	{
+	for(int i = 0; i < results.size(); ++i) {
 		Bar *bar = this->addBar(
 				"MB/s",
 				Def::FormatSize(results[i].__block_size),
@@ -57,8 +53,7 @@ ReadBlock::ReadBlock(QWidget *parent):
 	}
 
 	// add reference bars to scene
-	for(int i = 0; i < reference.size(); ++i)
-	{
+	for(int i = 0; i < reference.size(); ++i) {
 		Bar *bar = this->addBar(
 				"MB/s",
 				Def::FormatSize(reference[i].__block_size),
@@ -69,43 +64,38 @@ ReadBlock::ReadBlock(QWidget *parent):
 	}
 }
 
-void ReadBlock::TestLoop()
-{
+void ReadBlock::TestLoop() {
 	// erase prevoius results
-	for(int i = 0;i < results.size(); ++i)
+	for(int i = 0;i < results.size(); ++i){
 		results[i].erase();
+	}
 
 	// run subtests
-	for(int i = 0; i < results.size(); ++i)
-	{
+	for(int i = 0; i < results.size(); ++i) {
 		ReadBlockResult *result = &results[i];
 
 		// run subtest
-		while(result->__bytes_read < READ_BLOCK_SIZE)
-		{
+		while(result->__bytes_read < READ_BLOCK_SIZE) {
 			result->__time_elapsed += device->Read(result->__block_size);
 			result->__bytes_read += result->__block_size;
 
-			if(testState == STOPPING)
+			if(testState == STOPPING) {
 				return;
+			}
 		}
 
-		if(testState == STOPPING)
+		if(testState == STOPPING) {
 			return;
+		}
 	}
 }
 
 
-void ReadBlock::InitScene()
-{
+void ReadBlock::InitScene() {}
 
-}
-
-void ReadBlock::UpdateScene()
-{
+void ReadBlock::UpdateScene() {
 	// update subtest results
-	for(int i = 0; i < results.size(); ++i)
-	{
+	for(int i = 0; i < results.size(); ++i) {
 		//// update subresult
 		const ReadBlockResult &result = results.at(i);
 		const ReadBlockResult &refer = reference.at(i);
@@ -121,8 +111,7 @@ void ReadBlock::UpdateScene()
 	}
 }
 
-int ReadBlock::GetProgress()
-{
+int ReadBlock::GetProgress() {
 	hddsize read = 0;
 
 	for(int i = 0; i < results.size(); ++i)
@@ -131,28 +120,24 @@ int ReadBlock::GetProgress()
 }
 
 ReadBlockResult::ReadBlockResult(hddsize block_size):
-	__bytes_read(0), __time_elapsed(0), __block_size(block_size)
-{
+	__bytes_read(0), __time_elapsed(0), __block_size(block_size) {
 	erase();
 }
 
-void ReadBlockResult::erase()
-{
+void ReadBlockResult::erase() {
 	// reset bytes read and time elapsed
 	this->__bytes_read = 0;
 	this->__time_elapsed = 0;
 }
 
-QDomElement ReadBlock::WriteResults(QDomDocument &doc)
-{
+QDomElement ReadBlock::WriteResults(QDomDocument &doc) {
 	// create main seek element
 	QDomElement master = doc.createElement("Read_Block");
 	master.setAttribute("valid", (GetProgress() == 100)?"yes":"no");
 	doc.appendChild(master);
 
 	// write subresults
-	for(int i = 0; i < results.size(); ++i)
-	{
+	for(int i = 0; i < results.size(); ++i) {
 		// add build element
 		QDomElement build = doc.createElement("Result");
 		build.setAttribute("size", results[i].__block_size);
@@ -163,25 +148,25 @@ QDomElement ReadBlock::WriteResults(QDomDocument &doc)
 	return master;
 }
 
-void ReadBlock::RestoreResults(QDomElement &results, DataSet dataset)
-{
+void ReadBlock::RestoreResults(QDomElement &results, DataSet dataset) {
 	QList<ReadBlockResult> &res = (dataset == REFERENCE)?this->reference:this->results;
 
 	// Locate main readblock element
 	QDomElement seek = results.firstChildElement("Read_Block");
-	if(!seek.attribute("valid", "no").compare("no"))
+	if(!seek.attribute("valid", "no").compare("no")) {
 		return;
+	}
 
 	// remove old results
-	for(int i = 0; i < res.size(); ++i)
+	for(int i = 0; i < res.size(); ++i) {
 		res[i].erase();
+	}
 
 	// get list of readblock subresults
 	QDomNodeList xmlresults = seek.elementsByTagName("Result");
 
 	// read subresults
-	for(int i = 0; i < this->results.size(); ++i)
-	{
+	for(int i = 0; i < this->results.size(); ++i) {
 		res[i].__block_size = xmlresults.at(i).toElement().attribute("size").toLongLong();
 		res[i].__time_elapsed = xmlresults.at(i).toElement().attribute("time").toLongLong();
 		res[i].__bytes_read = READ_BLOCK_SIZE;
@@ -191,15 +176,17 @@ void ReadBlock::RestoreResults(QDomElement &results, DataSet dataset)
 	UpdateScene();
 }
 
-void ReadBlock::EraseResults(DataSet dataset)
-{
+void ReadBlock::EraseResults(DataSet dataset) {
 	// erase data
-	if(dataset == RESULTS)
-		for(int i = 0; i < results.size(); ++i)
+	if(dataset == RESULTS) {
+		for(int i = 0; i < results.size(); ++i) {
 			results[i].erase();
-	else
-		for(int i = 0; i < reference.size(); ++i)
+		}
+	} else {
+		for(int i = 0; i < reference.size(); ++i) {
 			reference[i].erase();
+		}
+	}
 
 	// refresh view
 	UpdateScene();

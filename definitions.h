@@ -108,8 +108,7 @@ namespace HDDTest {
 	static const hddtime s	= 1000 * ms;
 
 	/// Contains human readable value formating functions
-	class Def
-	{
+	class Def {
 	public:
 		static QString FormatSize(hddsize size);	/// Size to human readable format convertor
 		static QString FormatSpeed(hddsize size);	/// Speed to human readable format convertor

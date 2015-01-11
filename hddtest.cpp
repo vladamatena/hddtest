@@ -66,8 +66,7 @@ HDDTestWidget::~HDDTestWidget() {
 void HDDTestWidget::on_drive_currentIndexChanged(QString) {
 	QVariant data = ui->drive->itemData(ui->drive->currentIndex());
 
-	switch(data.value<Device::Item>().type)
-	{
+	switch(data.value<Device::Item>().type) {
 	case Device::Item::DEVICE:
 		EraseResults(TestWidget::RESULTS);
 		device.Open(data.value<Device::Item>().path, true);
@@ -91,8 +90,7 @@ void HDDTestWidget::on_drive_currentIndexChanged(QString) {
 void HDDTestWidget::on_reference_currentIndexChanged(QString ) {
 	QVariant data = ui->reference->itemData(ui->reference->currentIndex());
 
-	switch(data.value<Device::Item>().type)
-	{
+	switch(data.value<Device::Item>().type) {
 	case Device::Item::RESULT:
 		refDevice.Open("", true);
 		EraseResults(TestWidget::REFERENCE);
@@ -112,9 +110,8 @@ void HDDTestWidget::on_reference_currentIndexChanged(QString ) {
 	}
 }
 
-void HDDTestWidget::device_accessWarning()
-{
-	QString user = QString::fromAscii(getenv("USER"));
+void HDDTestWidget::device_accessWarning() {
+	QString user = QString::fromLatin1(getenv("USER"));
 	QMessageBox box;
 	box.setText("You are running HDDTest as user: " + user +
 				" most probably you do not have rights for HDDTest to operate properly." +
@@ -130,44 +127,36 @@ void HDDTestWidget::device_accessWarning()
 
 void HDDTestWidget::device_operationError() {
 	bool running = false;
-	if(ui->filerwwidget->testState == TestWidget::STARTED)
-	{
+	if(ui->filerwwidget->testState == TestWidget::STARTED) {
 		ui->filerwwidget->StopTest();
 		running = true;
 	}
-	if(ui->filestructurewidget->testState == TestWidget::STARTED)
-	{
+	if(ui->filestructurewidget->testState == TestWidget::STARTED) {
 		ui->filestructurewidget->StopTest();
 		running = true;
 	}
-	if(ui->readblockwidget->testState == TestWidget::STARTED)
-	{
+	if(ui->readblockwidget->testState == TestWidget::STARTED) {
 		ui->readblockwidget->StopTest();
 		running = true;
 	}
-	if(ui->readcontwidget->testState == TestWidget::STARTED)
-	{
+	if(ui->readcontwidget->testState == TestWidget::STARTED) {
 		ui->readcontwidget->StopTest();
 		running = true;
 	}
-	if(ui->readrndwidget->testState == TestWidget::STARTED)
-	{
+	if(ui->readrndwidget->testState == TestWidget::STARTED) {
 		ui->readrndwidget->StopTest();
 		running = true;
 	}
-	if(ui->seekwidget->testState == TestWidget::STARTED)
-	{
+	if(ui->seekwidget->testState == TestWidget::STARTED) {
 		ui->seekwidget->StopTest();
 		running = true;
 	}
-	if(ui->smallfileswidget->testState == TestWidget::STARTED)
-	{
+	if(ui->smallfileswidget->testState == TestWidget::STARTED) {
 		ui->smallfileswidget->StopTest();
 		running = true;
 	}
 
-	if(running)
-	{
+	if(running) {
 		QMessageBox box;
 		box.setText(QString() + "An error occured while running test. I/O operation failed in test function." +
 					" This can be caused by missing permissions for operating device you are testing" +
@@ -185,8 +174,7 @@ void HDDTestWidget::device_operationError() {
 void HDDTestWidget::refDevice_accessWarning() {}
 
 void HDDTestWidget::UpdateInfo(TestWidget::DataSet dataset) {
-	if(dataset == TestWidget::RESULTS)
-	{
+	if(dataset == TestWidget::RESULTS) {
 		// update info tab - tested device
 		ui->model->setText(device.model);
 		ui->serial->setText(device.serial);
@@ -196,9 +184,7 @@ void HDDTestWidget::UpdateInfo(TestWidget::DataSet dataset) {
 		ui->fstype->setText(device.fstype);
 		ui->fsoptions->setText(device.fsoptions);
 		ui->kernel->setText(device.kernel);
-	}
-	else if(dataset == TestWidget::REFERENCE)
-	{
+	} else if(dataset == TestWidget::REFERENCE) {
 		// update info tab - reference devices
 		ui->reference_model->setText(refDevice.model);
 		ui->reference_serial->setText(refDevice.serial);
@@ -208,9 +194,7 @@ void HDDTestWidget::UpdateInfo(TestWidget::DataSet dataset) {
 		ui->reference_fstype->setText(refDevice.fstype);
 		ui->reference_fsoptions->setText(refDevice.fsoptions);
 		ui->reference_kernel->setText(refDevice.kernel);
-	}
-	else
-	{
+	} else {
 		std::cerr << "WARNING: Cannot update info for unknown dataset." << std::endl;
 	}
 }
@@ -235,10 +219,11 @@ void HDDTestWidget::ReloadTests(bool loaded) {
 }
 
 void HDDTestWidget::EraseResults(TestWidget::DataSet dataset) {
-	if(dataset == TestWidget::RESULTS)
+	if(dataset == TestWidget::RESULTS) {
 		device.EraseDriveInfo();
-	else
+	} else {
 		refDevice.EraseDriveInfo();
+	}
 
 	ui->readblockwidget->EraseResults(dataset);
 	ui->readcontwidget->EraseResults(dataset);
@@ -249,8 +234,7 @@ void HDDTestWidget::EraseResults(TestWidget::DataSet dataset) {
 	ui->filestructurewidget->EraseResults(dataset);
 }
 
-void HDDTestWidget::on_save_clicked()
-{
+void HDDTestWidget::on_save_clicked() {
 	QString filename = QFileDialog::getSaveFileName(this, tr("Save results"), "", tr("Results (*.hddtest)"));
 	if(filename.length() > 0) {
 		// Create base document for tests results
@@ -310,16 +294,14 @@ void HDDTestWidget::on_about_clicked() {
 }
 
 void HDDTestWidget::OpenResultFile(QString filename, TestWidget::DataSet dataset) {
-	if(filename.length() == 0)
-	{
+	if(filename.length() == 0) {
 		std::cerr << "WARNING: no filename given for results file" << std::endl;
 		return;
 	}
 
 	// open file
 	QFile file(filename);
-	if(!file.open(QIODevice::ReadOnly))
-	{
+	if(!file.open(QIODevice::ReadOnly)) {
 		std::cerr << "Cannot open results file" << std::endl;
 		file.close();
 		return;
@@ -329,8 +311,7 @@ void HDDTestWidget::OpenResultFile(QString filename, TestWidget::DataSet dataset
 	QDomDocument doc("HddTest");
 	QString err;
 	int row,col;
-	if(!doc.setContent(&file, &err, &row, &col))
-	{
+	if(!doc.setContent(&file, &err, &row, &col)) {
 		file.close();
 		std::cerr << "Cannot set XML document context to file" << std::endl;
 		return;
@@ -434,8 +415,9 @@ void HDDTestWidget::device_list_refresh() {
 	int driveIndex = 0;
 	if(!selectedDrive.isEmpty()) {
 		driveIndex = ui->drive->findText(selectedDrive);
-		if(driveIndex < 0)
+		if(driveIndex < 0) {
 			driveIndex = 0;
+		}
 	}
 	ui->drive->setCurrentIndex(driveIndex);
 	on_drive_currentIndexChanged("");
@@ -443,8 +425,9 @@ void HDDTestWidget::device_list_refresh() {
 	int referenceIndex = 0;
 	if(!selectedReference.isEmpty()) {
 		referenceIndex = ui->reference->findText(selectedReference);
-		if(referenceIndex < 0)
+		if(referenceIndex < 0) {
 			referenceIndex = 0;
+		}
 	}
 	ui->reference->setCurrentIndex(referenceIndex);
 }

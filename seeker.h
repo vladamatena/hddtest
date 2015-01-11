@@ -38,12 +38,10 @@
 /** Seeker test class. Implements Seeker test. The test test device for ramdom position access.
 Attempts to access different random positions on drive are made. Results are shown as dots.
 Dots shows dependency of seek time on seek length. **/
-class Seeker : public TestWidget
-{
+class Seeker : public TestWidget {
 private:
 	/// Keeps information about running or pased seek test
-	class SeekResult
-	{
+	class SeekResult {
 	public:
 		SeekResult():
 				progress(0) {}

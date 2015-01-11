@@ -30,8 +30,7 @@ using namespace HDDTest;
 /// Class implementing software stopwatch
 /** The Timer class works like stopwatch.
   The start and stop position can be marked. **/
-class Timer
-{
+class Timer {
 public:
 	Timer();	/// The Timer constuctor
 

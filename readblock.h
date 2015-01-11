@@ -28,8 +28,7 @@
 /// Stores ReadBlock benchmark results
 /** Class for keepeg ReadBlock subtest results and progress
 @see ReadBlock class **/
-class ReadBlockResult
-{
+class ReadBlockResult {
 public:
 	ReadBlockResult(hddsize block_size);
 
@@ -44,8 +43,7 @@ public:
 /** Read Block test. The test reads blocks of differsent sizes from the device.
 Bar graphs for every block size are drawn to the graph.
 @see ReadBlockResults class **/
-class ReadBlock : public TestWidget
-{
+class ReadBlock : public TestWidget {
 public:
 	// ReadRnd class constructor
 	ReadBlock(QWidget *parent = 0);	/// The constructor

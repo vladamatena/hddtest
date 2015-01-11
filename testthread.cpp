@@ -22,13 +22,11 @@
 #include "testwidget.h"
 
 TestThread::TestThread(TestWidget *widget) :
-	QThread(widget)
-{
+	QThread(widget) {
 	this->widget = widget;
 }
 
-void TestThread::run()
-{
+void TestThread::run() {
 	// prepare device for test
 	widget->device->Warmup();
 	widget->device->DropCaches();

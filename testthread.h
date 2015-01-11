@@ -33,8 +33,7 @@ class TestWidget;
   Start is called on this class. The cache flush is done before benchmarking
   code is run. This class also emits the test_started and
   test_stopped signals. **/
-class TestThread : public QThread
-{
+class TestThread : public QThread {
     Q_OBJECT
 public:
 	/** Construct TestThread with TestWidget instance which defines code to be run.
@@ -46,9 +45,10 @@ private:
 	TestWidget *widget;
 
 signals:
-	void test_started(); /// Emited when benchmark is started
-	void test_stopped(); /// Emitted when benchmark has finished
-public slots:
+	/// Emited when benchmark is started
+	void test_started();
+	/// Emitted when benchmark has finished
+	void test_stopped();
 };
 
 #endif // TESTTHREAD_H

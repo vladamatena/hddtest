@@ -21,8 +21,7 @@
 #include "seeker.h"
 
 Seeker::Seeker(QWidget *parent) :
-	TestWidget(parent)
-{
+	TestWidget(parent) {
 	dataAvgLine = addLine("ms", "Avg", QColor(255, 0, 0));
 	referenceAvgLine = addLine("ms", "Avg", QColor(0, 0, 255));
 
@@ -37,12 +36,9 @@ Seeker::Seeker(QWidget *parent) :
 			" Seek lenght is marked on horizontal axis and seek duration is on vertical axis.";
 }
 
-Seeker::~Seeker()
-{
-}
+Seeker::~Seeker() {}
 
-void Seeker::TestLoop()
-{
+void Seeker::TestLoop() {
 	// erease previous results
 	result.erase();
 
@@ -54,8 +50,7 @@ void Seeker::TestLoop()
 	device->SeekTo(last);
 
 	// test SEEKER_SEEKCOUNT seeks
-	for(int i = 0; i < SEEKER_SEEKCOUNT; ++i)
-	{
+	for(int i = 0; i < SEEKER_SEEKCOUNT; ++i) {
 		hddsize next = gen.Get64() % device->GetSize();	// get next position
 
 		// make timed seek
@@ -79,41 +74,40 @@ void Seeker::TestLoop()
 		// count test progress
 		result.progress = i * 100 / (SEEKER_SEEKCOUNT - 1);
 
-		if(testState == STOPPING)
+		if(testState == STOPPING) {
 			return;
+		}
 	}
 }
 
-void Seeker::InitScene()
-{
+void Seeker::InitScene() {
 	// clear ticks
 	dataTicks->erase();
 }
 
-void Seeker::UpdateScene()
-{
+void Seeker::UpdateScene() {
 	// draw new seeks
-	while(!result.newseeks.empty())
-	{
+	while(!result.newseeks.empty()) {
 		QPointF seek = result.newseeks.pop();
 
 		// mark seek as important if it is close to average
-		if(seek.ry() < SEEKER_IMPORTANT * result.avg())
+		if(seek.ry() < SEEKER_IMPORTANT * result.avg()) {
 			dataTicks->AddTick(seek.y(), seek.x(), true);
-		else
+		} else {
 			dataTicks->AddTick(seek.y(), seek.x(), false);
+		}
 	}
 
 	// draw new reference seeks
-	while(!reference.newseeks.empty())
-	{
+	while(!reference.newseeks.empty()) {
 		QPointF seek = reference.newseeks.pop();
 
 		// mark seek as important if it is close to average
-		if(seek.ry() < SEEKER_IMPORTANT * reference.avg())
+		if(seek.ry() < SEEKER_IMPORTANT * reference.avg()) {
 			referenceTicks->AddTick(seek.y(), seek.x(), true);
-		else
+		} else {
 			referenceTicks->AddTick(seek.y(), seek.x(), false);
+		}
 	}
 
 	// update lines
@@ -124,13 +118,11 @@ void Seeker::UpdateScene()
 	Rescale();
 }
 
-int Seeker::GetProgress()
-{
+int Seeker::GetProgress() {
 	return result.progress;
 }
 
-void Seeker::SeekResult::AddSeek(QPointF seek)
-{
+void Seeker::SeekResult::AddSeek(QPointF seek) {
 	// count new average seek
 	average = ((qreal)seeks.count() * average + seek.y()) / (seeks.count() + 1);
 
@@ -138,29 +130,25 @@ void Seeker::SeekResult::AddSeek(QPointF seek)
 	newseeks.push_back(seek);	// add sekk to stack used for drawing new results
 }
 
-qreal Seeker::SeekResult::avg()
-{
+qreal Seeker::SeekResult::avg() {
 	return average;
 }
 
-void Seeker::SeekResult::erase()
-{
+void Seeker::SeekResult::erase() {
 	seeks.erase(seeks.begin(), seeks.end());
 	newseeks.erase(newseeks.begin(), newseeks.end());
 	progress = 0.0f;
 	average = 0.0f;
 }
 
-QDomElement Seeker::WriteResults(QDomDocument &doc)
-{
+QDomElement Seeker::WriteResults(QDomDocument &doc) {
 	// create main seek element
 	QDomElement master = doc.createElement("Seeker");
 	master.setAttribute("valid", (GetProgress() == 100)?"yes":"no");
 	doc.appendChild(master);
 
 	// add values to main element
-	if(GetProgress() == 100) for(int i = 0; i < result.seeks.size(); ++i)
-	{
+	if(GetProgress() == 100) for(int i = 0; i < result.seeks.size(); ++i) {
 		QDomElement value = doc.createElement("Seek");
 		value.setAttribute("length", result.seeks[i].x());
 		value.setAttribute("time", result.seeks[i].y());
@@ -170,14 +158,14 @@ QDomElement Seeker::WriteResults(QDomDocument &doc)
 	return master;
 }
 
-void Seeker::RestoreResults(QDomElement &results, DataSet dataset)
-{
+void Seeker::RestoreResults(QDomElement &results, DataSet dataset) {
 	SeekResult &result = (dataset == REFERENCE)?this->reference:this->result;
 
 	// Locate main seek element
 	QDomElement seek = results.firstChildElement("Seeker");
-	if(!seek.attribute("valid", "no").compare("no"))
+	if(!seek.attribute("valid", "no").compare("no")) {
 		return;
+	}
 
 	// clear results and initialize scene
 	result.erase();
@@ -187,11 +175,12 @@ void Seeker::RestoreResults(QDomElement &results, DataSet dataset)
 	QDomNodeList seeks = seek.elementsByTagName("Seek");
 
 	// read result data
-	for(int i = 0; i < seeks.size(); ++i)
+	for(int i = 0; i < seeks.size(); ++i) {
 			result.AddSeek(
 				QPointF(
 						seeks.at(i).toElement().attribute("length", "0").toDouble(),
 						seeks.at(i).toElement().attribute("time", "0").toDouble()));
+	}
 
 	// set progress
 	result.progress = 100;
@@ -200,15 +189,11 @@ void Seeker::RestoreResults(QDomElement &results, DataSet dataset)
 	UpdateScene();
 }
 
-void Seeker::EraseResults(DataSet dataset)
-{
-	if(dataset == RESULTS)
-	{
+void Seeker::EraseResults(DataSet dataset) {
+	if(dataset == RESULTS) {
 		result.erase();
 		dataTicks->erase();
-	}
-	else
-	{
+	} else {
 		reference.erase();
 		referenceTicks->erase();
 	}

@@ -27,8 +27,7 @@
 /// Stores Small Files benchmark results
 /** SmallFilesResults class encapsulates resutls of SmallFiles benchmark
   @see SmallFiles class **/
-class SmallFilesResults
-{
+class SmallFilesResults {
 public:
 	/** Enumerates different phases of the smallfiles benchmark **/
 	enum Phase { PHASE_NONE, PHASE_DIR_BUILD, PHASE_FILE_BUILD, PHASE_FILE_READ, PHASE_DESTROY, PHASE_DONE };
@@ -58,25 +57,33 @@ public:
 A huge structure of files and dirs is build then files are read and the whole structure is destroyed again.
 Times of all kinds of operations are measured and whown in the bar graph.
 @see SmallFilesResults class **/
-class SmallFiles : public TestWidget
-{
+class SmallFiles : public TestWidget {
 public:
 	SmallFiles(QWidget *parent = 0);	/// The SmallFiles constructor
 
 	/** Count of the files and directories used in the benchmark **/
 	static const int SMALLFILES_SIZE = 1000;
 
-	void InitScene();	/// Initializes the graph scene
-	void TestLoop();	/// The main benchmark code
-	void UpdateScene(); /// Updates graph
-	int GetProgress();	/// Returns benchmark progress
+	/// Initializes the graph scene
+	void InitScene();
+	/// The main benchmark code
+	void TestLoop();
+	/// Updates graph
+	void UpdateScene();
+	/// Returns benchmark progress
+	int GetProgress();
 
-	SmallFilesResults results;		/// Primary resutls
-	SmallFilesResults reference;	/// Reference results
+	/// Primary resutls
+	SmallFilesResults results;
+	/// Reference results
+	SmallFilesResults reference;
 
-	QDomElement WriteResults(QDomDocument &doc);				/// Writes results of test to XML
-	void RestoreResults(QDomElement &root, DataSet dataset);	/// Reads results from XML document
-	void EraseResults(DataSet dataset);							/// Erases results
+	/// Writes results of test to XML
+	QDomElement WriteResults(QDomDocument &doc);
+	/// Reads results from XML document
+	void RestoreResults(QDomElement &root, DataSet dataset);
+	/// Erases results
+	void EraseResults(DataSet dataset);
 
 private:
 	Bar *build_dir_bar;

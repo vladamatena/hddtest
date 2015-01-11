@@ -78,8 +78,9 @@ void Device::Open(QString path, bool close) {
 
 	// open device file
 	fd = open(path.toUtf8(), O_RDONLY | O_LARGEFILE | O_SYNC);
-	if(fd < 0)
+	if(fd < 0) {
 		ReportWarning();
+	}
 
 	DropCaches();
 
@@ -93,21 +94,20 @@ void Device::Open(QString path, bool close) {
 }
 
 void Device::DropCaches() {
-		// give advice to disable caching
-		int ret = posix_fadvise(fd, 0, 0, POSIX_FADV_DONTNEED);
-		if(ret)
-			ReportWarning();
+	// give advice to disable caching
+	int ret = posix_fadvise(fd, 0, 0, POSIX_FADV_DONTNEED);
+	if(ret)
+		ReportWarning();
 
-		// empty caches
-		QFile caches("/proc/sys/vm/drop_caches");
-		caches.open(QIODevice::WriteOnly);
-		if(caches.isOpen())
-		{
-			caches.putChar('3');
-			caches.close();
-		}
-		else
-			ReportWarning();
+	// empty caches
+	QFile caches("/proc/sys/vm/drop_caches");
+	caches.open(QIODevice::WriteOnly);
+	if(caches.isOpen()) {
+		caches.putChar('3');
+		caches.close();
+	} else {
+		ReportWarning();
+	}
 }
 
 hddtime Device::Sync() {
@@ -126,8 +126,9 @@ void Device::Warmup() {
 }
 
 void Device::ReportWarning() {
-	if(problemReported)
+	if(problemReported) {
 		return;
+	}
 
 	problemReported = true;
 	accessWarning();
@@ -139,8 +140,9 @@ void Device::ReportError() {
 
 void Device::SetPos(hddsize pos) {
 	// set position
-	if(lseek64(fd, pos, SEEK_SET) < 0)
+	if(lseek64(fd, pos, SEEK_SET) < 0) {
 		ReportError();
+	}
 }
 
 hddtime Device::SeekTo(hddsize pos) {
@@ -189,8 +191,7 @@ hddtime Device::Read(hddsize size) {
 	timer.MarkStart();
 
 	// read data
-	if(read(fd, buffer, sizeof(char) * size) <= 0)
-	{
+	if(read(fd, buffer, sizeof(char) * size) <= 0) {
 		std::cerr << "Read failed" << std::endl;
 		ReportError();
 	}
@@ -299,8 +300,9 @@ hddtime Device::MkDir(QString path) {
 	timer.MarkStart();
 
 	// make dir
-	if(!dir.mkdir(path))
+	if(!dir.mkdir(path)) {
 		ReportError();
+	}
 
 	timer.MarkEnd();
 
@@ -338,9 +340,10 @@ hddtime Device::DelDir(QString path) {
 
 	timer.MarkStart();
 
-	// del dir
-	if(!dir.rmdir(path))
+	// Del dir
+	if(!dir.rmdir(path)) {
 		ReportError();
+	}
 
 	timer.MarkEnd();
 
@@ -351,8 +354,9 @@ hddtime Device::DelFile(QString path) {
 	timer.MarkStart();
 
 	// del file
-	if(!QFile::remove(path))
+	if(!QFile::remove(path)) {
 		ReportError();
+	}
 
 	timer.MarkEnd();
 
@@ -364,10 +368,9 @@ hddtime Device::ReadFile(QString path) {
 
 	// read file
 	QFile file(path);
-	if(!file.open(QIODevice::ReadOnly))
+	if(!file.open(QIODevice::ReadOnly)) {
 		ReportError();
-	else
-	{
+	} else {
 		// read data from file
 		char *buffer = new char[file.size()];
 		if(file.read(buffer, file.size()) < 0)
@@ -419,8 +422,9 @@ void Device::ReadInfo(QDomElement &root) {
 
 	// add fs info
 	QDomElement fsi = info.firstChildElement("FS");
-	if(fsi.isNull())
+	if(fsi.isNull()) {
 		return;
+	}
 	fs = fsi.attribute("fs", "NO DATA").compare("1") == 0;
 	mountpoint = fsi.attribute("mountpoint", "NO DATA");
 	fstype = fsi.attribute("fstype", "NO DATA");
@@ -429,8 +433,9 @@ void Device::ReadInfo(QDomElement &root) {
 
 	// add device info
 	QDomElement dev = info.firstChildElement("Device");
-	if(dev.isNull())
+	if(dev.isNull()) {
 		return;
+	}
 	path = dev.attribute("path", "NO DATA");
 	model = dev.attribute("model", "NO DATA");
 	serial = dev.attribute("serial", "NO DATA");

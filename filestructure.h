@@ -27,8 +27,7 @@
 /// Stores FileRW benchmark results
 /** FileStructureResults class encapsulates Structure benchmark results
   @see FileStructure **/
-class FileStructureResults
-{
+class FileStructureResults {
 public:
 	/// benchmark phase
 	enum Phase { PHASE_NONE, PHASE_BUILD, PHASE_DESTROY, PHASE_DONE };
@@ -50,8 +49,7 @@ public:
 /** This class implements File Structure test. The test build dirs
 and files in a huge structure and draw bar graphs with operation times.
 @see FileStructureResults class **/
-class FileStructure : public TestWidget
-{
+class FileStructure : public TestWidget {
 public:
 	FileStructure(QWidget *parent = 0);	/// The constructore
 

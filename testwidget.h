@@ -54,8 +54,7 @@ This class handles benchmark starting/stopping and peridical refreshing
 the graph by calling UpdateScene method implemented in benchmark specific class.
 The TestWidget class handles GUI parts as Progress bar, start/stop button,
 export button, info button and graph area. **/
-class TestWidget : public QWidget
-{
+class TestWidget : public QWidget {
     Q_OBJECT
 
 public:
@@ -74,8 +73,7 @@ public:
 	new scale multipiler is calculated. The NET_WIDTH and NET_HIGHLIGHT_WIDTH
 	constants are used by all markers as borders of graph area.**/
 	/// Marker is common base of all graph parts
-	class Marker
-	{
+	class Marker {
 	public:
 		Marker(TestWidget *test);
 		virtual ~Marker();
@@ -94,8 +92,7 @@ public:
 	by Seek benchmark. The graph contains dots that can be added by AddTick method
 	one by one. Dots are used to display discrete values in 2D graph.
 	All dost can be erased by erase method.**/
-	class Ticks : public Marker
-	{
+	class Ticks : public Marker {
 	public:
 		Ticks(TestWidget *test, QColor color);
 		~Ticks();
@@ -109,8 +106,7 @@ public:
 		void Reposition();	/// Resposition ticks according to new scale
 
 	private:
-		struct Tick
-		{
+		struct Tick {
 			qreal value;
 			qreal position;
 			QGraphicsRectItem *tick;
@@ -123,8 +119,7 @@ public:
 	/// Horizontal line marker
 	/** The Line class extends marker class to simple horizontal line with
 	value on the right.**/
-	class Line : public Marker
-	{
+	class Line : public Marker {
 	public:
 		Line(TestWidget *test, QString unit, QString name, QColor color);
 		~Line();
@@ -151,8 +146,7 @@ public:
 	determines its height. The bar consist just of its border
 	when progress is 0. When progress gets higher the bar
 	fills with the color from bottom.**/
-	class Bar : public Marker
-	{
+	class Bar : public Marker {
 	public:
 		Bar(TestWidget *test, QString unit, QString name, QColor color, qreal position, qreal width);
 		~Bar();
@@ -179,8 +173,7 @@ public:
 	can be erased to initial empty state. A count of line segments
 	in the whole graph needs to be set in order to display polyline
 	in the correct width. **/
-	class LineGraph : public Marker
-	{
+	class LineGraph : public Marker {
 	public:
 		LineGraph(TestWidget *test, QString unit, QColor color);
 		~LineGraph();
@@ -208,8 +201,7 @@ public:
 	/** Net class extends marker class to background net
 	 with numbers on the side. The net recalculates step of its scale
 	 on Yscale update.**/
-	class Net : public Marker
-	{
+	class Net : public Marker {
 	public:
 		Net(TestWidget *test, QString unit, QString xAxis, QString yAxis);
 		~Net();
@@ -229,8 +221,7 @@ public:
 	mapping from colour to text. The coloured rectangle with description is displayed
 	for every item. Items can only be added as they are not expected to change
 	while application is running.**/
-	class Legend : public Marker
-	{
+	class Legend : public Marker {
 	public:
 		Legend(TestWidget *test);
 		~Legend();
@@ -241,8 +232,7 @@ public:
 		void AddItem(QString name, QColor color);
 		void Reposition();
 	private:
-		struct Item
-		{
+		struct Item {
 		public:
 			QGraphicsTextItem *text;
 			QGraphicsRectItem *rect;

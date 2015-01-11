@@ -21,8 +21,7 @@
 #include "smallfiles.h"
 
 SmallFiles::SmallFiles(QWidget *parent):
-	TestWidget(parent)
-{
+	TestWidget(parent) {
 	build_dir_bar = this->addBar(	"s", "Dirs",		QColor(255,	0,		0),	0.03, 0.1);
 	build_files_bar = this->addBar(	"s", "Files 1-10K",	QColor(255,	64,		0),	0.27, 0.1);
 	read_files_bar = this->addBar(	"s", "Read files",	QColor(255,	128,	0),	0.51, 0.1);
@@ -42,13 +41,11 @@ SmallFiles::SmallFiles(QWidget *parent):
 			" This test is only aviable for devices containing mounted filesystem.";
 }
 
-void SmallFiles::InitScene()
-{
+void SmallFiles::InitScene() {
 	results.erase();
 }
 
-void SmallFiles::TestLoop()
-{
+void SmallFiles::TestLoop() {
 	// init random
 	RandomGenerator random;
 
@@ -62,8 +59,7 @@ void SmallFiles::TestLoop()
 	results.phase = SmallFilesResults::PHASE_DIR_BUILD;
 	device->DropCaches();
 	device->Sync();
-	for(int i = 0; (i < SMALLFILES_SIZE) && (testState != STOPPING); ++i)
-	{
+	for(int i = 0; (i < SMALLFILES_SIZE) && (testState != STOPPING); ++i) {
 		// construct new node name and path
 		QString file = nodes.at(random.Get64() % nodes.size()) + "/" + QString::number(counter++);
 		nodes.push_back(file);
@@ -79,8 +75,7 @@ void SmallFiles::TestLoop()
 	// build files
 	results.phase = SmallFilesResults::PHASE_FILE_BUILD;
 	device->DropCaches();
-	for(int i = 0; (i < SMALLFILES_SIZE) && (testState != STOPPING); ++i)
-	{
+	for(int i = 0; (i < SMALLFILES_SIZE) && (testState != STOPPING); ++i) {
 		// construct new node name and path
 		QString file = nodes.at(random.Get64() % nodes.size()) + "/" + QString::number(counter++);
 		files.push_back(file);
@@ -97,8 +92,7 @@ void SmallFiles::TestLoop()
 	results.phase = SmallFilesResults::PHASE_FILE_READ;
 	device->DropCaches();
 	QList<QString> files_to_read(files);
-	while(!files_to_read.empty() && (testState != STOPPING))
-	{
+	while(!files_to_read.empty() && (testState != STOPPING)) {
 		// generate random index
 		int index = random.Get64() % files_to_read.size();
 		hddtime time = device->ReadFile(files_to_read[index]);
@@ -114,16 +108,14 @@ void SmallFiles::TestLoop()
 
 	// del files
 	results.phase = SmallFilesResults::PHASE_DESTROY;
-	for(int i = 0; i < files.size(); ++i)
-	{
+	for(int i = 0; i < files.size(); ++i) {
 		results.destroy_time += device->DelFile(files[i]);
 		++results.destroyed;
 	}
 	results.destroy_time += device->Sync();
 
 	// del dirs
-	for(int i = nodes.size() - 1; i > 0 ; --i)
-	{
+	for(int i = nodes.size() - 1; i > 0 ; --i) {
 		results.destroy_time += device->DelDir(nodes[i]);
 		++results.destroyed;
 	}
@@ -135,8 +127,7 @@ void SmallFiles::TestLoop()
 	device->ClearSafeTemp();
 }
 
-void SmallFiles::UpdateScene()
-{
+void SmallFiles::UpdateScene() {
 	// get progress
 	hddtime dir_build = results.dir_build_time;
 	hddtime file_build = results.file_build_time;
@@ -144,10 +135,8 @@ void SmallFiles::UpdateScene()
 	hddtime destroy = results.destroy_time;
 
 	// add current operation progress
-	if(device)
-	{
-		switch(results.phase)
-		{
+	if(device) {
+		switch(results.phase) {
 		case SmallFilesResults::PHASE_DIR_BUILD:
 			dir_build += device->timer.GetCurrentOffset();
 			break;
@@ -196,21 +185,18 @@ void SmallFiles::UpdateScene()
 	Rescale();
 }
 
-int SmallFiles::GetProgress()
-{
+int SmallFiles::GetProgress() {
 	// "+ results.done" and  "+ 1" forces 99% until filan sync is done
 	int state = results.dirs_build + results.files_build + results.files_read + results.destroyed + results.done;
 	int target = 5 * SMALLFILES_SIZE + 1;
 	return (100 * state) / target;
 }
 
-SmallFilesResults::SmallFilesResults()
-{
+SmallFilesResults::SmallFilesResults() {
 	erase();
 }
 
-void SmallFilesResults::erase()
-{
+void SmallFilesResults::erase() {
 	dir_build_time = 0;
 	file_build_time = 0;
 	file_read_time = 0;
@@ -225,8 +211,7 @@ void SmallFilesResults::erase()
 	phase = PHASE_NONE;
 }
 
-QDomElement SmallFiles::WriteResults(QDomDocument &doc)
-{
+QDomElement SmallFiles::WriteResults(QDomDocument &doc) {
 	// create main seek element
 	QDomElement master = doc.createElement("Small_Files");
 	master.setAttribute("valid", (this->GetProgress() == 100)?"yes":"no");
@@ -256,8 +241,7 @@ QDomElement SmallFiles::WriteResults(QDomDocument &doc)
 	return master;
 }
 
-void SmallFiles::RestoreResults(QDomElement &results, DataSet dataset)
-{
+void SmallFiles::RestoreResults(QDomElement &results, DataSet dataset) {
 	SmallFilesResults &res = (dataset == REFERENCE)?this->reference:this->results;
 
 	// Locate main seek element
@@ -302,8 +286,7 @@ void SmallFiles::RestoreResults(QDomElement &results, DataSet dataset)
 	UpdateScene();
 }
 
-void SmallFiles::EraseResults(DataSet dataset)
-{
+void SmallFiles::EraseResults(DataSet dataset) {
 	if(dataset == RESULTS)
 		results.erase();
 	else

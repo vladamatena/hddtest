@@ -23,23 +23,19 @@
 Timer::Timer():
 	start(timeval()), end(timeval()) {}
 
-void Timer::MarkStart()
-{
+void Timer::MarkStart() {
 	gettimeofday(&start, 0);
 }
 
-void Timer::MarkEnd()
-{
+void Timer::MarkEnd() {
 	gettimeofday(&end, 0);
 }
 
-hddtime Timer::GetFinalOffset()
-{
+hddtime Timer::GetFinalOffset() {
 	return (end.tv_sec * s + end.tv_usec * us) - (start.tv_sec * s + start.tv_usec * us);
 }
 
-hddtime Timer::GetCurrentOffset()
-{
+hddtime Timer::GetCurrentOffset() {
 	timeval now;
 	gettimeofday(&now, 0);
 

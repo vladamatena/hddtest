@@ -34,8 +34,7 @@ using namespace std;
 Provides two methods for querying random numbers (32 and 64 bit).
 Uses random with states internaly.
 Random number stability is guaranted only on the same machine with thw same SW versions **/
-class RandomGenerator
-{
+class RandomGenerator {
 public:
 	RandomGenerator();	/// Initalize generator with stable seed
 
