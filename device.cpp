@@ -27,6 +27,7 @@ Device::Device() {
 	fs = false;
 	fd = 0;
 
+	// TODO: Fix this code
 	// connect to udisks dbus interface and connect device update signals
 //	udisks = new UDisksInterface("org.freedesktop.UDisks2", "/org/freedesktop/UDisks2", QDBusConnection::systemBus(), 0);
 //	connect(udisks, SIGNAL(DeviceAdded(QDBusObjectPath)), this, SIGNAL(udisksUpdate()));
@@ -46,7 +47,7 @@ void Device::Close() {
 
 QList<Device::Item> Device::GetDevices() {
 	QList<Item> list;
-
+// TODO: Fix this code
 /*	QList<QDBusObjectPath> devices = udisks->EnumerateDevices().value();
 
 	std::cout << "Devices: " << devices.size() << std::endl;

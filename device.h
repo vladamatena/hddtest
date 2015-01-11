@@ -141,10 +141,15 @@ private:
 	void ReportWarning();						/// Reports a problem with accessing device
 	void ReportError();							/// Reports error in test
 
-	int fd;						// device's file destriptor
-	hddsize device_size;		// device's size
-	bool problemReported;		// whenever device access problem was reported
-//	UDisksInterface *udisks;	// udisks dbus connection
+	// Device's file destriptor
+	int fd;
+	// Device's size
+	hddsize device_size;
+	// Whenever device access problem was reported
+	bool problemReported;
+
+	// UDisks2 DBus connection
+//	QDBusInterface *udisks;
 
 signals:
 	void accessWarning();

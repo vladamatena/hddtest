@@ -80,8 +80,8 @@ public:
 		Marker(TestWidget *test);
 		virtual ~Marker();
 
-		static const qreal NET_WIDTH = 0.88;			// Width of net lines
-		static const qreal NET_HIGHLIGHT_WIDTH = 0.89;	// Width of extended net lines
+		static constexpr qreal NET_WIDTH = 0.88;			// Width of net lines
+		static constexpr qreal NET_HIGHLIGHT_WIDTH = 0.89;	// Width of extended net lines
 
 		TestWidget *test;				/// pointer to test containing this marker
 		qreal max;						/// maximal value used by this marker
