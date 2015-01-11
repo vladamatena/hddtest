@@ -26,16 +26,9 @@ Device::Device() {
 	size = -1;
 	fs = false;
 	fd = 0;
-
-	// TODO: Fix this code
-	// connect to udisks dbus interface and connect device update signals
-//	udisks = new UDisksInterface("org.freedesktop.UDisks2", "/org/freedesktop/UDisks2", QDBusConnection::systemBus(), 0);
-//	connect(udisks, SIGNAL(DeviceAdded(QDBusObjectPath)), this, SIGNAL(udisksUpdate()));
-//	connect(udisks, SIGNAL(DeviceRemoved(QDBusObjectPath)), this, SIGNAL(udisksUpdate()));
 }
 
 Device::~Device() {
-//	delete udisks;
 	Close();
 }
 
