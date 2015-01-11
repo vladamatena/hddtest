@@ -47,21 +47,16 @@ void Device::Close() {
 
 QList<Device::Item> Device::GetDevices() {
 	QList<Item> list;
-// TODO: Fix this code
-/*	QList<QDBusObjectPath> devices = udisks->EnumerateDevices().value();
 
-	std::cout << "Devices: " << devices.size() << std::endl;
-
-	for(int i = 0; i < devices.size(); ++i) {
-		UDisksDeviceInterface device("org.freedesktop.UDisks", devices.at(i).path(), QDBusConnection::systemBus(), 0);
-
-		if(!device.driveIsMediaEjectable())
+	for(QStorageInfo info: QStorageInfo::mountedVolumes()) {
+		if(info.device().startsWith("/dev/") && info.isValid() && info.isReady()) {
 			list.append(Device::Item(
-						Device::Item::DEVICE,
-						device.deviceFile(),
-						device.deviceFile() + " (" + device.driveModel() + ")"));
+							Device::Item::DEVICE,
+							info.device(),
+							info.displayName()));
+		}
 	}
-*/
+
 	return list;
 }
 
@@ -161,7 +156,7 @@ hddtime Device::SeekTo(hddsize pos) {
 }
 
 hddsize Device::GetSize() {
-	// return private __device_size
+	// Return private __device_size
 	return device_size;
 }
 
@@ -170,7 +165,7 @@ hddtime Device::ReadAt(hddsize size, hddsize pos) {
 
 	timer.MarkStart();
 
-	// seek to new position
+	// Seek to new position
 	SetPos(pos);
 	if(read(fd, buffer, sizeof(char) * size) <= 0)
 	{
@@ -190,7 +185,7 @@ hddtime Device::Read(hddsize size) {
 
 	timer.MarkStart();
 
-	// read data
+	// Read data
 	if(read(fd, buffer, sizeof(char) * size) <= 0) {
 		std::cerr << "Read failed" << std::endl;
 		ReportError();
@@ -220,29 +215,17 @@ void Device::EraseDriveInfo() {
 
 void Device::DriveInfo() {
 	EraseDriveInfo();
-/*
-	QDBusObjectPath object = udisks->FindDeviceByDeviceFile(path).value();
-	UDisksDeviceInterface device("org.freedesktop.UDisks", object.path(), QDBusConnection::systemBus(), 0);
 
-	size = device.deviceSize();
-	model = device.driveModel();
-	serial = device.driveSerial();
-	firmware = device.driveRevision();
-
-	fs = device.deviceIsMounted();
-
-	if(fs)
-	{
-		// List mountpoints
-		QStringList mountpoints = device.deviceMountPaths();
-		if(!mountpoints.isEmpty())
-			mountpoint = mountpoints.first();
-
-		// get partition type
-		fstype = device.idType();
-
-		// TODO: Reading with udisks not possible?
-	//	fsoptions = device.partitionFlags().first();
+	for(QStorageInfo i: QStorageInfo::mountedVolumes()) {
+		if(i.device() == path) {
+			size = i.bytesTotal();
+//			model = "UND";
+//			serial = "UND";
+//			firmware = "UND";
+			fs = true;
+			fstype = i.fileSystemType();
+			mountpoint = i.rootPath();
+		}
 	}
 
 	// Old way reading only for filesystem mount options
@@ -270,11 +253,9 @@ void Device::DriveInfo() {
 	// get info about kernel
 	utsname buf;
 	memset(&buf, 0, sizeof(utsname));
-
-	if(!uname(&buf))
-		kernel = QString::fromAscii(buf.sysname) + " - " + QString::fromAscii(buf.release);
-
-		*/
+	if(!uname(&buf)) {
+		kernel = QString::fromLatin1(buf.sysname) + " - " + QString::fromLatin1(buf.release);
+	}
 }
 
 QString Device::GetSafeTemp() {
