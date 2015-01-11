@@ -1,7 +1,7 @@
 HDDTest
 =======
 
-HDDTest is drive benchmarking tool written in C++/Qt. It runs under Linux and 
+HDDTest is drive benchmarking tool written in C++/Qt5. It runs under Linux and 
 displays measured data in real-time. The design is focused on simple usage.
 Results can be saved and compared.
 
@@ -9,7 +9,7 @@ Build instructions
 ------------------
 
 # cd /path/to/hddtest/source
-# make clean
-# qmake −Wall CONFIG+=debug hddtest.pro
+# /usr/lib/qt5/bin/qmake hddtest.pro
 # make
+# kdesu ./hddtest
 
