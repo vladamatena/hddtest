@@ -25,7 +25,6 @@
 #include "ui_hddtest.h"
 
 #include "testwidget.h"
-#include "randomgenerator.h"
 #include "seeker.h"
 
 
@@ -67,13 +66,13 @@ void HDDTestWidget::on_drive_currentIndexChanged(QString) {
 	QVariant data = ui->drive->itemData(ui->drive->currentIndex());
 
 	switch(data.value<Device::Item>().type) {
-	case Device::Item::DEVICE:
+    case Device::Item::Type::DEVICE:
 		EraseResults(TestWidget::RESULTS);
 		device.Open(data.value<Device::Item>().path, true);
 		ReloadTests(false);
 		break;
 
-	case Device::Item::RESULT:
+    case Device::Item::Type::RESULT:
 		device.Open("", true);
 		EraseResults(TestWidget::RESULTS);
 		OpenResultFile(data.value<Device::Item>().path, TestWidget::RESULTS);
@@ -91,14 +90,14 @@ void HDDTestWidget::on_reference_currentIndexChanged(QString ) {
 	QVariant data = ui->reference->itemData(ui->reference->currentIndex());
 
 	switch(data.value<Device::Item>().type) {
-	case Device::Item::RESULT:
+    case Device::Item::Type::RESULT:
 		refDevice.Open("", true);
 		EraseResults(TestWidget::REFERENCE);
 		OpenResultFile(data.value<Device::Item>().path, TestWidget::REFERENCE);
 		UpdateInfo(TestWidget::REFERENCE);
 		break;
 
-	case Device::Item::NOTHING:
+    case Device::Item::Type::NOTHING:
 		EraseResults(TestWidget::REFERENCE);
 		UpdateInfo(TestWidget::REFERENCE);
 		break;

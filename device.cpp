@@ -20,6 +20,10 @@
 
 #include "device.h"
 
+#include <iostream>
+#include <stdio.h>
+#include <iostream>
+
 Device::Device() {
 	path = "";
 	problemReported = false;
@@ -39,16 +43,16 @@ void Device::Close() {
 }
 
 QList<Device::Item> Device::GetDevices() {
-	QList<Item> list;
+    QList<Item> list;
 
     QList<QStorageInfo> volumes = QStorageInfo::mountedVolumes();
-    for(QStorageInfo info: volumes) {
+    for(QStorageInfo &info: volumes) {
         if(!info.isValid() || !info.isReady()) {
             continue;
         }
 
         list.append(Device::Item(
-            Device::Item::DEVICE,
+            Device::Item::Type::DEVICE,
             info.device(),
             info.displayName() + " (" + info.rootPath() + ")"));
 	}
@@ -212,7 +216,9 @@ void Device::EraseDriveInfo() {
 void Device::DriveInfo() {
 	EraseDriveInfo();
 
-	for(QStorageInfo i: QStorageInfo::mountedVolumes()) {
+    QList<QStorageInfo> volumes = QStorageInfo::mountedVolumes();
+
+    for(QStorageInfo i: volumes) {
 		if(i.device() == path) {
 			size = i.bytesTotal();
 //			model = "UND";
@@ -427,9 +433,9 @@ void Device::ReadInfo(QDomElement &root) {
 }
 
 Device::Item Device::Item::None() {
-	return Item(NOTHING, "");
+    return Item(Type::NOTHING, "");
 }
 
 Device::Item Device::Item::Saved(QString path) {
-	return Item(RESULT, path);
+    return Item(Type::RESULT, path);
 }

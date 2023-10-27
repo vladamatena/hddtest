@@ -18,6 +18,8 @@
 *
 ********************************************************************************/
 
+#include <iostream>
+
 #include "testwidget.h"
 #include "ui_testwidget.h"
 

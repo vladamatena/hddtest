@@ -34,11 +34,8 @@
 #pragma once
 
 #include <fcntl.h>
-#include <iostream>
 #include <linux/hdreg.h>
 #include <sys/ioctl.h>
-#include <iostream>
-#include <stdio.h>
 #include <mntent.h>
 #include <unistd.h>
 #include <sys/utsname.h>
@@ -59,11 +56,11 @@ public:
 	/// Stores one item in device selection combobox
 	struct Item {
 		/// Item type enumeration
-		enum Type	{ DEVICE, RESULT, NOTHING };
+        enum class Type	{ DEVICE, RESULT, NOTHING };
 
 		/// Constructor for empty item
-		Item():
-			type(NOTHING), path("") {}
+        Item():
+            type(Type::NOTHING), path("") {}
 
 		/// Constructor for type and path specified
 		Item(Type type, QString path):
