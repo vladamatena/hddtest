@@ -10,3 +10,5 @@ ui_*
 qrc_*
 
 build-*
+.qtc_clangd
+CMakeLists.txt.user
