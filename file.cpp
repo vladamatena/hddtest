@@ -99,5 +99,5 @@ hddtime File::Write(hddsize size) {
 }
 
 void File::ReportError() {
-	operationError();
+    emit operationError();
 }

@@ -33,7 +33,7 @@ void TestThread::run() {
 	widget->device->Sync();
 
 	// run test
-	test_started();
+    emit test_started();
 	widget->TestLoop();
-	test_stopped();
+    emit test_stopped();
 }

@@ -122,11 +122,11 @@ void Device::ReportWarning() {
 	}
 
 	problemReported = true;
-	accessWarning();
+    emit accessWarning();
 }
 
 void Device::ReportError() {
-	operationError();
+    emit operationError();
 }
 
 void Device::SetPos(hddsize pos) {
