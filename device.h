@@ -66,17 +66,21 @@ public:
 		Item(Type type, QString path):
 			type(type), path(path), label(path) {}
 
-		/// Constructor for type, path and label specified
-		Item(Type type, QString path, QString label):
-			type(type), path(path), label(label) {}
+        /// Constructor for type, path and label specified
+        Item(Type type, QString path, QString label):
+            type(type), path(path), label(label) {}
+
+        /// Construct from QStorageInfo
+        Item(QStorageInfo info);
 
 		static Item None();             /// Returns item of none type
 		static Item Saved(QString path);/// Returns item of saved type
 
-		Type type;		/// Item type
-		QString path;	/// Item path
-		QString label;  /// Item label
-	};
+        Type type {};		/// Item type
+        QString path {};	/// Item path
+        QString label {};  /// Item label
+        QStorageInfo info {};  /// Qt storage info
+    };
 
 	Device();									/// Device constructor
 	~Device();									/// Device destructor - close device file descriptor
@@ -85,7 +89,7 @@ public:
 	QList<Item> GetDevices();					/// Gets list of devices
 
 	// device access operations
-	void Open(QString path, bool close);		/// Opens device specified by path
+    void Open(Item device, bool close);		/// Opens device specified by path
 	void Close();								/// Close device file descriptor
 	void DropCaches();							/// Disables some caches for device
 	hddtime Sync();								/// Sync filesystem
@@ -114,6 +118,7 @@ public:
 	void ClearSafeTemp();						/// Clears temp
 
 	// drive info
+    QStorageInfo info;  /// Qt storage info
 	QString path;		/// Path to device
 	QString model;		/// model of the device
 	QString serial;		/// Serial number of the device

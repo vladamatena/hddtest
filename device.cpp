@@ -51,25 +51,33 @@ QList<Device::Item> Device::GetDevices() {
             continue;
         }
 
-        list.append(Device::Item(
-            Device::Item::Type::DEVICE,
-            info.device(),
-            info.displayName() + " (" + info.rootPath() + ")"));
+        list.append(info);
 	}
 
 	return list;
 }
 
-void Device::Open(QString path, bool close) {
-	this->path = path;
+Device::Item::Item(QStorageInfo info): Device::Item::Item(
+    Device::Item::Type::DEVICE,
+    info.device(),
+    info.displayName() + " " + info.rootPath() + " " + info.device())
+{
+    this->info = info;
+}
+
+void Device::Open(Item item, bool close) {
+    this->info = item.info;
+    this->path = item.path;
 	problemReported = false;
 
-	if(close)
-		Close();
+    if(close) {
+        Close();
+    }
 
-	// skip opening device pointing to result file
-	if(path.length() == 0)
-		return;
+    // skip opening device pointing to result file
+    if(item.type != Device::Item::Type::DEVICE) {
+        return;
+    }
 
 	// open device file
 	fd = open(path.toUtf8(), O_RDONLY | O_LARGEFILE | O_SYNC);
@@ -216,19 +224,10 @@ void Device::EraseDriveInfo() {
 void Device::DriveInfo() {
 	EraseDriveInfo();
 
-    QList<QStorageInfo> volumes = QStorageInfo::mountedVolumes();
-
-    for(QStorageInfo i: volumes) {
-		if(i.device() == path) {
-			size = i.bytesTotal();
-//			model = "UND";
-//			serial = "UND";
-//			firmware = "UND";
-			fs = true;
-			fstype = i.fileSystemType();
-			mountpoint = i.rootPath();
-		}
-	}
+    size = info.bytesTotal();
+    fs = true;
+    fstype = info.fileSystemType();
+    mountpoint = info.rootPath();
 
 	// Old way reading only for filesystem mount options
 	QFile mounts("/proc/mounts");

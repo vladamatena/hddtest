@@ -68,12 +68,12 @@ void HDDTestWidget::on_drive_currentIndexChanged(QString) {
 	switch(data.value<Device::Item>().type) {
     case Device::Item::Type::DEVICE:
 		EraseResults(TestWidget::RESULTS);
-		device.Open(data.value<Device::Item>().path, true);
+        device.Open(data.value<Device::Item>(), true);
 		ReloadTests(false);
 		break;
 
     case Device::Item::Type::RESULT:
-		device.Open("", true);
+        device.Open(data.value<Device::Item>(), true);
 		EraseResults(TestWidget::RESULTS);
 		OpenResultFile(data.value<Device::Item>().path, TestWidget::RESULTS);
 		ReloadTests(true);
@@ -91,7 +91,7 @@ void HDDTestWidget::on_reference_currentIndexChanged(QString ) {
 
 	switch(data.value<Device::Item>().type) {
     case Device::Item::Type::RESULT:
-		refDevice.Open("", true);
+        refDevice.Open(data.value<Device::Item>(), true);
 		EraseResults(TestWidget::REFERENCE);
 		OpenResultFile(data.value<Device::Item>().path, TestWidget::REFERENCE);
 		UpdateInfo(TestWidget::REFERENCE);
