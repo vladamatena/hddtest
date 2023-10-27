@@ -41,13 +41,16 @@ void Device::Close() {
 QList<Device::Item> Device::GetDevices() {
 	QList<Item> list;
 
-	for(QStorageInfo info: QStorageInfo::mountedVolumes()) {
-		if(info.device().startsWith("/dev/") && info.isValid() && info.isReady()) {
-			list.append(Device::Item(
-							Device::Item::DEVICE,
-							info.device(),
-							info.displayName()));
-		}
+    QList<QStorageInfo> volumes = QStorageInfo::mountedVolumes();
+    for(QStorageInfo info: volumes) {
+        if(!info.isValid() || !info.isReady()) {
+            continue;
+        }
+
+        list.append(Device::Item(
+            Device::Item::DEVICE,
+            info.device(),
+            info.displayName() + " (" + info.rootPath() + ")"));
 	}
 
 	return list;
