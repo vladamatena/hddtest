@@ -12,5 +12,13 @@
         <file>reference/Maxtor 6 Y080P0 USB.hddtest</file>
         <file>reference/MicroSD 8G.hddtest</file>
         <file>reference/TOSHIBA MK1652GSX.hddtest</file>
+        <file>reference/AData8GBSD.hddtest</file>
+        <file>reference/Crucia MX100 256G.hddtest</file>
+        <file>reference/Kingson 2GB DT Mini Fun.hddtest</file>
+        <file>reference/Kingston DT Micro 16GB.hddtest</file>
+        <file>reference/Kingston DTSE9 16GB.hddtest</file>
+        <file>reference/Kingston V100+ 96GB.hddtest</file>
+        <file>reference/Patriot Flex 16GB.hddtest</file>
+        <file>reference/Samsung SSD 850.hddtest</file>
     </qresource>
 </RCC>
