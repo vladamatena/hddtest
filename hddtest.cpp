@@ -111,6 +111,10 @@ void HDDTestWidget::on_reference_currentIndexChanged(QString ) {
 }
 
 void HDDTestWidget::device_accessWarning() {
+#ifndef NDEBUG
+    return;
+#endif
+
 	QString user = QString::fromLatin1(getenv("USER"));
 	QMessageBox box;
 	box.setText("You are running HDDTest as user: " + user +
