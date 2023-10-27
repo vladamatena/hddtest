@@ -11,24 +11,28 @@ find_package(QT NAMES Qt5 Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Gui Widgets Xml)
 
 add_executable(hddtest
-	about.cpp about.h about.ui
-	definitions.cpp definitions.h
-	device.cpp device.h
-	file.cpp file.h
-	filerw.cpp filerw.h
-	filestructure.cpp filestructure.h
-	hddtest.cpp hddtest.h hddtest.ui
+	about.cpp
+	about.ui
+	definitions.cpp
+	device.cpp
+	file.cpp
+	filerw.cpp
+	filestructure.cpp
+	hddtest.cpp
+	hddtest.ui
 	main.cpp
-	randomgenerator.cpp randomgenerator.h
-	readblock.cpp readblock.h
-	readcont.cpp readcont.h
-	readrnd.cpp readrnd.h
-	seeker.cpp seeker.h
-	smallfiles.cpp smallfiles.h
-	testthread.cpp testthread.h
-	testwidget.cpp testwidget.h testwidget.ui
-	timer.cpp timer.h
+	randomgenerator.cpp
+	readblock.cpp
+	readcont.cpp
+	readrnd.cpp
+	seeker.cpp
+	smallfiles.cpp
+	testthread.cpp
+	testwidget.cpp
+	testwidget.ui
+	timer.cpp
 )
+
 target_link_libraries(hddtest PRIVATE
     Qt::Core
     Qt::Gui
@@ -39,7 +43,7 @@ target_link_libraries(hddtest PRIVATE
 set_property(TARGET hddtest PROPERTY CXX_STANDARD 23)
 
 # Resources:
-set(resource_resource_files
+set(icon_files
     "icon/document-open.png"
     "icon/document-save.png"
     "icon/hdd.svg"
@@ -51,9 +55,10 @@ qt_add_resources(hddtest "resource"
     PREFIX
         "/icon"
     FILES
-        ${resource_resource_files}
+	    ${icon_files}
 )
-set(resource1_resource_files
+
+set(reference_data_files
     "reference/KingMax 8G USB2.0.hddtest"
     "reference/Kingston 4GB CF.hddtest"
     "reference/Maxtor 6 Y080P0 USB.hddtest"
@@ -65,7 +70,7 @@ qt_add_resources(hddtest "resource1"
     PREFIX
         "/reference"
     FILES
-        ${resource1_resource_files}
+	    ${reference_data_files}
 )
 
 install(TARGETS hddtest
