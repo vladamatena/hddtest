@@ -18,8 +18,7 @@
 *
 ********************************************************************************/
 
-#ifndef RANDOMGENERATOR_H
-#define RANDOMGENERATOR_H
+#pragma once
 
 #include <QtGlobal>
 #include <stdlib.h>
@@ -47,5 +46,3 @@ private:
 	struct random_data data;
 	char state[statelen];
 };
-
-#endif // RANDOMGENERATOR_H

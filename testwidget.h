@@ -18,8 +18,7 @@
 *
 ********************************************************************************/
 
-#ifndef TESTWIDGET_H
-#define TESTWIDGET_H
+#pragma once
 
 #include <math.h>
 #include <QWidget>
@@ -365,5 +364,3 @@ private slots:
 	void test_started();
 	void test_stopped();
 };
-
-#endif // TESTWIDGET_H

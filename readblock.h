@@ -18,8 +18,7 @@
 *
 ********************************************************************************/
 
-#ifndef READBLOCK_H
-#define READBLOCK_H
+#pragma once
 
 #include "testwidget.h"
 #include "randomgenerator.h"
@@ -70,5 +69,3 @@ private:
 	QList<Bar*> bars;
 	QList<Bar*> reference_bars;
 };
-
-#endif // READBLOCK_H

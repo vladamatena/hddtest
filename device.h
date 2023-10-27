@@ -31,8 +31,7 @@
 *
 */
 
-#ifndef DEVICE_H
-#define DEVICE_H
+#pragma once
 
 #include <fcntl.h>
 #include <iostream>
@@ -158,5 +157,3 @@ signals:
 };
 
 Q_DECLARE_METATYPE(Device::Item)
-
-#endif // DEVICE_H

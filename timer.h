@@ -18,8 +18,7 @@
 *
 ********************************************************************************/
 
-#ifndef TIMER_H
-#define TIMER_H
+#pragma once
 
 #include <sys/time.h>
 
@@ -51,5 +50,3 @@ private:
 	timeval start;
 	timeval end;
 };
-
-#endif // TIMER_H

@@ -18,8 +18,7 @@
 *
 ********************************************************************************/
 
-#ifndef FILE_H
-#define FILE_H
+#pragma once
 
 #include <iostream>
 #include <stdio.h>
@@ -75,5 +74,3 @@ private:
 signals:
 	void operationError();	/// Emited when error occures
 };
-
-#endif // FILE_H

@@ -85,8 +85,7 @@
  * \subsection step3 Step 3: # make
  */
 
-#ifndef DEFINITIONS_H
-#define DEFINITIONS_H
+#pragma once
 
 #include<QtCore>
 
@@ -114,5 +113,3 @@ namespace HDDTest {
 		static QString FormatSpeed(hddsize size);	/// Speed to human readable format convertor
 	};
 }
-
-#endif // DEFINITIONS_H

@@ -18,8 +18,7 @@
 *
 ********************************************************************************/
 
-#ifndef SMALLFILES_H
-#define SMALLFILES_H
+#pragma once
 
 #include "testwidget.h"
 #include "randomgenerator.h"
@@ -97,5 +96,3 @@ private:
 	Bar *destroy_reference_bar;
 
 };
-
-#endif // SMALLFILES_H

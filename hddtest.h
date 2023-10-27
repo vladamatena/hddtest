@@ -18,8 +18,7 @@
 *
 ********************************************************************************/
 
-#ifndef HDDTEST_H
-#define HDDTEST_H
+#pragma once
 
 #include <QObject>
 #include <QDialog>
@@ -94,5 +93,3 @@ private slots:
 	void on_about_clicked();
 	void on_open_clicked();
 };
-
-#endif // HDDTEST_H

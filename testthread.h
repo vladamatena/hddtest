@@ -18,8 +18,7 @@
 *
 ********************************************************************************/
 
-#ifndef TESTTHREAD_H
-#define TESTTHREAD_H
+#pragma once
 
 #include <QThread>
 
@@ -50,5 +49,3 @@ signals:
 	/// Emitted when benchmark has finished
 	void test_stopped();
 };
-
-#endif // TESTTHREAD_H

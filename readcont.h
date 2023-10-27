@@ -18,8 +18,7 @@
 *
 ********************************************************************************/
 
-#ifndef READCONT_H
-#define READCONT_H
+#pragma once
 
 #include <QThread>
 #include <QList>
@@ -80,6 +79,3 @@ private:
 	Line *averageLine;
 	Line *refAverageLine;
 };
-
-
-#endif // READCONT_H

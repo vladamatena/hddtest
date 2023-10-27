@@ -18,8 +18,7 @@
 *
 ********************************************************************************/
 
-#ifndef SEEKER_H
-#define SEEKER_H
+#pragma once
 
 #include <QThread>
 #include <QFile>
@@ -84,5 +83,3 @@ private:
 
 	Net* net;
 };
-
-#endif // SEEKER_H

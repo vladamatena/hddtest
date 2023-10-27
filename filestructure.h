@@ -18,8 +18,7 @@
 *
 ********************************************************************************/
 
-#ifndef FILESTRUCTURE_H
-#define FILESTRUCTURE_H
+#pragma once
 
 #include "testwidget.h"
 #include "randomgenerator.h"
@@ -74,5 +73,3 @@ private:
 	Bar *build_reference_bar;
 	Bar *destroy_reference_bar;
 };
-
-#endif // FILESTRUCTURE_H

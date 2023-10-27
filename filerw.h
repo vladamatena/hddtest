@@ -18,8 +18,7 @@
 *
 ********************************************************************************/
 
-#ifndef FILERW_H
-#define FILERW_H
+#pragma once
 
 #include "definitions.h"
 #include "testwidget.h"
@@ -91,5 +90,3 @@ private:
 
 	Legend *__legend;
 };
-
-#endif // FILERW_H
